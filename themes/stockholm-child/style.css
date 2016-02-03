@@ -1,0 +1,38 @@
+/*
+Theme Name: Stockholm Child
+Theme URI: http://demo.select-themes.com/stockholm/
+Description: A child theme of Stockholm Theme
+Author: Select Themes
+Author URI: http://select-themes.com
+Version: 1.0.0
+Template: stockholm
+*/
+@import url("../stockholm/style.css");
+
+.sitetitle {
+	position: absolute;
+    left: 75px;
+    top: 50%;
+    width: 500px;
+    font-size: 25px;
+    color: #000000;
+}
+
+.info-box {
+	margin-bottom: 2rem;
+	padding: 0 2rem 2rem;
+	background: hsl(0, 0%, 85%);
+}
+
+.info-box h1 {
+	margin-left: -2rem;
+	margin-right: -2rem;
+	padding: .5rem 2rem;
+	background: hsl(0, 0%, 10%);
+	color: #fff;
+	font-size: 2.5rem;
+}
+
+.info-boxp {
+	font-size: 1.6rem;
+}
