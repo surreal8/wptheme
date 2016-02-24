@@ -36,3 +36,13 @@ Template: stockholm
 .info-boxp {
 	font-size: 1.6rem;
 }
+
+.filter_holder ul.child {
+    display: none;
+    position: absolute;
+    top: 70%;
+}
+
+.filter_holder li:hover > ul.child {
+  display: block;
+}
