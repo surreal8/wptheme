@@ -9,6 +9,10 @@ Template: stockholm
 */
 @import url("../stockholm/style.css");
 
+.q_logo a{
+    height: 50px !important;
+}
+
 .sitetitle {
 	position: absolute;
     left: 75px;
@@ -44,5 +48,35 @@ Template: stockholm
 }
 
 .filter_holder li:hover > ul.child {
-  display: block;
+    display: block;
+}
+
+.flexslider .slides img {
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    height: 800px;
+}
+
+.portfolio_image_title {
+    float: right;
+}
+
+li.related {
+	width: 30%;
+	display: inline-table;
+	padding-right: 10px;
+	margin-top: 20px;
+}
+
+li.related p {
+	color: #8d8d8d;
+}
+
+p.spacer {
+	height: 30px;
+}
+
+.readmore {
+	font-weight: bold;
 }

@@ -641,3 +641,29 @@ endwhile;
             }
 }
 add_shortcode('portfolio_list', 'portfolio_list');
+
+if(!function_exists('qode_excerpt')) {
+	/**
+	 * Function that cuts post excerpt to the number of word based on previosly set global
+	 * variable $word_count, which is defined in qode_set_blog_word_count function
+	 */
+	function qode_excerpt() {
+		global $qode_options, $word_count, $post;
+
+		if($word_count != '0') {
+			$word_count = isset($word_count) && $word_count !== "" ? $word_count : $qode_options['number_of_chars'];
+			$post_excerpt = $post->post_excerpt != "" ? $post->post_excerpt : strip_tags($post->post_content);
+			$clean_excerpt = strlen($post_excerpt) && strpos($post_excerpt, '...') ? strstr($post_excerpt, '...', true) : $post_excerpt;
+
+			$excerpt_word_array = explode (' ', $clean_excerpt);
+			$excerpt_word_array = array_slice ($excerpt_word_array, 0, $word_count);
+			$excerpt = implode (' ', $excerpt_word_array);
+			$excerpt_readmore = '<span class="readmore"><a href="' . get_the_permalink() . '">read more</a></span>';
+
+			//is excerpt different than empty string?
+			if($excerpt !== '') {
+				echo '<p class="post_excerpt">'.$excerpt.' '.$excerpt_readmore.'</p>';
+			}
+		}
+	}
+}

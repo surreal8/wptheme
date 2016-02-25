@@ -103,14 +103,15 @@ if (is_array($portfolio_images)){
                 <?php
 							  $posts = get_field('related_posts');
 							  if ($posts) {
+								echo '<p class="spacer"></p>';
 								echo '<h3>Related</h3>';
 								echo '<ul class="related-list">';
 								foreach($posts as $post):
 								  setup_postdata($post);
-								  echo '<li><a href="' . get_the_permalink() . '">';
-								  echo '<h3>' . get_the_title() . '</h3>';
-								  the_excerpt();
-								  echo '</a></li>';
+								  echo '<li class="related">';
+								  echo '<h4>' . get_the_title() . '</h4>';
+								  qode_excerpt();
+								  echo '</li>';
 								endforeach;
 								echo '</ul>';  
 								wp_reset_postdata();
