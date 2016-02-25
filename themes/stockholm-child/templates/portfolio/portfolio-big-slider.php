@@ -99,25 +99,24 @@ if (is_array($portfolio_images)){
 			<div class="portfolio_single_text_holder">
 				<h2 class="portfolio_single_text_title"><span><?php the_title(); ?></span></h2>
 				<?php the_content(); ?>
-                
                 <?php
-							  $posts = get_field('related_posts');
-							  if ($posts) {
-								echo '<p class="spacer"></p>';
-								echo '<h3>Related</h3>';
-								echo '<ul class="related-list">';
-								foreach($posts as $post):
-								  setup_postdata($post);
-								  echo '<li class="related">';
-								  echo '<h4>' . get_the_title() . '</h4>';
-								  qode_excerpt();
-								  echo '</li>';
-								endforeach;
-								echo '</ul>';  
-								wp_reset_postdata();
-							  }
+				  $posts = get_field('related_posts');
+				  if ($posts) {
+					echo '<p class="spacer"></p>';
+					echo '<h3>Related</h3>';
+					echo '<ul class="related-list">';
+					foreach($posts as $post):
+					  setup_postdata($post);
+					  echo '<li class="related">';
+					  echo '<h4>' . get_the_title() . '</h4>';
+					  qode_excerpt();
+					  echo '</li>';
+					endforeach;
+					echo '</ul>';  
+					wp_reset_postdata();
+				  }
 							
-							?>
+				?>
 			</div>
 		</div>
 	</div>
