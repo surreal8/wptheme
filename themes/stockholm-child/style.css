@@ -80,3 +80,11 @@ p.spacer {
 .readmore {
 	font-weight: bold;
 }
+
+.portfolio_single h2.portfolio_single_text_title {
+    margin: 0;
+}
+
+.vc_gitem-animated-block {
+    position: relative;
+    display: none;

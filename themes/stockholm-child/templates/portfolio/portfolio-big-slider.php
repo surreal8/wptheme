@@ -98,6 +98,12 @@ if (is_array($portfolio_images)){
 		<div class="column_inner">
 			<div class="portfolio_single_text_holder">
 				<h2 class="portfolio_single_text_title"><span><?php the_title(); ?></span></h2>
+                <?php
+				if (get_field('tombstone')) { 
+				  echo get_field('tombstone'); 
+				  echo '<p>&nbsp;</p>'; 
+				 }
+				?>
 				<?php the_content(); ?>
                 <?php
 				  $posts = get_field('related_posts');
@@ -112,10 +118,27 @@ if (is_array($portfolio_images)){
 					  qode_excerpt();
 					  echo '</li>';
 					endforeach;
-					echo '</ul>';  
+					echo '</ul>';
 					wp_reset_postdata();
-				  }
-							
+				  }		
+				?>
+                <?php
+				if (get_field('primary_sources') || get_field('other_collections')) { 
+				  echo '<ul class="related-list">';
+				    if (get_field('primary_sources')) {
+					  echo '<li class="related">';
+					  echo '<h3>Primary Sources</h3>';
+					  echo '<p>' . get_field('primary_sources') . '</p>'; 
+				      echo '</li>';
+				    }
+					if (get_field('other_collections')) {
+					  echo '<li class="related">';
+					  echo '<h3>In Other Stiegltiz Collections</h3>';
+					  echo '<p>' . get_field('other_collections') . '</p>'; 
+				      echo '</li>';
+				    }
+				  echo '</ul>';
+				}
 				?>
 			</div>
 		</div>
