@@ -49,9 +49,9 @@ Template: stockholm
     top: 70%;
 }
 
-.filter_holder li:hover > ul.child {
+/*.filter_holder li:hover > ul.child {
     display: block;
-}
+}*/
 
 .flexslider .slides img {
     width: auto;
@@ -90,3 +90,4 @@ p.spacer {
 .vc_gitem-animated-block {
     position: relative;
     display: none;
+}

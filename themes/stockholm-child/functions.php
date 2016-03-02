@@ -8,6 +8,12 @@ wp_enqueue_style( 'childstyle' );
 }
 add_action( 'wp_enqueue_scripts', 'wp_schools_enqueue_scripts', 11);
 
+add_action('wp_enqueue_scripts', 'load_javascript_files');
+function load_javascript_files() {
+	wp_register_script('defaultjs', get_stylesheet_directory_uri() . '/js/default.js', array('jquery'), true );
+	wp_enqueue_script('defaultjs');
+}
+
 //adding subcategories in menu for portfolio list
 if (!function_exists('portfolio_list')) {
 	
@@ -159,7 +165,7 @@ if (!function_exists('portfolio_list')) {
 						$html .= "<li class='filter' data-filter='portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
                         //$html .= "<li><span>$portfolio_category->name</span>";
                     } else {
-                        $html .= "<li><span>$portfolio_category->name</span>";
+                        $html .= "<li class='parent_filter'><span>$portfolio_category->name</span>";
                     }
                     $args = array(
                         'child_of' => $portfolio_category->term_id
