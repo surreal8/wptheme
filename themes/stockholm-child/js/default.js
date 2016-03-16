@@ -121,7 +121,7 @@ $j(window).load(function(){
 	setDropDownMenuPosition();
 	initDropDownMenu();
 	initPortfolio();
-	subMenuFilter();
+	subMenu();
 	initPortfolioZIndex();
 	initPortfolioSingleInfo();
 	initTestimonials();
@@ -1481,7 +1481,6 @@ function initPortfolio(){
 
 			$j('.filter_holder .filter').on('click',function(){
 				var $this = $j(this).text();
-				console.log('$this', $this);
 				var dropLabels = $j('.filter_holder').find('.label span');
 				dropLabels.each(function(){
 					$j(this).text($this);
@@ -1498,15 +1497,12 @@ function initPortfolio(){
 }
 
 /*
-** sub menu filtering
+** Show/hide sub menu
 */
-function subMenuFilter(){
-	$j('.parent_filter').on('click',function(){
-		
+function subMenu(){
+	$j('.parent_menu').on('click',function(){
 		$j('.filter_holder ul.child').css('display', 'none');
 		$j('.filter_holder li:hover > ul.child').css('display', 'block');
-		
-		var selector = '.'+$j(this).attr('data-filter');
 	});	
 }
 
@@ -1643,7 +1639,6 @@ function initPortfolioMasonryFilter(){
         portfolioIsotopeAnimation = setTimeout(function(){  $j('.isotope, .isotope .isotope-item').css('transition-duration','0s'); },700);
 
         var selector = $j(this).attr('data-filter');
-		console.log('selector', selector);
         $j('.projects_masonry_holder, .masonry_with_space .projects_holder').isotope({ filter: selector });
 
 		$j(".filter").removeClass("current");

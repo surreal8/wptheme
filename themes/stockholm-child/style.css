@@ -49,10 +49,6 @@ Template: stockholm
     top: 70%;
 }
 
-/*.filter_holder li:hover > ul.child {
-    display: block;
-}*/
-
 .flexslider .slides img {
     width: auto;
     display: block;

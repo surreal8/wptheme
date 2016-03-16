@@ -1,18 +1,26 @@
 <?php
 
 // enqueue the child theme stylesheet
-
 Function wp_schools_enqueue_scripts() {
 wp_register_style( 'childstyle', get_stylesheet_directory_uri() . '/style.css'  );
 wp_enqueue_style( 'childstyle' );
 }
 add_action( 'wp_enqueue_scripts', 'wp_schools_enqueue_scripts', 11);
 
+//Replace default.js file
 add_action('wp_enqueue_scripts', 'load_javascript_files');
 function load_javascript_files() {
 	wp_register_script('defaultjs', get_stylesheet_directory_uri() . '/js/default.js', array('jquery'), true );
 	wp_enqueue_script('defaultjs');
 }
+
+// Remove Query String
+function _remove_script_version( $src ){
+$parts = explode( '?ver', $src );
+return $parts[0];
+}
+add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 
 //adding subcategories in menu for portfolio list
 if (!function_exists('portfolio_list')) {
@@ -160,30 +168,33 @@ if (!function_exists('portfolio_list')) {
                 }
 
                 foreach ($portfolio_categories as $portfolio_category) {
-					//var_dump($portfolio_category);
-                    if ($type == 'masonry_with_space' || $type == 'masonry_with_space_without_description') {
+                	if ($type == 'masonry_with_space' || $type == 'masonry_with_space_without_description') {
 						$html .= "<li class='filter' data-filter='portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
                         //$html .= "<li><span>$portfolio_category->name</span>";
                     } else {
-                        $html .= "<li class='parent_filter'><span>$portfolio_category->name</span>";
+						$args = array('child_of' => $portfolio_category->term_id);
+						$portfolio_categories_child = get_terms('portfolio_category', $args);
+						$subcatnum = count($portfolio_categories_child);
+						$subcats = array();
+						if ($subcatnum > 1) {
+							foreach ($portfolio_categories_child as $portfolio_category_child) {
+								array_push($subcats, 'portfolio_category_'.$portfolio_category_child->term_id);
+								$subcatresults =  implode(' ', $subcats);
+							}
+						} else {
+								$subcatresults = 'portfolio_category_'.$portfolio_category_child->term_id;
+							}
+                        	$html .= "<li class='parent_menu filter' data-filter='$subcatresults'><span>$portfolio_category->name</span>";
                     }
-                    $args = array(
-                        'child_of' => $portfolio_category->term_id
-                    );
-					
+                    
                     $html .= "<ul class='child'>";
-                    $portfolio_categories_child = get_terms('portfolio_category', $args);
+                    
                     foreach ($portfolio_categories_child as $portfolio_category_child) {
-                        $html .= "<li class='filter' data-filter='portfolio_category_$portfolio_category_child->term_id'><span>$portfolio_category_child->name</span>"; 
-						//echo $portfolio_category_child->name;
+                        $html .= "<li class='filter' data-filter='portfolio_category_$portfolio_category_child->term_id'><span>$portfolio_category_child->name</span></li>"; 
                     }
-                    $html .= "</ul>";
-
-                    $html .= "</li>";
+                    $html .= "</ul></li>";
                 }
-
-                $html .= "</ul></div>";
-                $html .= "</div>";
+                $html .= "</ul></div></div>";
             }
 
             $thumb_size_class = "";
