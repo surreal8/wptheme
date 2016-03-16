@@ -49,7 +49,8 @@ Template: stockholm
 .filter_holder ul.child {
     display: none;
     position: absolute;
-    top: 70%;
+    top: 40px;
+	padding: 0;
 }
 
 .flexslider .slides img {
@@ -98,4 +99,18 @@ nav.main_menu > ul > li > a {
 header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
     border-bottom: 1px solid #dedede;
     height: 55px;
+}
+
+.header_bottom {
+	height: 0px
+}
+
+header {
+	height: 38px;	
+}
+
+.filter_outer.left_align {
+    text-align: center;
+    background-color: #f0bd97;
+	padding-top: 5px;
 }
