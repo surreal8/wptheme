@@ -15,13 +15,16 @@ Template: stockholm
 	display: none;
 }
 
-.sitetitle {
+.sitetitle a {
 	position: absolute;
     /*left: 75px;*/
-    top: 50%;
+    top: 18px;
     width: 500px;
-    font-size: 25px;
-    color: #000000;
+	color: #393939;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0px;
+	text-transform: uppercase;
 }
 
 .info-box {
@@ -86,4 +89,13 @@ p.spacer {
 .vc_gitem-animated-block {
     position: relative;
     display: none;
+}
+
+nav.main_menu > ul > li > a {
+    line-height: 60px;
+}
+
+header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
+    border-bottom: 1px solid #dedede;
+    height: 55px;
 }
