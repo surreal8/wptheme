@@ -146,7 +146,7 @@ if (!function_exists('portfolio_list')) {
                 if ($type == 'masonry_with_space' || $type == 'masonry_with_space_without_description') {
                     $html .= "<li class='filter' data-filter='*'><span>" . __('All', 'edgt_cpt') . "</span></li>";
                 } else {
-                    $html .= "<li class='filter' data-filter='all'><span>" . __('All', 'edgt_cpt') . "</span></li>";
+                    $html .= "<li class='parent_menu filter' data-filter='all'><span>" . __('All', 'edgt_cpt') . "</span></li>";
                 }
 
                 if ($category == "") {
