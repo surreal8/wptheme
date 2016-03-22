@@ -32,11 +32,19 @@ if (is_array($portfolio_images)){
                 $image_src = wp_get_attachment_image_src( $gimg_id, 'blog_image_in_grid' );
                 if (is_array($image_src)) $image_src = $image_src[0];
                 ?>
-                <li class="slide">
-                    <img src="<?php echo $image_src; ?>" alt="<?php echo $alt; ?>" />
-                    <div class="portfolio_image_title"><?php echo $title; ?></div>
-                </li>
-            <?php
+                <?php if($lightbox_single_project == "yes"){ ?>
+                    <li class="slide">
+                        <a class="lightbox_single_portfolio" title="<?php echo $title; ?>" href="<?php echo $image_src; ?>" data-rel="prettyPhoto[single_pretty_photo]">
+                            <img src="<?php echo $image_src; ?>" alt="<?php echo $alt; ?>" />
+                        </a>
+                        <div class="portfolio_image_title"><?php echo $title; ?></div>
+                    </li>
+                 <?php } else { ?>
+                     <li class="slide">
+                        <img src="<?php echo $image_src; ?>" alt="<?php echo $alt; ?>" />
+                        <div class="portfolio_image_title"><?php echo $title; ?></div>
+                    </li>
+            	<?php }
             }
         }
 
@@ -50,10 +58,19 @@ if (is_array($portfolio_images)){
 					list($id, $title, $alt) = qode_get_portfolio_image_meta($portfolio_image['portfolioimg']);
 
 					?>
-					<li class="slide">
-						<img src="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" alt="<?php echo $alt; ?>" />
-					    <div class="portfolio_image_title"><?php echo $title; ?></div>
-                    </li>
+                    <?php if($lightbox_single_project == "yes"){ ?>
+                        <li class="slide">
+                            <a class="lightbox_single_portfolio" title="<?php echo $title; ?>" href="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" data-rel="prettyPhoto[single_pretty_photo]">
+                                <img src="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" alt="<?php echo $alt; ?>" />
+                            </a>
+                            <div class="portfolio_image_title"><?php echo $title; ?></div>
+                        </li>
+                    <?php } else { ?>
+                        <li class="slide">
+                                <img src="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" alt="<?php echo $alt; ?>" />
+                            <div class="portfolio_image_title"><?php echo $title; ?></div>
+                        </li>
+                    <?php } ?>
 				<?php }else{ ?>
 
 					<?php
