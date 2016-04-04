@@ -15,16 +15,25 @@ Template: stockholm
 	display: none;
 }
 
-.sitetitle a {
+.sitetitle, .sitetitlehome a:link, a:visited {
 	position: absolute;
     /*left: 75px;*/
     top: 18px;
     width: 500px;
-	color: #393939;
+	color: #bebdbd;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0px;
 	text-transform: uppercase;
+	margin-left: 25px;
+}
+
+header:not(.with_hover_bg_color) nav.main_menu>ul>li:hover>a, nav.main_menu>ul>li.active>a {
+	color: #eb5f33;
+}
+
+nav.main_menu > ul > li > a {
+	color: #bebdbd;
 }
 
 .info-box {
@@ -44,13 +53,6 @@ Template: stockholm
 
 .info-boxp {
 	font-size: 1.6rem;
-}
-
-.filter_holder ul.child {
-    display: none;
-    position: absolute;
-    top: 40px;
-	padding: 0;
 }
 
 .flexslider .slides img {
@@ -97,8 +99,14 @@ nav.main_menu > ul > li > a {
 }
 
 header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
-    border-bottom: 1px solid #dedede;
-    height: 55px;
+	border-bottom: none;
+    /*border-bottom: 1px solid #dedede;*/
+    height: 57px;
+}
+
+.container_inner {
+	background-image: url("img/headerbg.jpg");
+	background-repeat: no-repeat;	
 }
 
 .header_bottom {
@@ -122,4 +130,26 @@ header {
 
 .portfolio_single_tags {
 	display: none;
+}
+
+.content .content_inner > .container > .container_inner, .content .content_inner > .full_width > .full_width_inner {
+    padding-top: 159px;
+}
+
+.filter_holder ul li:not(.filter_title) span {
+	text-transform: uppercase
+}
+
+.filter_holder ul:not(ul.child) li.current span, .filter_holder ul:not(ul.child) li:not(.filter_title):hover span {
+    color: #3a3a3a;
+    font-weight: 600;
+}
+
+.filter_holder ul.child {
+    display: none;
+    position: absolute;
+    top: 40px;
+	padding: 0;
+	background-color: #3b3b3b;
+	color: #f0bd97;
 }
