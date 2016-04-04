@@ -135,7 +135,7 @@ if (is_array($portfolio_images)){
 				  $posts = get_field('related_posts');
 				  if ($posts) {
 					echo '<p class="spacer"></p>';
-					echo '<h3>Related Glossary Pages</h3>';
+					echo '<h3 class="related">Related Glossary Pages</h3>';
 					echo '<ul class="related-list">';
 					foreach($posts as $post):
 					  setup_postdata($post);
@@ -159,19 +159,19 @@ if (is_array($portfolio_images)){
 				  echo '<ul class="related-list">';
 				  	if (get_field('object_research')) {
 					  echo '<li class="relatedside">';
-					  echo '<h3>Object Research</h3>';
+					  echo '<h3 class="related">Object Research</h3>';
 					  echo '<p>' . get_field('object_research') . '</p>'; 
 				      echo '</li>';
 				    }
 				    if (get_field('primary_sources')) {
 					  echo '<li class="relatedside">';
-					  echo '<h3>Primary Sources</h3>';
+					  echo '<h3 class="related">Primary Sources</h3>';
 					  echo '<p>' . get_field('primary_sources') . '</p>'; 
 				      echo '</li>';
 				    }
 					if (get_field('other_collections')) {
 					  echo '<li class="relatedside">';
-					  echo '<h3>In Other Stiegltiz Collections</h3>';
+					  echo '<h3 class="related">In Other Stiegltiz Collections</h3>';
 					  echo '<p>' . get_field('other_collections') . '</p>'; 
 				      echo '</li>';
 				    }

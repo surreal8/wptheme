@@ -160,3 +160,11 @@ header {
 	background-color: #3b3b3b;
 	color: #f0bd97;
 }
+
+h3.related {
+	border-top: #63132d 5px solid;
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+}
