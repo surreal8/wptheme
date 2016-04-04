@@ -114,9 +114,18 @@ if (is_array($portfolio_images)){
 	<div class="column1">
 		<div class="column_inner">
 			<div class="portfolio_single_text_holder">
+            	<?php
+				if (get_field('artist_name') || get_field('artist_name')) { 
+				  //add artist name and origin
+				  $artist_name =  get_field('artist_name'); 
+				  $artist_origin =  get_field('artist_origin'); 
+				  echo '<p>' . $artist_name .' ('.$artist_origin.')'.'</p>'; 
+				 }
+				?>
 				<h2 class="portfolio_single_text_title"><span><?php the_title(); ?></span></h2>
                 <?php
 				if (get_field('tombstone')) { 
+				//tombstone info
 				  echo get_field('tombstone'); 
 				  echo '<p>&nbsp;</p>'; 
 				 }
