@@ -135,7 +135,7 @@ if (is_array($portfolio_images)){
 				  $posts = get_field('related_posts');
 				  if ($posts) {
 					echo '<p class="spacer"></p>';
-					echo '<h3>Related</h3>';
+					echo '<h3>Related Glossary Pages</h3>';
 					echo '<ul class="related-list">';
 					foreach($posts as $post):
 					  setup_postdata($post);
@@ -148,17 +148,29 @@ if (is_array($portfolio_images)){
 					wp_reset_postdata();
 				  }		
 				?>
-                <?php
-				if (get_field('primary_sources') || get_field('other_collections')) { 
+			</div>
+		</div>
+	</div>
+	<div class="column2">
+		<div class="column_inner">
+			<div class="portfolio_detail">
+             <?php
+				if (get_field('primary_sources') || get_field('other_collections') || get_field('object_research')) { 
 				  echo '<ul class="related-list">';
+				  	if (get_field('object_research')) {
+					  echo '<li class="relatedside">';
+					  echo '<h3>Object Research</h3>';
+					  echo '<p>' . get_field('object_research') . '</p>'; 
+				      echo '</li>';
+				    }
 				    if (get_field('primary_sources')) {
-					  echo '<li class="related">';
+					  echo '<li class="relatedside">';
 					  echo '<h3>Primary Sources</h3>';
 					  echo '<p>' . get_field('primary_sources') . '</p>'; 
 				      echo '</li>';
 				    }
 					if (get_field('other_collections')) {
-					  echo '<li class="related">';
+					  echo '<li class="relatedside">';
 					  echo '<h3>In Other Stiegltiz Collections</h3>';
 					  echo '<p>' . get_field('other_collections') . '</p>'; 
 				      echo '</li>';
@@ -166,12 +178,7 @@ if (is_array($portfolio_images)){
 				  echo '</ul>';
 				}
 				?>
-			</div>
-		</div>
-	</div>
-	<div class="column2">
-		<div class="column_inner">
-			<div class="portfolio_detail">
+            
 				<?php
 					//get portfolio custom fields section
 					get_template_part('templates/portfolio/parts/portfolio-custom-fields');

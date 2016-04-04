@@ -77,6 +77,13 @@ li.related p {
 	color: #8d8d8d;
 }
 
+li.relatedside {
+	width: 100%;
+	display: inline-table;
+	padding-right: 10px;
+	margin-top: 20px;
+}
+
 p.spacer {
 	height: 30px;
 }
