@@ -115,7 +115,7 @@ if (is_array($portfolio_images)){
 		<div class="column_inner">
 			<div class="portfolio_single_text_holder">
             	<?php
-				if (get_field('artist_name') || get_field('artist_name')) { 
+				if (get_field('artist_name') || get_field('artist_origin')) { 
 				  //add artist name and origin
 				  $artist_name =  get_field('artist_name'); 
 				  $artist_origin =  get_field('artist_origin'); 

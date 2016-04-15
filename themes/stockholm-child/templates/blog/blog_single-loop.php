@@ -21,7 +21,6 @@ if (isset($qode_options['blog_single_hide_category']) && $qode_options['blog_sin
 <?php
 $_post_format = get_post_format();
 ?>
-WORD WORD WORD default page  YO!
 <?php
 	switch ($_post_format) {
 		case "video":
@@ -79,7 +78,6 @@ WORD WORD WORD default page  YO!
 						<div class="post_content">
 							<h2><span><?php the_title(); ?></span></h2>
 							<?php the_content(); ?>
-                            <?php the_field('info_box_title'); ?>
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
@@ -129,7 +127,6 @@ WORD WORD WORD default page  YO!
 						<div class="post_content">
 							<h2><span><?php the_title(); ?></span></h2>
 							<?php the_content(); ?>
-                            <?php the_field('info_box_title'); ?>
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
@@ -179,7 +176,6 @@ WORD WORD WORD default page  YO!
 					</div>
 					<div class="post_content">
 						<?php the_content(); ?>
-                        <?php the_field('info_box_title'); ?>
 						<div class="clear"></div>
 						<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 							<div class="post_social">
@@ -246,7 +242,6 @@ WORD WORD WORD default page  YO!
 									echo do_shortcode($filtered_content);
 								} else {
 									the_content();
-									the_field('info_box_title');
 								} 
 							?>
 
@@ -301,7 +296,6 @@ WORD WORD WORD default page  YO!
 						</div>
 						<div class="post_content">
 							<?php the_content(); ?>
-                            <?php the_field('info_box_title'); ?>
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
@@ -351,36 +345,13 @@ WORD WORD WORD default page  YO!
 						<div class="post_content">
 							<h2><span><?php the_title(); ?></span></h2>
                             <?php
-							  $user = get_field('contributor');
-							  //var_dump($user);
+							if (get_field('origin_posts')) { 
+							  //add origin info
+							  $origin =  get_field('origin_posts'); 
+							  echo '<p>' . $origin . '</p>'; 
+							 }
 							?>
 							<?php the_content(); ?>
-                            <?php 
-							  if (get_field('info_box_content')) {
-								  echo '<div class="info-box">';
-								  echo '<h1>' . get_field('info_box_title') . '</h1>'; 
-								  the_field('info_box_content');
-								  echo '</div>';
-							  }
-							?>
-                            
-                            <?php
-							  $posts = get_field('related_posts');
-							  if ($posts) {
-								echo '<h1>Further Reading:</h1>';
-								echo '<ul class="related-list">';
-								foreach($posts as $post):
-								  setup_postdata($post);
-								  echo '<li><a href="' . get_the_permalink() . '">';
-								  echo '<h3>' . get_the_title() . '</h3>';
-								  the_excerpt();
-								  echo '</a></li>';
-								endforeach;
-								echo '</ul>';  
-								wp_reset_postdata();
-							  }
-							
-							?>
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
