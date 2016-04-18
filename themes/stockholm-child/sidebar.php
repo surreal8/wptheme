@@ -5,17 +5,6 @@ $sidebar_id =  $qode_page_id;
 ?>
 	<div class="column_inner">
 		<aside class="sidebar">
-        <div class="words">
-          <div class="detail-type">
-            <?php echo get_the_term_list( $post->ID, 'detail-type', 'Type of detail page: ', ', ', '' ); ?> 
-          </div>
-          <div class="price-range">
-            <?php echo get_the_term_list( $post->ID, 'price', 'Price Range: ', ', ', '' ); ?> 
-         </div>
-         <div class="mood">
-            <?php echo get_the_term_list( $post->ID, 'mood', 'The mood this puts me in: ', ', ', '' ); ?> 
-         </div>
-        </div>
 			<?php	
 			$sidebar = "";
 
@@ -77,8 +66,7 @@ $sidebar_id =  $qode_page_id;
 				echo '</ul>';
 				wp_reset_postdata();
 			  }		
-			?>
-            
+			?>   
             </div>
 		</aside>
 	</div>
