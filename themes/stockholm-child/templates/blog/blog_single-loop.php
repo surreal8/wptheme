@@ -348,7 +348,7 @@ $_post_format = get_post_format();
 							if (get_field('origin_posts')) { 
 							  //add origin info
 							  $origin =  get_field('origin_posts'); 
-							  echo '<p>' . $origin . '</p>'; 
+							  echo '<p class="tombstone">' . $origin . '</p>'; 
 							 }
 							?>
 							<?php the_content(); ?>

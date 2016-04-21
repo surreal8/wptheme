@@ -45,7 +45,7 @@ $sidebar_id =  $qode_page_id;
 			  //add related image
 			  echo '<img src="'.$related_image['url'].'" alt="'.$related_caption.'"/>';
 			  
-			  echo '<p>' . $related_caption .'</p>'; 
+			  echo '<p class="related_caption">' . $related_caption .'</p>'; 
 			 }
 			?>
             </div>
@@ -55,12 +55,12 @@ $sidebar_id =  $qode_page_id;
 			$posts = get_field('relationship_posts');
 			if ($posts) {
 				echo '<p class="spacer"></p>';
-				echo '<h3 class="related">Related Glossary Pages</h3>';
 				echo '<ul class="related-list">';
 				foreach($posts as $post):
 				  setup_postdata($post);
-				  echo '<li class="related">';
-				  echo '<a href="'.get_permalink().'">'.get_the_title().'</a>';
+				  echo '<li class="relatedside">';
+				  echo '<h3 class="related">Related Glossary Pages</h3>';
+				  echo '<p><a href="'.get_permalink().'">'.get_the_title().'</a></p>';
 				  echo '</li>';
 				endforeach;
 				echo '</ul>';

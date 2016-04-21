@@ -44,8 +44,8 @@ body {
 	font-size: 18px;
 }
 
-.portfolio_container { 
-	font-family: Garibaldi-Medium; 
+.portfolio_container, .blog_holder { 
+	font-family: 'Garibaldi-Medium', serif; 
 	line-height: 1.5em;
 }
 
@@ -54,11 +54,22 @@ h2 {
     text-transform: none;
 	font-size: 41px;
 }
+
+.blog_holder article h2 {
+	margin: 0;
+}
+
+.blog_holder .filter_outer.left_align, .blog_holder .filter_holder{
+	display: none;
+}
  
-.tombstone, .artistname {
+.tombstone, .artistname, .related_caption {
 	font-family: 'Poppins', sans-serif; 
 	font-size: 15px;
 	line-height: 1.75em;
+}
+.related_caption {
+	text-align: center;
 }
 
 .artistname {
@@ -89,9 +100,19 @@ a, p a {
     color: #eb5e33;
 	text-decoration: underline;
 	font-weight: 500;
+	font-family: 'Garibaldi-Medium', serif; 
+	
+}
+
+.related a, .related p a, .relatedside a, .relatedside p a {
 	font-family: 'Poppins', sans-serif;
 	font-size: 14px;
 }
+
+.related .readmore a{
+	font-size: 11px; 
+}
+
 
 header:not(.with_hover_bg_color) nav.main_menu>ul>li:hover>a, nav.main_menu>ul>li.active>a {
 	color: #eb5f33;
@@ -195,13 +216,12 @@ li.related {
 	width: 30%;
 	display: inline-table;
 	padding-right: 25px;
-	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
 li.related p {
 	color: #3a3a3a;
-	font-family: Garibaldi-Medium; 
+	font-family: 'Garibaldi-Medium', serif; 
 	font-size: 14px;
 	line-height: 1.5em;
 }
@@ -216,10 +236,6 @@ li.relatedside {
 
 p.spacer {
 	height: 30px;
-}
-
-.readmore a{
-	font-size: 11px; 
 }
 
 .portfolio_single h2.portfolio_single_text_title {
