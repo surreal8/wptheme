@@ -19,7 +19,7 @@ if (is_array($portfolio_images)){
 	usort($portfolio_images, "comparePortfolioImages");
 }
 ?>
-
+<div> <a href="<?php echo home_url('/'); ?>" class="return_home">< Return To All Photographs</a> </div>
 <div class="flexslider">
 	<ul class="slides">
 		<?php
@@ -119,18 +119,20 @@ if (is_array($portfolio_images)){
 				  //add artist name and origin
 				  $artist_name =  get_field('artist_name'); 
 				  $artist_origin =  get_field('artist_origin'); 
-				  echo '<p>' . $artist_name .' ('.$artist_origin.')'.'</p>'; 
+				  echo '<p class="artistname">' . $artist_name .' ('.$artist_origin.')'.'</p>'; 
 				 }
 				?>
 				<h2 class="portfolio_single_text_title"><span><?php the_title(); ?></span></h2>
                 <?php
 				if (get_field('tombstone')) { 
 				//tombstone info
-				  echo get_field('tombstone'); 
+				  $tombstone_info = get_field('tombstone'); 
+				  echo '<div class="tombstone">' . $tombstone_info .'</div>'; 
 				  echo '<p>&nbsp;</p>'; 
 				 }
 				?>
 				<?php the_content(); ?>
+                <p>&nbsp;</p>
                 <?php
 				  $posts = get_field('related_posts');
 				  if ($posts) {
@@ -171,7 +173,7 @@ if (is_array($portfolio_images)){
 				    }
 					if (get_field('other_collections')) {
 					  echo '<li class="relatedside">';
-					  echo '<h3 class="related">In Other Stiegltiz Collections</h3>';
+					  echo '<h3 class="related">In Other Stieglitz Collections</h3>';
 					  echo '<p>' . get_field('other_collections') . '</p>'; 
 				      echo '</li>';
 				    }
