@@ -142,6 +142,10 @@ if (is_array($portfolio_images)){
 					foreach($posts as $post):
 					  setup_postdata($post);
 					  echo '<li class="related">';
+					  $categories = get_the_category();
+ 					  if ( ! empty( $categories ) ) {
+					    echo '<p class="artist_cat">' . esc_html( $categories[0]->name ) . '</p>';   
+					  }
 					  echo '<h4>' . get_the_title() . '</h4>';
 					  qode_excerpt();
 					  echo '</li>';
