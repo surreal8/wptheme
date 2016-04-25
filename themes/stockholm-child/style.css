@@ -248,7 +248,7 @@ p.spacer {
 }
 
 header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
-    border-bottom: 2px solid #dedede;
+    border-bottom: 2px solid #bebdbd;
     height: 57px;
 }
 
@@ -344,5 +344,45 @@ h4 {
     letter-spacing: .1em;
 	text-decoration: none;
 	left: 20px;
+}
+
+#glossaryNav a {
+	font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #bebdbd;
+    padding: 0 15px;
+    text-decoration: none;
+}
+
+#glossaryNav {
+	text-align: center;
+	border-bottom: 2px solid #bebdbd;
+	padding: 15px 0px;
+	color: #bebdbd;
+}
+
+#artists, #processes, #galleries, #journals, #stieglitz-series, #themes {
+	color: #63122d;
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    padding: 50px 0px 15px 25px;
+}
+
+.latest_post_text {
+	font-family: 'Garibaldi-Medium', serif;
+	font-size: 14px;
+}
+
+h4.latest_post_title a{
+	 font-size: 26px;
+	 text-decoration: none;
+}
+.latest_post_holder .latest_post_title a:hover {
+	color: #eb5e33;
+}
+
+.latest_post_holder.boxes>ul>li .latest_post p.excerpt {
+	margin: 0;
 }
 
