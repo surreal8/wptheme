@@ -398,3 +398,19 @@ li.related p.artist_cat {
     letter-spacing: 1px;
 }
 
+div.pp_pic_holder {
+	background-color: #f6f6f6;
+}
+
+body div.pp_default .pp_nav .currentTextHolder, body div.pp_default a.pp_arrow_previous:after, body div.pp_default a.pp_arrow_next:after, body div.pp_default .pp_description {
+	color: #000000;
+}
+
+body div.pp_default a.pp_next {
+    right: -61px;
+}
+
+body div.pp_default a.pp_previous {
+    left: -61px;
+}
+
