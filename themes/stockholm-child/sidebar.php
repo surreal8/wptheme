@@ -56,13 +56,13 @@ $sidebar_id =  $qode_page_id;
 			if ($posts) {
 				echo '<p class="spacer"></p>';
 				echo '<ul class="related-list">';
+				echo '<li class="relatedside">';
+				echo '<h3 class="related">Related Glossary Pages</h3>';
 				foreach($posts as $post):
 				  setup_postdata($post);
-				  echo '<li class="relatedside">';
-				  echo '<h3 class="related">Related Glossary Pages</h3>';
 				  echo '<p><a href="'.get_permalink().'">'.get_the_title().'</a></p>';
-				  echo '</li>';
 				endforeach;
+				echo '</li>';
 				echo '</ul>';
 				wp_reset_postdata();
 			  }		
