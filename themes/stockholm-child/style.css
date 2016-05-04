@@ -208,7 +208,7 @@ ol.flex-control-nav {
     text-align: center;
     font-family: Poppins, sans-serif;
     font-size: 15px;
-    padding-top: 15px;
+    padding-top: 5px;
     color: #3a3a3a;
 }
 
@@ -412,5 +412,9 @@ body div.pp_default a.pp_next {
 
 body div.pp_default a.pp_previous {
     left: -61px;
+}
+
+.flexslider .slides>li {
+	margin-top: 25px;
 }
 
