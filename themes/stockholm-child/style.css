@@ -87,12 +87,11 @@ h2 {
 	position: absolute;
     top: 18px;
     width: 500px;
-	color: #3a3a3a;
+	color: #bebdbd;
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0px;
+    letter-spacing: 1px;
 	text-transform: uppercase;
-	margin-left: 20px;
 	text-decoration: none;
 }
 
@@ -120,8 +119,17 @@ header:not(.with_hover_bg_color) nav.main_menu>ul>li:hover>a, nav.main_menu>ul>l
 
 nav.main_menu > ul > li > a {
 	font-family: 'Poppins', sans-serif; 
-	color: #3a3a3a;
+	color: #bebdbd;
 	line-height: 60px;
+	letter-spacing: 1px;
+}
+
+nav.main_menu>ul>li>a {
+	padding: 0 10px;
+	
+}
+nav.main_menu>ul>li:not(:first-child):before {
+	color: #bebdbd;
 }
 
 .info-box {
@@ -458,3 +466,10 @@ body div.pp_default a.pp_previous {
 	float: none;
 }
 
+.aicLogo {
+	padding-top: 24px;
+}
+
+.titleStieglitz {
+	padding-bottom: 50px;
+}
