@@ -1503,6 +1503,11 @@ function subMenu(){
 	$j('.parent_menu').on('click',function(){
 		$j('.filter_holder ul.child').css('display', 'none');
 		$j('.filter_holder li:hover > ul.child').css('display', 'block');
+		var subMenuHeight = $j('.filter_holder li:hover > ul.child').height();
+		var filterHolderHeight = $j('.filter_holder').height();
+		var menuAreaHeight = subMenuHeight + filterHolderHeight;
+		$j('.filter_outer').css('height', menuAreaHeight);
+		
 	});	
 }
 
@@ -1643,6 +1648,7 @@ function initPortfolioMasonryFilter(){
 
 		$j(".filter").removeClass("current");
 		$j(this).addClass("current");
+		$j(this).parents("li.parent_menu").addClass("current");
 
         setTimeout(setPortfolioMasZIndex(),700);
 

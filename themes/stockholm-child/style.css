@@ -278,7 +278,7 @@ header {
 .filter_outer.left_align {
     text-align: center;
     background-color: #f0bd97;
-	padding-top: 5px;
+	padding: 15px 0;
 }
 
 .projects_holder {
@@ -294,22 +294,37 @@ header {
     padding-top: 159px;
 }
 
-.filter_holder ul li:not(.filter_title) span {
-	text-transform: uppercase
+.filter_holder ul li.parent_menu span {
+	text-transform: uppercase;
+	font-size: 14px;
+    font-weight: 600;
+	color: #a58771;
+	letter-spacing: 0.050em;
 }
 
-.filter_holder ul:not(ul.child) li.current span, .filter_holder ul:not(ul.child) li:not(.filter_title):hover span {
+.filter_holder ul:not(.child) li.current span, .filter_holder ul:not(.child) li:hover span {
     color: #3a3a3a;
     font-weight: 600;
+}
+
+.filter_holder ul.child li.filter span {
+	color: #706156;
+	padding: 5px 25px;
+}
+
+.filter_holder ul.child li.filter:hover span, .filter_holder ul.child li.filter.current span {
+	color: #f0bd97;
 }
 
 .filter_holder ul.child {
     display: none;
     position: absolute;
-    top: 40px;
-	padding: 0;
+    top: 55px;
+	padding: 25px 0;
 	background-color: #3b3b3b;
 	color: #f0bd97;
+	left: 0;
+	width: 100%;
 }
 
 h3.related {
@@ -416,5 +431,30 @@ body div.pp_default a.pp_previous {
 
 .flexslider .slides>li {
 	margin-top: 25px;
+}
+
+.filter_holder ul li span:after {
+	content: normal;
+}
+
+.filter_holder ul li span {
+	padding: 0 15px;
+}
+
+.filter_holder ul.child li:not(:last-child) span:after {
+    content: '|';
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    width: 1px;
+    color: #706156;
+}
+
+.filter_holder ul li {
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+    text-align: center;
+	float: none;
 }
 
