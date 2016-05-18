@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Stockholm v2.3.1\n"
+"Project-Id-Version: Stockholm v2.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-07-29 11:50:13+0000\n"
+"PO-Revision-Date: 2016-04-08 14:13:32+0000\n"
 "Last-Translator: admin <support@qodeinteractive.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,15 +28,17 @@ msgstr ""
 #: search.php:42
 #: search.php:61
 #: search.php:89
-#: templates/blog/blog-structure.php:92
+#: templates/blog/blog-structure.php:124
 #@ qode
 msgid "No posts were found."
 msgstr ""
 
+#: templates/blog/blog_centered-loop.php:120
 #: templates/blog/blog_large_image-loop.php:119
 #: templates/blog/blog_large_image_whole_post-loop.php:101
 #: templates/blog/blog_masonry-loop.php:83
-#: templates/blog/blog_single-loop.php:99
+#: templates/blog/blog_pinterest-loop.php:101
+#: templates/blog/blog_single-loop.php:114
 #@ qode
 msgid "Your browser don't support audio player"
 msgstr ""
@@ -68,47 +70,47 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: contact-page.php:155
+#: contact-page.php:164
 #@ qode
 msgid "Contact Us"
 msgstr ""
 
-#: contact-page.php:189
+#: contact-page.php:214
 #@ qode
 msgid "This is a required field"
 msgstr ""
 
-#: contact-page.php:197
+#: contact-page.php:222
 #@ qode
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: contact-page.php:227
+#: contact-page.php:252
 #@ qode
 msgid "THANK YOU!"
 msgstr ""
 
-#: contact-page.php:227
+#: contact-page.php:252
 #@ qode
 msgid "Your email was successfully sent. We will contact you as soon as possible."
 msgstr ""
 
-#: contact-page.php:236
+#: contact-page.php:261
 #@ qode
 msgid "Invalid Captcha"
 msgstr ""
 
-#: contact-page.php:241
+#: contact-page.php:266
 #@ qode
 msgid "Email server problem"
 msgstr ""
 
-#: extendvc/extend-vc.php:1279
+#: extendvc/extend-vc.php:1432
 #@ qode
 msgid "Please insert margin in format: 0px 0px 1px 0px"
 msgstr ""
 
-#: extendvc/extend-vc.php:3053
+#: extendvc/extend-vc.php:3590
 #: includes/nav_menu/edit_custom_walker.php:205
 #: includes/plugins/class-tgm-plugin-activation.php:1390
 #@ qode
@@ -116,13 +118,13 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: functions.php:582
+#: functions.php:606
 #@ qode
 msgid "Top Navigation"
 msgstr ""
 
-#: header.php:305
-#: title.php:296
+#: header.php:322
+#: title.php:299
 #@ qode
 msgid "Search"
 msgstr ""
@@ -555,7 +557,7 @@ msgid "Remove"
 msgstr ""
 
 #: includes/nav_menu/edit_custom_walker.php:283
-#: woocommerce/myaccount/my-orders.php:75
+#: woocommerce/myaccount/my-orders.php:92
 #@ qode
 #@ woocommerce
 msgid "Cancel"
@@ -564,6 +566,8 @@ msgstr ""
 #: includes/plugins/class-tgm-plugin-activation.php:161
 #: includes/plugins/envato-wordpress-toolkit.php:55
 #: includes/plugins/layer-slider.php:65
+#: includes/plugins/select-instagram-feed.php:52
+#: includes/plugins/select-twitter-feed.php:52
 #: includes/plugins/visual-composer.php:55
 #@ tgmpa
 #@ qode
@@ -573,6 +577,8 @@ msgstr ""
 #: includes/plugins/class-tgm-plugin-activation.php:162
 #: includes/plugins/envato-wordpress-toolkit.php:56
 #: includes/plugins/layer-slider.php:66
+#: includes/plugins/select-instagram-feed.php:53
+#: includes/plugins/select-twitter-feed.php:53
 #: includes/plugins/visual-composer.php:56
 #@ tgmpa
 #@ qode
@@ -582,6 +588,8 @@ msgstr ""
 #: includes/plugins/class-tgm-plugin-activation.php:163
 #: includes/plugins/envato-wordpress-toolkit.php:57
 #: includes/plugins/layer-slider.php:67
+#: includes/plugins/select-instagram-feed.php:54
+#: includes/plugins/select-twitter-feed.php:54
 #: includes/plugins/visual-composer.php:57
 #, php-format
 #@ tgmpa
@@ -597,6 +605,8 @@ msgstr ""
 #: includes/plugins/class-tgm-plugin-activation.php:165
 #: includes/plugins/envato-wordpress-toolkit.php:59
 #: includes/plugins/layer-slider.php:69
+#: includes/plugins/select-instagram-feed.php:56
+#: includes/plugins/select-twitter-feed.php:56
 #: includes/plugins/visual-composer.php:59
 #, php-format
 #@ qode
@@ -608,6 +618,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:166
 #: includes/plugins/envato-wordpress-toolkit.php:60
 #: includes/plugins/layer-slider.php:70
+#: includes/plugins/select-instagram-feed.php:57
+#: includes/plugins/select-twitter-feed.php:57
 #: includes/plugins/visual-composer.php:60
 #, php-format
 #@ qode
@@ -619,6 +631,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:167
 #: includes/plugins/envato-wordpress-toolkit.php:61
 #: includes/plugins/layer-slider.php:71
+#: includes/plugins/select-instagram-feed.php:58
+#: includes/plugins/select-twitter-feed.php:58
 #: includes/plugins/visual-composer.php:61
 #, php-format
 #@ qode
@@ -630,6 +644,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:168
 #: includes/plugins/envato-wordpress-toolkit.php:62
 #: includes/plugins/layer-slider.php:72
+#: includes/plugins/select-instagram-feed.php:59
+#: includes/plugins/select-twitter-feed.php:59
 #: includes/plugins/visual-composer.php:62
 #, php-format
 #@ qode
@@ -641,6 +657,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:169
 #: includes/plugins/envato-wordpress-toolkit.php:63
 #: includes/plugins/layer-slider.php:73
+#: includes/plugins/select-instagram-feed.php:60
+#: includes/plugins/select-twitter-feed.php:60
 #: includes/plugins/visual-composer.php:63
 #, php-format
 #@ qode
@@ -652,6 +670,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:170
 #: includes/plugins/envato-wordpress-toolkit.php:64
 #: includes/plugins/layer-slider.php:74
+#: includes/plugins/select-instagram-feed.php:61
+#: includes/plugins/select-twitter-feed.php:61
 #: includes/plugins/visual-composer.php:64
 #, php-format
 #@ qode
@@ -663,6 +683,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:171
 #: includes/plugins/envato-wordpress-toolkit.php:65
 #: includes/plugins/layer-slider.php:75
+#: includes/plugins/select-instagram-feed.php:62
+#: includes/plugins/select-twitter-feed.php:62
 #: includes/plugins/visual-composer.php:65
 #, php-format
 #@ qode
@@ -674,6 +696,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:172
 #: includes/plugins/envato-wordpress-toolkit.php:66
 #: includes/plugins/layer-slider.php:76
+#: includes/plugins/select-instagram-feed.php:63
+#: includes/plugins/select-twitter-feed.php:63
 #: includes/plugins/visual-composer.php:66
 #, php-format
 #@ qode
@@ -685,6 +709,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:173
 #: includes/plugins/envato-wordpress-toolkit.php:67
 #: includes/plugins/layer-slider.php:77
+#: includes/plugins/select-instagram-feed.php:64
+#: includes/plugins/select-twitter-feed.php:64
 #: includes/plugins/visual-composer.php:67
 #@ qode
 msgid "Begin installing plugin"
@@ -694,6 +720,8 @@ msgstr[1] ""
 
 #: includes/plugins/envato-wordpress-toolkit.php:68
 #: includes/plugins/layer-slider.php:78
+#: includes/plugins/select-instagram-feed.php:65
+#: includes/plugins/select-twitter-feed.php:65
 #: includes/plugins/visual-composer.php:68
 #@ qode
 msgid "Activate installed plugin"
@@ -704,6 +732,8 @@ msgstr[1] ""
 #: includes/plugins/class-tgm-plugin-activation.php:175
 #: includes/plugins/envato-wordpress-toolkit.php:69
 #: includes/plugins/layer-slider.php:79
+#: includes/plugins/select-instagram-feed.php:66
+#: includes/plugins/select-twitter-feed.php:66
 #: includes/plugins/visual-composer.php:69
 #@ tgmpa
 #@ qode
@@ -719,6 +749,8 @@ msgstr ""
 #: includes/plugins/class-tgm-plugin-activation.php:1956
 #: includes/plugins/envato-wordpress-toolkit.php:70
 #: includes/plugins/layer-slider.php:80
+#: includes/plugins/select-instagram-feed.php:67
+#: includes/plugins/select-twitter-feed.php:67
 #: includes/plugins/visual-composer.php:70
 #@ tgmpa
 #@ qode
@@ -731,7 +763,7 @@ msgstr ""
 msgid "All plugins installed and activated successfully. %1$s"
 msgstr ""
 
-#: framework/qode-framework.php:444
+#: framework/qode-framework.php:448
 #: includes/plugins/class-tgm-plugin-activation.php:180
 #@ qode
 #@ tgmpa
@@ -792,8 +824,7 @@ msgid "Source"
 msgstr ""
 
 #: includes/plugins/class-tgm-plugin-activation.php:1391
-#: woocommerce/myaccount/my-orders.php:34
-#: woocommerce/myaccount/my-orders.php:55
+#: woocommerce/myaccount/my-orders.php:27
 #@ tgmpa
 #@ woocommerce
 msgid "Status"
@@ -932,6 +963,8 @@ msgstr ""
 
 #: includes/plugins/envato-wordpress-toolkit.php:58
 #: includes/plugins/layer-slider.php:68
+#: includes/plugins/select-instagram-feed.php:55
+#: includes/plugins/select-twitter-feed.php:55
 #: includes/plugins/visual-composer.php:58
 #@ qode
 msgid "Something went wrong with the plugin API."
@@ -939,6 +972,8 @@ msgstr ""
 
 #: includes/plugins/envato-wordpress-toolkit.php:71
 #: includes/plugins/layer-slider.php:81
+#: includes/plugins/select-instagram-feed.php:68
+#: includes/plugins/select-twitter-feed.php:68
 #: includes/plugins/visual-composer.php:71
 #, php-format
 #@ qode
@@ -1308,8 +1343,8 @@ msgstr ""
 msgid "You already like this!"
 msgstr ""
 
-#: framework/qode-framework.php:165
-#: framework/qode-framework.php:279
+#: framework/qode-framework.php:169
+#: framework/qode-framework.php:283
 #@ qode
 msgid "Save Changes"
 msgstr ""
@@ -1319,62 +1354,65 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3535
+#: includes/shortcodes/shortcodes.php:4006
 #@ qode
 msgid "Facebook"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3548
+#: includes/shortcodes/shortcodes.php:4019
 #@ qode
 msgid "Twitter"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3572
+#: includes/shortcodes/shortcodes.php:4043
 #@ qode
 msgid "LinkedIn"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3584
+#: includes/shortcodes/shortcodes.php:4055
 #@ qode
 msgid "Tumblr"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3597
+#: includes/shortcodes/shortcodes.php:4068
 #@ qode
 msgid "Pinterest"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:2400
-#: includes/shortcodes/shortcodes.php:2402
-#: includes/shortcodes/shortcodes.php:2704
+#: includes/shortcodes/shortcodes.php:2601
+#: includes/shortcodes/shortcodes.php:2827
+#: includes/shortcodes/shortcodes.php:2986
+#: includes/shortcodes/shortcodes.php:2988
 #: templates/blog/masonry-filter.php:40
 #@ qode
 msgid "All"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:2682
-#: includes/shortcodes/shortcodes.php:2890
-#: includes/shortcodes/shortcodes.php:3059
-#: includes/shortcodes/shortcodes.php:4138
-#: includes/shortcodes/shortcodes.php:4889
-#: includes/shortcodes/shortcodes.php:5013
+#: includes/shortcodes/shortcodes.php:2810
+#: includes/shortcodes/shortcodes.php:2962
+#: includes/shortcodes/shortcodes.php:3330
+#: includes/shortcodes/shortcodes.php:3513
+#: includes/shortcodes/shortcodes.php:4726
+#: includes/shortcodes/shortcodes.php:5513
+#: includes/shortcodes/shortcodes.php:5664
 #@ qode
 msgid "Sorry, no posts matched your criteria."
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:2690
-#: templates/blog/blog-structure.php:100
-#: templates/blog/blog-structure.php:104
+#: includes/shortcodes/shortcodes.php:2969
+#: includes/shortcodes/shortcodes.php:3338
+#: templates/blog/blog-structure.php:132
+#: templates/blog/blog-structure.php:136
 #@ qode
 msgid "Show more"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3520
+#: includes/shortcodes/shortcodes.php:3991
 #@ qode
 msgid "Share"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:4864
+#: includes/shortcodes/shortcodes.php:5488
 #@ qode
 msgid "Sorry, no slides matched your criteria."
 msgstr ""
@@ -1405,8 +1443,7 @@ msgid "Search Here"
 msgstr ""
 
 #: templates/portfolio/parts/portfolio-date.php:12
-#: woocommerce/myaccount/my-orders.php:33
-#: woocommerce/myaccount/my-orders.php:52
+#: woocommerce/myaccount/my-orders.php:26
 #@ qode
 #@ woocommerce
 msgid "Date"
@@ -1417,7 +1454,7 @@ msgstr ""
 msgid "Category "
 msgstr ""
 
-#: title.php:314
+#: title.php:317
 #@ qode
 msgid "Archive"
 msgstr ""
@@ -1506,8 +1543,7 @@ msgstr ""
 #: widgets/woocommerce-dropdown-cart.php:76
 #: woocommerce/cart/cart-totals.php:78
 #: woocommerce/cart/cart.php:30
-#: woocommerce/myaccount/my-orders.php:35
-#: woocommerce/myaccount/my-orders.php:58
+#: woocommerce/myaccount/my-orders.php:28
 #@ woocommerce
 msgid "Total"
 msgstr ""
@@ -1547,7 +1583,7 @@ msgstr ""
 msgid "Available on backorder"
 msgstr ""
 
-#: woocommerce/global/quantity-input.php:17
+#: woocommerce/global/quantity-input.php:24
 #@ woocommerce
 msgctxt "Product quantity input tooltip"
 msgid "Qty"
@@ -1601,7 +1637,7 @@ msgid "Please attempt your purchase again."
 msgstr ""
 
 #: woocommerce/checkout/thankyou.php:28
-#: woocommerce/myaccount/my-orders.php:68
+#: woocommerce/myaccount/my-orders.php:84
 #@ woocommerce
 msgid "Pay"
 msgstr ""
@@ -1637,7 +1673,9 @@ msgstr ""
 msgid "Payment method:"
 msgstr ""
 
-#: woocommerce/loop/add-to-cart.php:17
+#: includes/qode-product-list.php:132
+#: woocommerce/loop/add-to-cart.php:25
+#@ qode
 #@ woocommerce
 msgid "Out of stock"
 msgstr ""
@@ -1774,17 +1812,17 @@ msgstr ""
 msgid "You have not set up this type of address yet."
 msgstr ""
 
-#: woocommerce/myaccount/my-orders.php:26
+#: woocommerce/myaccount/my-orders.php:42
 #@ woocommerce
 msgid "Recent Orders"
 msgstr ""
 
-#: woocommerce/myaccount/my-orders.php:32
+#: woocommerce/myaccount/my-orders.php:25
 #@ woocommerce
 msgid "Order"
 msgstr ""
 
-#: woocommerce/myaccount/my-orders.php:59
+#: woocommerce/myaccount/my-orders.php:77
 #, php-format
 #@ woocommerce
 msgid "%s for %s item"
@@ -1792,7 +1830,7 @@ msgid_plural "%s for %s items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: woocommerce/myaccount/my-orders.php:81
+#: woocommerce/myaccount/my-orders.php:88
 #@ woocommerce
 msgid "View"
 msgstr ""
@@ -1843,73 +1881,73 @@ msgid "E-mail address"
 msgstr ""
 
 #: comments.php:52
-#: contact-page.php:122
+#: contact-page.php:131
 #@ qode
 msgid "Website"
 msgstr ""
 
-#: contact-page.php:101
+#: contact-page.php:110
 #@ qode
 msgid "First Name *"
 msgstr ""
 
-#: contact-page.php:106
+#: contact-page.php:115
 #@ qode
 msgid "Last Name *"
 msgstr ""
 
-#: contact-page.php:111
-#: contact-page.php:117
+#: contact-page.php:120
+#: contact-page.php:126
 #@ qode
 msgid "Email *"
 msgstr ""
 
-#: contact-page.php:128
+#: contact-page.php:137
 #@ qode
 msgid "Message"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3650
+#: includes/shortcodes/shortcodes.php:4125
 #@ qode
 msgid "Share on Facebook"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3666
+#: includes/shortcodes/shortcodes.php:4146
 #@ qode
 msgid "Share on Twitter"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3678
+#: includes/shortcodes/shortcodes.php:4163
 #@ qode
 msgid "Share on Google+"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3690
+#: includes/shortcodes/shortcodes.php:4180
 #@ qode
 msgid "Share on LinkedIn"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3702
+#: includes/shortcodes/shortcodes.php:4197
 #@ qode
 msgid "Share on Tumblr"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3715
+#: includes/shortcodes/shortcodes.php:4215
 #@ qode
 msgid "Share on Pinterest"
 msgstr ""
 
-#: js/default_dynamic.php:94
+#: js/default_dynamic.php:105
 #@ qode
 msgid "Loading new posts..."
 msgstr ""
 
-#: js/default_dynamic.php:96
+#: js/default_dynamic.php:107
 #@ qode
 msgid "No more posts"
 msgstr ""
 
-#: title.php:301
+#: title.php:304
 #@ qode
 msgid "404 - Page not found"
 msgstr ""
@@ -2056,17 +2094,7 @@ msgstr ""
 msgid "Anti-spam"
 msgstr ""
 
-#: woocommerce/single-product/add-to-cart/variable.php:27
-#@ woocommerce
-msgid "Choose an option"
-msgstr ""
-
-#: woocommerce/single-product/add-to-cart/variable.php:62
-#@ woocommerce
-msgid "Clear selection"
-msgstr ""
-
-#: woocommerce/single-product/add-to-cart/variable.php:93
+#: woocommerce/single-product/add-to-cart/variable.php:31
 #@ woocommerce
 msgid "This product is currently out of stock and unavailable."
 msgstr ""
@@ -2147,12 +2175,12 @@ msgstr ""
 msgid "Post a Reply to %s"
 msgstr ""
 
-#: extendvc/extend-vc.php:1287
+#: extendvc/extend-vc.php:1440
 #@ qode
 msgid "Please insert border radius(Rounded corners) in px. For example: 4 "
 msgstr ""
 
-#: functions.php:589
+#: functions.php:613
 #@ qode
 msgid "Fullscreen Navigation"
 msgstr ""
@@ -2231,7 +2259,7 @@ msgstr ""
 msgid "You already liked this!"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3560
+#: includes/shortcodes/shortcodes.php:4031
 #@ qode
 msgid "Google+"
 msgstr ""
@@ -2261,29 +2289,45 @@ msgstr ""
 msgid "Video"
 msgstr ""
 
-#: functions.php:596
+#: functions.php:620
 #@ qode
 msgid "Left Top Navigation"
 msgstr ""
 
-#: functions.php:602
+#: functions.php:626
 #@ qode
 msgid "Right Top Navigation"
 msgstr ""
 
-#: functions.php:1454
+#: functions.php:1630
 #@ qode
 msgid "READ MORE"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3610
+#: includes/shortcodes/shortcodes.php:4081
 #@ qode
 msgid "VK"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:1797
-#: includes/shortcodes/shortcodes.php:1822
-#: includes/shortcodes/shortcodes.php:1837
+#: includes/shortcodes/shortcodes.php:1945
+#: includes/shortcodes/shortcodes.php:1970
+#: includes/shortcodes/shortcodes.php:1985
+#: templates/blog/blog_animated-loop.php:59
+#: templates/blog/blog_animated-loop.php:89
+#: templates/blog/blog_animated-loop.php:119
+#: templates/blog/blog_animated-loop.php:149
+#: templates/blog/blog_animated-loop.php:179
+#: templates/blog/blog_animated-loop.php:209
+#: templates/blog/blog_centered-loop.php:72
+#: templates/blog/blog_centered-loop.php:132
+#: templates/blog/blog_centered-loop.php:206
+#: templates/blog/blog_centered-loop.php:261
+#: templates/blog/blog_centered-loop.php:310
+#: templates/blog/blog_centered-loop.php:364
+#: templates/blog/blog_chequered-loop.php:64
+#: templates/blog/blog_chequered-loop.php:98
+#: templates/blog/blog_chequered-loop.php:132
+#: templates/blog/blog_chequered-loop.php:211
 #: templates/blog/blog_large_image-loop.php:73
 #: templates/blog/blog_large_image-loop.php:134
 #: templates/blog/blog_large_image-loop.php:209
@@ -2302,38 +2346,51 @@ msgstr ""
 #: templates/blog/blog_masonry-loop.php:185
 #: templates/blog/blog_masonry-loop.php:215
 #: templates/blog/blog_masonry-loop.php:256
+#: templates/blog/blog_pinterest-loop.php:71
+#: templates/blog/blog_pinterest-loop.php:124
+#: templates/blog/blog_pinterest-loop.php:164
+#: templates/blog/blog_pinterest-loop.php:226
+#: templates/blog/blog_pinterest-loop.php:269
+#: templates/blog/blog_pinterest-loop.php:319
 #: templates/blog/blog_search-loop.php:33
-#: templates/blog/blog_single-loop.php:70
-#: templates/blog/blog_single-loop.php:119
-#: templates/blog/blog_single-loop.php:165
-#: templates/blog/blog_single-loop.php:230
-#: templates/blog/blog_single-loop.php:282
-#: templates/blog/blog_single-loop.php:337
+#: templates/blog/blog_single-loop.php:85
+#: templates/blog/blog_single-loop.php:134
+#: templates/blog/blog_single-loop.php:180
+#: templates/blog/blog_single-loop.php:245
+#: templates/blog/blog_single-loop.php:297
+#: templates/blog/blog_single-loop.php:352
 #@ qode
 msgid "By"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:2397
-#: includes/shortcodes/shortcodes.php:2702
+#: includes/shortcodes/shortcodes.php:2599
+#: includes/shortcodes/shortcodes.php:2824
+#: includes/shortcodes/shortcodes.php:2983
 #@ qode
 msgid "Sort Portfolio:"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:2583
-#: includes/shortcodes/shortcodes.php:2604
-#: includes/shortcodes/shortcodes.php:2654
-#: includes/shortcodes/shortcodes.php:2833
-#: includes/shortcodes/shortcodes.php:2854
-#: includes/shortcodes/shortcodes.php:3025
+#: includes/shortcodes/shortcodes.php:2746
+#: includes/shortcodes/shortcodes.php:2770
+#: includes/shortcodes/shortcodes.php:3224
+#: includes/shortcodes/shortcodes.php:3246
+#: includes/shortcodes/shortcodes.php:3302
+#: includes/shortcodes/shortcodes.php:3478
 #@ qode
 msgid "In "
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:3728
+#: includes/shortcodes/shortcodes.php:4233
 #@ qode
 msgid "Share on VK"
 msgstr ""
 
+#: templates/blog/blog_centered-loop.php:66
+#: templates/blog/blog_centered-loop.php:126
+#: templates/blog/blog_centered-loop.php:200
+#: templates/blog/blog_centered-loop.php:255
+#: templates/blog/blog_centered-loop.php:302
+#: templates/blog/blog_centered-loop.php:358
 #: templates/blog/blog_large_image-loop.php:68
 #: templates/blog/blog_large_image-loop.php:129
 #: templates/blog/blog_large_image-loop.php:204
@@ -2346,13 +2403,17 @@ msgstr ""
 #: templates/blog/blog_large_image_whole_post-loop.php:228
 #: templates/blog/blog_large_image_whole_post-loop.php:283
 #: templates/blog/blog_large_image_whole_post-loop.php:341
+#: templates/blog/blog_pinterest-loop.php:56
+#: templates/blog/blog_pinterest-loop.php:109
+#: templates/blog/blog_pinterest-loop.php:206
+#: templates/blog/blog_pinterest-loop.php:304
 #: templates/blog/blog_search-loop.php:27
-#: templates/blog/blog_single-loop.php:64
-#: templates/blog/blog_single-loop.php:113
-#: templates/blog/blog_single-loop.php:159
-#: templates/blog/blog_single-loop.php:224
-#: templates/blog/blog_single-loop.php:276
-#: templates/blog/blog_single-loop.php:331
+#: templates/blog/blog_single-loop.php:79
+#: templates/blog/blog_single-loop.php:128
+#: templates/blog/blog_single-loop.php:174
+#: templates/blog/blog_single-loop.php:239
+#: templates/blog/blog_single-loop.php:291
+#: templates/blog/blog_single-loop.php:346
 #@ qode
 msgid "In"
 msgstr ""
@@ -2362,7 +2423,7 @@ msgstr ""
 msgid "Sort Blog:"
 msgstr ""
 
-#: title.php:290
+#: title.php:293
 #@ qode
 msgid "Author:"
 msgstr ""
@@ -2401,7 +2462,7 @@ msgstr[1] ""
 msgid "Stockholm — One-Click Import"
 msgstr ""
 
-#: functions.php:1583
+#: functions.php:1759
 #@ qode
 msgid ""
 "Note that writing permissions aren't set for folders containing css and js files on your server.\n"
@@ -2429,7 +2490,8 @@ msgstr ""
 msgid "Error 404"
 msgstr ""
 
-#: includes/shortcodes/shortcodes.php:2691
+#: includes/shortcodes/shortcodes.php:2970
+#: includes/shortcodes/shortcodes.php:3339
 #@ qode
 msgid "Loading..."
 msgstr ""
@@ -2441,43 +2503,14 @@ msgid_plural "Begin activating plugins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/blog/blog_single-loop.php:364
+#: templates/blog/blog_single-loop.php:379
 #@ qode
 msgid "Tags:"
 msgstr ""
 
-#: woocommerce/cart/cart-shipping.php:20
-#, php-format
-#@ woocommerce
-msgid "Shipping #%d"
-msgstr ""
-
-#: woocommerce/cart/cart-shipping.php:22
-#: woocommerce/cart/cart-shipping.php:97
 #: woocommerce/cart/cart-totals.php:46
 #@ woocommerce
 msgid "Shipping"
-msgstr ""
-
-#: woocommerce/cart/cart-shipping.php:59
-#@ woocommerce
-msgid "Please use the shipping calculator to see available shipping methods."
-msgstr ""
-
-#: woocommerce/cart/cart-shipping.php:63
-#@ woocommerce
-msgid "Please continue to the checkout and enter your full address to see if there are any available shipping methods."
-msgstr ""
-
-#: woocommerce/cart/cart-shipping.php:67
-#@ woocommerce
-msgid "Please fill in your details to see available shipping methods."
-msgstr ""
-
-#: woocommerce/cart/cart-shipping.php:76
-#: woocommerce/cart/cart-shipping.php:82
-#@ woocommerce
-msgid "There don&lsquo;t seem to be available shipping methods. Please double check your address, or contact us if you need any help."
 msgstr ""
 
 #: woocommerce/cart/cart-totals.php:19
@@ -2509,8 +2542,98 @@ msgctxt "%1$d = first, %2$d = last, %3$d = total"
 msgid "%1$d&ndash;%2$d of %3$d results"
 msgstr ""
 
-#: woocommerce/myaccount/my-orders.php:47
+#: extendvc/extend-vc.php:146
+#@ js_composer
+msgid "Content"
+msgstr ""
+
+#: extendvc/extend-vc.php:8103
+#@ qode
+msgid "Select Elements Holder"
+msgstr ""
+
+#: extendvc/extend-vc.php:8175
+#@ qode
+msgid "Select Elements Holder Item"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2704
+#@ qode
+msgid "You have successfully connected with your Twitter account. If you have any issues fetching data from Twitter try reconnecting."
+msgstr ""
+
+#: framework/lib/qode.layout.php:2710
+#@ qode
+msgid "Re-connect with Twitter"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2710
+#: framework/lib/qode.layout.php:2720
+#@ qode
+msgid "Connect with Twitter"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2722
+#@ qode
+msgid "Connecting with Twitter will enable you to show your latest tweets on your site"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2755
+#@ qode
+msgid "You have successfully connected with your Instagram account. If you have any issues fetching data from Instagram try reconnecting."
+msgstr ""
+
+#: framework/lib/qode.layout.php:2761
+#@ qode
+msgid "Re-connect with Instagram"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2761
+#: framework/lib/qode.layout.php:2772
+#@ qode
+msgid "Connect with Instagram"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2774
+#@ qode
+msgid "Connecting with Instagram will enable you to show your latest photos on your site"
+msgstr ""
+
+#: framework/lib/qode.layout.php:2786
+#@ qode
+msgid "Disconnect from Instagram"
+msgstr ""
+
+#: header.php:694
+#@ qode
+msgid "Type in what you're looking for"
+msgstr ""
+
+#: includes/qode-product-list.php:107
+#@ qode
+msgid "Options"
+msgstr ""
+
+#: templates/blog/blog_centered-loop.php:85
+#: templates/blog/blog_centered-loop.php:145
+#: templates/blog/blog_centered-loop.php:219
+#: templates/blog/blog_centered-loop.php:377
+#@ qode
+msgid "Continue Reading"
+msgstr ""
+
+#: woocommerce/cart/cart-shipping.php:47
 #@ woocommerce
-msgid "Order Number"
+msgid "Shipping costs will be calculated once you have provided your address."
+msgstr ""
+
+#: woocommerce/cart/cart-shipping.php:49
+#@ woocommerce
+msgid "There are no shipping methods available. Please double check your address, or contact us if you need any help."
+msgstr ""
+
+#: woocommerce/single-product/add-to-cart/variable.php:42
+#@ woocommerce
+msgid "Clear"
 msgstr ""
 

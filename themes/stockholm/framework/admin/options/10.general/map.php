@@ -47,6 +47,28 @@ $generalPage->addChild("panel1",$panel1);
 		$pattern_background_image = new QodeField("image","pattern_background_image","","Background Pattern","Choose an image to be used as background pattern");
 		$boxed_container->addChild("pattern_background_image",$pattern_background_image);
 
+		$enable_content_top_margin = new QodeField("yesno","enable_content_top_margin","no","Put Content Below Header","Enabling this option  will put all of the content below header");
+		$panel1->addChild("enable_content_top_margin",$enable_content_top_margin);
+
+		$paspartu = new QodeField("yesno","paspartu","no","Enable Passepartout","Enabling this option will show passepartout", array(),
+			array("dependence" => true,
+				"dependence_hide_on_yes" => "",
+				"dependence_show_on_yes" => "#qodef_paspartu_container"));
+		$panel1->addChild("paspartu",$paspartu);
+
+		$paspartu_container = new QodeContainer("paspartu_container","paspartu","no");
+		$panel1->addChild("paspartu_container",$paspartu_container);
+
+		$paspartu_color = new QodeField("color","paspartu_color","","Passepartout Color","Choose color for passepartout");
+		$paspartu_container->addChild("paspartu_color",$paspartu_color);
+
+		$paspartu_width = new QodeField("text","paspartu_width","","Passepartout Size (%)","Enter size amount for passepartout, default value is 2% (the percent is in relation to site width)");
+		$paspartu_container->addChild("paspartu_width",$paspartu_width);
+
+
+
+
+
 // Settings
 
 $panel4 = new QodePanel("Settings","settings");
@@ -78,14 +100,19 @@ $generalPage->addChild("panel4",$panel4);
 			$row1 = new QodeRow();
 			$group1->addChild("row1",$row1);
 			
-				$loading_animation_spinner = new QodeField("selectsimple","loading_animation_spinner","pulse","Spinner","This is some description", array( "pulse" => "Pulse",
-	       "double_pulse" => "Double Pulse",
-	       "cube" => "Cube",
-	       "rotating_cubes" => "Rotating Cubes",
-	       "stripes" => "Stripes",
-	       "wave" => "Wave",
-	       "two_rotating_circles" => "2 Rotating Circles",
-	       "five_rotating_circles" => "5 Rotating Circles"
+			$loading_animation_spinner = new QodeField("selectsimple","loading_animation_spinner","pulse","Spinner","This is some description", array( "pulse" => "Pulse",
+			   "double_pulse" => "Double Pulse",
+			   "cube" => "Cube",
+			   "rotating_cubes" => "Rotating Cubes",
+			   "stripes" => "Stripes",
+			   "wave" => "Wave",
+			   "two_rotating_circles" => "2 Rotating Circles",
+			   "five_rotating_circles" => "5 Rotating Circles",
+			   "pulsating_circle" => "Pulsating Circle",
+			   "ripples" => "Ripples",
+			   "spinner" => "Spinner",
+				"cubes" => "Cubes",
+				"indeterminate" => "Indeterminate"
 	      ));
 				$row1->addChild("loading_animation_spinner",$loading_animation_spinner);
 				

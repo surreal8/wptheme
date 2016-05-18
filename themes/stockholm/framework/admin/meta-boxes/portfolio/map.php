@@ -92,7 +92,13 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("portfolio_general",$qodeGeneral);
 		"big-slider" => "Portfolio big slider",
 		"custom" => "Portfolio custom",
 		"full-width-custom" => "Portfolio full width custom",
-		"gallery" => "Portfolio gallery"
+		"gallery" => "Portfolio gallery",
+		"gallery-right" => "Portfolio gallery right",
+		"fullscreen-slider" => "Portfolio full screen slider",
+		"fullwidth-slider" => "Portfolio full width slider",
+		"masonry-gallery" => "Portfolio masonry gallery",
+		"fixed-right" => "Portfolio fixed right",
+		"fixed-left" => "Portfolio fixed left"
 	),
         array("dependence" => true,
             "hide" => array(
@@ -102,15 +108,22 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("portfolio_general",$qodeGeneral);
                 "big-images"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
                 "big-slider"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
                 "custom"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
-                "full-width-custom"=>"#qodef_qode_choose_number_of_portfolio_columns_container"
+                "full-width-custom"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
+				"fullscreen-slider"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
+				"fullwidth-slider"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
+				"masonry-gallery"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
+				"fixed-right"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
+				"fixed-left"=>"#qodef_qode_choose_number_of_portfolio_columns_container"
             ),
             "show" => array(
-                "gallery"=>"#qodef_qode_choose_number_of_portfolio_columns_container")
+                "gallery"=>"#qodef_qode_choose_number_of_portfolio_columns_container",
+				"gallery-right"=>"#qodef_qode_choose_number_of_portfolio_columns_container"
+			)
         )
     );
 	$qodeGeneral->addChild("qode_choose-portfolio-single-view",$qode_choose_portfolio_single_view);
 
-    $qode_choose_number_of_portfolio_columns_container = new QodeContainer("qode_choose_number_of_portfolio_columns_container","qode_choose-portfolio-single-view","no",array("", "small-images", "small-slider", "big-images", "big-slider", "custom", "full-width-custom"));
+    $qode_choose_number_of_portfolio_columns_container = new QodeContainer("qode_choose_number_of_portfolio_columns_container","qode_choose-portfolio-single-view","no",array("", "small-images", "small-slider", "big-images", "big-slider", "custom", "full-width-custom", "fullscreen-slider", "fullwidth-slider", "masonry-gallery", "fixed-right", "fixed-left"));
     $qodeGeneral->addChild("qode_choose_number_of_portfolio_columns_container",$qode_choose_number_of_portfolio_columns_container);
 
 	$qode_choose_number_of_portfolio_columns = new QodeMetaField("selectblank","qode_choose-number-of-portfolio-columns","","Number of Columns",'Select the number of columns for Portfolio Gallery type', array(
@@ -130,6 +143,11 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("portfolio_general",$qodeGeneral);
 
 	$qode_choose_portfolio_list_page = new QodeMetaField("selectblank","qode_choose-portfolio-list-page","",'"Back To" Link','Choose "Back To" page to link from portfolio Single Project page',$qode_pages);
 	$qodeGeneral->addChild("qode_choose-portfolio-list-page",$qode_choose_portfolio_list_page);
+
+
+	$qode_portfolio_subtitle = new QodeMetaField("text","qode_portfolio_subtitle","","Portfolio Subtitle","Enter portfolio subtitle");
+	$qodeGeneral->addChild("qode_portfolio_subtitle",$qode_portfolio_subtitle);
+
 
 	$qode_portfolio_external_link = new QodeMetaField("text","qode_portfolio-external-link","","Portfolio External Link","Enter URL to link from Portfolio List page");
 	$qodeGeneral->addChild("qode_portfolio-external-link",$qode_portfolio_external_link);
@@ -151,11 +169,23 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("portfolio_general",$qodeGeneral);
 	));
 	$qodeGeneral->addChild("qode_portfolio_type_masonry_style",$qode_portfolio_type_masonry_style);
 
+	$qode_portfolio_masonry_parallax = new QodeMetaField("select","qode_portfolio_masonry_parallax","no","Set Masonry Item in Parallax","", array(
+		"no" => "No",
+		"yes" => "Yes"
+	));
+	$qodeGeneral->addChild("qode_portfolio_masonry_parallax",$qode_portfolio_masonry_parallax);
+
 	$qode_portfolio_disable_comments = new QodeMetaField("selectblank","qode_portfolio-hide-comments","","Disable Comments","", array(
 		"no" => "No",
 		"yes" => "Yes"
 	));
     $qodeGeneral->addChild("qode_portfolio-hide-comments",$qode_portfolio_disable_comments);
+
+	$qode_enable_content_top_margin = new QodeMetaField("selectblank","qode_enable_content_top_margin","","Put Content Below Header","Enabling this option will put all of the content below header", array(
+		"no" => "No",
+		"yes" => "Yes",
+	));
+	$qodeGeneral->addChild("qode_enable_content_top_margin",$qode_enable_content_top_margin);
 
 
 // Header
@@ -265,6 +295,15 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("porfolio_title",$qodeTitle);
 	));
 	$row1->addChild("qode_title_text_shadow",$qode_title_text_shadow);
 
+	$row2 = new QodeRow();
+	$group1->addChild("row2",$row2);
+
+	$qode_page_title_text_background_color = new QodeMetaField("colorsimple","qode_page-title-text-background-color","","Text Background Color","ThisIsDescription");
+	$row2->addChild("qode_page-title-text-background-color",$qode_page_title_text_background_color);
+
+	$qode_page_title_text_background_opacity = new QodeMetaField("textsimple","qode_page-title-text-background-opacity","","Text Background Opacity (0-1)","ThisIsDescription", array(), array("col_width" => 3));
+	$row2->addChild("qode_page-title-text-background-opacity",$qode_page_title_text_background_opacity);
+
 	$qode_page_title_background_color = new QodeMetaField("color","qode_page-title-background-color","","Background Color","Choose background color for Title Area");
 	$qode_page_title_area_container->addChild("qode_page-title-background-color",$qode_page_title_background_color);
 
@@ -367,7 +406,7 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("portfolio_content_bottom_page",$qodeC
 $qodeSideBar = new QodeMetaBox("portfolio_page", "Select Sidebar");
 $qodeFramework->qodeMetaBoxes->addMetaBox("portfolio_side_bar",$qodeSideBar);
 
-	$qode_show_sidebar = new QodeMetaField("selectblank","qode_portfolio_show_sidebar","default","Layout","Choose the sidebar layout",array( "default" => "Default",
+	$qode_show_sidebar = new QodeMetaField("selectblank","qode_portfolio_show_sidebar","default","Layout","Choose the sidebar layout (Note that Full Screen Slider and Full Width Slider single portfolio types don't use  sidebar)",array( "default" => "Default",
        "1" => "Sidebar 1/3 right",
        "2" => "Sidebar 1/4 right",
        "3" => "Sidebar 1/3 left",

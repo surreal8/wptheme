@@ -5,7 +5,7 @@
 }
 .wpb-layout-element-button .icon-wpb-portfolio{ 
 	background-image: url('images/vc-extend.png');
-	background-position:-32px 0;
+	background-position: -32px 0;
 }
 
 .wpb-layout-element-button .icon-wpb-portfolio_slider {
@@ -19,15 +19,15 @@
 }
 .wpb-layout-element-button .icon-wpb-counter{ 
 	background-image: url('images/vc-extend.png');
-	background-position:-128px 0;
+	background-position: -128px 0;
 }
 .wpb-layout-element-button .icon-wpb-icon_list_item{ 
 	background-image: url('images/vc-extend.png');
-	background-position:-160px 0;
+	background-position: -160px 0;
 }
 .wpb-layout-element-button .icon-wpb-action{ 
 	background-image: url('images/vc-extend.png');
-	background-position:-192x 0;
+	background-position: -192px 0;
 }
 .wpb-layout-element-button .icon-wpb-blockquote{ 
 	background-image: url('images/vc-extend.png');
@@ -158,6 +158,42 @@
 .wpb-layout-element-button .icon-wpb-qode_circle {
     background-image: url('images/vc-extend.png');
   	background-position: -1152px 0;
+}
+.wpb-layout-element-button .icon-wpb-qode_elements_holder {
+	background-image: url('images/vc-extend.png');
+	background-position: -1184px 0;
+}
+.wpb-layout-element-button .icon-wpb-qode_elements_holder_item {
+	background-image: url('images/vc-extend.png');
+	background-position: -1216px 0;
+}
+.wpb-layout-element-button .icon-wpb-twitter-shortcode {
+	background-image: url('images/vc-extend.png');
+	background-position: -1248px 0;
+}
+.wpb-layout-element-button .icon-wpb-product-list {
+	background-image: url('images/vc-extend.png');
+	background-position: -1280px 0;
+}
+.wpb-layout-element-button .icon-wpb-shop-category-showcase {
+	background-image: url('images/vc-extend.png');
+	background-position: -1312px 0;
+}
+.wpb-layout-element-button .icon-wpb-pricing-list {
+	background-image: url('images/vc-extend.png');
+	background-position: -1344px 0;
+}
+.wpb-layout-element-button .icon-wpb-pricing-list-item {
+	background-image: url('images/vc-extend.png');
+	background-position: -1344px 0;
+}
+.wpb-layout-element-button .icon-wpb-countdown {
+	background-image: url('images/vc-extend.png');
+	background-position: -1376px 0;
+}
+.wpb-layout-element-button .icon-wpb-service_table {
+	background-image: url('images/vc-extend.png');
+	background-position: -1408px 0;
 }
 .wpb-layout-element-button .icon-wpb-woocommerce_order_tracking,
 .wpb-layout-element-button .icon-wpb-add_to_cart,

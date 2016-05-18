@@ -34,7 +34,7 @@ if(get_post_meta(get_the_ID(), "qode_choose-portfolio-single-view", true) != "")
 			}
 
 			//is current portfolio template full width?
-			if($portfolio_template !== 'full-width-custom') {
+			if(($portfolio_template !== 'full-width-custom') && ($portfolio_template !== 'fullwidth-slider') && ($portfolio_template !== 'fullscreen-slider')) {
 				//load general portfolio structure which will load proper template
 				get_template_part('templates/portfolio/portfolio-structure');
 			} else {

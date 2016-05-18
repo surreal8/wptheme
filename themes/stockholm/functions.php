@@ -49,6 +49,7 @@ include_once('includes/qode-custom-taxonomy-field.php');
 include_once('includes/header/qode-header-functions.php');
 include_once('includes/title/qode-title-functions.php');
 include_once('includes/qode-portfolio-functions.php');
+include_once('includes/qode-product-list.php');
 include_once('includes/qode-loading-spinners.php');
 /* Include comment functionality */
 include_once('includes/comment/comment.php');
@@ -61,14 +62,21 @@ include_once('includes/qode_carousel/qode-carousel.php');
 /* Include font awesome icons list */
 include_once('includes/font_awesome/font-awesome.php');
 include_once('includes/elegant_icons/elegant-icons.php');
+include_once('includes/linear_icons/linear-icons.php');
 /** Include the TGM_Plugin_Activation class. */
 require_once dirname( __FILE__ ) . '/includes/plugins/class-tgm-plugin-activation.php';
 /* Include visual composer initialization */
 include_once('includes/plugins/visual-composer.php');
 /* Include activation for layer slider */
 include_once('includes/plugins/layer-slider.php');
-/* Include activation for layer slider */
+/* Include activation for revolution slider */
+include_once('includes/plugins/revolution-slider.php');
+/* Include activation for envato wordpress toolkit */
 include_once('includes/plugins/envato-wordpress-toolkit.php');
+/* Include activation for select twitter feed */
+include_once('includes/plugins/select-twitter-feed.php');
+/* Include activation for select instagram feed */
+include_once('includes/plugins/select-instagram-feed.php');
 include_once('widgets/call_to_action_widget.php');
 
 //does woocommerce function exists?
@@ -116,6 +124,12 @@ if (!function_exists('qode_styles')) {
 
 		//include elegant font styles
 		wp_enqueue_style("qode_elegant-icons", QODE_ROOT . "/css/elegant-icons/style.min.css");
+
+		//include linear-icons styles
+		wp_enqueue_style("qode_linear-icons", QODE_ROOT . "/css/linear-icons/style.css");
+
+		//include mediaelement style
+		wp_enqueue_style('wp-mediaelement');
 
 		//does responsive option exists?
 		if (isset($qode_options['responsiveness'])) {
@@ -321,7 +335,18 @@ if(!function_exists('qode_google_fonts_styles')) {
             'gf_description_font_family',
 			'vc_grid_portfolio_filter_font_family',
 			'vc_grid_button_title_google_fonts',
-			'vc_grid_load_more_button_title_google_fonts'
+			'vc_grid_load_more_button_title_google_fonts',
+			'blog_chequered_with_image_title_font_family',
+			'blog_chequered_with_bgcolor_title_font_family',
+			'blog_animated_title_font_family',
+			'blog_centered_title_font_family',
+			'blog_centered_info_font_family',
+			'testimonials_title_font_family',
+			'testimonials_author_job_font_family',
+			'woo_products_standard_category_font_family',
+			'woo_products_standard_title_font_family',
+			'woo_products_standard_price_font_family',
+			'woo_products_standard_list_add_to_cart_font_family'
 		);
 
 		//define available font options array
@@ -416,6 +441,7 @@ if (!function_exists('qode_scripts')) {
 
 		//init theme core scripts
 		wp_enqueue_script("jquery");
+		wp_enqueue_script("wp-mediaelement");
 		wp_enqueue_script("qode_plugins", QODE_ROOT."/js/plugins.js",array(),false,true);
 		wp_enqueue_script("carouFredSel", QODE_ROOT."/js/jquery.carouFredSel-6.2.1.js",array(),false,true);
 		wp_enqueue_script("one_page_scroll", QODE_ROOT."/js/jquery.fullPage.min.js",array(),false,true);
@@ -436,7 +462,7 @@ if (!function_exists('qode_scripts')) {
 			wp_enqueue_script("qode_default_dynamic", QODE_ROOT."/js/default_dynamic.php", array(), false, true);
 		}
 
-		//wp_enqueue_script("qode_default", QODE_ROOT."/js/default.min.js", array(), false, true);
+		wp_enqueue_script("qode_default", QODE_ROOT."/js/default.min.js", array(), false, true);
 
 		if (file_exists(dirname(__FILE__) ."/js/custom_js.js") && qode_is_js_folder_writable() && !is_multisite()) {
 			wp_enqueue_script("qode_custom_js", QODE_ROOT."/js/custom_js.js",array(), filemtime(dirname(__FILE__) ."/js/custom_js.js"),true);
@@ -818,6 +844,131 @@ if (!function_exists('vertical_menu_class')) {
 	add_filter('body_class','vertical_menu_class');
 }
 
+if (!function_exists('paspartu_class')) {
+	/**
+	 * Function that adds classes on body element for passepartout
+	 */
+
+	function paspartu_class($classes) {
+		global $qode_options;
+
+		//is passepartout turned on?
+		if(isset($qode_options['paspartu']) && $qode_options['paspartu'] =='yes') {
+			$classes[] = 'paspartu_enabled';
+		}
+
+		return $classes;
+	}
+
+	add_filter('body_class','paspartu_class');
+}
+
+
+
+
+if (!function_exists('menu_hover_class')) {
+	/**
+	 * Function that adds classes on body element if hover animation for first level menu is enabled
+	 */
+
+	function menu_hover_class($classes) {
+		global $qode_options;
+
+		if(isset($qode_options['vertical_area']) && $qode_options['vertical_area'] =='yes') {
+			if(isset($qode_options['enable_vertical_menu_hover_animation']) && $qode_options['enable_vertical_menu_hover_animation'] =='yes') {
+				if(isset($qode_options['vertical_menu_hover_type']) && $qode_options['vertical_menu_hover_type'] !='') {
+					$classes[] = "menu-animation-" . $qode_options['vertical_menu_hover_type'];
+				}
+			}
+		} else {
+			if(isset($qode_options['enable_menu_hover_animation']) && $qode_options['enable_menu_hover_animation'] =='yes') {
+				if(isset($qode_options['menu_hover_type']) && $qode_options['menu_hover_type'] !='') {
+					$classes[] = "menu-animation-" . $qode_options['menu_hover_type'];
+				}
+			}
+		}
+
+		if(isset($qode_options['enable_fullscreen_menu_hover_animation']) && $qode_options['enable_fullscreen_menu_hover_animation'] =='yes') {
+			if(isset($qode_options['fullscreen_menu_hover_type']) && $qode_options['fullscreen_menu_hover_type'] !='') {
+				$classes[] = "fs-menu-animation-" . $qode_options['fullscreen_menu_hover_type'];
+			}
+		}
+
+		return $classes;
+	}
+
+	add_filter('body_class','menu_hover_class');
+}
+
+if (!function_exists('popup_menu_class')) {
+	/**
+	 * Function that adds classes for popup menu appearance on body element, if popup menu is enabled
+	 */
+
+	function popup_menu_class($classes) {
+		global $qode_options;
+
+		if(isset($qode_options['enable_popup_menu']) && $qode_options['enable_popup_menu'] =='yes') {
+
+			if(isset($qode_options['popup_menu_appearance']) && $qode_options['popup_menu_appearance'] !='') {
+				$classes[] = "popup-menu-" . $qode_options['popup_menu_appearance'];
+			} else {
+				$classes[] = "popup-menu-fade"; //default type was fade
+			}
+		}
+
+		return $classes;
+	}
+
+	add_filter('body_class','popup_menu_class');
+}
+
+if (!function_exists('side_area_class')) {
+	/**
+	 * Function that adds classes side area type
+	 */
+
+	function side_area_class($classes) {
+		global $qode_options;
+
+		if(isset($qode_options['enable_side_area']) && $qode_options['enable_side_area'] =='yes') {
+
+			if(isset($qode_options['side_area_appear_type']) && $qode_options['side_area_appear_type'] !='') {
+				$classes[] = $qode_options['side_area_appear_type'];
+			} else {
+				$classes[] = "side_area_uncovered"; //default type was uncovered
+			}
+		}
+
+		return $classes;
+	}
+
+	add_filter('body_class','side_area_class');
+}
+
+if (!function_exists('smooth_scroll_class')) {
+    /**
+     * Function that adds classes for smooth scroll
+     */
+    function smooth_scroll_class($classes) {
+        global $qode_options;
+        global $is_chrome;
+        global $is_opera;
+
+        $smooth_scroll = false;
+        if(isset($qode_options['smooth_scroll']) && $qode_options['smooth_scroll'] == "yes"){
+            $smooth_scroll = true;
+        }
+        //is Chome or Opera and is smooth scrolling turned on?
+        if(($is_chrome || $is_opera) && $smooth_scroll){
+            $classes[] = "smooth_scroll";
+        }
+
+        return $classes;
+    }
+    add_filter('body_class','smooth_scroll_class');
+}
+
 if(!function_exists('qode_wp_title')) {
 	/**
 	 * Function that sets page's title. Hooks to wp_title filter
@@ -876,6 +1027,33 @@ if(!function_exists('qode_wp_title')) {
 	}
 
 	add_filter('wp_title', 'qode_wp_title', 10, 2);
+}
+
+if(!function_exists('qode_is_content_below_header')) {
+	/**
+	 * Function that check is content below header on page
+	 * @param none
+	 * @return true/false
+	 */
+	function qode_is_content_below_header() {
+		global $qode_options;
+		$page_id = qode_get_page_id();
+
+		$content_below_header = false;
+		if(get_post_meta($page_id, "qode_enable_content_top_margin", true) === 'yes'){
+			$content_below_header = true;
+		}elseif(get_post_meta($page_id, "qode_enable_content_top_margin", true) === 'no'){
+			$content_below_header = false;
+		}else{
+			if(isset($qode_options['enable_content_top_margin']) && ($qode_options['enable_content_top_margin'] === 'yes')){
+				$content_below_header = true;
+			}elseif(isset($qode_options['enable_content_top_margin']) && ($qode_options['enable_content_top_margin'] === 'no')){
+				$content_below_header = false;
+			}
+		}
+
+		return $content_below_header;
+	}
 }
 
 if(!function_exists('qode_ajax_meta')) {
@@ -1879,3 +2057,54 @@ if(!function_exists('qode_get_vc_version')) {
 		return false;
 	}
 }
+
+/*=================================================================================
+ * #Contact Form 7 helper functions
+ *=================================================================================*/
+if(!function_exists('qode_contact_form_7_installed')) {
+	/**
+	 * Function that checks if contact form 7 installed
+	 * @return bool
+	 */
+	function qode_contact_form_7_installed() {
+		//is Contact Form 7 installed?
+		if(defined('WPCF7_VERSION')) {
+			return true;
+		}
+
+		return false;
+	}
+}
+
+
+
+if(!function_exists('qode_attachment_field_custom_size')) {
+
+	function qode_attachment_field_custom_size($form_fields, $post){
+		$field_value = get_post_meta($post->ID, 'qode_portfolio_single_predefined_size', true);
+		$form_fields['qode_portfolio_single_predefined_size'] = array(
+			'label' => 'Masonry Size',
+			'input' => 'text',
+			'value' => $field_value ? $field_value : ''
+		);
+		$form_fields["qode_portfolio_single_predefined_size"]["extra_rows"] = array(
+			"row1" => "Enter 'large' (twice the size of default image) or 'huge' (three times the size of default image) for Masonry Gallery templates on Portfolio Single Pages."
+		);
+
+		return $form_fields;
+	}
+}
+add_filter( 'attachment_fields_to_edit', 'qode_attachment_field_custom_size', 10, 2 );
+
+
+if(!function_exists('qode_attachment_field_custom_size_save')) {
+	function qode_attachment_field_custom_size_save($post, $attachment)
+	{
+		if (isset($attachment['qode_portfolio_single_predefined_size'])) {
+			update_post_meta($post['ID'], 'qode_portfolio_single_predefined_size', $attachment['qode_portfolio_single_predefined_size']);
+		}
+		return $post;
+	}
+}
+
+add_filter( 'attachment_fields_to_save', 'qode_attachment_field_custom_size_save', 10, 2 );

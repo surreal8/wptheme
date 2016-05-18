@@ -7,6 +7,13 @@ require_once( $path[0] . '/wp-load.php' );
 <div id="qode_shortcode_form_wrapper">
 	<form id="qode_shortcode_form" name="qode_shortcode_form" method="post" action="">
 		<div class="input">
+			<label>Type</label>
+			<select name="team_type" id="team_type">
+				<option class="" value="">Default</option>
+				<option value="info_hover">Info on Hover</option>
+			</select>
+		</div>
+		<div class="input">
 			<label>Team Image</label>
 			<input id="team_image" type="text" name="team_image" class="popup_image" value="" size="55" />
 			<input class="upload_button" type="button" value="Upload file" id="popup_image_button">

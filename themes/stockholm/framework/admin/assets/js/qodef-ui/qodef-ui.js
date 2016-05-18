@@ -424,7 +424,7 @@
                 btn.siblings('.qodef-media-image-holder').find('img').attr('src', '');
 
                 //reset meta fields
-                btn.siblings('.qodef-media-meta-fields').find('input[type=hidden]').each(function(e) {
+                btn.siblings('.qodef-media-meta-fields').find('input[type="hidden"]').each(function(e) {
                     $(this).val('');
                 });
 

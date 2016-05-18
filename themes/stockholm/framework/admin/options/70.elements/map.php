@@ -263,6 +263,9 @@ $elementsPage->addChild("panel4",$panel4);
 		$row2 = new QodeRow(true);
 		$group1->addChild("row2",$row2);
 
+			$counters_font_family = new QodeField("Fontsimple","counters_font_family","-1","Numeral Font Family","This is some description");
+			$row2->addChild("counters_font_family",$counters_font_family);
+
 			$counters_font_size = new QodeField("textsimple","counters_font_size","","Numeral Font Size (px)","This is some description");
 			$row2->addChild("counters_font_size",$counters_font_size);
 
@@ -283,6 +286,47 @@ $elementsPage->addChild("panel4",$panel4);
 
 			$counters_text_letterspacing = new QodeField("textsimple","counters_text_letterspacing","","Text Letter Spacing (px)","This is some description");
 			$row3->addChild("counters_text_letterspacing",$counters_text_letterspacing);
+
+//Countdown
+
+$panel20 = new QodePanel("Countdown","countdown_panel");
+$elementsPage->addChild("panel20",$panel20);
+
+	$group1 = new QodeGroup("Countdown Style","Define styles for Countdown");
+	$panel20->addChild("group1",$group1);
+
+		$row1 = new QodeRow();
+		$group1->addChild("row1",$row1);
+
+			$countdown_color = new QodeField("colorsimple","countdown_color","","Numeral Color","This is some description");
+			$row1->addChild("countdown_color",$countdown_color);
+
+			$countdown_text_color = new QodeField("colorsimple","countdown_text_color","","Text Color","This is some description");
+			$row1->addChild("countdown_text_color",$countdown_text_color);
+
+		$row2 = new QodeRow(true);
+		$group1->addChild("row2",$row2);
+
+			$countdown_font_size = new QodeField("textsimple","countdown_font_size","","Numeral Font Size (px)","This is some description");
+			$row2->addChild("countdown_font_size",$countdown_font_size);
+
+			$countdown_fontweight = new QodeField("selectblanksimple","countdown_fontweight","","Numeral Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("countdown_fontweight",$countdown_fontweight);
+
+		$row3 = new QodeRow(true);
+		$group1->addChild("row3",$row3);
+
+			$countdown_text_font_size = new QodeField("textsimple","countdown_text_font_size","","Text Font Size (px)","This is some description");
+			$row3->addChild("countdown_text_font_size",$countdown_text_font_size);
+
+			$countdown_text_fontweight = new QodeField("selectblanksimple","countdown_text_fontweight","","Text Font Weight","This is some description",$options_fontweight);
+			$row3->addChild("countdown_text_fontweight",$countdown_text_fontweight);
+
+			$countdown_text_texttransform = new QodeField("selectblanksimple","countdown_text_texttransform","","Text Transform","This is some description",$options_texttransform);
+			$row3->addChild("countdown_text_texttransform",$countdown_text_texttransform);
+
+			$countdown_text_letterspacing = new QodeField("textsimple","countdown_text_letterspacing","","Text Letter Spacing (px)","This is some description");
+			$row3->addChild("countdown_text_letterspacing",$countdown_text_letterspacing);
 
 //Expandable Section
 
@@ -727,7 +771,153 @@ $elementsPage->addChild("panel12",$panel12);
 
 			$pricing_tables_button_letter_spacing = new QodeField("textsimple","pricing_tables_button_letter_spacing","","Letter Spacing (px)","This is some description");
 			$row2->addChild("pricing_tables_button_letter_spacing",$pricing_tables_button_letter_spacing);
-			
+
+
+//Pricing list
+
+	$panel19 = new QodePanel("Pricing Lists","pricing_list_panel");
+	$elementsPage->addChild("panel19",$panel19);
+
+		$group1 = new QodeGroup("Pricing lists title","Define Pricing lists title style.");
+		$panel19->addChild("group1",$group1);
+
+			$row1 = new QodeRow();
+			$group1->addChild("row1",$row1);
+
+				$pricing_lists_title_color = new QodeField("colorsimple","pricing_lists_title_color","","Color","This is some description");
+				$row1->addChild("pricing_lists_title_color",$pricing_lists_title_color);
+
+				$pricing_lists_title_font_size = new QodeField("textsimple","pricing_lists_title_font_size","","Font Size (px)","This is some description");
+				$row1->addChild("pricing_lists_title_font_size",$pricing_lists_title_font_size);
+
+				$pricing_lists_title_line_height = new QodeField("textsimple","pricing_lists_title_line_height","","Line Height (px)","This is some description");
+				$row1->addChild("pricing_lists_title_line_height",$pricing_lists_title_line_height);
+
+				$pricing_lists_title_text_transform = new QodeField("selectblanksimple","pricing_lists_title_text_transform","","Text Transform","This is some description",$options_texttransform);
+				$row1->addChild("pricing_lists_title_text_transform",$pricing_lists_title_text_transform);
+
+			$row2 = new QodeRow(true);
+			$group1->addChild("row2",$row2);
+
+				$pricing_lists_title_font_family = new QodeField("Fontsimple","pricing_lists_title_font_family","-1","Font Family","This is some description");
+				$row2->addChild("pricing_lists_title_font_family",$pricing_lists_title_font_family);
+
+				$pricing_lists_title_font_style = new QodeField("selectblanksimple","pricing_lists_title_font_style","","Font Style","This is some description",$options_fontstyle);
+				$row2->addChild("pricing_lists_title_font_style",$pricing_lists_title_font_style);
+
+				$pricing_lists_title_font_weight = new QodeField("selectblanksimple","pricing_lists_title_font_weight","","Font Weight","This is some description",$options_fontweight);
+				$row2->addChild("pricing_lists_title_font_weight",$pricing_lists_title_font_weight);
+
+				$pricing_lists_title_letter_spacing = new QodeField("textsimple","pricing_lists_title_letter_spacing","","Letter Spacing (px)","This is some description");
+				$row2->addChild("pricing_lists_title_letter_spacing",$pricing_lists_title_letter_spacing);
+
+
+		$group2 = new QodeGroup("Pricing lists price","Define Pricing lists Price Style.");
+		$panel19->addChild("group2",$group2);
+
+			$row1 = new QodeRow();
+			$group2->addChild("row1",$row1);
+
+				$pricing_lists_price_color = new QodeField("colorsimple","pricing_lists_price_color","","Color","This is some description");
+				$row1->addChild("pricing_lists_price_color",$pricing_lists_price_color);
+
+				$pricing_lists_price_font_size = new QodeField("textsimple","pricing_lists_price_font_size","","Font Size (px)","This is some description");
+				$row1->addChild("pricing_lists_price_font_size",$pricing_lists_price_font_size);
+
+				$pricing_lists_price_line_height = new QodeField("textsimple","pricing_lists_price_line_height","","Line Height (px)","This is some description");
+				$row1->addChild("pricing_lists_price_line_height",$pricing_lists_price_line_height);
+
+				$pricing_lists_price_text_transform = new QodeField("selectblanksimple","pricing_lists_price_text_transform","","Text Transform","This is some description",$options_texttransform);
+				$row1->addChild("pricing_lists_price_text_transform",$pricing_lists_price_text_transform);
+
+			$row2 = new QodeRow(true);
+			$group2->addChild("row2",$row2);
+
+				$pricing_lists_price_font_family = new QodeField("Fontsimple","pricing_lists_price_font_family","-1","Font Family","This is some description");
+				$row2->addChild("pricing_lists_price_font_family",$pricing_lists_price_font_family);
+
+				$pricing_lists_price_font_style = new QodeField("selectblanksimple","pricing_lists_price_font_style","","Font Style","This is some description",$options_fontstyle);
+				$row2->addChild("pricing_lists_price_font_style",$pricing_lists_price_font_style);
+
+				$pricing_lists_price_font_weight = new QodeField("selectblanksimple","pricing_lists_price_font_weight","","Font Weight","This is some description",$options_fontweight);
+				$row2->addChild("pricing_lists_price_font_weight",$pricing_lists_price_font_weight);
+
+				$pricing_lists_price_letter_spacing = new QodeField("textsimple","pricing_lists_price_letter_spacing","","Letter Spacing (px)","This is some description");
+				$row2->addChild("pricing_lists_price_letter_spacing",$pricing_lists_price_letter_spacing);
+
+		$group3 = new QodeGroup("Pricing lists text","DefinePricing lists text style.");
+		$panel19->addChild("group3",$group3);
+
+			$row1 = new QodeRow();
+			$group3->addChild("row1",$row1);
+
+				$pricing_lists_text_color = new QodeField("colorsimple","pricing_lists_text_color","","Color","This is some description");
+				$row1->addChild("pricing_lists_text_color",$pricing_lists_text_color);
+
+				$pricing_lists_text_font_size = new QodeField("textsimple","pricing_lists_text_font_size","","Font Size (px)","This is some description");
+				$row1->addChild("pricing_lists_text_font_size",$pricing_lists_text_font_size);
+
+				$pricing_lists_text_line_height = new QodeField("textsimple","pricing_lists_text_line_height","","Line Height (px)","This is some description");
+				$row1->addChild("pricing_lists_text_line_height",$pricing_lists_text_line_height);
+
+				$pricing_lists_text_text_transform = new QodeField("selectblanksimple","pricing_lists_text_text_transform","","Text Transform","This is some description",$options_texttransform);
+				$row1->addChild("pricing_lists_text_text_transform",$pricing_lists_text_text_transform);
+
+			$row2 = new QodeRow(true);
+			$group3->addChild("row2",$row2);
+
+				$pricing_lists_text_font_family = new QodeField("Fontsimple","pricing_lists_text_font_family","-1","Font Family","This is some description");
+				$row2->addChild("pricing_lists_text_font_family",$pricing_lists_text_font_family);
+
+				$pricing_lists_text_font_style = new QodeField("selectblanksimple","pricing_lists_text_font_style","","Font Style","This is some description",$options_fontstyle);
+				$row2->addChild("pricing_lists_text_font_style",$pricing_lists_text_font_style);
+
+				$pricing_lists_text_font_weight = new QodeField("selectblanksimple","pricing_lists_text_font_weight","","Font Weight","This is some description",$options_fontweight);
+				$row2->addChild("pricing_lists_text_font_weight",$pricing_lists_text_font_weight);
+
+				$pricing_lists_text_letter_spacing = new QodeField("textsimple","pricing_lists_text_letter_spacing","","Letter Spacing (px)","This is some description");
+				$row2->addChild("pricing_lists_text_letter_spacing",$pricing_lists_text_letter_spacing);
+
+		$group4 = new QodeGroup("Pricing lists highlighted text","DefinePricing lists highlighted text style.");
+		$panel19->addChild("group4",$group4);
+
+			$row1 = new QodeRow();
+			$group4->addChild("row1",$row1);
+
+				$pricing_lists_highlighted_text_color = new QodeField("colorsimple","pricing_lists_highlighted_text_color","","Color","This is some description");
+				$row1->addChild("pricing_lists_highlighted_text_color",$pricing_lists_highlighted_text_color);
+
+				$pricing_lists_highlighted_text_font_size = new QodeField("textsimple","pricing_lists_highlighted_text_font_size","","Font Size (px)","This is some description");
+				$row1->addChild("pricing_lists_highlighted_text_font_size",$pricing_lists_highlighted_text_font_size);
+
+				$pricing_lists_highlighted_text_line_height = new QodeField("textsimple","pricing_lists_highlighted_text_line_height","","Line Height (px)","This is some description");
+				$row1->addChild("pricing_lists_highlighted_text_line_height",$pricing_lists_highlighted_text_line_height);
+
+				$pricing_lists_highlighted_text_text_transform = new QodeField("selectblanksimple","pricing_lists_highlighted_text_text_transform","","Text Transform","This is some description",$options_texttransform);
+				$row1->addChild("pricing_lists_highlighted_text_text_transform",$pricing_lists_highlighted_text_text_transform);
+
+			$row2 = new QodeRow(true);
+			$group4->addChild("row2",$row2);
+
+				$pricing_lists_highlighted_text_font_family = new QodeField("Fontsimple","pricing_lists_highlighted_text_font_family","-1","Font Family","This is some description");
+				$row2->addChild("pricing_lists_highlighted_text_font_family",$pricing_lists_highlighted_text_font_family);
+
+				$pricing_lists_highlighted_text_font_style = new QodeField("selectblanksimple","pricing_lists_highlighted_text_font_style","","Font Style","This is some description",$options_fontstyle);
+				$row2->addChild("pricing_lists_highlighted_text_font_style",$pricing_lists_highlighted_text_font_style);
+
+				$pricing_lists_highlighted_text_font_weight = new QodeField("selectblanksimple","pricing_lists_highlighted_text_font_weight","","Font Weight","This is some description",$options_fontweight);
+				$row2->addChild("pricing_lists_highlighted_text_font_weight",$pricing_lists_highlighted_text_font_weight);
+
+				$pricing_lists_highlighted_text_letter_spacing = new QodeField("textsimple","pricing_lists_highlighted_text_letter_spacing","","Letter Spacing (px)","This is some description");
+				$row2->addChild("pricing_lists_highlighted_text_letter_spacing",$pricing_lists_highlighted_text_letter_spacing);
+
+			$row3 = new QodeRow();
+			$group4->addChild("row3",$row3);
+
+				$pricing_lists_highlighted_background_color = new QodeField("colorsimple","pricing_lists_highlighted_background_color","","Background Color","This is some description");
+				$row3->addChild("pricing_lists_highlighted_background_color",$pricing_lists_highlighted_background_color);
+
+
 //Separators
 
 $panel13 = new QodePanel("Separators","separators_panel");
@@ -981,6 +1171,38 @@ $elementsPage->addChild("panel18",$panel18);
 $panel16 = new QodePanel("Testimonials","testimonials_panel");
 $elementsPage->addChild("panel16",$panel16);
 
+	$group4 = new QodeGroup("Testimonials Title Style","Define Testimonials Title style");
+	$panel16->addChild("group4",$group4);
+		$row1 = new QodeRow();
+		$group4->addChild("row1",$row1);
+
+			$testimonials_title_color = new QodeField("colorsimple","testimonials_title_color","","Color","This is some description");
+			$row1->addChild("testimonials_title_color",$testimonials_title_color);
+
+			$testimonials_title_font_size = new QodeField("textsimple","testimonials_title_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("testimonials_title_font_size",$testimonials_title_font_size);
+
+			$testimonials_title_line_height = new QodeField("textsimple","testimonials_title_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("testimonials_title_line_height",$testimonials_title_line_height);
+
+			$testimonials_title_text_transform = new QodeField("selectblanksimple","testimonials_title_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("testimonials_title_text_transform",$testimonials_title_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group4->addChild("row2",$row2);
+
+			$testimonials_title_font_family = new QodeField("Fontsimple","testimonials_title_font_family","-1","Font Family","This is some description");
+			$row2->addChild("testimonials_title_font_family",$testimonials_title_font_family);
+
+			$testimonials_title_font_style = new QodeField("selectblanksimple","testimonials_title_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("testimonials_title_font_style",$testimonials_title_font_style);
+
+			$testimonials_title_font_weight = new QodeField("selectblanksimple","testimonials_title_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("testimonials_title_font_weight",$testimonials_title_font_weight);
+
+			$testimonials_title_letter_spacing = new QodeField("textsimple","testimonials_title_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("testimonials_title_letter_spacing",$testimonials_title_letter_spacing);
+
 	$group1 = new QodeGroup("Testimonials Text Style","Define Testimonials Text style");
 	$panel16->addChild("group1",$group1);
 		$row1 = new QodeRow();
@@ -1045,6 +1267,38 @@ $elementsPage->addChild("panel16",$panel16);
 			$testimonials_author_letter_spacing = new QodeField("textsimple","testimonials_author_letter_spacing","","Letter Spacing (px)","This is some description");
 			$row2->addChild("testimonials_author_letter_spacing",$testimonials_author_letter_spacing);
 
+	$group5 = new QodeGroup("Testimonials Author Job Style","Define Testimonials Author Job Position style");
+	$panel16->addChild("group5",$group5);
+		$row1 = new QodeRow();
+		$group5->addChild("row1",$row1);
+
+			$testimonials_author_job_color = new QodeField("colorsimple","testimonials_author_job_color","","Color","This is some description");
+			$row1->addChild("testimonials_author_job_color",$testimonials_author_job_color);
+
+			$testimonials_author_job_font_size = new QodeField("textsimple","testimonials_author_job_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("testimonials_author_job_font_size",$testimonials_author_job_font_size);
+
+			$testimonials_author_job_line_height = new QodeField("textsimple","testimonials_author_job_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("testimonials_author_job_line_height",$testimonials_author_job_line_height);
+
+			$testimonials_author_job_text_transform = new QodeField("selectblanksimple","testimonials_author_job_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("testimonials_author_job_text_transform",$testimonials_author_job_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group5->addChild("row2",$row2);
+
+			$testimonials_auhtor_job_font_family = new QodeField("Fontsimple","testimonials_author_job_font_family","-1","Font Family","This is some description");
+			$row2->addChild("testimonials_author_job_font_family",$testimonials_auhtor_job_font_family);
+
+			$testimonials_author_job_font_style = new QodeField("selectblanksimple","testimonials_author_job_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("testimonials_author_job_font_style",$testimonials_author_job_font_style);
+
+			$testimonials_author_job_font_weight = new QodeField("selectblanksimple","testimonials_author_job_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("testimonials_author_job_font_weight",$testimonials_author_job_font_weight);
+
+			$testimonials_author_job_letter_spacing = new QodeField("textsimple","testimonials_author_job_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("testimonials_author_job_letter_spacing",$testimonials_author_job_letter_spacing);
+
 	$group3 = new QodeGroup("Testimonials Navigation Style","Define Testimonials Navigation Style");
 	$panel16->addChild("group3",$group3);
 		$row1 = new QodeRow();
@@ -1057,4 +1311,25 @@ $elementsPage->addChild("panel16",$panel16);
 			$row1->addChild("testimonials_navigation_active_color",$testimonials_navigation_active_color);
 
 			$testimonaials_navigation_border_radius = new QodeField("textsimple","testimonaials_navigation_border_radius","","Border radius (px)","This is some description");
-			$row1->addChild("testimonaials_navigation_border_radius",$testimonaials_navigation_border_radius);		
+			$row1->addChild("testimonaials_navigation_border_radius",$testimonaials_navigation_border_radius);
+
+	$group6 = new QodeGroup("Grouped Testimonials Style","Define Basic Layout for Grouped Testimonial Type");
+	$panel16->addChild("group6",$group6);
+
+		$row1 = new QodeRow();
+		$group6->addChild("row1",$row1);
+
+			$testimonials_grouped_background_color = new QodeField("colorsimple","testimonials_grouped_background_color","","Background Color","This is some description");
+			$row1->addChild("testimonials_grouped_background_color",$testimonials_grouped_background_color);
+
+			$testimonials_grouped_background_transparency = new QodeField("textsimple","testimonials_grouped_background_transparency","","Transparency","This is some description");
+			$row1->addChild("testimonials_grouped_background_transparency",$testimonials_grouped_background_transparency);
+
+		$row2 = new QodeRow();
+		$group6->addChild("row2",$row2);
+
+			$testimonials_grouped_border_color = new QodeField("colorsimple","testimonials_grouped_border_color","","Border Color","This is some description");
+			$row2->addChild("testimonials_grouped_border_color",$testimonials_grouped_border_color);
+
+			$testimonials_grouped_border_width = new QodeField("textsimple","testimonials_grouped_border_width","","Border Width","This is some description");
+			$row2->addChild("testimonials_grouped_border_width",$testimonials_grouped_border_width);

@@ -23,6 +23,8 @@ function qode_admin_scripts_init() {
 	wp_register_script('bootstrap.min', get_template_directory_uri().'/framework/admin/assets/js/bootstrap.min.js');
 	wp_register_script('jquery.nouislider.min', get_template_directory_uri().'/framework/admin/assets/js/qodef-ui/jquery.nouislider.min.js');
 	wp_register_script('qodef-ui-admin', get_template_directory_uri().'/framework/admin/assets/js/qodef-ui/qodef-ui.js');
+	wp_register_script('qodef-twitter-connect', get_template_directory_uri().'/framework/admin/assets/js/qodef-twitter-connect.js');
+	wp_register_script('qodef-instagram-disconnect', get_template_directory_uri().'/framework/admin/assets/js/qodef-instagram-disconnect.js');
 }
 add_action('admin_init', 'qode_admin_scripts_init');
 
@@ -47,6 +49,8 @@ function enqueue_admin_scripts() {
 	wp_enqueue_media();
 	wp_enqueue_script('jquery.nouislider.min');
 	wp_enqueue_script('qodef-ui-admin');
+	wp_enqueue_script('qodef-twitter-connect');
+	wp_enqueue_script('qodef-instagram-disconnect');
 }
 
 function enqueue_meta_box_styles() {
@@ -468,3 +472,32 @@ if(!function_exists('qode_save_dismisable_notice')) {
 
     add_action('admin_init', 'qode_save_dismisable_notice');
 }
+
+if(!function_exists('qode_hook_twitter_request_ajax')) {
+	/**
+	 * Wrapper function for obtaining twitter request token.
+	 * Hooks to wp_ajax_qode_twitter_obtain_request_token ajax action
+	 *
+	 * @see QodeStockholmTwitterApi::obtainRequestToken()
+	 */
+	function qode_hook_twitter_request_ajax() {
+		QodeStockholmTwitterApi::getInstance()->obtainRequestToken();
+	}
+
+	add_action('wp_ajax_qode_twitter_obtain_request_token', 'qode_hook_twitter_request_ajax');
+}
+
+if(!function_exists('qode_hook_instagram_disconnect_ajax')) {
+	/**
+	 * Wrapper function for disconnecting from instagram.
+	 * Hooks to wp_ajax_qode_instagram_disconnect ajax action
+	 *
+	 * @see QodeStockholmInstagramApi::obtainRequestToken()
+	 */
+	function qode_hook_instagram_disconnect_ajax() {
+		QodeStockholmInstagramApi::getInstance()->disconnectUser();
+	}
+
+	add_action('wp_ajax_qode_instagram_disconnect', 'qode_hook_instagram_disconnect_ajax');
+}
+?>

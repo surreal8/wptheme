@@ -2684,3 +2684,114 @@ class QodeOptionsFramework implements iRender {
 
 	}
 }
+
+class QodeSelectTwitterFramework implements  iRender {
+	public function render($factory) {
+		$twitterApi = QodeStockholmTwitterApi::getInstance();
+		$message = '';
+
+		if(!empty($_GET['oauth_token']) && !empty($_GET['oauth_verifier'])) {
+			if(!empty($_GET['oauth_token'])) {
+				update_option($twitterApi::AUTHORIZE_TOKEN_FIELD, $_GET['oauth_token']);
+			}
+
+			if(!empty($_GET['oauth_verifier'])) {
+				update_option($twitterApi::AUTHORIZE_VERIFIER_FIELD, $_GET['oauth_verifier']);
+			}
+
+			$responseObj = $twitterApi->obtainAccessToken();
+			if($responseObj->status) {
+				$message = esc_html__('You have successfully connected with your Twitter account. If you have any issues fetching data from Twitter try reconnecting.', 'qode');
+			} else {
+				$message = $responseObj->message;
+			}
+		}
+
+		$buttonText = $twitterApi->hasUserConnected() ? esc_html__('Re-connect with Twitter', 'qode') : esc_html__('Connect with Twitter', 'qode');
+		?>
+		<?php if($message !== '') { ?>
+			<div class="alert alert-success" style="margin-top: 20px;">
+				<span><?php echo esc_html($message); ?></span>
+			</div>
+		<?php } ?>
+		<div class="qodef-page-form-section" id="qodef_enable_social_share">
+
+			<div class="qodef-field-desc">
+				<h4><?php esc_html_e('Connect with Twitter', 'qode'); ?></h4>
+
+				<p><?php esc_html_e('Connecting with Twitter will enable you to show your latest tweets on your site', 'qode'); ?></p>
+			</div>
+			<!-- close div.qodef-field-desc -->
+
+			<div class="qodef-section-content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<a id="qodef-tw-request-token-btn" class="btn btn-primary" href="#"><?php echo esc_html($buttonText); ?></a>
+							<input type="hidden" data-name="current-page-url" value="<?php echo esc_url($twitterApi->buildCurrentPageURI()); ?>"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- close div.qodef-section-content -->
+
+		</div>
+	<?php }
+
+}
+
+class QodeSelectInstagramFramework implements iRender {
+	public function render($factory) {
+		$instagram_api = QodeStockholmInstagramApi::getInstance();
+		$message = '';
+
+		//if code wasn't saved to database
+		if(!get_option('qode_instagram_code')) {
+			//check if code parameter is set in URL. That means that user has connected with Instagram
+			if(!empty($_GET['code'])) {
+				//update code option so we can use it later
+				$instagram_api->storeCode();
+				$instagram_api->getAccessToken();
+				$message = esc_html__('You have successfully connected with your Instagram account. If you have any issues fetching data from Instagram try reconnecting.', 'qode');
+
+			} else {
+				$instagram_api->storeCodeRequestURI();
+			}
+		}
+		$buttonText = $instagram_api->hasUserConnected() ? esc_html__('Re-connect with Instagram', 'qode') : esc_html__('Connect with Instagram', 'qode');
+
+		?>
+		<?php if($message !== '') { ?>
+			<div class="alert alert-success" style="margin-top: 20px;">
+				<span><?php echo esc_html($message); ?></span>
+			</div>
+		<?php } ?>
+		<div class="qodef-page-form-section" id="qode_enable_social_share">
+
+			<div class="qodef-field-desc">
+				<h4><?php esc_html_e('Connect with Instagram', 'qode'); ?></h4>
+
+				<p><?php esc_html_e('Connecting with Instagram will enable you to show your latest photos on your site', 'qode'); ?></p>
+			</div>
+			<!-- close div.qodef-field-desc -->
+
+			<div class="qodef-section-content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-6">
+							<a class="btn btn-primary" href="<?php echo esc_url($instagram_api->getAuthorizeUrl()); ?>"><?php echo esc_html($buttonText); ?></a>
+						</div>
+						<?php if($instagram_api->hasUserConnected()) { ?>
+							<div class="col-lg-6">
+								<a id="qodef-instagram-disconnect-button" class="btn btn-primary" href="#"><?php  esc_html_e('Disconnect from Instagram', 'qode') ?></a>
+								<input type="hidden" data-name="current-page-url" value="<?php echo esc_url($instagram_api->buildCurrentPageURI()); ?>"/>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+			<!-- close div.qodef-section-content -->
+
+		</div>
+	<?php }
+}

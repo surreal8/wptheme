@@ -30,7 +30,7 @@
 
 		delete_sidebar: function(e){
 			var widget = $(e.currentTarget).parents('.widgets-holder-wrap:eq(0)'),
-			title = widget.find('.sidebar-name h3'),
+			title = widget.find('.sidebar-name h2'),
 			spinner = title.find('.spinner'),
 			widget_name = $.trim(title.text()),
 			obj = this;

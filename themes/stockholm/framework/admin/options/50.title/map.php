@@ -31,6 +31,12 @@ $titlePage->addChild("panel8",$panel8);
 				"right" => "Right"
 		      ));
 		$enable_title_container->addChild("page_title_position",$page_title_position);
+
+		$title_text_background_color = new QodeField("color","title_text_background_color","","Title Text Background Color","Choose a background color for title text");
+		$enable_title_container->addChild("title_text_background_color",$title_text_background_color);
+
+		$title_text_background_opacity = new QodeField("text","title_text_background_opacity","","Title Text Background Opacity (0-1)","Set opacity for title text background.", array(), array("col_width" => 3));
+		$enable_title_container->addChild("title_text_background_opacity",$title_text_background_opacity);
 		
 		$title_text_shadow = new QodeField("yesno","title_text_shadow","no","Text Shadow","Enabling this option will give Title text a shadow");
 		$enable_title_container->addChild("title_text_shadow",$title_text_shadow);

@@ -97,9 +97,9 @@ if (is_array($portfolio_images)){
 										    
 										    $thumbnail = "//img.youtube.com/vi/".$vidID."/maxresdefault.jpg";
 										?>
-										<a class="lightbox_single_portfolio" title="<?php echo $video_title; ?>" href="//www.youtube.com/watch?feature=player_embedded&v=<?php echo $vidID; ?>" rel="prettyPhoto[single_pretty_photo]">
+										<a class="lightbox_single_portfolio" title="<?php echo $video_title; ?>" href="//www.youtube.com/watch?feature=player_embedded&v=<?php echo $vidID; ?>" data-rel="prettyPhoto[single_pretty_photo]">
 											<i class="fa fa-play"></i>
-											<img width="100%" src="<?php echo $thumbnail; ?>"></img>
+											<img width="100%" src="<?php echo $thumbnail; ?>">
 										</a>
 									<?php } else { ?>
 										<iframe width="100%" src="//www.youtube.com/embed/<?php echo $portfolio_image['portfoliovideoid'];  ?>?wmode=transparent" wmode="Opaque" frameborder="0" allowfullscreen></iframe>
@@ -115,9 +115,9 @@ if (is_array($portfolio_images)){
 									   		$video_title = $xml[0]['title'];
 										    $thumbnail = $xml[0]['thumbnail_large'];
 										?>
-										<a class="lightbox_single_portfolio" title="<?php echo $video_title; ?>" href="<?php echo $protocol;?>//vimeo.com/<?php echo $vidID; ?>" rel="prettyPhoto[single_pretty_photo]">
+										<a class="lightbox_single_portfolio" title="<?php echo $video_title; ?>" href="<?php echo $protocol;?>//vimeo.com/<?php echo $vidID; ?>" data-rel="prettyPhoto[single_pretty_photo]">
 											<i class="fa fa-play"></i>
-											<img width="100%" src="<?php echo $thumbnail; ?>"></img>
+											<img width="100%" src="<?php echo $thumbnail; ?>">
 										</a>
 									<?php } else { ?>
 										<iframe src="//player.vimeo.com/video/<?php echo $portfolio_image['portfoliovideoid']; ?>?title=0&amp;byline=0&amp;portrait=0" width="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>

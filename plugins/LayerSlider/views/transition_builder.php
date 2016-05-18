@@ -47,7 +47,7 @@
 
 <div id="ls-screen-options" class="metabox-prefs hidden">
 	<div id="screen-options-wrap" class="hidden">
-		<form id="ls-screen-options-form" action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+		<form id="ls-screen-options-form" method="post">
 			<h5><?php _e('Show on screen', 'LayerSlider') ?></h5>
 			<label>
 				<input type="checkbox" name="showTooltips"<?php echo $lsScreenOptions['showTooltips'] == 'true' ? ' checked="checked"' : ''?>> <?php _e('Tooltips', 'LayerSlider') ?>
@@ -513,7 +513,7 @@
 	<?php  endif; ?>
 
 	<!-- Editor box -->
-	<form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post" id="ls-tr-builder-form">
+	<form method="post" id="ls-tr-builder-form">
 		<input type="hidden" name="ls-user-transitions" value="1">
 		<?php wp_nonce_field('save-user-transitions'); ?>
 		<div class="ls-box ls-tr-builder">

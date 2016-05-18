@@ -27,18 +27,27 @@ if(get_post_meta($id, "qode_content-top-padding", true) != ""){
 	}
 }
 
+$google_map_position = "bottom_position";
+if(isset($qode_options['google_map_position'])) {
+	$google_map_position = $qode_options['google_map_position'];
+}
+
 if($qode_options['enable_google_map'] == "yes"){
 	$container_class= " full_map";
 } else {
 	$container_class= "";
 }
+if($qode_options['enable_google_map'] == "yes" && ($google_map_position == "right_position" || $google_map_position == "left_position")) {
+	$container_class .= ' map_lr map_' . $google_map_position;
+}
 $show_section = "yes";
 if(isset($qode_options['section_between_map_form'])) {
 	$show_section = $qode_options['section_between_map_form'];
 }
-$google_map_position = "bottom_position";
-if(isset($qode_options['google_map_position'])) {
-	$google_map_position = $qode_options['google_map_position'];
+
+$custom_style = "";
+if(isset($qode_options['use_custom_style']) && $qode_options['use_custom_style'] == 'yes') {
+	$custom_style .= ' cf7_custom_style_1';
 }
 ?>
 	
@@ -92,7 +101,7 @@ if(isset($qode_options['google_map_position'])) {
 						</div>
 					<?php } ?>
 					<?php if($qode_options['enable_contact_form'] == "yes"){ ?>
-						<div class="contact_form">
+						<div class="contact_form <?php echo esc_attr($custom_style) ?>">
                             <?php if($qode_options['contact_heading_above'] != "") { ?><h5> <?php echo $qode_options['contact_heading_above']; ?> </h5> <?php } ?>
 							<form id="contact-form" method="post" action="">
 								<div class="two_columns_50_50 clearfix">
@@ -157,7 +166,23 @@ if(isset($qode_options['google_map_position'])) {
 							</form>	
 						</div>
 					<?php } ?>
-				</div>	
+				</div>
+				<!-- Contact form right/left -->
+				<?php if($qode_options['enable_google_map'] == "yes" && ($google_map_position == "right_position" || $google_map_position == "left_position")){ ?>
+				<div class="google_map_holder">
+					<?php
+					$google_maps_scroll_wheel = false;
+					if(isset($qode_options['google_maps_scroll_wheel'])){
+						if ($qode_options['google_maps_scroll_wheel'] == "yes")
+							$google_maps_scroll_wheel = true;
+					}
+					if(!$google_maps_scroll_wheel){
+						?>
+						<div class="google_map_ovrlay"></div>
+					<?php } ?>
+					<div class="q_google_map" id="map_canvas"></div>
+				</div>
+				<?php } ?>
 			</div>	
 	    </div>
 	    <?php } ?>

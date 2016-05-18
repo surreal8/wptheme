@@ -6,6 +6,7 @@ $args = array(
 	"icon_pack"						=> "",
     "fa_icon"						=> "",
     "fe_icon"						=> "",
+    "linear_icon"					=> "",
     "size"							=> "",
     "icon_color"					=> "",
     "icon_background_color"			=> "",
@@ -69,6 +70,9 @@ if($icon_pack == 'font_awesome' && $fa_icon !== '') {
 } elseif($icon_pack == 'font_elegant' && $fe_icon !== '') {
 	$icon_html .= "<span class='animated_icon " . $fe_icon."'" . $style ."></span>";
 	$icon_hover_html .= "<span class='animated_icon " . $fe_icon."'" . $style_hover ."></span>";
+} elseif($icon_pack == 'linear_icons' && $linear_icon !== '') {
+	$icon_html .= "<i class='animated_icon lnr " . $linear_icon."'" . $style ."></i>";
+	$icon_hover_html .= "<i class='animated_icon lnr " . $linear_icon."'" . $style_hover ."></i>";
 }
 
     $html .= '<div class="animated_icon_with_text_holder">';

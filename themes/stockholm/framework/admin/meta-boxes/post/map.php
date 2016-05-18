@@ -45,6 +45,12 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("post_general",$qodeGeneral);
 	$qode_revolution_slider = new QodeMetaField("text","qode_revolution-slider","","Layer Slider or Select Slider Shortcode","Copy and paste your shortcode located in Select Slider -> Slider");
 	$qodeGeneral->addChild("qode_revolution-slider",$qode_revolution_slider);
 
+	$qode_enable_content_top_margin = new QodeMetaField("selectblank","qode_enable_content_top_margin","","Put Content Below Header","Enabling this option will put all of the content below header", array(
+		"no" => "No",
+		"yes" => "Yes",
+	));
+	$qodeGeneral->addChild("qode_enable_content_top_margin",$qode_enable_content_top_margin);
+
 // Left Menu Area
 
 $qodeLeftMenuArea = new QodeMetaBox("post", "Select Left Menu Area","vertical_area",array("no"));
@@ -151,6 +157,15 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("post_title",$qodeTitle);
 		"yes" => "yes"
 	));
 	$row1->addChild("qode_title_text_shadow",$qode_title_text_shadow);
+
+	$row2 = new QodeRow();
+	$group1->addChild("row2",$row2);
+
+	$qode_page_title_text_background_color = new QodeMetaField("colorsimple","qode_page-title-text-background-color","","Text Background Color","ThisIsDescription");
+	$row2->addChild("qode_page-title-text-background-color",$qode_page_title_text_background_color);
+
+	$qode_page_title_text_background_opacity = new QodeMetaField("textsimple","qode_page-title-text-background-opacity","","Text Background Opacity (0-1)","ThisIsDescription", array(), array("col_width" => 3));
+	$row2->addChild("qode_page-title-text-background-opacity",$qode_page_title_text_background_opacity);
 
 	$qode_page_title_background_color = new QodeMetaField("color","qode_page-title-background-color","","Background Color","Choose background color for Title Area");
 	$qode_page_title_area_container->addChild("qode_page-title-background-color",$qode_page_title_background_color);
@@ -264,6 +279,14 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("post_side_bar",$qodeSideBar);
 
 	$qode_choose_sidebar = new QodeMetaField("selectblank","qode_choose-sidebar","default","Choose Widget Area in Sidebar","Choose Custom Widget area to display in Sidebar", $qode_custom_sidebars);
 	$qodeSideBar->addChild("qode_choose-sidebar",$qode_choose_sidebar);
+
+// Blog Chequered
+
+$qodeBlogChequered = new QodeMetaBox("post", "Select Chequered Blog List");
+$qodeFramework->qodeMetaBoxes->addMetaBox("post_blog_chequered",$qodeBlogChequered);
+
+	$blog_chequered_color = new QodeMetaField("color","qode_blog_chequered_color","","Background Color","Choose color for post background on chequered blog list.");
+	$qodeBlogChequered->addChild("blog_chequered_color",$blog_chequered_color);
 
 // SEO
 

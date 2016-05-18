@@ -292,7 +292,7 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 		if (in_array("prettyphoto", $tmp_class)) {
 			wp_enqueue_script('prettyphoto');
 			wp_enqueue_style('prettyphoto');
-			$a_class = ' class="prettyphoto"' . ' rel="prettyPhoto[rel-' . get_the_ID() . '-' . rand() . ']"';
+			$a_class = ' class="prettyphoto"' . ' data-rel="prettyPhoto[rel-' . get_the_ID() . '-' . rand() . ']"';
 			$el_class = str_ireplace(" prettyphoto", "", $el_class);
 		}
 	}

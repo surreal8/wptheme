@@ -60,7 +60,7 @@
 ?>
 <div id="ls-screen-options" class="metabox-prefs hidden">
 	<div id="screen-options-wrap" class="hidden">
-		<form id="ls-screen-options-form" action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+		<form id="ls-screen-options-form" method="post">
 			<h5><?php _e('Show on screen', 'LayerSlider') ?></h5>
 			<label>
 				<input type="checkbox" name="showTooltips"<?php echo $lsScreenOptions['showTooltips'] == 'true' ? ' checked="checked"' : ''?>> Tooltips
@@ -93,7 +93,7 @@ include LS_ROOT_PATH . '/templates/tmpl-transition-window.php';
 		if(!empty($slideVal['properties']['thumbnailId'])) { $slideVal['properties']['thumbnailThumb'] = apply_filters('ls_get_thumbnail', $slideVal['properties']['thumbnailId'], $slideVal['properties']['thumbnail']); }
 		$slider['layers'][$slideKey] = $slideVal;
 
-		if(!empty($slideVal['sublayers'])) {
+		if(!empty($slideVal['sublayers']) && is_array($slideVal['sublayers'])) {
 			foreach($slideVal['sublayers'] as $layerKey => $layerVal) {
 				if(!empty($layerVal['imageId'])) { $layerVal['imageThumb'] = apply_filters('ls_get_thumbnail', $layerVal['imageId'], $layerVal['image']); }
 
@@ -104,12 +104,14 @@ include LS_ROOT_PATH . '/templates/tmpl-transition-window.php';
 				}
 
 				// Parse embedded JSON data
-				$layerVal['styles'] = !empty($layerVal['styles']) ? json_decode(stripslashes($layerVal['styles']), true) : new stdClass;
-				$layerVal['transition'] = !empty($layerVal['transition']) ? json_decode(stripslashes($layerVal['transition']), true) : new stdClass;
-				$layerVal['html'] = stripslashes($layerVal['html']);
+				$layerVal['styles'] = !empty($layerVal['styles']) ?  (object) json_decode(stripslashes($layerVal['styles']), true) : new stdClass;
+				$layerVal['transition'] = !empty($layerVal['transition']) ?  (object) json_decode(stripslashes($layerVal['transition']), true) : new stdClass;
+				$layerVal['html'] = !empty($layerVal['html']) ? stripslashes($layerVal['html']) : '';
 
 				$slider['layers'][$slideKey]['sublayers'][$layerKey] = $layerVal;
 			}
+		} else {
+			$slider['layers'][$slideKey]['sublayers'] = array();
 		}
 	}
 ?>
@@ -121,10 +123,11 @@ include LS_ROOT_PATH . '/templates/tmpl-transition-window.php';
 
 
 
-<form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post" class="wrap" id="ls-slider-form" novalidate="novalidate">
+<form method="post" class="wrap" id="ls-slider-form" novalidate="novalidate">
 
 	<input type="hidden" name="slider_id" value="<?php echo $id ?>">
 	<input type="hidden" name="action" value="ls_save_slider">
+	<?php wp_nonce_field('ls-save-slider-' . $id); ?>
 
 	<!-- Title -->
 	<h2>

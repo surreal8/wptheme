@@ -24,6 +24,12 @@ if (is_array($portfolio_images)){
 	usort($portfolio_images, "comparePortfolioImages");
 }
 
+//check if images title should be displayed
+$show_image_title = true;
+if (isset($qode_options['portfolio_hide_image_title']) && $qode_options['portfolio_hide_image_title'] == 'yes') {
+	$show_image_title = false;
+}
+
 if(get_post_meta(get_the_ID(), "qode_choose-number-of-portfolio-columns", true) !== "") {
 	$columns_number = 'v'.get_post_meta(get_the_ID(), "qode_choose-number-of-portfolio-columns", true);
 } elseif(isset($qode_options['portfolio_columns_number']) && $qode_options['portfolio_columns_number'] !== '') {
@@ -50,12 +56,24 @@ if(get_post_meta(get_the_ID(), "qode_choose-number-of-portfolio-columns", true) 
             ?>
             <?php if($lightbox_single_project == "yes"){ ?>
                 <a class="lightbox_single_portfolio <?php echo $columns_number; ?>" title="<?php echo $title; ?>" href="<?php echo $image_light_src; ?>" data-rel="prettyPhoto[single_pretty_photo]">
-                    <span class="gallery_text_holder"><span class="gallery_text_inner"><h4><?php echo $title; ?></h4></span></span>
+                    <span class="gallery_text_holder">
+						<?php if($show_image_title) { ?>
+							<span class="gallery_text_inner">
+										<h4><?php echo $title; ?></h4>
+									</span>
+						<?php } ?>
+					</span>
                     <img src="<?php echo $image_src; ?>" alt="<?php echo $alt; ?>" />
                 </a>
             <?php } else { ?>
                 <a class="lightbox_single_portfolio <?php echo $columns_number; ?>" href="#">
-                    <span class="gallery_text_holder"><span class="gallery_text_inner"><h4><?php echo $title; ?></h4></span></span>
+                    <span class="gallery_text_holder">
+						<?php if($show_image_title) { ?>
+							<span class="gallery_text_inner">
+										<h4><?php echo $title; ?></h4>
+									</span>
+						<?php } ?>
+					</span>
                     <img src="<?php echo $image_src; ?>" alt="<?php echo $alt; ?>" />
                 </a>
             <?php }
@@ -84,12 +102,24 @@ if(get_post_meta(get_the_ID(), "qode_choose-number-of-portfolio-columns", true) 
 				?>
 				<?php if($lightbox_single_project == "yes"){ ?>
 					<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" title="<?php echo $portfolio_image['portfoliotitle']; ?>" href="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" data-rel="prettyPhoto[single_pretty_photo]">
-						<span class="gallery_text_holder"><span class="gallery_text_inner"><h4><?php echo $portfolio_image['portfoliotitle']; ?></h4></span></span>
+						<span class="gallery_text_holder">
+							<?php if($show_image_title) { ?>
+								<span class="gallery_text_inner">
+									<h4><?php echo $portfolio_image['portfoliotitle']; ?></h4>
+								</span>
+							<?php } ?>
+						</span>
 						<img src="<?php echo $single_image_src; ?>" alt="<?php echo $alt; ?>" />
 					</a>
 				<?php } else { ?>
 					<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" href="#">
-						<span class="gallery_text_holder"><span class="gallery_text_inner"><h4><?php echo $portfolio_image['portfoliotitle']; ?></h4></span></span>
+						<span class="gallery_text_holder">
+							<?php if($show_image_title) { ?>
+								<span class="gallery_text_inner">
+									<h4><?php echo $portfolio_image['portfoliotitle']; ?></h4>
+								</span>
+							<?php } ?>
+						</span>
 						<img src="<?php echo $single_image_src; ?>" alt="<?php echo $alt; ?>" />
 					</a>
 				<?php } ?>
@@ -107,9 +137,9 @@ if(get_post_meta(get_the_ID(), "qode_choose-number-of-portfolio-columns", true) 
 								$vidID = $portfolio_image['portfoliovideoid'];  
 							    $thumbnail = "http://img.youtube.com/vi/".$vidID."/maxresdefault.jpg";
 							?>
-							<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" title="<?php echo $portfolio_image['portfoliotitle']; ?>" href="//www.youtube.com/watch?feature=player_embedded&v=<?php echo $vidID; ?>" rel="prettyPhoto[single_pretty_photo]">
+							<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" title="<?php echo $portfolio_image['portfoliotitle']; ?>" href="//www.youtube.com/watch?feature=player_embedded&v=<?php echo $vidID; ?>" data-rel="prettyPhoto[single_pretty_photo]">
 								<i class="fa fa-play"></i>
-								<img width="100%" src="<?php echo $thumbnail; ?>"></img>
+								<img width="100%" src="<?php echo $thumbnail; ?>"/>
 							</a>
 						<?php } else { ?>
 							<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" href="#">
@@ -125,9 +155,9 @@ if(get_post_meta(get_the_ID(), "qode_choose-number-of-portfolio-columns", true) 
 							    $thumbnail = $xml[0]['thumbnail_large'];  
 							    $video_title = $xml[0]['title'];
 							?>
-							<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" title="<?php echo $portfolio_image['portfoliotitle']; ?>" href="<?php echo $protocol;?>//vimeo.com/<?php echo $portfolio_image['portfoliovideoid']; ?>" rel="prettyPhoto[single_pretty_photo]">
+							<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" title="<?php echo $portfolio_image['portfoliotitle']; ?>" href="<?php echo $protocol;?>//vimeo.com/<?php echo $portfolio_image['portfoliovideoid']; ?>" data-rel="prettyPhoto[single_pretty_photo]">
 								<i class="fa fa-play"></i>
-								<img width="100%" src="<?php echo $thumbnail; ?>"></img>
+								<img width="100%" src="<?php echo $thumbnail; ?>"/>
 							</a>
 						<?php } else { ?>
 							<a class="lightbox_single_portfolio <?php echo $columns_number; ?>" href="#">

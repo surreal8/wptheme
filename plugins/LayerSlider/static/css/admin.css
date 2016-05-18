@@ -451,6 +451,7 @@ body #ls-layers table.noborder td {
 .ls-sublayer-wrapper {
 	width: 100%;
 	position: relative;
+	direction: ltr;
 }
 
 .ls-sublayer-wrapper h4 {

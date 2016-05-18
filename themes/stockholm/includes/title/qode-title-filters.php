@@ -208,3 +208,29 @@ if(!function_exists('qode_title_background_color_class')) {
 
 	add_filter('qode_title_classes', 'qode_title_background_color_class');
 }
+
+if(!function_exists('qode_title_text_background_class')) {
+	function qode_title_text_background_class($classes) {
+		global $qode_options;
+		global $wp_query;
+
+		//init variables
+		$id 			= $wp_query->get_queried_object_id();
+		$title_class = '';
+		if(qode_is_woocommerce_page()) {
+			$id = get_option('woocommerce_shop_page_id');
+		}
+
+		if(get_post_meta($id, "qode_page-title-text-background-color", true) != ""){
+			$title_class = 'with_title_text_bg_color';
+		}else if(isset($qode_options['title_text_background_color']) && $qode_options['title_text_background_color'] !=''){
+			$title_class = "with_title_text_bg_color";
+		}
+
+		$classes[] = $title_class;
+
+		return $classes;
+	}
+
+	add_filter('qode_title_classes', 'qode_title_text_background_class');
+}

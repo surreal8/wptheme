@@ -10,6 +10,7 @@ $args = array(
 	"icon_pack"             		=> "",
 	"fa_icon"               		=> "",
 	"fe_icon"               		=> "",
+	"linear_icon"              		=> "",
     "size"                          => "",
     "icon_color"                    => "",
     "image"                         => "",
@@ -124,6 +125,9 @@ if($type == "image_type"){
 	elseif($icon_pack == "font_elegant" && $fe_icon != ""){
 		$html .= '<span class="process_icon q_font_elegant_icon '.$fe_icon.'" style="'.$icon_style.'" ></span>';
 	}
+    elseif($icon_pack == "linear_icons" && $linear_icon != ""){
+        $html .= '<i class="process_icon lnr '.$linear_icon.'" style="'.$icon_style.'" ></i>';
+    }
 } else if ($type == "text_type"){
     $html .= '<'.$text_in_circle_tag.' class="q_text_in_circle" style="'.$text_in_circle_style.'">'.$text_in_circle.'</'.$text_in_circle_tag.'>';
 }

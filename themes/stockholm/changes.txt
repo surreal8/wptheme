@@ -1,3 +1,115 @@
+3.1
+- Added new type of Select Carousel Slider
+- Added Revolution Slider exported files for new demos
+- Updated waypoints.js to 2.0.5
+- Updated Visual Composer to 4.11.2.1
+- Fixed bug with image rendering in Mozilla Firefox
+
+3.0.2
+-Updated Visual Composer to 4.11.2
+-Updated Layer Slider to 5.6.5
+
+3.0.1
+- Added  Wordpress 4.5 compatibility
+
+3.0
+- Added Kelda Demo
+- Added Frida Demo
+- Added Jette Demo
+- Added Metta Demo
+- Added G�ta Demo
+- Added Eva Demo
+- Added Tilde Demo
+- Added Ebba Demo
+- Added Rona Demo
+- Added Tove Demo
+- Added Solveig Demo
+- Added Hilde Demo
+- Added Kajsa Demo
+- Added Elke Demo
+- Added Anke Demo
+- Added Dagmar Demo
+- Added Tala Demo
+- Added Oda Demo
+- Added Ylva Demo
+- Added Gala Demo
+- Added Slider Revolution Responsive WordPress Plugin ($19 value) to the theme
+- Added Woocommerce 2.5.5 compatibility
+- Added 'Elements Holder' shortcode
+- Added 'Always Put Content Below Header' functionality
+- Added 'Justified Gallery' portfolio list type
+- Added 'Blog Chequered' list type
+- Added 'Blog Animated' list type
+- Added 'Blog Pinterest' list type
+- Added 'Blog Centered' list type
+- Added field for author job position in testimonials
+- Added Twitter Plugin - enables twitter widget and twitter shortcode
+- Added Instagram Plugin - enables instagram widget
+- Added options for contact form custom style
+- Added "Info on Hover" type of team shortcode
+- Added Fixed Right Portfolio Single Type
+- Added Fixed Left Portfolio Single Type
+- Added Gallery Right Portfolio Single Type
+- Added Masonry Portfolio Single Type
+- Added Full Screen Slider Portfolio Single Type
+- Added Full Width Slider Portfolio Single Type
+- Added 'Select Product List' shortcode
+- Added Standard Product List type
+- Added Simple Product List type
+- Added Linear Icons font
+- Added 'Shop Category Showcase' shortcode
+- Added Passepartout 
+- Added 'Info on Hover' Type of Portfolio Hover for Pinterest
+- Added Option 'Space Between Pinterest' on Pinterest Portfolio List
+- Added Pricing List Shortcode
+- Added Loading Animation for Pinterest and Masonry Portfolio Lists
+- Added Loading Animation for Pinterest and Masonry Blog Lists
+- Added "Border Radius" Option for Icons Shortcode
+- Added option for default shop layout.
+- Added new options for testimonials
+- Added Landing Page template
+- Added Menu Hover Animation options
+- Added Dropdown Appearance options
+- Added Fulscreen Search type
+- Added new spinners
+- Added option for Slide title text background color
+- Added option for title text background color
+- Added button hover animation for icon
+- Added options for search input fields
+- Added Side Area Types
+- Added Close Icon Position
+- Added Countdown shortcode
+- Added pot language file
+- Added Revolution Slider
+- Updated po/mo language files
+- Updated Visual Composer to 4.11.1
+- Updated 'Testimonials' shortcode
+- Updated 'Pie Chart' shortcode
+- Updated 'Pie Chart With Icon' shortcode
+- Updated Google fonts list
+- Updated 'Icon' shortcode
+- Updated 'Icon with text' shortcode
+- Updated 'Row' shortcode
+- Updated Contact Page options
+- Updated 'Social Share List' shortcode
+- Updated 'Image Gallery' shortcode
+- Updated 'Button' shortcode
+- Updated 'Carousel' shortcode
+- Updated 'Counter' shortcode
+- Updated Portfolio options
+- Updated Header options
+- Updated Blog Single options
+- Updated Woocommerce options
+- Updated contact form - reply to field added inside header
+- Fixed Font Options for Contact Page
+- Fixed Slider Anchor not using text color from slider
+- Fixed option for footer padding not working for full width footer
+- Fixed option for slider navigation not working on prettyphoto
+- Fixed Select Slider - Slide text not using margin bottom setting
+- Fixed cart icon not using settings from header icons styles
+- Fixed portfolio not using default sidebar option
+- Fixed custom widget area not able to delete
+
 2.6
 - Added Woocommerce 2.5.0 compatibility
 - Updated Visual Composer to 4.9.2

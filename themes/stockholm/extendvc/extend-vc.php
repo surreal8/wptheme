@@ -80,6 +80,9 @@ if (function_exists('vc_remove_param')) {
     vc_remove_param('vc_row', 'parallax');
     vc_remove_param('vc_row', 'parallax_image');
 
+	vc_remove_param('vc_row', 'parallax_speed_video');
+	vc_remove_param('vc_row', 'parallax_speed_bg');
+
 	if(version_compare(qode_get_vc_version(), '4.4.2') >= 0) {
 		vc_remove_param('vc_accordion', 'disable_keyboard');
 		vc_remove_param('vc_separator', 'align');
@@ -158,6 +161,11 @@ foreach ($font_awesome_icons as $key => $value) {
 }
 
 $fe_icons = qode_font_elegant_icon_array();
+
+$linear_icons = qode_linear_icons_icon_array();
+foreach ($linear_icons as $key => $value) {
+	$lnr_icons[$key] = $key;
+}
 
 $carousel_sliders = getCarouselSliderArray();
 
@@ -340,6 +348,16 @@ vc_add_param("vc_gallery", array(
 ));
 
 vc_add_param("vc_gallery", array(
+	"type" => "dropdown",
+	"class" => "",
+	"heading" => "Space Between Images",
+	"param_name" => "space_between_images",
+	"value" => array('No' => 'no', 'Yes' => 'yes'),
+	'save_always' => true,
+	"dependency" => Array('element' => "type", 'value' => array('image_grid'))
+));
+
+vc_add_param("vc_gallery", array(
     "type" => "dropdown",
     "class" => "",
     "heading" => "Frame",
@@ -359,7 +377,7 @@ vc_add_param("vc_gallery", array(
 	"class" => "",
 	"heading" => "Choose Frame",
 	"param_name" => "choose_frame",
-	"value" => array('Default' => 'default', 'Frame 1' => 'frame1', 'Frame 2' => 'frame2', 'Frame 3' => 'frame3'),
+	"value" => array('Default' => 'default', 'Frame 1' => 'frame1', 'Frame 2' => 'frame2', 'Frame 3' => 'frame3', 'Frame 4' => 'frame4'),
 	'save_always' => true,
 	"dependency" => Array('element' => "frame", 'value' => array('use_frame'))
 ));
@@ -441,7 +459,8 @@ vc_add_param("vc_row", array(
 	"param_name" => "icon_pack",
 	"value" => array(
 		"Font Awesome" => "font_awesome",
-		"Font Elegant" => "font_elegant"
+		"Font Elegant" => "font_elegant",
+		"Linear Icons" => "linear_icons"
 	),
 	'save_always' => true,
 	"description" => "",
@@ -467,6 +486,16 @@ vc_add_param("vc_row", array(
 	'save_always' => true,
 	"description" => "",
 	"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+));
+vc_add_param("vc_row", array(
+	"type" => "dropdown",
+	"class" => "",
+	"heading" => "Content menu icon",
+	"param_name" => "content_menu_linear_icon",
+	"value" => $lnr_icons,
+	'save_always' => true,
+	"description" => "",
+	"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 ));
 vc_add_param("vc_row", array(
 	"type" => "dropdown",
@@ -571,12 +600,38 @@ vc_add_param("vc_row", array(
 ));
 
 vc_add_param("vc_row", array(
+	"type" => "dropdown",
+	"class" => "",
+	"heading" => "Full Screen Height",
+	"param_name" => "full_screen_section_height",
+	"value" => array(
+		"No" => "no",
+		"Yes" => "yes"
+	),
+	'save_always' => true,
+	"dependency" => Array('element' => "row_type", 'value' => array('parallax'))
+));
+
+vc_add_param("vc_row", array(
+	"type" => "dropdown",
+	"class" => "",
+	"heading" => "Vertically Align Content In Middle",
+	"param_name" => "vertically_align_content_in_middle",
+	"value" => array(
+		"No" => "no",
+		"Yes" => "yes"
+	),
+	'save_always' => true,
+	"dependency" => array('element' => 'full_screen_section_height', 'value' => 'yes')
+));
+
+vc_add_param("vc_row", array(
 	"type" => "textfield",
 	"class" => "",
 	"heading" => "Section height",
 	"param_name" => "section_height",
 	"value" => "",
-	"dependency" => Array('element' => "row_type", 'value' => array('parallax'))
+	"dependency" => Array('element' => "full_screen_section_height", 'value' => array('no'))
 ));
 vc_add_param("vc_row", array(
     "type" => "textfield",
@@ -1064,6 +1119,23 @@ vc_add_param("vc_single_image",  array(
   
 ));
 
+/*** Contact Form 7 ***/
+
+if(qode_contact_form_7_installed()){
+	vc_add_param("contact-form-7", array(
+		"type" => "dropdown",
+		"class" => "",
+		"heading" => "Style",
+		"param_name" => "html_class",
+		"value" => array(
+			"Default"				=> "default",
+			"Custom Style 1"		=> "cf7_custom_style_1"
+		),
+		'save_always' => true,
+		"description" => "You can style each form element individually in Select Options > Contact Form"
+	));
+}
+
 /*** Blockquote  ***/
 
 vc_map( array(
@@ -1220,7 +1292,8 @@ vc_map( array(
 				"value" => array(
 					"No Icon" => "",
 					"Font Awesome" => "font_awesome",
-					"Font Elegant" => "font_elegant"
+					"Font Elegant" => "font_elegant",
+					"Linear Icons" => "linear_icons"
 				),
 			),
 			array(
@@ -1242,12 +1315,27 @@ vc_map( array(
 				"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
 			),
 			array(
+				"type" => "dropdown",
+				"class" => "",
+				"heading" => "Icon",
+				"param_name" => "linear_icon",
+				"value" => $lnr_icons,
+				"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
+			),
+			array(
 				"type" => "colorpicker",
 				"holder" => "div",
 				"class" => "",
 				"heading" => "Icon Color",
 				"param_name" => "icon_color",
 				"dependency" => Array('element' => "icon", 'not_empty' => true)
+			),
+			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Icon Size (px)",
+				"param_name" => "icon_size"
 			),
 			array(
 				"type" => "textfield",
@@ -1311,6 +1399,13 @@ vc_map( array(
                 "param_name" => "hover_border_color"
             ),
 			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Font Size (px)",
+				"param_name" => "font_size"
+			),
+			array(
 				"type" => "dropdown",
 				"holder" => "div",
 				"class" => "",
@@ -1346,7 +1441,18 @@ vc_map( array(
 				"heading" => "Border radius",
 				"param_name" => "border_radius",
 				"description" => __("Please insert border radius(Rounded corners) in px. For example: 4 ", 'qode')
-			)
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Hover Animation",
+				"param_name" => "hover_animation",
+				"value" => array(
+					"" => "",
+					"Move Icon" => "move_icon"
+				)
+			),
 		)
 ) );
 
@@ -1407,7 +1513,8 @@ vc_map( array(
 				"value" => array(
 					"No Icon" => "",
 					"Font Awesome" => "font_awesome",
-					"Font Elegant" => "font_elegant"
+					"Font Elegant" => "font_elegant",
+					"Linear Icons" => "linear_icons"
 				),
 				"description" => "",
 				"dependency" => Array('element' => "type", 'value' => array('with_icon'))
@@ -1429,6 +1536,14 @@ vc_map( array(
 				'save_always' => true,
 				"description" => "",
 				"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+			),
+			array(
+				"type" => "dropdown",
+				"class" => "",
+				"heading" => "Icon",
+				"param_name" => "linear_icon",
+				"value" => $lnr_icons,
+				"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 			),
 			array(
 				"type" => "textfield",
@@ -1811,6 +1926,254 @@ vc_map( array(
 				"dependency" => array('element' => "separator", 'value' => array('yes'))
 			)
 		)
+) );
+
+/*** Countdown shortcode ***/
+
+vc_map( array(
+	'name' => 'Countdown',
+	'base' => 'countdown',
+	'category' => 'by SELECT',
+	'admin_enqueue_css' => array(get_template_directory_uri().'/css/admin/vc-extend.css'),
+	'icon' => 'icon-wpb-countdown',
+	'allowed_container_element' => 'vc_row',
+	'params' => array(
+		array(
+			'type' => 'dropdown',
+			'heading' => 'Year',
+			'param_name' => 'year',
+			'value' => array(
+				'' => '',
+				'2016' => '2016',
+				'2017' => '2017',
+				'2018' => '2018',
+				'2019' => '2019',
+				'2020' => '2020'
+			),
+			'admin_label' => true,
+			'save_always' => true
+		),
+		array(
+			'type' => 'dropdown',
+			'heading' => 'Month',
+			'param_name' => 'month',
+			'value' => array(
+				'' => '',
+				'January' => '1',
+				'February' => '2',
+				'March' => '3',
+				'April' => '4',
+				'May' => '5',
+				'June' => '6',
+				'July' => '7',
+				'August' => '8',
+				'September' => '9',
+				'October' => '10',
+				'November' => '11',
+				'December' => '12'
+			),
+			'admin_label' => true,
+			'save_always' => true
+		),
+		array(
+			'type' => 'dropdown',
+			'heading' => 'Day',
+			'param_name' => 'day',
+			'value' => array(
+				'' => '',
+				'1' => '1',
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+				'5' => '5',
+				'6' => '6',
+				'7' => '7',
+				'8' => '8',
+				'9' => '9',
+				'10' => '10',
+				'11' => '11',
+				'12' => '12',
+				'13' => '13',
+				'14' => '14',
+				'15' => '15',
+				'16' => '16',
+				'17' => '17',
+				'18' => '18',
+				'19' => '19',
+				'20' => '20',
+				'21' => '21',
+				'22' => '22',
+				'23' => '23',
+				'24' => '24',
+				'25' => '25',
+				'26' => '26',
+				'27' => '27',
+				'28' => '28',
+				'29' => '29',
+				'30' => '30',
+				'31' => '31',
+			),
+			'admin_label' => true,
+			'save_always' => true
+		),
+		array(
+			'type' => 'dropdown',
+			'heading' => 'Hour',
+			'param_name' => 'hour',
+			'value' => array(
+				'' => '',
+				'0' => '0',
+				'1' => '1',
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+				'5' => '5',
+				'6' => '6',
+				'7' => '7',
+				'8' => '8',
+				'9' => '9',
+				'10' => '10',
+				'11' => '11',
+				'12' => '12',
+				'13' => '13',
+				'14' => '14',
+				'15' => '15',
+				'16' => '16',
+				'17' => '17',
+				'18' => '18',
+				'19' => '19',
+				'20' => '20',
+				'21' => '21',
+				'22' => '22',
+				'23' => '23',
+				'24' => '24'
+			),
+			'admin_label' => true,
+			'save_always' => true
+		),
+		array(
+			'type' => 'dropdown',
+			'heading' => 'Minute',
+			'param_name' => 'minute',
+			'value' => array(
+				'' => '',
+				'0' => '0',
+				'1' => '1',
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+				'5' => '5',
+				'6' => '6',
+				'7' => '7',
+				'8' => '8',
+				'9' => '9',
+				'10' => '10',
+				'11' => '11',
+				'12' => '12',
+				'13' => '13',
+				'14' => '14',
+				'15' => '15',
+				'16' => '16',
+				'17' => '17',
+				'18' => '18',
+				'19' => '19',
+				'20' => '20',
+				'21' => '21',
+				'22' => '22',
+				'23' => '23',
+				'24' => '24',
+				'25' => '25',
+				'26' => '26',
+				'27' => '27',
+				'28' => '28',
+				'29' => '29',
+				'30' => '30',
+				'31' => '31',
+				'32' => '32',
+				'33' => '33',
+				'34' => '34',
+				'35' => '35',
+				'36' => '36',
+				'37' => '37',
+				'38' => '38',
+				'39' => '39',
+				'40' => '40',
+				'41' => '41',
+				'42' => '42',
+				'43' => '43',
+				'44' => '44',
+				'45' => '45',
+				'46' => '46',
+				'47' => '47',
+				'48' => '48',
+				'49' => '49',
+				'50' => '50',
+				'51' => '51',
+				'52' => '52',
+				'53' => '53',
+				'54' => '54',
+				'55' => '55',
+				'56' => '56',
+				'57' => '57',
+				'58' => '58',
+				'59' => '59',
+				'60' => '60',
+			),
+			'admin_label' => true,
+			'save_always' => true
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Month Label',
+			'param_name' => 'month_label',
+			'description' => ''
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Day Label',
+			'param_name' => 'day_label',
+			'description' => ''
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Hour Label',
+			'param_name' => 'hour_label',
+			'description' => ''
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Minute Label',
+			'param_name' => 'minute_label',
+			'description' => ''
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Second Label',
+			'param_name' => 'second_label',
+			'description' => ''
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Digit Font Size (px)',
+			'param_name' => 'digit_font_size',
+			'description' => '',
+			'group' => 'Design Options'
+		),
+		array(
+			'type' => 'textfield',
+			'heading' => 'Label Font Size (px)',
+			'param_name' => 'label_font_size',
+			'description' => '',
+			'group' => 'Design Options'
+		),
+		array(
+			'type' => 'colorpicker',
+			'heading' => 'Digit Color',
+			'param_name' => 'digit_color',
+			'description' => '',
+			'group' => 'Design Options'
+		)
+	)
 ) );
 
 /*** Cover Boxes ***/
@@ -2235,7 +2598,8 @@ vc_map( array(
 			"param_name" => "icon_pack",
 			"value" => array(
 				"Font Awesome" => "font_awesome",
-				"Font Elegant" => "font_elegant"
+				"Font Elegant" => "font_elegant",
+				"Linear Icons" => "linear_icons"
 			),
 			'save_always' => true,
 			"description" => ""
@@ -2259,6 +2623,14 @@ vc_map( array(
 			'save_always' => true,
 			"description" => "",
 			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+		),
+		array(
+			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Icon",
+			"param_name" => "linear_icon",
+			"value" => $lnr_icons,
+			"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 		),
 		array(
 			"type" => "dropdown",
@@ -2308,6 +2680,14 @@ vc_map( array(
 			"description" => ""
 		),
 		array(
+			"type" => "colorpicker",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Icon Hover Color",
+			"param_name" => "icon_hover_color",
+			"description" => ""
+		),
+		array(
 			"type" => "dropdown",
 			"holder" => "div",
 			"class" => "",
@@ -2330,6 +2710,14 @@ vc_map( array(
 			"dependency" => Array('element' => "type", 'value' => array('circle','square'))
 		),
 		array(
+			"type" => "colorpicker",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Border Hover Color",
+			"param_name" => "border_hover_color",
+			"dependency" => Array('element' => "type", 'value' => array('circle','square'))
+		),
+		array(
 			"type" => "textfield",
 			"holder" => "div",
 			"class" => "",
@@ -2339,11 +2727,29 @@ vc_map( array(
 			"dependency" => Array('element' => "type", 'value' => array('circle','square'))
 		),
 		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Border Radius",
+			"param_name" => "border_radius",
+			"description" => "Enter just number. Omit pixels",
+			"dependency" => Array('element' => "type", 'value' => array('square'))
+		),
+		array(
 			"type" => "colorpicker",
 			"holder" => "div",
 			"class" => "",
 			"heading" => "Background Color",
 			"param_name" => "background_color",
+			"description" => "",
+			"dependency" => Array('element' => "type", 'value' => array('circle','square'))
+		),
+		array(
+			"type" => "colorpicker",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Background Hover Color",
+			"param_name" => "background_hover_color",
 			"description" => "",
 			"dependency" => Array('element' => "type", 'value' => array('circle','square'))
 		),
@@ -2415,7 +2821,8 @@ vc_map( array(
 			"param_name" => "icon_pack",
 			"value" => array(
 				"Font Awesome" => "font_awesome",
-				"Font Elegant" => "font_elegant"
+				"Font Elegant" => "font_elegant",
+				"Linear Icons" => "linear_icons"
 			),
 			'save_always' => true,
 			"description" => ""
@@ -2439,6 +2846,14 @@ vc_map( array(
 			'save_always' => true,
 			"description" => "",
 			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+		),
+		array(
+			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Icon",
+			"param_name" => "linear_icon",
+			"value" => $lnr_icons,
+			"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 		),
 		array(
 			"type" => "dropdown",
@@ -2568,7 +2983,9 @@ vc_map( array(
 			"param_name" => "icon_pack",
 			"value" => array(
 				"Font Awesome" => "font_awesome",
-				"Font Elegant" => "font_elegant"
+				"Font Elegant" => "font_elegant",
+				"Linear Icons" => "linear_icons",
+				"Custom Icon"  => "custom_icon"
 			),
 			'save_always' => true,
 			"description" => ""
@@ -2595,6 +3012,22 @@ vc_map( array(
 		),
 		array(
 			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Icon",
+			"param_name" => "linear_icon",
+			"value" => $lnr_icons,
+			"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
+		),
+		array(
+			"type" => "attach_image",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Custom Icon",
+			"param_name" => "custom_icon_image",
+			"dependency" => Array('element' => "icon_pack", 'value' => array('custom_icon'))
+		),
+		array(
+			"type" => "dropdown",
 			"holder" => "div",
 			"class" => "",
 			"heading" => "Icon Type",
@@ -2605,7 +3038,8 @@ vc_map( array(
 				"Square" => "square"
 			),
 			'save_always' => true,
-			"description" => "This attribute doesn't work when Icon Position is Top With Title Over. In This case Icon Type is Normal"
+			"description" => "This attribute doesn't work when Icon Position is Top With Title Over. In This case Icon Type is Normal",
+			"dependency" => Array('element' => "icon_pack", 'value' => array('font_awesome', 'font_elegant', 'linear_icons'))
 		),
 		array(
 			"type" => "textfield",
@@ -2648,7 +3082,7 @@ vc_map( array(
 			"heading" => "Custom Icon Size (px)",
 			"param_name" => "custom_icon_size",
 			"description" => "Default value is 20",
-			"dependency" => Array('element' => "fe_icon", 'not_empty' => true)
+			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant', 'linear_icons'))
 		),
 		array(
 			"type" => "textfield",
@@ -2657,19 +3091,16 @@ vc_map( array(
 			"heading" => "Text Left Padding (px)",
 			"param_name" => "text_left_padding",
 			"description" => "Default value is 86. Only when Icon Position is Left",
-			"dependency" => Array('element' => "fe_icon", 'not_empty' => true)
+			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant', 'linear_icons'))
 		),
 		array(
 			"type" => "dropdown",
-			"holder" => "div",
-			"class" => "",
 			"heading" => "Icon Animation",
 			"param_name" => "icon_animation",
 			"value" => array(
 				"No" => "",
 				"Yes" => "q_icon_animation"
-			),
-			"dependency" => Array('element' => "icon", 'not_empty' => true)
+			)
 		),
 		array(
 			"type" => "textfield",
@@ -2719,7 +3150,8 @@ vc_map( array(
 			"holder" => "div",
 			"class" => "",
 			"heading" => "Icon Color",
-			"param_name" => "icon_color"
+			"param_name" => "icon_color",
+			"dependency" => Array('element' => "icon_pack", 'value' => array('font_awesome', 'font_elegant', 'linear_icons'))
 		),
 		array(
 			"type" => "colorpicker",
@@ -3002,7 +3434,8 @@ vc_map( array(
 				"value" => array(
 					"No Icon" => "",
 					"Font Awesome" => "font_awesome",
-					"Font Elegant" => "font_elegant"
+					"Font Elegant" => "font_elegant",
+					"Linear Icons" => "linear_icons"
 				),
 				"description" => ""
 			),
@@ -3027,6 +3460,14 @@ vc_map( array(
 				"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
 			),
 			array(
+				"type" => "dropdown",
+				"class" => "",
+				"heading" => "Icon",
+				"param_name" => "linear_icon",
+				"value" => $lnr_icons,
+				"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
+			),
+			array(
 				"type" => "textfield",
 				"holder" => "div",
 				"class" => "",
@@ -3034,7 +3475,7 @@ vc_map( array(
 				"param_name" => "icon_custom_size",
 				"value" => "",
 				"description" => "Defaul value is 45",
-				"dependency" => Array('element' => "icon_pack", 'value' => array('font_awesome','font_elegant'))
+				"dependency" => Array('element' => "icon_pack", 'value' => array('font_awesome','font_elegant','linear_icons'))
 			),
 			array(
 				"type" => "colorpicker",
@@ -3417,7 +3858,8 @@ vc_map( array(
 			"param_name" => "icon_pack",
 			"value" => array(
 				"Font Awesome" => "font_awesome",
-				"Font Elegant" => "font_elegant"
+				"Font Elegant" => "font_elegant",
+				"Linear Icons" => "linear_icons"
 			),
 			'save_always' => true,
 			"description" => "",
@@ -3442,6 +3884,14 @@ vc_map( array(
 			'save_always' => true,
 			"description" => "",
 			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+		),
+		array(
+			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Icon",
+			"param_name" => "linear_icon",
+			"value" => $lnr_icons,
+			"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 		),
 		array(
 			"type" => "dropdown",
@@ -3642,6 +4092,14 @@ vc_map( array(
 				"type" => "textfield",
 				"holder" => "div",
 				"class" => "",
+				"heading" => "Pie Chart Width (px)",
+				"param_name" => "chart_width",
+				"description" => ""
+			),
+			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
 				"heading" => "Pie Chart Line Width (px)",
 				"param_name" => "line_width",
 				"description" => ""
@@ -3733,6 +4191,14 @@ vc_map( array(
 			"type" => "textfield",
 			"holder" => "div",
 			"class" => "",
+			"heading" => "Pie Chart Width (px)",
+			"param_name" => "chart_width",
+			"description" => ""
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
 			"heading" => "Pie Chart Line Width (px)",
 			"param_name" => "line_width",
 			"description" => ""
@@ -3776,7 +4242,8 @@ vc_map( array(
 			"value" => array(
 				"No Icon" => "",
 				"Font Awesome" => "font_awesome",
-				"Font Elegant" => "font_elegant"
+				"Font Elegant" => "font_elegant",
+				"Linear Icons" => "linear_icons"
 			),
 			"description" => ""
 		),
@@ -3801,12 +4268,20 @@ vc_map( array(
 			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
 		),
 		array(
+			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Icon",
+			"param_name" => "linear_icon",
+			"value" => $lnr_icons,
+			"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
+		),
+		array(
 			"type" => "colorpicker",
 			"holder" => "div",
 			"class" => "",
 			"heading" => "Icon Color",
 			"param_name" => "icon_color",
-			"dependency" => Array('element' => "icon_pack", 'value' => array('font_awesome','font_elegant'))
+			"dependency" => Array('element' => "icon_pack", 'value' => array('font_awesome','font_elegant','linear_icons'))
 		),
 		array(
 			"type" => "textfield",
@@ -3939,11 +4414,74 @@ vc_map( array(
 					"Standard No Space" => "standard_no_space",
 					"Gallery Text" => "hover_text",
 					"Gallery No Space" => "hover_text_no_space",
-					"Masonry Without Space" => "masonry",
-                    "Pinterest" => "masonry_with_space"
+					"Masonry" => "masonry",
+                    "Pinterest" => "masonry_with_space",
+					"Justified Gallery" => "justified_gallery"
 				),
 				'save_always' => true,
 				"description" => ""
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Space Between Masonry",
+				"param_name" => "masonry_space",
+				"value" => array(
+					"No" => "no",
+					"Yes" => "yes"
+				),
+				"description" => "",
+				'save_always' => true,
+				"dependency" => array('element' => "type", 'value' => array('masonry'))
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Space Between Pinterest",
+				"param_name" => "pinterest_space",
+				"value" => array(
+					"No" => "no",
+					"Yes" => "yes"
+				),
+				"description" => "",
+				'save_always' => true,
+				"dependency" => array('element' => "type", 'value' => array('masonry_with_space'))
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Loading Type",
+				"param_name" => "portfolio_loading_type",
+				"value" => array(
+					"Default" => "",
+					"Appear From Bottom" => "appear_from_bottom"
+				),
+				"description" => "",
+				'save_always' => true,
+				"dependency" => array('element' => "type", 'value' => array('masonry_with_space', 'masonry'))
+			),
+			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Parallax Item Speed",
+				"param_name" => "parallax_item_speed",
+				"value" => "",
+				"description" => 'This option only takes effect on portfolio items on which "Set Masonry Item in Parallax" is set to "Yes", default value is 0.3',
+				"dependency" => array('element' => "masonry_space", 'value' => array('yes'))
+			),
+			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Parallax Item Offset",
+				"param_name" => "parallax_item_offset",
+				"value" => "",
+				"description" => 'This option only takes effect on portfolio items on which "Set Masonry Item in Parallax" is set to "Yes", default value is 0',
+				"dependency" => array('element' => "masonry_space", 'value' => array('yes'))
 			),
 			array(
 				"type" => "dropdown",
@@ -3954,10 +4492,24 @@ vc_map( array(
 				"value" => array(
 					"Default" => "default_hover",
 					"Standard" => "standard_hover",
-					"Elegant Without Icons" => "elegant_hover"
+					"Elegant Without Icons" => "elegant_hover",
+					"Move from Left" => "move_from_left"
 				),
 				'save_always' => true,
 				"dependency" => array('element' => "type", 'value' => array('hover_text','hover_text_no_space','masonry'))
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Pinterest Hover Type",
+				"param_name" => "pinterest_hover_type",
+				"value" => array(
+					"Default" => "",
+					"Info on Hover" => "info_on_hover"
+				),
+				'save_always' => true,
+				"dependency" => array('element' => "type", 'value' => array('masonry_with_space'))
 			),
 			array(
 				"type" => "colorpicker",
@@ -4037,6 +4589,43 @@ vc_map( array(
                 "description" => "",
 				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space'))
             ),
+			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Row Height (px)",
+				"param_name" => "row_height",
+				"value" => "200",
+				"save_always" => true,
+				"description" => "Targeted row height, which may vary depending on the proportions of the images.",
+				"dependency" => array('element' => "type", 'value' => array('justified_gallery'))
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Last Row Behavior",
+				"param_name" => "justify_last_row",
+				"value" => array(
+					"Align left" => "nojustify",
+					"Align right" => "right",
+					"Align centrally" => "center",
+					"Justify" => "justify",
+					"Hide" => "hide"
+				),
+				"description" => "Defines whether to justify the last row, align it in a certain way, or hide it.",
+				"dependency" => array('element' => "type", 'value' => array('justified_gallery'))
+			),
+			array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Justify Threshold (0-1)",
+				"param_name" => "justify_threshold",
+				"value" => "0.75",
+				"description" => "If the last row takes up more than this part of available width, it will be justified despite the defined alignment. Enter 1 to never justify the last row.",
+				"dependency" => array('element' => "justify_last_row", 'value' => array('nojustify','right','center'))
+			),
 			array(
 				"type" => "dropdown",
 				"holder" => "div",
@@ -4132,7 +4721,8 @@ vc_map( array(
 					"Yes" => "yes",
 					"No" => "no"	
 				),
-				"description" => "Default value is No"
+				"description" => "Default value is No",
+				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space','masonry','masonry_with_space'))
 			),
 			array(
 				"type" => "dropdown",
@@ -4172,7 +4762,7 @@ vc_map( array(
 					"No" => "no"	
 				),
 				"description" => "Default value is Yes",
-				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space', 'masonry_with_space'))
+				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space', 'masonry_with_space', 'justified_gallery'))
 			),
 			array(
 				"type" => "textfield",
@@ -4182,7 +4772,7 @@ vc_map( array(
 				"param_name" => "number",
 				"value" => "-1",
 				"description" => "Number of portolios on page (-1 is all)",
-				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space','masonry','masonry_with_space'))
+				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space','masonry','masonry_with_space', 'justified_gallery'))
 			),
 			array(
 				"type" => "textfield",
@@ -4215,7 +4805,8 @@ vc_map( array(
 					"h5" => "h5",	
 					"h6" => "h6",	
 				),
-				"description" => ""
+				"description" => "",
+				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space','masonry','masonry_with_space'))
             ),
             array(
 				"type" => "textfield",
@@ -4223,7 +4814,8 @@ vc_map( array(
 				"class" => "",
 				"heading" => "Title Custom Font Size (px)",
 				"param_name" => "title_font_size",
-				"value" => ""
+				"value" => "",
+				"dependency" => array('element' => "type", 'value' => array('standard','standard_no_space','hover_text','hover_text_no_space','masonry','masonry_with_space'))
 			),
 			array(
 				"type" => "dropdown",
@@ -4577,7 +5169,8 @@ vc_map( array(
 			"param_name" => "icon_pack",
 			"value" => array(
 				"Font Awesome" => "font_awesome",
-				"Font Elegant" => "font_elegant"
+				"Font Elegant" => "font_elegant",
+				"Linear Icons" => "linear_icons"
 			),
 			'save_always' => true,
 			"description" => ""
@@ -4601,6 +5194,14 @@ vc_map( array(
 			'save_always' => true,
 			"description" => "",
 			"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+		),
+		array(
+			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Icon",
+			"param_name" => "linear_icon",
+			"value" => $lnr_icons,
+			"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 		),
 		array(
 			"type" => "dropdown",
@@ -4821,6 +5422,32 @@ vc_map( array(
 				"type" => "dropdown",
 				"holder" => "div",
 				"class" => "",
+				"heading" => "Carousel Type",
+				"param_name" => "carousel_type",
+				"value" => array(
+					"Default"   => "",
+					"Draggable"   => "carousel_owl"
+				),
+				'save_always' => true
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Items Visible",
+				"param_name" => "items_visible",
+				"value" => array(
+					"Five"   => "5",
+					"Four"   => "4",
+					"Three"  => "3"
+				),
+				'save_always' => true,
+				"dependency" => array('element' => "carousel_type", 'value' => array(''))
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
 				"heading" => "Order By",
 				"param_name" => "order_by",
 				"value" => array(
@@ -4855,7 +5482,8 @@ vc_map( array(
 					"No" => "no",
 				),
 				'save_always' => true,
-				"description" => ""
+				"description" => "",
+				"dependency" => array('element' => "carousel_type", 'value' => array(''))
 			),
 			array(
 				"type" => "dropdown",
@@ -4868,7 +5496,48 @@ vc_map( array(
 					"Yes" => "yes",
 				),
 				"description" => ""
-			)
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Space Between Items?",
+				"param_name" => "space_between",
+				"value" => array(
+					"No"  => "no",
+					"Yes" => "yes"
+				),
+				'save_always' => true,
+				"description" => ""
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Hover Effect",
+				"param_name" => "hover_effect",
+				"value" => array(
+					"Show second image"  => "second_image",
+					"Overlay" => "overlay",
+					"Disable" => "disable"
+				),
+				'save_always' => true,
+				"description" => ""
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "On Click",
+				"param_name" => "on_click",
+				"value" => array(
+					"Open link"  => "open_link",
+					"Open image in Prettyphoto" => "prettyphoto"
+				),
+				'save_always' => true,
+				"description" => "",
+				"dependency" => array('element' => "hover_effect", 'value' => array('overlay', 'disable'))
+			),
 		)
 ) );
 
@@ -4922,6 +5591,20 @@ vc_map( array(
 				"" => "",
 				"Same Window" => "_self",
 				"New Window" => "_blank"
+			),
+			"dependency" => array('element' => 'on_click', 'value' => 'use_custom_links'),
+			"description" => ""
+		),
+		array(
+			"type" => "dropdown",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Link all Items",
+			"param_name" => "link_all_items",
+			"value" => array(
+				"" => "",
+				"No" => "no",
+				"Yes" => "yes"
 			),
 			"dependency" => array('element' => 'on_click', 'value' => 'use_custom_links'),
 			"description" => ""
@@ -5048,7 +5731,8 @@ vc_map( array(
 				"param_name" => "icon_pack",
 				"value" => array(
 					"Font Awesome" => "font_awesome",
-					"Font Elegant" => "font_elegant"
+					"Font Elegant" => "font_elegant",
+					"Linear Icons" => "linear_icons"
 				),
 				'save_always' => true
 			),
@@ -5071,6 +5755,14 @@ vc_map( array(
 				'save_always' => true,
 				"description" => "",
 				"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+			),
+			array(
+				"type" => "dropdown",
+				"class" => "",
+				"heading" => "Icon",
+				"param_name" => "linear_icon",
+				"value" => $lnr_icons,
+				"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 			),
             array(
                 "type" => "textfield",
@@ -5295,7 +5987,20 @@ vc_map( array(
 	"category" => 'by SELECT',
 	"allowed_container_element" => 'vc_row',
 	"show_settings_on_create" => false,
-	"params" => array()
+	"params" => array(
+		array(
+			"type" => "dropdown",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Icon Type",
+			"param_name" => "list_type",
+			"value" => array(
+				"Circle"  => "circle",
+				"Regular" => "regular"
+			),
+			'save_always' => true,
+		),
+	)
 ) );
 
 /*** Team ***/
@@ -5307,6 +6012,17 @@ vc_map( array(
 		"icon" => "icon-wpb-q_team",
 		"allowed_container_element" => 'vc_row',
 		"params" => array(
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Type",
+				"param_name" => "team_type",
+				"value" => array(
+					"Default" => "",
+					"Info on Hover" => "info_hover"
+				)
+			),
 			array(
 				"type" => "attach_image",
 				"holder" => "div",
@@ -5852,6 +6568,18 @@ vc_map( array(
 		"allowed_container_element" => 'vc_row',
 		"params" => array(
 			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Type",
+				"param_name" => "type",
+				"value" => array(
+					"Default"  => "",
+					"Grouped"  => "grouped"
+				),
+				'save_always' => true
+			),
+			array(
 				"type" => "textfield",
 				"holder" => "div",
 				"class" => "",
@@ -5868,6 +6596,31 @@ vc_map( array(
 				"param_name" => "number",
 				"value" => "",
 				"description" => "Number of Testimonials"
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Show Author Image",
+				"param_name" => "show_author_image",
+				"value" => array(
+					"No"   => "no",
+					"Yes"  => "yes"
+				),
+				'save_always' => true
+			),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Show Title",
+				"param_name" => "show_title",
+				"value" => array(
+					"No"   => "no",
+					"Yes"  => "yes"
+				),
+				'save_always' => true,
+				"dependency" => array("element" => "type", "value" => array(""))
 			),
             array(
                 "type" => "colorpicker",
@@ -5893,6 +6646,18 @@ vc_map( array(
                 "param_name" => "author_text_color",
                 "description" => ""
             ),
+			array(
+				"type" => "dropdown",
+				"holder" => "div",
+				"class" => "",
+				"heading" => "Show Author Job Position",
+				"param_name" => "show_author_job_position",
+				"value" => array(
+					"No"   => "no",
+					"Yes"  => "yes"
+				),
+				'save_always' => true
+			),
             array(
                 "type" => "dropdown",
                 "holder" => "div",
@@ -5972,8 +6737,108 @@ vc_map( array(
                 "description" => "Speed of slide animation in miliseconds"
             )
 		)
-) );
+));
 
+/*** Product list shortcode ***/
+if(qode_is_woocommerce_installed()) {
+	vc_map(array(
+		'name' => 'Select Product List',
+		'base' => 'qode_product_list',
+		'category' => 'by SELECT',
+		'icon' => 'icon-wpb-product-list',
+		'allowed_container_element' => 'vc_row',
+		'params' => array(
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Type',
+				'param_name' => 'type',
+				'value' => array(
+					'Standard' 	=> 'standard',
+					'Simple' 	=> 'simple'
+				),
+				'save_always' => true,
+				'admin_label' => true
+			),
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Columns',
+				'param_name' => 'columns',
+				'value' => array(
+					'Two' => '2',
+					'Three' => '3',
+					'Four' => '4',
+					'Five' => '5'
+				),
+				'save_always' => true,
+				'admin_label' => true
+			),
+			array(
+				'type' => 'textfield',
+				'heading' => 'Number of Items',
+				'param_name' => 'items_number',
+				'value' => '',
+				'admin_label' => true,
+				'description' => 'Leave empty for all.'
+			),
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Order By',
+				'param_name' => 'order_by',
+				'value' => array(
+					'ID' => 'id',
+					'Date' => 'date',
+					'Menu Order' => 'menu_order',
+					'Title' => 'title'
+				),
+				'save_always' => true,
+				'admin_label' => true
+			),
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Sort Order',
+				'param_name' => 'sort_order',
+				'value' => array(
+					'Ascending' => 'ASC',
+					'Descending' => 'DESC'
+				),
+				'save_always' => true,
+				'admin_label' => true
+			),
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Choose Sorting Taxonomy',
+				'param_name' => 'taxonomy_to_display',
+				'value' => array(
+					'Category' => 'category',
+					'Tag' => 'tag',
+					'Id' => 'id'
+				),
+				'save_always' => true,
+				'admin_label' => true,
+				'description' => 'If you would like to display only certain products, this is where you can select the criteria by which you would like to choose which products to display.'
+			),
+			array(
+				'type' => 'textfield',
+				'heading' => 'Enter Taxonomy Values',
+				'param_name' => 'taxonomy_values',
+				'value' => '',
+				'admin_label' => true,
+				'description' => 'Separate values (category slugs, tags, or post IDs) with a comma'
+			),
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Display Categories',
+				'param_name' => 'display_categories',
+				'value' => array(
+					'Yes' => 'yes',
+					'No' => 'no'
+				),
+				'description' => '',
+				"dependency" => array("element" => "type", "value" => array("standard"))
+			)
+		)
+	));
+}
 /*** Unordered List ***/
 
 vc_map( array(
@@ -6049,6 +6914,52 @@ vc_map( array(
 			)
 		)
 ) );
+
+/*** Product combo shortcode ***/
+if(qode_is_woocommerce_installed()) {
+	vc_map(array(
+		'name' => 'Shop Category Showcase',
+		'base' => 'qode_shop_category_showcase',
+		'category' => 'by SELECT',
+		'icon' => 'icon-wpb-shop-category-showcase',
+		'allowed_container_element' => 'vc_row',
+		'params' => array(
+			array(
+				'type' => 'textfield',
+				'heading' => 'Category Slug',
+				'param_name' => 'cat_slug',
+				'value' => '',
+				'admin_label' => true
+			),
+			array(
+				'type' => 'textfield',
+				'heading' => 'Product ID',
+				'param_name' => 'product_id',
+				'value' => '',
+				'admin_label' => true
+			),
+			array(
+				'type' => 'textfield',
+				'heading' => 'Product 2 ID',
+				'param_name' => 'product_id_2',
+				'value' => '',
+				'admin_label' => true
+			),
+			array(
+				'type' => 'dropdown',
+				'heading' => 'Products position',
+				'param_name' => 'products_position',
+				'value' => array(
+					'Left' => 'left',
+					'Right' => 'right'
+				),
+				'save_always' => true,
+				'admin_label' => true,
+				'description' => "Choose where products will be placed related to category position."
+			),
+		)
+	));
+}
 
 class WPBakeryShortCode_Qode_Pricing_Tables  extends WPBakeryShortCodesContainer {}
 vc_map( array(
@@ -6250,6 +7161,103 @@ vc_map( array(
 		)
 ) );
 
+
+
+
+
+/*Pricing list shortcode*/
+
+class WPBakeryShortCode_Qode_Pricing_List  extends WPBakeryShortCodesContainer {}
+vc_map( array(
+	"name" => "Select Pricing List", "qode",
+	"base" => "qode_pricing_list",
+	"as_parent" => array('only' => 'qode_pricing_list_item'),
+	"content_element" => true,
+	"category" => 'by SELECT',
+	"icon" => "icon-wpb-pricing-list",
+	"show_settings_on_create" => false,
+	"js_view" => 'VcColumnView',
+	"params" => array()
+) );
+
+
+/*** Pricing List Item ***/
+
+class WPBakeryShortCode_Qode_Pricing_List_Item extends WPBakeryShortCode {}
+vc_map( array(
+	"name" => "Select Pricing List Item", "qode",
+	"base" => "qode_pricing_list_item",
+	"content_element" => true,
+	"icon" => "icon-wpb-pricing-list-item",
+	"as_child" => array('only' => 'qode_pricing_list'),
+	"params" => array(
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Title",
+			"param_name" => "title",
+		),
+		array(
+			"type" => "dropdown",
+			"class" => "",
+			"heading" => "Title Tag",
+			"param_name" => "title_tag",
+			"value" => array(
+				""   => "",
+				"h2" => "h2",
+				"h3" => "h3",
+				"h4" => "h4",
+				"h5" => "h5",
+				"h6" => "h6",
+			),
+			"description" => "",
+			"dependency" => array('element' => "title", 'not_empty' => true)
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Text",
+			"param_name" => "text",
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Price",
+			"param_name" => "price",
+			"description" => "You can append any unit that you want"
+		),
+		array(
+			"type" => "checkbox",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Highlighted Item",
+			"param_name" => "enable_highlighted_item",
+			"value" => array("Set as highlighted item?" => "enable_highlighted_item"),
+			"description" => ""
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Highlighted Text",
+			"param_name" => "highlighted_text",
+			"description" => "",
+			"dependency" => array('element' => "enable_highlighted_item", 'value' => array("enable_highlighted_item"))
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Item Margin Bottom (px)",
+			"param_name" => "margin_bottom_item",
+			"description" => ""
+		),
+	)
+) );
+
 class WPBakeryShortCode_Animated_Icons_With_Text  extends WPBakeryShortCodesContainer {}
 //Register "container" content element. It will hold all your inner (child) content elements
 vc_map( array(
@@ -6327,7 +7335,8 @@ vc_map( array(
 				"value" => array(
 					"No Icon" => "",
 					"Font Awesome" => "font_awesome",
-					"Font Elegant" => "font_elegant"
+					"Font Elegant" => "font_elegant",
+					"Linear Icons" => "linear_icons"
 				),
 				"description" => ""
 			),
@@ -6350,6 +7359,14 @@ vc_map( array(
 				'save_always' => true,
 				"description" => "",
 				"dependency" => Array('element' => "icon_pack", 'value' => array('font_elegant'))
+			),
+			array(
+				"type" => "dropdown",
+				"class" => "",
+				"heading" => "Icon",
+				"param_name" => "linear_icon",
+				"value" => $lnr_icons,
+				"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 			),
 			array(
 				"type" => "textfield",
@@ -6528,7 +7545,8 @@ vc_map( array(
 				"param_name" => "icon_pack",
 				"value" => array(
 					"Font Awesome" => "font_awesome",
-					"Font Elegant" => "font_elegant"
+					"Font Elegant" => "font_elegant",
+					"Linear Icons" => "linear_icons"
 				),
 				'save_always' => true,
 				"description" => "",
@@ -6551,6 +7569,14 @@ vc_map( array(
 				"value" => $fe_icons,
 				'save_always' => true,
 				"dependency" => array('element' => "icon_pack", 'value' => array("font_elegant"))
+			),
+			array(
+				"type" => "dropdown",
+				"class" => "",
+				"heading" => "Icon",
+				"param_name" => "linear_icon",
+				"value" => $lnr_icons,
+				"dependency" => Array('element' => "icon_pack", 'value' => array('linear_icons'))
 			),
 			array(
 				"type" => "textfield",
@@ -7083,3 +8109,190 @@ if(function_exists("is_woocommerce") && version_compare(qode_get_vc_version(), '
 	));
 
 }
+
+
+
+/**************Elements Holder*************************/
+
+class WPBakeryShortCode_Qode_Elements_Holder  extends WPBakeryShortCodesContainer {}
+//Register "container" content element. It will hold all your inner (child) content elements
+vc_map( array(
+	"name" =>  __( 'Select Elements Holder', 'qode' ),
+	"base" => "qode_elements_holder",
+	"as_parent" => array('only' => 'qode_elements_holder_item'), // Use only|except attributes to limit child shortcodes (separate multiple values with comma)
+	"content_element" => true,
+	"category" => 'by SELECT',
+	"icon" => "icon-wpb-qode_elements_holder",
+	"show_settings_on_create" => true,
+	"js_view" => 'VcColumnView',
+	"params" => array(
+		array(
+			"type" => "colorpicker",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Background Color",
+			"param_name" => "background_color",
+			"value" => "",
+			"description" => ""
+		),
+		array(
+			"type" => "dropdown",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Columns",
+			"param_name" => "number_of_columns",
+			"value" => array(
+				"One"    	=> "one_column",
+				"Two"    	=> "two_columns",
+				"Three"     => "three_columns",
+				"Four"      => "four_columns"
+			),
+			'save_always' => true,
+			"description" => ""
+		),
+		array(
+			"type" => "dropdown",
+			"holder" => "div",
+			"class" => "",
+			"group" => "Width & Responsiveness",
+			"heading" => "Switch to One Column",
+			"param_name" => "switch_to_one_column",
+			"value" => array(
+				"Default"    		=> "",
+				"Below 1300px" 		=> "1300",
+				"Below 1000px"    	=> "1000",
+				"Below 768px"     	=> "768",
+				"Below 600px"    	=> "600",
+				"Below 480px"    	=> "480",
+				"Never"    			=> "never"
+			),
+			"description" => "Choose on which stage item will be in one column"
+		),
+		array(
+			"type" => "dropdown",
+			"holder" => "div",
+			"class" => "",
+			"group" => "Width & Responsiveness",
+			"heading" => "Choose Alignment In Responsive Mode",
+			"param_name" => "alignment_one_column",
+			"value" => array(
+				"Default"    	=> "",
+				"Left" 			=> "left",
+				"Center"    	=> "center",
+				"Right"     	=> "right"
+			),
+			"description" => "Alignment When Items are in One Column"
+		)
+	)
+) );
+
+class WPBakeryShortCode_Qode_Elements_Holder_Item  extends WPBakeryShortCodesContainer {}
+//Register "container" content element. It will hold all your inner (child) content elements
+vc_map( array(
+	"name" =>  __( 'Select Elements Holder Item', 'qode' ),
+	"base" => "qode_elements_holder_item",
+	"as_parent" => array('except' => 'vc_row, vc_tabs, vc_accordion, cover_boxes, portfolio_list, portfolio_slider, qode_carousel'), // Use only|except attributes to limit child shortcodes (separate multiple values with comma)
+	"as_child" => array('only' => 'qode_elements_holder'), // Use only|except attributes to limit child shortcodes (separate multiple values with comma)
+	"content_element" => true,
+	"category" => 'by SELECT',
+	"icon" => "icon-wpb-qode_elements_holder_item",
+	"show_settings_on_create" => true,
+	"js_view" => 'VcColumnView',
+	"params" => array(
+		array(
+			"type" => "colorpicker",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Background Color",
+			"param_name" => "background_color",
+			"value" => "",
+			"description" => ""
+		),
+		array(
+			"type" => "attach_image",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Background Image",
+			"param_name" => "background_image",
+			"value" => "",
+			"description" => ""
+		),
+		array(
+			"type" => "textfield",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Padding",
+			"param_name" => "item_padding",
+			"value" => "",
+			"description" => "Please insert padding in format 0px 10px 0px 10px"
+		),
+		array(
+			"type" => "dropdown",
+			"holder" => "div",
+			"class" => "",
+			"heading" => "Vertical Alignment",
+			"param_name" => "vertical_alignment",
+			"value" => array(
+				"Default" => "",
+				"Top" => "top",
+				"Middle" => "middle",
+				"Bottom" => "bottom"
+			),
+			"description" => ""
+		),
+		array(
+			'type' => 'textfield',
+			'class' => '',
+			'group' => 'Width & Responsiveness',
+			'heading' => 'Padding on screen size between 1280px-1600px',
+			'param_name' => 'item_padding_1280_1600',
+			'value' => '',
+			'description' => 'Please insert padding in format 0px 10px 0px 10px'
+		),
+		array(
+			'type' => 'textfield',
+			'class' => '',
+			'group' => 'Width & Responsiveness',
+			'heading' => 'Padding on screen size between 1024px-1280px',
+			'param_name' => 'item_padding_1024_1280',
+			'value' => '',
+			'description' => 'Please insert padding in format 0px 10px 0px 10px'
+		),
+		array(
+			'type' => 'textfield',
+			'class' => '',
+			'group' => 'Width & Responsiveness',
+			'heading' => 'Padding on screen size between 768px-1024px',
+			'param_name' => 'item_padding_768_1024',
+			'value' => '',
+			'description' => 'Please insert padding in format 0px 10px 0px 10px'
+		),
+		array(
+			'type' => 'textfield',
+			'class' => '',
+			'group' => 'Width & Responsiveness',
+			'heading' => 'Padding on screen size between 600px-768px',
+			'param_name' => 'item_padding_600_768',
+			'value' => '',
+			'description' => 'Please insert padding in format 0px 10px 0px 10px'
+		),
+		array(
+			'type' => 'textfield',
+			'class' => '',
+			'group' => 'Width & Responsiveness',
+			'heading' => 'Padding on screen size between 480px-600px',
+			'param_name' => 'item_padding_480_600',
+			'value' => '',
+			'description' => 'Please insert padding in format 0px 10px 0px 10px'
+		),
+		array(
+			'type' => 'textfield',
+			'class' => '',
+			'group' => 'Width & Responsiveness',
+			'heading' => 'Padding on Screen Size Bellow 480px',
+			'param_name' => 'item_padding_480',
+			'value' => '',
+			'description' => 'Please insert padding in format 0px 10px 0px 10px'
+		)
+	)
+) );

@@ -111,15 +111,6 @@ if (!class_exists('qode_type1_walker_nav_menu')) {
 			if($depth==1 && $args->has_children) : 
 				$sub = 'sub';
 			endif;
-
-			$active = "";
-			
-			// depth dependent classes
-			if ((($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0)) && ($qode_options['page_transitions'] == "0")):
-				
-					$active = 'active';
-				
-			endif;
 		
 			// passed classes
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
@@ -155,6 +146,12 @@ if (!class_exists('qode_type1_walker_nav_menu')) {
 				$anchor = '#'.esc_attr($item->anchor);
                 $class_names .= ' anchor-item';
 			}
+
+			$active = "";
+			// depth dependent classes
+			if ($item->anchor == "" && (($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0))):
+				$active = 'active';
+			endif;
 			
 			// build html
 			$output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $class_names . ' ' . $active . $sub . $menu_type . $wide_menu_position .'">';
@@ -190,7 +187,7 @@ if (!class_exists('qode_type1_walker_nav_menu')) {
                 }
 
 				$item_output .= '<i class="menu_icon fa '.$icon.'"></i>';
-				$item_output .= '<span>'.apply_filters( 'the_title', $item->title, $item->ID ).'</span><span class="plus"></span>';
+				$item_output .= '<span class="menu-text">'.apply_filters( 'the_title', $item->title, $item->ID ).'</span><span class="plus"></span>';
 
                 //append arrow for dropdown
                 if($args->has_children && $angle_icon != "") {
@@ -254,15 +251,6 @@ if (!class_exists('qode_type2_walker_nav_menu')) {
 				$sub = ' has_sub';
 			endif;
 
-			$active = "";
-
-			// depth dependent classes
-			if ((($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0)) && ($qode_options['page_transitions'] == "0")):
-
-				$active = 'active';
-
-			endif;
-
 			// passed classes
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
@@ -272,6 +260,11 @@ if (!class_exists('qode_type2_walker_nav_menu')) {
 			if($item->anchor != ""){
 				$anchor = '#'.esc_attr($item->anchor);
 			}
+
+			$active = "";
+			if ($item->anchor == "" && (($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0))):
+				$active = 'active';
+			endif;
 
 			// build html
 			$output .= $indent . '<li id="mobile-menu-item-'. $item->ID . '" class="' . $class_names . ' ' . $active . $sub .'">';
@@ -348,13 +341,6 @@ if (!class_exists('qode_type3_walker_nav_menu')) {
                 $sub = ' has_sub';
             endif;
 
-            $active = "";
-
-            // depth dependent classes
-            if ((($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0)) && ($qode_options['page_transitions'] == "0")):
-                $active = 'active';
-            endif;
-
             // passed classes
             $classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
@@ -364,6 +350,12 @@ if (!class_exists('qode_type3_walker_nav_menu')) {
             if($item->anchor != ""){
                 $anchor = '#'.esc_attr($item->anchor);
             }
+
+			$active = "";
+			// depth dependent classes
+			if ($item->anchor == "" && (($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0))):
+				$active = 'active';
+			endif;
 
             // build html
             $output .= $indent . '<li id="popup-menu-item-'. $item->ID . '" class="' . $class_names . ' ' . $active . $sub .'">';
@@ -441,15 +433,6 @@ if (!class_exists('qode_type4_walker_nav_menu')) {
                 $sub = ' has_sub';
             endif;
 
-            $active = "";
-
-            // depth dependent classes
-            if ((($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0)) && ($qode_options['page_transitions'] == "0")):
-
-                $active = 'active';
-
-            endif;
-
             // passed classes
             $classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
@@ -459,6 +442,12 @@ if (!class_exists('qode_type4_walker_nav_menu')) {
             if($item->anchor != ""){
                 $anchor = '#'.esc_attr($item->anchor);
             }
+
+			$active = "";
+			// depth dependent classes
+			if ($item->anchor == "" && (($item->current && $depth == 0) ||  ($item->current_item_ancestor && $depth == 0))):
+				$active = 'active';
+			endif;
 
             // build html
             $output .= $indent . '<li id="mobile-menu-item-'. $item->ID . '" class="' . $class_names . ' ' . $active . $sub .'">';

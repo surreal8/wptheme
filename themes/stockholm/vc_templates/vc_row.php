@@ -13,6 +13,7 @@ extract(shortcode_atts(array(
 	'icon_pack' => '',
 	'content_menu_fa_icon' => '',
 	'content_menu_fe_icon' => '',
+	'content_menu_linear_icon' => '',
 	'video' => '',
 	'video_overlay' => '',
 	'video_overlay_image' => '',
@@ -21,6 +22,8 @@ extract(shortcode_atts(array(
 	'video_ogv' => '',
 	'video_image' => '',
 	'background_color' => '',
+	'full_screen_section_height' => 'no',
+	'vertically_align_content_in_middle' => 'no',
 	'section_height' => '',
     'parallax_speed' => '1',
 	'background_image' => '',
@@ -115,11 +118,15 @@ if($content_menu_title != ""){
 
 $menu_icon = "";
 if($icon_pack == 'font_awesome' && $content_menu_fa_icon != ""){
-	$menu_icon = ' data-q_icon="'.$content_menu_fa_icon.'"';
+	$menu_icon = ' data-q_icon="fa '.$content_menu_fa_icon.'"';
 }
 
 if($icon_pack == 'font_elegant' && $content_menu_fe_icon != ""){
 	$menu_icon = ' data-q_icon="'.$content_menu_fe_icon.'"';
+}
+
+if($icon_pack == 'linear_icons' && $content_menu_linear_icon != ""){
+	$menu_icon = ' data-q_icon="lnr '.$content_menu_linear_icon.'"';
 }
 
 
@@ -243,11 +250,25 @@ if($row_type == 'row') {
 	}
 				
 }else if($row_type == 'parallax'){
-    $output .='<section '.$row_id.' '.$anchor_id.' '.$menu_title.' '.$menu_icon.' data-speed="'. $parallax_speed .'" class="parallax_section_holder '.$css_class_in_content_menu.'" style = "';
-    $output .= ($section_height !='' || $section_height!=' ') ? ' height:' . $section_height . 'px;' : '';
+	$full_screen_section_height_class = '';
+	$vertically_align_content_in_middle_class = '';
+	if($full_screen_section_height == 'yes'){
+		$full_screen_section_height_class = 'full_screen_height_parallax';
+
+		if($vertically_align_content_in_middle == 'yes'){
+			$vertically_align_content_in_middle_class = 'vertical_middle_align';
+		}
+	}
+    $output .='<section '.$row_id.' '.$anchor_id.' '.$menu_title.' '.$menu_icon.' data-speed="'. $parallax_speed .'" class="parallax_section_holder '.$css_class_in_content_menu.' '.$full_screen_section_height_class.' '.$vertically_align_content_in_middle_class.'" style = "';
+	if($full_screen_section_height !== 'yes' ) {
+		$output .= ($section_height != '' || $section_height != ' ') ? ' height:' . $section_height . 'px;' : '';
+	}
     $output .= ($background_image !== '' || $background_image !== ' ') ? " background-image:url('" . $_image[0] . "');" : "";
     $output .= '"';
     $output .= '>';
+	if($full_screen_section_height == 'yes' ) {
+		$output .='<div class="parallax_content_outer">';
+	}
 	$output .='<div class="parallax_content ' . $text_align . '">';
 	$output .= "<div class='parallax_section_inner_margin clearfix'>";
 
@@ -310,7 +331,11 @@ if($row_type == 'row') {
 	$output .= '</div>'.$this->endBlockComment('row');
 }elseif($row_type == 'parallax'){
 	$output .= "</div>";
-	$output .= '</div></section>'.$this->endBlockComment('row');
+	$output .= '</div>';
+	if($full_screen_section_height == 'yes' ) {
+		$output .= "</div>";
+	}
+	$output .= '</section>'.$this->endBlockComment('row');
 	
 }elseif($row_type == 'expandable'){
 	$output .= '</div></div></div></div></div>'.$this->endBlockComment('row');

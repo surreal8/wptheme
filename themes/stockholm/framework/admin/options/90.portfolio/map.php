@@ -20,7 +20,7 @@ $portfolioPage->addChild("panel1",$panel1);
 	$portfolio_shader_color = new QodeField("color","portfolio_shader_color","","Portfolio Image Hover Color","Default color is #e6ae48.");
 	$panel1->addChild("portfolio_shader_color",$portfolio_shader_color);
 
-	$portfolio_shader_transparency = new QodeField("text","portfolio_shader_transparency","","Portfolio Image Hover Color Transparnecy","Choose a transparency for image hover color (0 = fully transparent, 1 = opaque). Note: If image hover color has not been chosen, transparency will not be displayed");
+	$portfolio_shader_transparency = new QodeField("text","portfolio_shader_transparency","","Portfolio Image Hover Color Transparnecy","Choose a transparency for image hover color (0 = fully transparent, 1 = opaque). Note: If image hover color has not been chosen, transparency will not be displayed", array(), array("col_width" => 3));
 	$panel1->addChild("portfolio_shader_transparency",$portfolio_shader_transparency);
 
 	$portfolio_qode_like = new QodeField("onoff","portfolio_qode_like","on","Likes",'Enabling this option will turn on "Likes"');
@@ -64,14 +64,21 @@ $portfolioPage->addChild("panel2",$panel2);
 		"big-slider" => "Portfolio big slider",
 		"custom" => "Portfolio custom",
 		"full-width-custom" => "Portfolio full width custom",
-		"gallery" => "Portfolio gallery"
+		"gallery" => "Portfolio gallery",
+		"gallery-right" => "Portfolio gallery right",
+		"fullscreen-slider" => "Portfolio full screen slider",
+		"fullwidth-slider" => "Portfolio full width slider",
+		"masonry-gallery" => "Portfolio masonry gallery",
+		"fixed-right" => "Portfolio fixed right",
+		"fixed-left" => "Portfolio fixed left"
+
       ));
 	$panel2->addChild("portfolio_style",$portfolio_style);
 
-	$lightbox_single_project = new QodeField("yesno","lightbox_single_project","yes","Lightbox for Images","Enabling this option will turn on lightbox functionality for projects with images.");
+	$lightbox_single_project = new QodeField("yesno","lightbox_single_project","yes","Lightbox for Images","Enabling this option will turn on lightbox functionality for projects with images. (Note that Full Screen Slider and Full Width Slider single portfolio types don't use light boxes)");
 	$panel2->addChild("lightbox_single_project",$lightbox_single_project);
 
-	$lightbox_video_single_project = new QodeField("yesno","lightbox_video_single_project","no","Lightbox for Videos","Enabling this option will turn on lightbox functionality for YouTube/Vimeo projects.");
+	$lightbox_video_single_project = new QodeField("yesno","lightbox_video_single_project","no","Lightbox for Videos","Enabling this option will turn on lightbox functionality for YouTube/Vimeo projects. (Note that Full Screen Slider and Full Width Slider single portfolio types don't use light boxes)");
 	$panel2->addChild("lightbox_video_single_project",$lightbox_video_single_project);
 
 	$portfolio_hide_categories = new QodeField("yesno","portfolio_hide_categories","no","Hide Categories","Enabling this option will disable category meta description on Single Projects.");
@@ -82,6 +89,21 @@ $portfolioPage->addChild("panel2",$panel2);
 
 	$portfolio_hide_comments = new QodeField("yesno","portfolio_hide_comments","yes","Hide Comments","Enabling this option will turn off comments functionality.");
 	$panel2->addChild("portfolio_hide_comments",$portfolio_hide_comments);
+
+	$group1 = new QodeGroup("Social Share Style","Define icons styles for social share on Single Project.");
+	$panel2->addChild("group1",$group1);
+
+		$row1 = new QodeRow();
+		$group1->addChild("row1",$row1);
+			$portfolio_social_share_type = new QodeField("select","portfolio_social_share_type","circle","Social Share Type",'Select social share type for display on Single Projects. Social Share for Portfolio Item must be enabled. ', array(
+				"circle" 	=> "Circle",
+				"regular" 	=> "Regular"
+			), array(), array("col_width" => 3));
+			$row1->addChild("portfolio_social_share_type",$portfolio_social_share_type);
+			$portfolio_single_social_color = new QodeField("colorsimple","portfolio_single_social_color","","Color","This is some description");
+			$row1->addChild("portfolio_single_social_color",$portfolio_single_social_color);
+			$portfolio_single_social_hover_color = new QodeField("colorsimple","portfolio_single_social_hover_color","","Hover Color","This is some description");
+			$row1->addChild("portfolio_single_social_hover_color",$portfolio_single_social_hover_color);
 
 	$portfolio_text_follow = new QodeField("portfoliofollow","portfolio_text_follow","portfolio_single_follow","Sticky Side Text ","Enabling this option will make side text sticky on Single Project pages");
 	$panel2->addChild("portfolio_text_follow",$portfolio_text_follow);
@@ -101,7 +123,7 @@ $portfolioPage->addChild("panel2",$panel2);
 	$portfolio_box_background_color = new QodeField("color","portfolio_box_background_color","","Portfolio Box Background Color","This color only works when Portfolio style is (Big Images, Big Slider or Gallery). Default color is #ffffff.");
 	$panel2->addChild("portfolio_box_background_color",$portfolio_box_background_color);
 
-	$portfolio_box_lr_padding = new QodeField("text","portfolio_box_lr_padding","","Portfolio Box Left/Right Padding(px)","This padding only works when Portfolio style is (Big Images, Big Slider or Gallery). Default value is 45.");
+	$portfolio_box_lr_padding = new QodeField("text","portfolio_box_lr_padding","","Portfolio Box Left/Right Padding(px)","This padding only works when Portfolio style is (Big Images, Big Slider or Gallery). Default value is 45.", array(), array("col_width" => 3));
 	$panel2->addChild("portfolio_box_lr_padding",$portfolio_box_lr_padding);
 
 	$portfolio_columns_number = new QodeField("select","portfolio_columns_number","2","Number of Columns",'Enter the number of columns for Portfolio Gallery type', array( "2" => "2 columns",
@@ -110,7 +132,16 @@ $portfolioPage->addChild("panel2",$panel2);
       ));
 	$panel2->addChild("portfolio_columns_number",$portfolio_columns_number);
 
-	$portfolio_single_sidebar = new QodeField("select","portfolio_single_sidebar","default","Sidebar Layout","Choose a sidebar layout for Single Project pages", array( 
+	$portfolio_hide_image_title = new QodeField("yesno","portfolio_hide_image_title","no","Hide Image Title","Enabling this option will hide image title from portfolio images hover in Portfolio Gallery Type.");
+	$panel2->addChild("portfolio_hide_image_title",$portfolio_hide_image_title);
+
+	$portfolio_single_gallery_color = new QodeField("color","portfolio_single_gallery_color","","Gallery Image Hover Color","Select color for image overlay in Single Project Gallery Type.");
+	$panel2->addChild("portfolio_single_gallery_color",$portfolio_single_gallery_color);
+
+	$portfolio_single_gallery_transparency = new QodeField("text","portfolio_single_gallery_transparency","","Gallery Image Hover Color Transparnecy","Enter a transparency for image overlay in Single Project Gallery Type. (0 = fully transparent, 1 = opaque). Note: If image hover color has not been chosen, transparency will not be displayed", array(), array("col_width" => 3));
+	$panel2->addChild("portfolio_single_gallery_transparency",$portfolio_single_gallery_transparency);
+
+	$portfolio_single_sidebar = new QodeField("select","portfolio_single_sidebar","default","Sidebar Layout","Choose a sidebar layout for Single Project pages. (Note that Full Screen Slider and Full Width Slider single portfolio types don't use  sidebar)", array(
 		"default" => "No Sidebar",
 		"1" => "Sidebar 1/3 right",
 		"2" => "Sidebar 1/4 right",

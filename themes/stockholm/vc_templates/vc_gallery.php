@@ -68,9 +68,14 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 			$li_classes .= 'no_grayscale';
 		}
 
+		$holder_classes = '';
+		if($type == 'image_grid' && $space_between_images == 'yes') {
+			$holder_classes .= ' with_space';
+		}
+
 		$el_start = '<li class="' . $li_classes . '">';
 		$el_end = '</li>';
-		$slides_wrap_start = '<div class="gallery_holder"><ul class="gallery_inner v' . $column_number . '">';
+		$slides_wrap_start = '<div class="gallery_holder ' . $holder_classes . '"><ul class="gallery_inner v' . $column_number . '">';
 		$slides_wrap_end = '</ul></div>';
 
 	}
@@ -100,7 +105,7 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 		$images = '-1,-2,-3';
 	}
 
-	$pretty_rel_random = ' rel="prettyPhoto[rel-' . get_the_ID() . '-' . rand() . ']"';
+	$pretty_rel_random = ' data-rel="prettyPhoto[rel-' . get_the_ID() . '-' . rand() . ']"';
 
 	if ( 'custom_link' === $onclick ) {
 		$custom_links = explode( ',', $custom_links );
@@ -178,6 +183,9 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 		if ($choose_frame == "frame3") {
 			$css_class .= " frame_holder3";
 		}
+		if ($choose_frame == "frame4") {
+			$css_class .= " frame_holder4";
+		}
 	}
 
 
@@ -192,6 +200,8 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame-2.png'/>";
 		} elseif ($choose_frame == "frame3") {
 			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame-3.png'/>";
+		} elseif ($choose_frame == "frame4") {
+			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame-4.png'/>";
 		} else {
 			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame.png'/>";
 		}
@@ -284,7 +294,7 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 //if ( $images == '' ) return null;
 	if ($images == '') $images = '-1,-2,-3';
 
-	$pretty_rel_random = ' rel="prettyPhoto[rel-' . rand() . ']"'; //rel-'.rand();
+	$pretty_rel_random = ' data-rel="prettyPhoto[rel-' . rand() . ']"'; //rel-'.rand();
 
 	if ($onclick == 'custom_link') {
 		$custom_links = explode(',', $custom_links);
@@ -331,6 +341,9 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 		if ($choose_frame == "frame3") {
 			$css_class .= " frame_holder3";
 		}
+		if ($choose_frame == "frame4") {
+			$css_class .= " frame_holder4";
+		}
 	}
 	$output .= "\n\t" . '<div class="' . $css_class . '">';
 	$output .= "\n\t\t" . '<div class="wpb_wrapper">';
@@ -344,6 +357,8 @@ if(version_compare(qode_get_vc_version(), '4.7.4') >= 0) {
 			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame-2.png'/>";
 		} elseif ($choose_frame == "frame3") {
 			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame-3.png'/>";
+		} elseif ($choose_frame == "frame4") {
+			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame-4.png'/>";
 		} else {
 			$output .= "<img src='" . get_template_directory_uri() . "/img/slider_frame.png'/>";
 		}

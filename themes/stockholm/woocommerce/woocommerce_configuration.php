@@ -233,9 +233,15 @@ function woo_qode_product_searchform($form) {
 
 if(!function_exists('qode_woocommerce_share')) {
     function qode_woocommerce_share() {
+        global $qode_options;
+        //check social share style
+        $social_type = 'circle';
+        if(isset($qode_options['woo_product_single_single_social_share_type'])  && $qode_options['woo_product_single_single_social_share_type'] != "") {
+            $social_type = $qode_options['woo_product_single_single_social_share_type'];
+        }
         if(do_shortcode('[social_share_list]') != ""){
-            echo '<span class="socail_share_title">Share: </span>'; 
-            echo do_shortcode('[social_share_list]');
+            echo '<span class="social_share_title">Share: </span>';
+            echo do_shortcode('[social_share_list list_type=' . $social_type . ']');
         }
     }
 

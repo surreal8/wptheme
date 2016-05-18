@@ -123,3 +123,22 @@ $socialPage->addChild("panel8",$panel8);
 		$vk_icon = new QodeField("image","vk_icon","","Upload Icon","");
 		$enable_vk_container->addChild("vk_icon",$vk_icon);
 
+
+//Twitter pannel
+if(defined('SELECT_TWITTER_FEED_VERSION')) {
+	$twitter_panel = new QodePanel('Twitter', 'twitter_panel');
+	$socialPage->addChild("twitter_panel", $twitter_panel);
+
+	$twitter_field = new QodeSelectTwitterFramework();
+	$twitter_panel->addChild('twitter_field', $twitter_field);
+}
+
+if(defined('SELECT_INSTAGRAM_FEED_VERSION')) {
+	//Instagram pannel
+
+	$instagram_panel = new QodePanel('Instagram', 'instagram_panel');
+	$socialPage->addChild("instagram_panel",$instagram_panel);
+
+	$instagram_field = new QodeSelectInstagramFramework();
+	$instagram_panel->addChild('instagram_field', $instagram_field);
+}

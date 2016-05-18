@@ -3,7 +3,23 @@
 $sidebarPage = new QodeAdminPage("7", "Sidebar");
 $qodeFramework->qodeOptions->addAdminPage("sidebar",$sidebarPage);
 
-// Navigation Style
+$panel2 = new QodePanel("General Style", "general_style");
+$sidebarPage->addChild("panel2",$panel2);
+
+	$sidebar_alignment = new QodeField("select","sidebar_alignment","default","Sidebar Text Alignment","Choose alignment for sidebar.", array(
+		"" 			=> "Default",
+		"left" 		=> "Left",
+		"center" 	=> "Center",
+		"right" 	=> "Right"
+	));
+	$panel2->addChild("sidebar_alignment",$sidebar_alignment);
+
+	$sidebar_widget_border = new QodeField("select","sidebar_widget_border","default","Border Around Widgets","Enable this option to display border around widgets.", array(
+		"" 			=> "Default",
+		"no" 		=> "No",
+		"yes" 		=> "Yes"
+	));
+	$panel2->addChild("sidebar_widget_border",$sidebar_widget_border);
 
 $panel1 = new QodePanel("Widget Style","widget_style");
 $sidebarPage->addChild("panel1",$panel1);

@@ -2,9 +2,18 @@
 global $qode_options;
 global $qode_page_id;
 $sidebar_id =  $qode_page_id;
+$sidebar_classes = array();
+if(isset($qode_options['sidebar_widget_border']) && $qode_options['sidebar_widget_border'] != "" && $qode_options['sidebar_widget_border'] == 'yes'){
+	$sidebar_classes[] = 'enable_widget_borders';
+}
+
+if(isset($qode_options['sidebar_alignment']) && $qode_options['sidebar_alignment'] !== '') {
+	$sidebar_classes[] = $qode_options['sidebar_alignment'];
+}
+
 ?>
 	<div class="column_inner">
-		<aside class="sidebar">
+		<aside class="sidebar <?php echo implode(' ', $sidebar_classes) ?>">
 			<?php	
 			$sidebar = "";
 

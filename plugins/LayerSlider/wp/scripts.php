@@ -28,6 +28,10 @@ function layerslider_enqueue_content_res() {
 	wp_register_script('layerslider-transitions', LS_ROOT_URL.'/static/js/layerslider.transitions.js', false, LS_PLUGIN_VERSION, $footer );
 	wp_enqueue_style('layerslider', LS_ROOT_URL.'/static/css/layerslider.css', false, LS_PLUGIN_VERSION );
 
+	wp_localize_script('layerslider', 'LS_Meta', array(
+		'v' => LS_PLUGIN_VERSION
+	));
+
 	// User resources
 	$uploads = wp_upload_dir();
 	if(file_exists($uploads['basedir'].'/layerslider.custom.transitions.js')) {
@@ -104,7 +108,7 @@ function layerslider_enqueue_admin_res() {
 
 		// 3rd-party: CodeMirror
 		wp_enqueue_style('codemirror', LS_ROOT_URL.'/static/codemirror/lib/codemirror.css', false, LS_PLUGIN_VERSION );
-		wp_enqueue_script('codemirror', LS_ROOT_URL.'/static/ codemirror/lib/codemirror.js', array('jquery'), LS_PLUGIN_VERSION );
+		wp_enqueue_script('codemirror', LS_ROOT_URL.'/static/codemirror/lib/codemirror.js', array('jquery'), LS_PLUGIN_VERSION );
 		wp_enqueue_style('codemirror-solarized', LS_ROOT_URL.'/static/codemirror/theme/solarized.mod.css', false, LS_PLUGIN_VERSION );
 		wp_enqueue_script('codemirror-syntax-css', LS_ROOT_URL.'/static/codemirror/mode/css/css.js', array('jquery'), LS_PLUGIN_VERSION );
 		wp_enqueue_script('codemirror-syntax-javascript', LS_ROOT_URL.'/static/codemirror/mode/javascript/javascript.js', array('jquery'), LS_PLUGIN_VERSION );
@@ -179,10 +183,8 @@ function ls_load_google_fonts() {
 	if(!empty($fonts) && is_array($fonts)) {
 		$lsFonts = array();
 		foreach($fonts as $item) {
-			if(!is_admin() && !$item['admin']) {
-				$lsFonts[] = $item['param'];
-			} else {
-				$lsFonts[] = $item['param'];
+			if( is_admin() || !$item['admin'] ) {
+				$lsFonts[] = htmlspecialchars($item['param']);
 			}
 		}
 		$lsFonts = implode('%7C', $lsFonts);

@@ -9,7 +9,7 @@ if (!function_exists('qode_font_elegant_icon_array')){
 
 		$icons = array (
             'arrow_back' => 'arrow_back',
-            'arrow_carrot-2down' => 'arrow_carrot-2dow',
+            'arrow_carrot-2down' => 'arrow_carrot-2down',
             'arrow_carrot-2down_alt2' => 'arrow_carrot-2down_alt2',
             'arrow_carrot-2dwnn_alt' => 'arrow_carrot-2dwnn_alt',
             'arrow_carrot-2left' => 'arrow_carrot-2left',

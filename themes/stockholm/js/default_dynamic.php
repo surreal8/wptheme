@@ -36,6 +36,8 @@ var scroll_amount_for_sticky = 85;
 var content_line_height = 60;
 var header_bottom_border_weight = 1;
 var scroll_amount_for_fixed_hiding = 200;
+var paspartu_width_init = 0.02;
+var search_header_height = 50;
 <?php
 if(is_admin_bar_showing()){
 ?>
@@ -90,6 +92,15 @@ var logo_width = 280; // stockholm logo width
 <?php } else { ?>
 	header_top_height = 0;
 <?php } }?>
+
+<?php if(isset($qode_options['paspartu_width']) && $qode_options['paspartu_width'] !== ""){ ?>
+	paspartu_width_init = <?php echo esc_attr($qode_options['paspartu_width'])/100; ?>;
+<?php } ?>
+
+<?php if(isset($qode_options['search_text_line_height']) && $qode_options['search_text_line_height'] !== ""){ ?>
+	search_header_height = <?php echo esc_attr($qode_options['search_text_line_height']) + 15 + 15 ; ?>; //15 is margin top and margin bottom
+<?php } ?>
+
 var loading_text;
 loading_text = '<?php _e('Loading new posts...', 'qode'); ?>';
 var finished_text;

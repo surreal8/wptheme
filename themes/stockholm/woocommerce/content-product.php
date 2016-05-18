@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-global $product, $woocommerce_loop;
+global $product, $woocommerce_loop, $qode_options;
 
 // Store loop count we're currently on
 if ( empty( $woocommerce_loop['loop'] ) ) {
@@ -47,51 +47,282 @@ if ( 0 === ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1
 if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
     $classes[] = 'last';
 }
+
+$type = '';
+if (isset($qode_options['woo_products_list_type']) && $qode_options['woo_products_list_type'] != "") {
+    $type .= $qode_options['woo_products_list_type'];
+}
 ?>
-<li <?php post_class( $classes ); ?>>
+<?php switch($type) {
+    case 'default': ?>
+        <li <?php post_class($classes); ?>>
 
-	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
-        <div class="top-product-section">
+            <?php do_action('woocommerce_before_shop_loop_item'); ?>
+            <div class="top-product-section">
 
-            <a class="product_list_thumb_link" href="<?php the_permalink(); ?>">
-                <span class="image-wrapper">
-                <?php
+                <a class="product_list_thumb_link" href="<?php the_permalink(); ?>">
+                    <span class="image-wrapper">
+                    <?php
                     /**
                      * woocommerce_before_shop_loop_item_title hook
                      *
                      * @hooked woocommerce_show_product_loop_sale_flash - 10
                      * @hooked woocommerce_template_loop_product_thumbnail - 10
                      */
-                    do_action( 'woocommerce_before_shop_loop_item_title' );
-                ?>
-                </span>
-            </a>
+                    do_action('woocommerce_before_shop_loop_item_title');
+                    ?>
+                    </span>
+                </a>
 
-			<?php do_action('qode_woocommerce_after_product_image'); ?>
+                <?php do_action('qode_woocommerce_after_product_image'); ?>
 
-        </div>
+            </div>
 
-        <div class="product_info_box">
+            <div class="product_info_box">
 
-            <span class="product-categories"><?php echo $product->get_categories(); ?></span>
+                <span class="product-categories"><?php echo $product->get_categories(); ?></span>
 
-            <a href="<?php the_permalink(); ?>" class="product-category">            
+                <a href="<?php the_permalink(); ?>" class="product-category">
 
-                <span class="product-title"><?php the_title(); ?></span>
+                    <span class="product-title"><?php the_title(); ?></span>
 
-                <?php
+                    <?php
                     /**
                      * woocommerce_after_shop_loop_item_title hook
                      *
                      * @hooked woocommerce_template_loop_rating - 5
                      * @hooked woocommerce_template_loop_price - 10
                      */
-                    do_action( 'woocommerce_after_shop_loop_item_title' );
+                    do_action('woocommerce_after_shop_loop_item_title');
+                    ?>
+                </a>
+
+            </div>
+
+            <?php do_action('woocommerce_after_shop_loop_item'); ?>
+
+        </li>
+
+        <?php break;
+    case 'standard': ?>
+
+        <li <?php  post_class($classes) ?> >
+            <div class="qodef-product-standard-image-holder">
+                <?php
+                /**
+                 * woocommerce_before_shop_loop_item hook.
+                 * @hooked woocommerce_show_product_loop_sale_flash - 5
+                 * @hooked qode_get_woocommerce_out_of_stock - 5
+                 * @hooked woocommerce_template_loop_product_link_open - 10
+                 */
+                do_action('qode_action_shop_standard_woocommerce_before_shop_loop_item');
                 ?>
-            </a>
-            
-        </div>
 
-        <?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
+                <span class="qodef-original-image">
+                <?php
+                /**
+                 * woocommerce_before_shop_loop_item_title hook.
+                 *
+                 *
+                 * @hooked woocommerce_template_loop_product_thumbnail - 10
+                 *
+                 */
+                do_action('qode_action_shop_standard_woocommerce_before_shop_loop_item_title');
+                ?>
 
-</li>
+                </span>
+                <span class="qodef-hover-image">
+                <?php
+                /**
+                 * woocommerce_before_shop_loop_item_title hook.
+                 *
+                 * @hooked qode_woocommerce_shop_loop_hover_image - 10
+                 *
+                 */
+                do_action('qode_action_shop_standard_woocommerce_shop_loop_item_hover_image');
+                ?>
+
+                </span>
+                <?php
+
+                /**
+                 * woocommerce_before_shop_loop_item_title hook.
+                 *
+                 * @hooked woocommerce_template_loop_product_link_close - 15
+                 *
+                 */
+
+                do_action('qode_action_shop_standard_woocommerce_shop_loop_item_hover_link_close');
+                ?>
+
+                <div class="qodef-product-standard-button-holder">
+                    <?php
+                    /**
+                     * woocommerce_before_shop_loop_item_title hook.
+                     *
+                     * @hooked qode_woocommerce_shop_loop_button - 5
+                     *
+                     */
+                    do_action('qode_action_shop_standard_woocommerce_shop_loop_product_simple_button');
+                    ?>
+
+                </div>
+            </div>
+            <div class="qodef-product-standard-info-top">
+                <?php
+                /**
+                 * qode_woocommerce_shop_loop_item_categories hook.
+                 *
+                 * @hooked qode_woocommerce_shop_loop_categories - 5
+                 *
+                 */
+                do_action('qode_action_shop_standard_woocommerce_shop_loop_item_categories');
+                ?>
+                <div class="qodef-product-standard-title">
+                    <?php
+                    /**
+                     * woocommerce_shop_loop_item_title hook.
+                     *
+                     * @hooked woocommerce_template_loop_product_link_open - 5
+                     * @hooked woocommerce_template_loop_product_title - 10
+                     * @hooked woocommerce_template_loop_product_link_close - 15
+                     */
+                    do_action( 'qode_action_shop_standard_woocommerce_shop_loop_item_title' );
+                    ?>
+                </div>
+                <?php
+                /**
+                 * woocommerce_after_shop_loop_item_title hook.
+                 *
+                 * @hooked woocommerce_template_loop_price - 10
+                 */
+                do_action('qode_action_shop_standard_woocommerce_after_shop_loop_item_title');
+                ?>
+            </div>
+        </li>
+    <?php break;
+
+    case 'simple': ?>
+
+        <li <?php  post_class($classes) ?> >
+            <div class="qodef-product-simple-holder">
+                <?php
+                /**
+                 * woocommerce_before_shop_loop_item hook.
+                 * @hooked woocommerce_show_product_loop_sale_flash - 5
+                 * @hooked qode_get_woocommerce_out_of_stock - 5
+                 * @hooked woocommerce_template_loop_product_link_open - 10
+                 */
+                do_action('qode_action_shop_simple_woocommerce_before_shop_loop_item');
+                ?>
+
+                <?php
+                /**
+                 * woocommerce_before_shop_loop_item_title hook.
+                 *
+                 *
+                 * @hooked woocommerce_template_loop_product_thumbnail - 10
+                 *
+                 */
+                do_action('qode_action_shop_simple_woocommerce_before_shop_loop_item_title');
+                ?>
+
+                <?php
+
+                /**
+                 * woocommerce_before_shop_loop_item_title hook.
+                 *
+                 * @hooked woocommerce_template_loop_product_link_close - 15
+                 *
+                 */
+
+                do_action('qode_action_shop_simple_woocommerce_shop_loop_item_hover_link_close');
+                ?>
+            </div>
+            <div class="qodef-product-simple-overlay">
+                <div class="qodef-product-simple-overlay-outer">
+                    <div class="qodef-product-simple-overlay-inner">
+                        <?php
+                        /**
+                         *
+                         * @hooked woocommerce_template_loop_product_link_open - 5
+                         * @hooked woocommerce_template_loop_product_link_close - 1
+                         */
+                        do_action( 'qode_action_shop_simple_woocommerce_shop_loop_item_overlay' );
+                        ?>
+                        <div class="qodef-product-standard-title">
+                            <?php
+                            /**
+                             * woocommerce_shop_loop_item_title hook.
+                             *
+                             * @hooked woocommerce_template_loop_product_link_open - 5
+                             * @hooked woocommerce_template_loop_product_title - 10
+                             * @hooked woocommerce_template_loop_product_link_close - 15
+                             */
+                            do_action( 'qode_action_shop_simple_woocommerce_shop_loop_item_title' );
+                            ?>
+                        </div>
+                        <?php
+                        /**
+                         * woocommerce_after_shop_loop_item_title hook.
+                         *
+                         * @hooked woocommerce_template_loop_price - 10
+                         */
+                        do_action('qode_action_shop_simple_woocommerce_after_shop_loop_item_title');
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <?php break;
+
+    default:  ?>
+        <li <?php post_class($classes); ?>>
+
+            <?php do_action('woocommerce_before_shop_loop_item'); ?>
+            <div class="top-product-section">
+
+                <a class="product_list_thumb_link" href="<?php the_permalink(); ?>">
+                    <span class="image-wrapper">
+                    <?php
+                    /**
+                     * woocommerce_before_shop_loop_item_title hook
+                     *
+                     * @hooked woocommerce_show_product_loop_sale_flash - 10
+                     * @hooked woocommerce_template_loop_product_thumbnail - 10
+                     */
+                    do_action('woocommerce_before_shop_loop_item_title');
+                    ?>
+                    </span>
+                </a>
+
+                <?php do_action('qode_woocommerce_after_product_image'); ?>
+
+            </div>
+
+            <div class="product_info_box">
+
+                <span class="product-categories"><?php echo $product->get_categories(); ?></span>
+
+                <a href="<?php the_permalink(); ?>" class="product-category">
+
+                    <span class="product-title"><?php the_title(); ?></span>
+
+                    <?php
+                    /**
+                     * woocommerce_after_shop_loop_item_title hook
+                     *
+                     * @hooked woocommerce_template_loop_rating - 5
+                     * @hooked woocommerce_template_loop_price - 10
+                     */
+                    do_action('woocommerce_after_shop_loop_item_title');
+                    ?>
+                </a>
+
+            </div>
+
+            <?php do_action('woocommerce_after_shop_loop_item'); ?>
+
+        </li>
+    <?php break;
+}

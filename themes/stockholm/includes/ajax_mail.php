@@ -30,8 +30,8 @@ $text .= "Message: " . $_POST["message"];
 $headers = "MIME-Version: 1.0" . "\r\n"; 
 $headers .= "Content-type:text/plain; charset=utf-8" . "\r\n"; 
 $headers .= "From: '".$_POST['name']." ".$_POST['lastname']."' <".$email_from."> " . "\r\n";
+$headers .= "Reply-To: '" . $_POST["email"] . "'" . "\r\n";
 $result = wp_mail($email_to, $subject, $text, $headers);
-
 if(!$result) {
 	global $phpmailer;
 	var_dump($phpmailer->ErrorInfo);

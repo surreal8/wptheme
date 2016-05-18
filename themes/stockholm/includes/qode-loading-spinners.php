@@ -33,6 +33,21 @@ if(!function_exists('qode_loading_spinners')) {
                 case "five_rotating_circles":
                     $spinner_html =  qode_loading_spinner_five_rotating_circles();
                 break;
+                case "pulsating_circle":
+                    $spinner_html = qode_loading_spinner_pulsating_circle();
+                break;
+                case "ripples":
+                    $spinner_html = qode_loading_spinner_ripples();
+                break;
+                case "spinner":
+                    $spinner_html = qode_loading_spinner_spinner();
+                break;
+                case "cubes":
+                    $spinner_html =  qode_loading_spinner_cubes();
+                 break;
+                case "indeterminate":
+                    $spinner_html =  qode_loading_spinner_indeterminate();
+                break;
             }
         }else{
             $spinner_html = qode_loading_spinner_pulse();
@@ -146,6 +161,65 @@ if(!function_exists('qode_loading_spinner_five_rotating_circles')) {
         $html .= '<div class="circle2"></div>';
         $html .= '<div class="circle3"></div>';
         $html .= '<div class="circle4"></div>';
+        $html .= '</div>';
+        $html .= '</div>';
+        return $html;
+    }
+}
+
+if(!function_exists('qode_loading_spinner_pulsating_circle')) {
+    function qode_loading_spinner_pulsating_circle() {
+        $html = '';
+        $html .= '<div class="pulsating_circle"></div>';
+        return $html;
+    }
+}
+
+if(!function_exists('qode_loading_spinner_ripples')) {
+    function qode_loading_spinner_ripples() {
+        $html = '';
+        $html .= '<div class="ripples">';
+        $html .= '<div class="ripples_circle ripples_circle1"></div>';
+        $html .= '<div class="ripples_circle ripples_circle2"></div>';
+        $html .= '<div class="ripples_circle ripples_circle3"></div>';
+        $html .= '</div>';
+        return $html;
+    }
+}
+
+if(!function_exists('qode_loading_spinner_spinner')) {
+    function qode_loading_spinner_spinner() {
+        $html = '';
+        $html .= '<div class="spinner"></div>';
+        return $html;
+    }
+}
+
+
+if(!function_exists('qode_loading_spinner_cubes')) {
+    function qode_loading_spinner_cubes() {
+        $html = '';
+        $html .= '<div class="loading-center-absolute">';
+        $html .= '<div class="object object_one"></div>';
+        $html .= '<div class="object object_two"></div>';
+        $html .= '<div class="object object_three"></div>';
+        $html .= '<div class="object object_four"></div>';
+        $html .= '<div class="object object_five"></div>';
+        $html .= '<div class="object object_six"></div>';
+        $html .= '<div class="object object_seven"></div>';
+        $html .= '<div class="object object_eight"></div>';
+        $html .= '<div class="object object_nine"></div>';
+        $html .= '</div>';
+        return $html;
+    }
+}
+
+if(!function_exists('qode_loading_spinner_indeterminate')) {
+    function qode_loading_spinner_indeterminate() {
+        $html = '';
+        $html .= '<div class="indeterminate-holder">';
+        $html .= '<div class="indeterminate-progress">';
+        $html .= '<div class="indeterminate"></div>';
         $html .= '</div>';
         $html .= '</div>';
         return $html;

@@ -68,6 +68,17 @@ $header_button_size = '';
 if(isset($qode_options['header_buttons_size'])){
 	$header_button_size = $qode_options['header_buttons_size'];
 }
+
+$search_type = "from_window_top";
+if(isset($qode_options['search_type']) && $qode_options['search_type'] !=''){
+	$search_type = $qode_options['search_type'];
+}
+
+$menu_dropdown_appearance_class='';
+if(isset($qode_options['menu_dropdown_appearance']) && $qode_options['menu_dropdown_appearance'] != ""){
+	$menu_dropdown_appearance_class = $qode_options['menu_dropdown_appearance'];
+}
+
 ?>
 <?php if($enable_side_area == "yes" && $enable_popup_menu == 'no' && !$enable_vertical_menu) { ?>
 	<section class="side_menu right">
@@ -76,7 +87,13 @@ if(isset($qode_options['header_buttons_size'])){
 				<h5><?php echo $qode_options['side_area_title'] ?></h5>
 			</div>
 		<?php } ?>
-		<a href="#" target="_self" class="close_side_menu"></a>
+		<?php if(isset($qode_options['sidearea_close_icon_type']) && $qode_options['sidearea_close_icon_type'] == 'fold') {?>
+			<a href="#" target="_self" class="close_side_menu_fold">
+				<i class="line">&nbsp;</i>
+			</a>
+		<?php } else { ?>
+			<a href="#" target="_self" class="close_side_menu"></a>
+		<?php } ?>
 		<?php dynamic_sidebar('sidearea'); ?>
 	</section>
 <?php } ?>
@@ -294,7 +311,7 @@ global $qode_toolbar;
 	<?php if(isset($qode_toolbar)) include("toolbar.php") ?>
 	<div class="header_inner clearfix">
 
-	<?php if(isset($qode_options['enable_search']) && $qode_options['enable_search'] == "yes"){ ?>
+	<?php if(isset($qode_options['enable_search']) && $qode_options['enable_search'] == "yes" && $search_type == "from_window_top"){ ?>
 		<form role="search" id="searchform" action="<?php echo home_url('/'); ?>" class="qode_search_form" method="get">
 			<?php if($header_in_grid){ ?>
 			<div class="container">
@@ -315,7 +332,6 @@ global $qode_toolbar;
 			</div>
 		<?php } ?>
 		</form>
-
 	<?php } ?>
 	<div class="header_top_bottom_holder">
 		<?php if($display_header_top == "yes"){ ?>
@@ -350,7 +366,7 @@ global $qode_toolbar;
 				<div class="container_inner clearfix" <?php echo $header_bottom_border_style; ?>>
 					<?php } ?>
                     <?php if($header_bottom_appearance == "stick_with_left_right_menu") { ?>
-                        <nav class="main_menu drop_down left_side">
+                        <nav class="main_menu drop_down left_side <?php echo esc_attr($menu_dropdown_appearance_class); ?>">
                             <?php
                             wp_nav_menu( array( 'theme_location' => 'left-top-navigation' ,
                                 'container'  => '',
@@ -396,7 +412,7 @@ global $qode_toolbar;
                         } ?>
 					</div>
 					<?php if($header_bottom_appearance == "stick_with_left_right_menu") { ?>
-                        <nav class="main_menu drop_down right_side">
+                        <nav class="main_menu drop_down right_side <?php echo esc_attr($menu_dropdown_appearance_class); ?>">
                             <?php
                             wp_nav_menu( array( 'theme_location' => 'right-top-navigation' ,
                                 'container'  => '',
@@ -424,7 +440,7 @@ global $qode_toolbar;
 									} ?>
 									<div class="side_menu_button">
 										<?php if(isset($qode_options['enable_search']) && $qode_options['enable_search'] == "yes"){ ?>
-											<a class="search_button" href="javascript:void(0)">
+											<a class="search_button <?php echo esc_attr($search_type); ?>" href="javascript:void(0)">
 												<i class="fa fa-search"></i>
 											</a>
 										<?php } ?>
@@ -440,7 +456,7 @@ global $qode_toolbar;
 							</div>
 						<?php } ?>
 						<?php if($centered_logo == true && $enable_border_top_bottom_menu == true) { ?> <div class="main_menu_and_widget_holder"> <?php } //only for logo is centered ?>
-						<nav class="main_menu drop_down <?php if($menu_position == "" && $header_bottom_appearance != "stick menu_bottom"){ echo 'right';} ?>">
+						<nav class="main_menu drop_down <?php echo esc_attr($menu_dropdown_appearance_class); ?> <?php if($menu_position == "" && $header_bottom_appearance != "stick menu_bottom"){ echo ' right';} ?>">
 							<?php
 
 							wp_nav_menu( array( 'theme_location' => 'top-navigation' ,
@@ -466,7 +482,7 @@ global $qode_toolbar;
 									} ?>
 									<div class="side_menu_button">
 										<?php if(isset($qode_options['enable_search']) && $qode_options['enable_search'] == "yes"){ ?>
-											<a class="search_button" href="javascript:void(0)">
+											<a class="search_button <?php echo esc_attr($search_type); ?>" href="javascript:void(0)">
 												<i class="fa fa-search"></i>
 											</a>
 										<?php } ?>
@@ -493,7 +509,7 @@ global $qode_toolbar;
 								<?php } else { ?>
 								<div class="main_menu_header_inner_right_holder">
 									<?php } ?>
-									<nav class="main_menu drop_down">
+									<nav class="main_menu drop_down <?php echo esc_attr($menu_dropdown_appearance_class); ?>">
 										<?php
 										wp_nav_menu( array(
 											'theme_location' => 'top-navigation' ,
@@ -518,7 +534,7 @@ global $qode_toolbar;
 											} ?>
 											<div class="side_menu_button">
 												<?php if(isset($qode_options['enable_search']) && $qode_options['enable_search'] == "yes"){ ?>
-													<a class="search_button" href="javascript:void(0)">
+													<a class="search_button <?php echo esc_attr($search_type); ?>" href="javascript:void(0)">
 														<i class="fa fa-search"></i>
 													</a>
 												<?php } ?>
@@ -667,6 +683,30 @@ global $qode_toolbar;
 	</div>
 <?php } ?>
 
+
+<?php if(isset($qode_options['enable_search']) && $qode_options['enable_search'] == "yes" && $search_type == "fullscreen_search"){ ?>
+	<div class="fullscreen_search_holder">
+		<div class="fullscreen_search_table">
+			<div class="fullscreen_search_cell">
+				<div class="fullscreen_search_inner">
+					<form role="search" id="searchform" action="<?php echo home_url('/'); ?>" class="fullscreen_search_form" method="get">
+						<div class="form_holder">
+							<input type="text" placeholder="<?php _e("Type in what you're looking for", 'qode'); ?>" name="s" class="qode_search_field" autocomplete="off" />
+							<input type="submit" class="search_submit" value="&#xf002;" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="qode_search_close">
+			<a href="#" class="fullscreen_search_close">
+				<i class="line">&nbsp;</i>
+			</a>
+		</div>
+	</div>
+<?php } ?>
+
+
 <?php
 $content_class = "";
 $is_title_area_visible = true;
@@ -689,14 +729,36 @@ if((is_search() || is_404()) && isset($qode_options['header_background_transpare
 
 //this isn't used because contact page map isn't on top anymore.
 $is_contact_page_with_solid_header_and_map = qode_is_contact_page_template() && $qode_options['enable_google_map'] === 'yes' && ($header_transparency === '' || $header_transparency == 1);
-if((get_post_meta($id, "qode_revolution-slider", true) == "" && $is_title_area_visible && ($header_transparency === '' || $header_transparency == 1)) || ((is_search() || is_404()) && $is_title_area_visible && $header_transparency_search)){
-	if($qode_options['header_bottom_appearance'] == "fixed" || $qode_options['header_bottom_appearance'] == "fixed_hiding"){
-		$content_class = "content_top_margin";
-	}else {
+
+
+if(qode_is_content_below_header()){
+
+	if($qode_options['header_bottom_appearance'] == "stick_with_left_right_menu" || $qode_options['header_bottom_appearance'] == "regular" || $qode_options['header_bottom_appearance'] == "stick" || $qode_options['header_bottom_appearance'] == "stick menu_bottom"){
 		$content_class = "content_top_margin_none";
+	} else{
+		$content_class = "content_top_margin";
+	}
+
+} else {
+
+	if((get_post_meta($id, "qode_revolution-slider", true) == "" && $is_title_area_visible && ($header_transparency === '' || $header_transparency == 1)) || ((is_search() || is_404()) && $is_title_area_visible && $header_transparency_search)){
+		if($qode_options['header_bottom_appearance'] == "fixed" || $qode_options['header_bottom_appearance'] == "fixed_hiding"){
+			$content_class = "content_top_margin";
+		}else {
+			$content_class = "content_top_margin_none";
+		}
 	}
 }
 ?>
+
+<?php
+if(isset($qode_options['paspartu'])  && $qode_options['paspartu'] == 'yes') { ?>
+	<div class="paspartu_top"></div>
+	<div class="paspartu_bottom"></div>
+	<div class="paspartu_left"></div>
+	<div class="paspartu_right"></div>
+<?php } ?>
+
 <div class="content <?php echo $content_class; ?>">
 	<?php
 	$animation = get_post_meta($id, "qode_show-animation", true);

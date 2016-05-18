@@ -11,6 +11,7 @@ function perPageBindings () {
 	initMessageHeight();
 	initToCounter();
 	initCounter();
+	initCountdown();
 	initProgressBars();
 	initListAnimation();
 	initPieChart();
@@ -29,12 +30,15 @@ function perPageBindings () {
 	placeholderReplace();
 	initPortfolio();
 	initPortfolioZIndex();
-    initPortfolioMasonry();
-    initPortfolioMasonryFilter();
+	initPortfolioJustifiedGallery();
+    //initPortfolioMasonryFilter();
+	qodefPortfolioFullScreenSlider().init();
 	initTabs();
 	initTestimonials();
+	initTwitterShortcode();
 	initBlog();
 	initBlogMasonryFullWidth();
+	initBlogChequered();
 	showContactMap();
 	backButtonShowHide();
 	backToTop();
@@ -56,10 +60,29 @@ function perPageBindings () {
 	createSelectContentMenu();
     initButtonHover();
     initSocialIconHover();
+	initIconHover();
 	setFooterHeight();
+	intPortfolioOWLSlider();
+	initPortfolioSingleMasonry();
+	contentMinHeightWithPaspartu();
+	intCarouselOWLSlider();
+
+
+	if($j('.portfolio_single_sticky').length){
+		stickyInfoTopOffset = $j('.portfolio_single_sticky').offset().top;
+		stickyInfoHeight = $j('.portfolio_single_sticky').height();
+	}
+
+	stickyInfoPortfolioWidth();
+	stickyInfoPortfolio($scroll, stickyInfoTopOffset, stickyInfoHeight);
+	removeStickyInfoPortfolioClass();
 
 	if(typeof vc_prettyPhoto === 'function'){
 		vc_prettyPhoto();
+	}
+
+	if($j('.portfolio_justified_gallery').length) {
+		$j('.portfolio_justified_gallery').css('opacity', '1');
 	}
 
     //these two functions are for landing page
@@ -71,7 +94,6 @@ function perPageBindings () {
 
 function ajaxSetActiveState(me){
 	"use strict";
-
     $j('.main_menu a, .mobile_menu a, .vertical_menu a, .popup_menu a').parent().removeClass('active');
 
     if(me.closest('.second').length === 0){
@@ -81,12 +103,19 @@ function ajaxSetActiveState(me){
 	}
 
 	if(me.closest('.mobile_menu').length > 0){
-		me.parent().addClass('active');
+		me.closest('.mobile_menu').find('.menu-item').addClass('active');
+	}
+
+	if(me.closest('.widget_nav_menu').length > 0){
+		$j('.widget_nav_menu ul.menu > li').removeClass('current-menu-item');
+		me.closest('.widget_nav_menu').find('.menu-item').addClass('current-menu-item');
 	}
 
 	$j('.main_menu a, .mobile_menu a, .vertical_menu a, .popup_menu a').removeClass('current');
 	me.addClass('current');
-	
+
+	/*checkAnchorOnScroll();
+	checkAnchorOnLoad(); */
 }
 
 function setPageMeta(content) {
@@ -96,8 +125,8 @@ function setPageMeta(content) {
 	var newTitle = content.find('.meta .seo_title').text();
 	var newDescription = content.find('.meta .seo_description').text();
 	var newKeywords = content.find('.meta .seo_keywords').text();
-	$j('head meta[name=description]').attr('content', newDescription);
-	$j('head meta[name=keywords]').attr('content', newKeywords);
+	$j('head meta[name="description"]').attr('content', newDescription);
+	$j('head meta[name="keywords"]').attr('content', newKeywords);
 	document.title = newTitle;
 	
 	var newBodyClasses = content.find('.meta .body_classes').text();
@@ -447,6 +476,7 @@ function slideInNewPage(text, direction, direction2, animationTime, callbacks, u
 				initPortfolioSingleInfo();
 				initTitleAreaAnimation();
 				initFullScreenTemplate();
+				initPortfolioMasonry();
 				$j('.blog_holder.masonry').isotope( 'layout');
 				$j('.blog_holder.masonry_full_width').isotope( 'layout');
 				$j('body:not(.content_with_no_min_height) .content').css('min-height',$j(window).height()-$j('header.page_header').height()-$j('footer:not(.uncover)').height() + 100); // min height for content to cover side menu bar, 100 is negative margin on content
@@ -466,6 +496,7 @@ function slideInNewPage(text, direction, direction2, animationTime, callbacks, u
 				initPortfolioSingleInfo();
 				initTitleAreaAnimation();
 				initFullScreenTemplate();
+				initPortfolioMasonry();
 				$j('.blog_holder.masonry').isotope( 'layout');
 				$j('.blog_holder.masonry_full_width').isotope( 'layout');
 				$j('body:not(.content_with_no_min_height) .content').css('min-height',$j(window).height()-$j('header.page_header').height()-$j('footer:not(.uncover)').height()); // min height for content to cover side menu bar
@@ -484,6 +515,7 @@ function slideInNewPage(text, direction, direction2, animationTime, callbacks, u
 				initPortfolioSingleInfo();
 				initTitleAreaAnimation();
 				initFullScreenTemplate();
+				initPortfolioMasonry();
 				$j('.blog_holder.masonry').isotope( 'layout');
 				$j('.blog_holder.masonry_full_width').isotope( 'layout');
 				$j('body:not(.content_with_no_min_height) .content').css('min-height',$j(window).height()-$j('header.page_header').height()-$j('footer:not(.uncover)').height() + 100); // min height for content to cover side menu bar, 100 is negative margin on content
@@ -508,6 +540,7 @@ function slideInNewPage(text, direction, direction2, animationTime, callbacks, u
 				initPortfolioSingleInfo();
 				initTitleAreaAnimation();
 				initFullScreenTemplate();
+				initPortfolioMasonry();
 				$j('.blog_holder.masonry').isotope( 'layout');
 				$j('.blog_holder.masonry_full_width').isotope( 'layout');
 				$j('body:not(.content_with_no_min_height) .content').css('min-height',$j(window).height()-$j('header.page_header').height()-$j('footer:not(.uncover)').height() + 100); // min height for content to cover side menu bar, 100 is negative margin on content
@@ -689,34 +722,34 @@ if (window.history.pushState) {
 }
 
 //show active page
-function showActivePage(){
-	"use strict";
-
-	var page_id = '';
-	if ((document.location.href.indexOf("?s=") >= 0) || (document.location.href.indexOf("?animation=") >= 0) || (document.location.href.indexOf("?menu=") >= 0) || (document.location.href.indexOf("?footer=") >= 0)) {
-		$j("body").removeClass("page_not_loaded");
-		ajaxSetActiveState($j("nav a[href='"+qode_root+"']"));
-		return;
-	}
-
-	if (document.location.href === qode_root) {
-		if (window.history.pushState) {
-		} else {
-			loadResource("");
-		}
-	}
-
-	if (typeof document.location.href.split("#/")[1] === "undefined") {
-		ajaxSetActiveState($j("a.current"));
-		$j('body').removeClass('page_not_loaded');
-	} else {
-		page_id = document.location.href.split("#/")[1];
-		if (window.history.pushState) {
-		} else {
-			loadResource(page_id);
-		}
-	}
-}
+//function showActivePage(){
+//	"use strict";
+//
+//	var page_id = '';
+//	if ((document.location.href.indexOf("?s=") >= 0) || (document.location.href.indexOf("?animation=") >= 0) || (document.location.href.indexOf("?menu=") >= 0) || (document.location.href.indexOf("?footer=") >= 0)) {
+//		$j("body").removeClass("page_not_loaded");
+//		ajaxSetActiveState($j("nav a[href='"+qode_root+"']"));
+//		return;
+//	}
+//
+//	if (document.location.href === qode_root) {
+//		if (window.history.pushState) {
+//		} else {
+//			loadResource("");
+//		}
+//	}
+//
+//	if (typeof document.location.href.split("#/")[1] === "undefined") {
+//		ajaxSetActiveState($j("a.current"));
+//		$j('body').removeClass('page_not_loaded');
+//	} else {
+//		page_id = document.location.href.split("#/")[1];
+//		if (window.history.pushState) {
+//		} else {
+//			loadResource(page_id);
+//		}
+//	}
+//}
 
 var content;
 var viewport;
@@ -731,7 +764,9 @@ $j(document).ready(function() {
 	content = $j('.content_inner');
 	
 	//if (!window.history.pushState) {
-		showActivePage();
+	//function is removed from call beacause qode-menu.php does not have page_transitions conditions for active class,
+	// and also ajaxSetActiveState which is called in this function makes all anchors active on load
+	//showActivePage();
 	//}
 	
 	if($j('body').hasClass('woocommerce') || $j('body').hasClass('woocommerce-page')){	

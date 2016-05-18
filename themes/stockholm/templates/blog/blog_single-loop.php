@@ -19,6 +19,21 @@ if (isset($qode_options['blog_single_hide_category']) && $qode_options['blog_sin
 }
 ?>
 <?php
+//check social share style
+$social_type = 'circle';
+if(isset($qode_options['blog_single_social_share_type'])  && $qode_options['blog_single_social_share_type'] != "") {
+$social_type = $qode_options['blog_single_social_share_type'];
+}
+?>
+
+<?php
+//check social share style
+$audio_bar_style = '';
+if(isset($qode_options['blog_single_audio_style'])  && $qode_options['blog_single_audio_style'] != "") {
+	$audio_bar_style = $qode_options['blog_single_audio_style'];
+}
+?>
+<?php
 $_post_format = get_post_format();
 ?>
 <?php
@@ -81,7 +96,7 @@ $_post_format = get_post_format();
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
-									<?php echo do_shortcode('[social_share_list]'); ?>
+									<?php echo do_shortcode('[social_share_list list_type=' . $social_type . ']'); ?>
 								</div>
 							<?php } ?>
 						</div>
@@ -92,7 +107,7 @@ $_post_format = get_post_format();
 		break;
 		case "audio":
 ?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<article id="post-<?php the_ID(); ?>" <?php post_class($audio_bar_style); ?>>
 			<div class="post_content_holder">
 				<div class="post_image">
 					<audio class="blog_audio" src="<?php echo get_post_meta(get_the_ID(), "audio_link", true) ?>" controls="controls">
@@ -130,7 +145,7 @@ $_post_format = get_post_format();
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
-									<?php echo do_shortcode('[social_share_list]'); ?>
+									<?php echo do_shortcode('[social_share_list list_type=' . $social_type . ']'); ?>
 								</div>
 							<?php } ?>
 						</div>
@@ -179,7 +194,7 @@ $_post_format = get_post_format();
 						<div class="clear"></div>
 						<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 							<div class="post_social">
-								<?php echo do_shortcode('[social_share_list]'); ?>
+								<?php echo do_shortcode('[social_share_list list_type=' . $social_type . ']'); ?>
 							</div>
 						<?php } ?>
 					</div>
@@ -247,7 +262,7 @@ $_post_format = get_post_format();
 
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
-									<?php echo do_shortcode('[social_share_list]'); ?>
+									<?php echo do_shortcode('[social_share_list list_type=' . $social_type . ']'); ?>
 								</div>
 							<?php } ?>
 						</div>
@@ -299,7 +314,7 @@ $_post_format = get_post_format();
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
-									<?php echo do_shortcode('[social_share_list]'); ?>
+									<?php echo do_shortcode('[social_share_list list_type=' . $social_type . ']'); ?>
 								</div>
 							<?php } ?>
 						</div>
@@ -348,7 +363,7 @@ $_post_format = get_post_format();
 							<div class="clear"></div>
 							<?php if(do_shortcode('[social_share_list]') != ""){ ?>
 								<div class="post_social">
-									<?php echo do_shortcode('[social_share_list]'); ?>
+									<?php echo do_shortcode('[social_share_list list_type=' . $social_type . ']'); ?>
 								</div>
 							<?php } ?>
 						</div>

@@ -422,6 +422,8 @@ $fontsPage->addChild("panel4",$panel4);
 			$row2->addChild("top_header_text_font_size",$top_header_text_font_size);
 			$top_header_text_line_height = new QodeField("textsimple","top_header_text_line_height","","Line Height (px)","This is some description");
 			$row2->addChild("top_header_text_line_height",$top_header_text_line_height);
+			$top_header_text_texttransform = new QodeField("selectblanksimple","top_header_text_texttransform","","Text Transform","This is some description",$options_texttransform);
+			$row2->addChild("top_header_text_texttransform",$top_header_text_texttransform);
 		$row3 = new QodeRow(true);
 		$group8->addChild("row3",$row3);
 		$group8->addChild("row3",$row3);
@@ -898,7 +900,7 @@ $fontsPage->addChild("panel7",$panel7);
 			$blog_large_image_ql_title_hover_color = new QodeField("colorsimple","blog_large_image_ql_title_hover_color","","Hover Color","This is some description");
 			$row3->addChild("blog_large_image_ql_title_hover_color",$blog_large_image_ql_title_hover_color);		
 
-	$group3 = new QodeGroup("Blog Masonry Title Style","Define title styles for Blog Masonry template.");
+	$group3 = new QodeGroup("Blog Masonry/Pinterest Title Style","Define title styles for Blog Masonry/Pinterest template.");
 	$panel7->addChild("group3",$group3);
 
 		$row1 = new QodeRow();
@@ -928,7 +930,7 @@ $fontsPage->addChild("panel7",$panel7);
 			$blog_masonry_title_hover_color = new QodeField("colorsimple","blog_masonry_title_hover_color","","Hover Color","This is some description");
 			$row3->addChild("blog_masonry_title_hover_color",$blog_masonry_title_hover_color);
 
-	$group4 = new QodeGroup("Blog Masonry Quote/Link Title Style","Define title styles for Quote/Link articles on Blog Masonry template.");
+	$group4 = new QodeGroup("Blog Masonry/Pinterest Quote/Link Title Style","Define title styles for Quote/Link articles on Blog Masonry/Pinterest template.");
 	$panel7->addChild("group4",$group4);
 
 		$row1 = new QodeRow();
@@ -958,7 +960,7 @@ $fontsPage->addChild("panel7",$panel7);
 			$blog_masonry_ql_title_hover_color = new QodeField("colorsimple","blog_masonry_ql_title_hover_color","","Hover Color","This is some description");
 			$row3->addChild("blog_masonry_ql_title_hover_color",$blog_masonry_ql_title_hover_color);
 
-	$group7 = new QodeGroup("Blog Masonry Quote/Link Icon Style","Define icon styles for Quote/Link articles on Blog Masonry template.");
+	$group7 = new QodeGroup("Blog Masonry/Pinterest Quote/Link Icon Style","Define icon styles for Quote/Link articles on Blog Masonry/Pinterest template.");
 	$panel7->addChild("group7",$group7);
 
 		$row1 = new QodeRow();
@@ -1002,7 +1004,7 @@ $fontsPage->addChild("panel7",$panel7);
 			$blog_large_image_ql_author_hover_color = new QodeField("colorsimple","blog_large_image_ql_author_hover_color","","Hover Color","This is some description");
 			$row3->addChild("blog_large_image_ql_author_hover_color",$blog_large_image_ql_author_hover_color);
 
-	$group5 = new QodeGroup("Blog Masonry Author Style","Define author styles for Blog Masonry template.");
+	$group5 = new QodeGroup("Blog Masonry/Pinterest Author and Comments Style","Define author and comments styles for Blog Masonry/Pinterest template.");
 	$panel7->addChild("group5",$group5);
 
 		$row1 = new QodeRow();
@@ -1044,7 +1046,132 @@ $fontsPage->addChild("panel7",$panel7);
 			$blog_large_image_icon_background_color = new QodeField("colorsimple","blog_large_image_icon_background_color","","Background Color","This is some description");
 			$row1->addChild("blog_large_image_icon_background_color",$blog_large_image_icon_background_color);
 			$blog_large_image_icon_background_hover_color = new QodeField("colorsimple","blog_large_image_icon_background_hover_color","","Background Hover Color","This is some description");
-			$row1->addChild("blog_large_image_icon_background_hover_color",$blog_large_image_icon_background_hover_color);		
+			$row1->addChild("blog_large_image_icon_background_hover_color",$blog_large_image_icon_background_hover_color);
+
+	$group9 = new QodeGroup("Blog Chequered With Background Image Visible Title Style","Define title styles for Blog Chequered template when background image of post is visible.");
+	$panel7->addChild("group9",$group9);
+
+		$row1 = new QodeRow();
+		$group9->addChild("row1",$row1);
+			$blog_chequered_with_image_title_color = new QodeField("colorsimple","blog_chequered_with_image_title_color","","Text Color","This is some description");
+			$row1->addChild("blog_chequered_with_image_title_color",$blog_chequered_with_image_title_color);
+			$blog_chequered_with_image_title_font_size = new QodeField("textsimple","blog_chequered_with_image_title_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("blog_chequered_with_image_title_font_size",$blog_chequered_with_image_title_font_size);
+			$blog_chequered_with_image_title_line_height = new QodeField("textsimple","blog_chequered_with_image_title_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("blog_chequered_with_image_title_line_height",$blog_chequered_with_image_title_line_height);
+			$blog_chequered_with_image_title_text_transform = new QodeField("selectblanksimple","blog_chequered_with_image_title_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("blog_chequered_with_image_title_text_transform",$blog_chequered_with_image_title_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group9->addChild("row2",$row2);
+			$blog_chequered_with_image_title_font_family = new QodeField("Fontsimple","blog_chequered_with_image_title_font_family","-1","Font Family","This is some description");
+			$row2->addChild("blog_chequered_with_image_title_font_family",$blog_chequered_with_image_title_font_family);
+			$blog_chequered_with_image_title_font_style = new QodeField("selectblanksimple","blog_chequered_with_image_title_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("blog_chequered_with_image_title_font_style",$blog_chequered_with_image_title_font_style);
+			$blog_chequered_with_image_title_font_weight = new QodeField("selectblanksimple","blog_chequered_with_image_title_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("blog_chequered_with_image_title_font_weight",$blog_chequered_with_image_title_font_weight);
+			$blog_chequered_with_image_title_letter_spacing = new QodeField("textsimple","blog_chequered_with_image_title_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("blog_chequered_with_image_title_letter_spacing",$blog_chequered_with_image_title_letter_spacing);
+
+	$group10 = new QodeGroup("Blog Chequered With Background Color Visible Title Style","Define title styles for Blog Chequered template when background color of post is visible.");
+	$panel7->addChild("group10",$group10);
+
+		$row1 = new QodeRow();
+		$group10->addChild("row1",$row1);
+			$blog_chequered_with_bgcolor_title_color = new QodeField("colorsimple","blog_chequered_with_bgcolor_title_color","","Text Color","This is some description");
+			$row1->addChild("blog_chequered_with_bgcolor_title_color",$blog_chequered_with_bgcolor_title_color);
+			$blog_chequered_with_bgcolor_title_font_size = new QodeField("textsimple","blog_chequered_with_bgcolor_title_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("blog_chequered_with_bgcolor_title_font_size",$blog_chequered_with_bgcolor_title_font_size);
+			$blog_chequered_with_bgcolor_title_line_height = new QodeField("textsimple","blog_chequered_with_bgcolor_title_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("blog_chequered_with_bgcolor_title_line_height",$blog_chequered_with_bgcolor_title_line_height);
+			$blog_chequered_with_bgcolor_title_text_transform = new QodeField("selectblanksimple","blog_chequered_with_bgcolor_title_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("blog_chequered_with_bgcolor_title_text_transform",$blog_chequered_with_bgcolor_title_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group10->addChild("row2",$row2);
+			$blog_chequered_with_bgcolor_title_font_family = new QodeField("Fontsimple","blog_chequered_with_bgcolor_title_font_family","-1","Font Family","This is some description");
+			$row2->addChild("blog_chequered_with_bgcolor_title_font_family",$blog_chequered_with_bgcolor_title_font_family);
+			$blog_chequered_with_bgcolor_title_font_style = new QodeField("selectblanksimple","blog_chequered_with_bgcolor_title_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("blog_chequered_with_bgcolor_title_font_style",$blog_chequered_with_bgcolor_title_font_style);
+			$blog_chequered_with_bgcolor_title_font_weight = new QodeField("selectblanksimple","blog_chequered_with_bgcolor_title_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("blog_chequered_with_bgcolor_title_font_weight",$blog_chequered_with_bgcolor_title_font_weight);
+			$blog_chequered_with_bgcolor_title_letter_spacing = new QodeField("textsimple","blog_chequered_with_bgcolor_title_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("blog_chequered_with_bgcolor_title_letter_spacing",$blog_chequered_with_bgcolor_title_letter_spacing);
+
+	$group11 = new QodeGroup("Blog Animated Title Style","Define title styles for Blog Animated template.");
+	$panel7->addChild("group11",$group11);
+
+		$row1 = new QodeRow();
+		$group11->addChild("row1",$row1);
+			$blog_animated_title_color = new QodeField("colorsimple","blog_animated_title_color","","Text Color","This is some description");
+			$row1->addChild("blog_animated_title_color",$blog_animated_title_color);
+			$blog_animated_title_font_size = new QodeField("textsimple","blog_animated_title_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("blog_animated_title_font_size",$blog_animated_title_font_size);
+			$blog_animated_title_line_height = new QodeField("textsimple","blog_animated_title_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("blog_animated_title_line_height",$blog_animated_title_line_height);
+			$blog_animated_title_text_transform = new QodeField("selectblanksimple","blog_animated_title_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("blog_animated_title_text_transform",$blog_animated_title_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group11->addChild("row2",$row2);
+			$blog_animated_title_font_family = new QodeField("Fontsimple","blog_animated_title_font_family","-1","Font Family","This is some description");
+			$row2->addChild("blog_animated_title_font_family",$blog_animated_title_font_family);
+			$blog_animated_title_font_style = new QodeField("selectblanksimple","blog_animated_title_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("blog_animated_title_font_style",$blog_animated_title_font_style);
+			$blog_animated_title_font_weight = new QodeField("selectblanksimple","blog_animated_title_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("blog_animated_title_font_weight",$blog_animated_title_font_weight);
+			$blog_animated_title_letter_spacing = new QodeField("textsimple","blog_animated_title_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("blog_animated_title_letter_spacing",$blog_animated_title_letter_spacing);
+
+	$group12 = new QodeGroup("Blog Centered Title Style","Define title styles for Blog Centered template.");
+	$panel7->addChild("group12",$group12);
+
+		$row1 = new QodeRow();
+		$group12->addChild("row1",$row1);
+			$blog_centered_title_color = new QodeField("colorsimple","blog_centered_title_color","","Text Color","This is some description");
+			$row1->addChild("blog_centered_title_color",$blog_centered_title_color);
+			$blog_centered_title_font_size = new QodeField("textsimple","blog_centered_title_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("blog_centered_title_font_size",$blog_centered_title_font_size);
+			$blog_centered_title_line_height = new QodeField("textsimple","blog_centered_title_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("blog_centered_title_line_height",$blog_centered_title_line_height);
+			$blog_centered_title_text_transform = new QodeField("selectblanksimple","blog_centered_title_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("blog_centered_title_text_transform",$blog_centered_title_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group12->addChild("row2",$row2);
+			$blog_centered_title_font_family = new QodeField("Fontsimple","blog_centered_title_font_family","-1","Font Family","This is some description");
+			$row2->addChild("blog_centered_title_font_family",$blog_centered_title_font_family);
+			$blog_centered_title_font_style = new QodeField("selectblanksimple","blog_centered_title_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("blog_centered_title_font_style",$blog_centered_title_font_style);
+			$blog_centered_title_font_weight = new QodeField("selectblanksimple","blog_centered_title_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("blog_centered_title_font_weight",$blog_centered_title_font_weight);
+			$blog_centered_title_letter_spacing = new QodeField("textsimple","blog_centered_title_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("blog_centered_title_letter_spacing",$blog_centered_title_letter_spacing);
+
+	$group13 = new QodeGroup("Blog Centered Info Style","Define styles for date, categories and author info on Blog Centered template.");
+	$panel7->addChild("group13",$group13);
+
+		$row1 = new QodeRow();
+		$group13->addChild("row1",$row1);
+			$blog_centered_info_color = new QodeField("colorsimple","blog_centered_info_color","","Text Color","This is some description");
+			$row1->addChild("blog_centered_info_color",$blog_centered_info_color);
+			$blog_centered_info_font_size = new QodeField("textsimple","blog_centered_info_font_size","","Font Size (px)","This is some description");
+			$row1->addChild("blog_centered_info_font_size",$blog_centered_info_font_size);
+			$blog_centered_info_line_height = new QodeField("textsimple","blog_centered_info_line_height","","Line Height (px)","This is some description");
+			$row1->addChild("blog_centered_info_line_height",$blog_centered_info_line_height);
+			$blog_centered_info_text_transform = new QodeField("selectblanksimple","blog_centered_info_text_transform","","Text Transform","This is some description",$options_texttransform);
+			$row1->addChild("blog_centered_info_text_transform",$blog_centered_info_text_transform);
+
+		$row2 = new QodeRow(true);
+		$group13->addChild("row2",$row2);
+			$blog_centered_info_font_family = new QodeField("Fontsimple","blog_centered_info_font_family","-1","Font Family","This is some description");
+			$row2->addChild("blog_centered_info_font_family",$blog_centered_info_font_family);
+			$blog_centered_info_font_style = new QodeField("selectblanksimple","blog_centered_info_font_style","","Font Style","This is some description",$options_fontstyle);
+			$row2->addChild("blog_centered_info_font_style",$blog_centered_info_font_style);
+			$blog_centered_info_font_weight = new QodeField("selectblanksimple","blog_centered_info_font_weight","","Font Weight","This is some description",$options_fontweight);
+			$row2->addChild("blog_centered_info_font_weight",$blog_centered_info_font_weight);
+			$blog_centered_info_letter_spacing = new QodeField("textsimple","blog_centered_info_letter_spacing","","Letter Spacing (px)","This is some description");
+			$row2->addChild("blog_centered_info_letter_spacing",$blog_centered_info_letter_spacing);
 
 // Blog Single
 
@@ -1143,20 +1270,20 @@ $fontsPage->addChild("panel10",$panel10);
 		$group2->addChild("row1",$row1);
 			$contact_form_section_title_color = new QodeField("colorsimple","contact_form_section_title_color","","Text Color","This is some description");
 			$row1->addChild("contact_form_section_title_color",$contact_form_section_title_color);
-			$contact_form_section_title_fontsize = new QodeField("textsimple","contact_form_section_title_fontsize","","Font Size (px)","This is some description");
+			$contact_form_section_title_fontsize = new QodeField("textsimple","contact_form_section_title_font_size","","Font Size (px)","This is some description");
 			$row1->addChild("contact_form_section_title_fontsize",$contact_form_section_title_fontsize);
-			$contact_form_section_title_lineheight = new QodeField("textsimple","contact_form_section_title_lineheight","","Line Height (px)","This is some description");
+			$contact_form_section_title_lineheight = new QodeField("textsimple","contact_form_section_title_line_height","","Line Height (px)","This is some description");
 			$row1->addChild("contact_form_section_title_lineheight",$contact_form_section_title_lineheight);
-			$contact_form_section_title_texttransform = new QodeField("selectblanksimple","contact_form_section_title_texttransform","","Text Transform","This is some description",$options_texttransform);
+			$contact_form_section_title_texttransform = new QodeField("selectblanksimple","contact_form_section_title_text_transform","","Text Transform","This is some description",$options_texttransform);
 			$row1->addChild("contact_form_section_title_texttransform",$contact_form_section_title_texttransform);
 			
 		$row2 = new QodeRow(true);
 		$group2->addChild("row2",$row2);
 			$contact_form_section_title_google_fonts = new QodeField("Fontsimple","contact_form_section_title_google_fonts","-1","Font Family","This is some description");
 			$row2->addChild("contact_form_section_title_google_fonts",$contact_form_section_title_google_fonts);
-			$contact_form_section_title_fontstyle = new QodeField("selectblanksimple","contact_form_section_title_fontstyle","","Font Style","This is some description",$options_fontstyle);
+			$contact_form_section_title_fontstyle = new QodeField("selectblanksimple","contact_form_section_title_font_style","","Font Style","This is some description",$options_fontstyle);
 			$row2->addChild("contact_form_section_title_fontstyle",$contact_form_section_title_fontstyle);
-			$contact_form_section_title_fontweight = new QodeField("selectblanksimple","contact_form_section_title_fontweight","","Font Weight","This is some description",$options_fontweight);
+			$contact_form_section_title_fontweight = new QodeField("selectblanksimple","contact_form_section_title_font_weight","","Font Weight","This is some description",$options_fontweight);
 			$row2->addChild("contact_form_section_title_fontweight",$contact_form_section_title_fontweight);
 			$contact_form_section_title_letter_spacing = new QodeField("textsimple","contact_form_section_title_letter_spacing","","Letter Spacing (px)","This is some description");
 			$row2->addChild("contact_form_section_title_letter_spacing",$contact_form_section_title_letter_spacing);
@@ -1168,20 +1295,20 @@ $fontsPage->addChild("panel10",$panel10);
 		$group3->addChild("row1",$row1);
 			$contact_form_section_subtitle_color = new QodeField("colorsimple","contact_form_section_subtitle_color","","Text Color","This is some description");
 			$row1->addChild("contact_form_section_subtitle_color",$contact_form_section_subtitle_color);
-			$contact_form_section_subtitle_fontsize = new QodeField("textsimple","contact_form_section_subtitle_fontsize","","Font Size (px)","This is some description");
+			$contact_form_section_subtitle_fontsize = new QodeField("textsimple","contact_form_section_subtitle_font_size","","Font Size (px)","This is some description");
 			$row1->addChild("contact_form_section_subtitle_fontsize",$contact_form_section_subtitle_fontsize);
-			$contact_form_section_subtitle_lineheight = new QodeField("textsimple","contact_form_section_subtitle_lineheight","","Line Height (px)","This is some description");
+			$contact_form_section_subtitle_lineheight = new QodeField("textsimple","contact_form_section_subtitle_line_height","","Line Height (px)","This is some description");
 			$row1->addChild("contact_form_section_subtitle_lineheight",$contact_form_section_subtitle_lineheight);
-			$contact_form_section_subtitle_texttransform = new QodeField("selectblanksimple","contact_form_section_subtitle_texttransform","","Text Transform","This is some description",$options_texttransform);
+			$contact_form_section_subtitle_texttransform = new QodeField("selectblanksimple","contact_form_section_subtitle_text_transform","","Text Transform","This is some description",$options_texttransform);
 			$row1->addChild("contact_form_section_subtitle_texttransform",$contact_form_section_subtitle_texttransform);
 			
 		$row2 = new QodeRow(true);
 		$group3->addChild("row2",$row2);
 			$contact_form_section_subtitle_google_fonts = new QodeField("Fontsimple","contact_form_section_subtitle_google_fonts","-1","Font Family","This is some description");
 			$row2->addChild("contact_form_section_subtitle_google_fonts",$contact_form_section_subtitle_google_fonts);
-			$contact_form_section_subtitle_fontstyle = new QodeField("selectblanksimple","contact_form_section_subtitle_fontstyle","","Font Style","This is some description",$options_fontstyle);
+			$contact_form_section_subtitle_fontstyle = new QodeField("selectblanksimple","contact_form_section_subtitle_font_style","","Font Style","This is some description",$options_fontstyle);
 			$row2->addChild("contact_form_section_subtitle_fontstyle",$contact_form_section_subtitle_fontstyle);
-			$contact_form_section_subtitle_fontweight = new QodeField("selectblanksimple","contact_form_section_subtitle_fontweight","","Font Weight","This is some description",$options_fontweight);
+			$contact_form_section_subtitle_fontweight = new QodeField("selectblanksimple","contact_form_section_subtitle_font_weight","","Font Weight","This is some description",$options_fontweight);
 			$row2->addChild("contact_form_section_subtitle_fontweight",$contact_form_section_subtitle_fontweight);
 			$contact_form_section_subtitle_letter_spacing = new QodeField("textsimple","contact_form_section_subtitle_letter_spacing","","Letter Spacing (px)","This is some description");
 			$row2->addChild("contact_form_section_subtitle_letter_spacing",$contact_form_section_subtitle_letter_spacing);	

@@ -46,6 +46,7 @@ if (!function_exists('call_to_action')) {
 			"icon_pack"                     	=> "",
 			"fa_icon"                       	=> "",
 			"fe_icon"                       	=> "",
+			"linear_icon"                       => "",
 			"icon_size"					        => "",
 			"icon_color"				        => "",
 			"custom_icon"				        => "",
@@ -94,18 +95,18 @@ if (!function_exists('call_to_action')) {
 		}
 
 		if($button_text_color != '') {
-			$button_styles .= 'color: '.$button_text_color.';';
+			$button_styles .= 'color:'.$button_text_color.';';
 		}
 		if($icon_color != "") {
-			$icon_styles = " style='color: ".$icon_color . ";'";
+			$icon_styles .= " color:".$icon_color . ";";
 		}
 
 		if($icon_size != '') {
-			$icon_styles .= 'font-size: '.$icon_size.'px;';
+			$icon_styles .= 'font-size:'.$icon_size.'px;';
 		}
 
 		if($button_border_color != '') {
-			$button_styles .= 'border-color: '.$button_border_color.';';
+			$button_styles .= 'border-color:'.$button_border_color.';';
 		}
 
 		if($button_background_color != '') {
@@ -165,6 +166,8 @@ if (!function_exists('call_to_action')) {
 				$html .= '<i class="call_to_action_icon fa '.$fa_icon.'" style="'.$icon_styles.'"></i>';
 			} elseif($icon_pack == 'font_elegant' && $fe_icon != '') {
 				$html .= '<span class="call_to_action_icon q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_styles.'"></span>';
+			} elseif($icon_pack == 'linear_icons' && $linear_icon != '') {
+				$html .= '<i class="call_to_action_icon q_linear_icons_icon lnr '.$linear_icon.'"  style="'.$icon_styles.'"></i>';
 			}
 
 			$html .= '</div>';
@@ -339,12 +342,14 @@ if (!function_exists('button')) {
 
 		$args = array(
 			"size"                      => "",
-			"style"                      => "",
+			"style"                     => "",
 			"text"                      => "",
-			"icon_pack"              => "",
-			"fa_icon"                => "",
-			"fe_icon"                => "",
+			"icon_pack"              	=> "",
+			"fa_icon"                	=> "",
+			"fe_icon"                	=> "",
+			"linear_icon"               => "",
 			"icon_color"                => "",
+			"icon_size"                 => "",
 			"link"                      => "",
 			"target"                    => "_self",
 			"color"                     => "",
@@ -353,11 +358,13 @@ if (!function_exists('button')) {
 			"hover_background_color"    => "",
 			"border_color"              => "",
 			"hover_border_color"        => "",
+			"font_size"                 => "",
 			"font_style"                => "",
 			"font_weight"               => "",
 			"text_align"                => "",
 			"margin"					=> "",
-			"border_radius"				=> ""
+			"border_radius"				=> "",
+			'hover_animation'			=> ""
 		);
 
 		extract(shortcode_atts($args, $atts));
@@ -369,6 +376,7 @@ if (!function_exists('button')) {
 		//init variables
 		$html  = "";
 		$button_classes = "qbutton ";
+		$icon_classes 	= "";
 		$button_styles  = "";
 		$add_icon       = "";
 		$data_attr      = "";
@@ -380,6 +388,11 @@ if (!function_exists('button')) {
 		if($text_align != "") {
 			$button_classes .= " {$text_align}";
 		}
+
+		if($hover_animation != "") {
+			$button_classes .= " {$hover_animation}";
+		}
+
 		if($style == "white") {
 			$button_classes .= " {$style}";
 		}
@@ -399,6 +412,10 @@ if (!function_exists('button')) {
 			$button_styles .= 'font-weight: '.$font_weight.'; ';
 		}
 
+		if($font_size != ""){
+			$button_styles .= 'font-size: '.$font_size.'px; ';
+		}
+
 		if($icon_pack != ""){
 			$icon_style = "";
 			$button_classes .= " qbutton_with_icon";
@@ -406,10 +423,18 @@ if (!function_exists('button')) {
 				$icon_style .= 'color: '.$icon_color.';';
 			}
 
+			if($icon_size != ""){
+				$icon_style .= 'font-size: '.$icon_size.'px;';
+				$icon_classes .= " custom_icon_size";
+			}
+
 			if($icon_pack == 'font_awesome' && $fa_icon != '')
-				$add_icon .= '<i class="button_icon fa '.$fa_icon.'" style="'.$icon_style.'"></i>';
+				$add_icon .= '<i class="button_icon ' . $icon_classes . ' fa '.$fa_icon.'" style="'.$icon_style.'"></i>';
 			elseif ($icon_pack == 'font_elegant' && $fe_icon != ''){
-				$add_icon .= '<span class="button_icon q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_style.'"></span>';
+				$add_icon .= '<span class="button_icon ' . $icon_classes . ' q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_style.'"></span>';
+			}
+			else if($icon_pack == 'linear_icons' && $linear_icon != '') {
+				$add_icon .= '<i class="button_icon ' . $icon_classes . ' q_linear_icons_icon lnr '.$linear_icon.'" style="'.$icon_style.'"></i>';
 			}
 		}
 
@@ -545,6 +570,57 @@ if (!function_exists('counter')) {
 	}
 }
 add_shortcode('counter', 'counter');
+
+/* Countdown shortcode */
+
+/* Counter shortcode */
+
+if (!function_exists('countdown')) {
+	function countdown($atts, $content = null) {
+		$args = array(
+			'year' => '',
+			'month' => '',
+			'day' => '',
+			'hour' => '',
+			'minute' => '',
+			'month_label' => 'Months',
+			'day_label' => 'Days',
+			'hour_label' => 'Hours',
+			'minute_label' => 'Minutes',
+			'second_label' => 'Seconds',
+			'digit_font_size' => '',
+			'label_font_size' => '',
+			'digit_color' => ''
+		);
+
+		extract(shortcode_atts($args, $atts));
+
+		$id = mt_rand(1000, 9999);
+
+		//Get HTML from template
+		$html = "";
+
+		$html .= '<div class="qode-countdown" id="countdown' . esc_html($id) . '"';
+		$html .= 'data-year="' . esc_attr($year) . '"';
+		$html .= 'data-month="' . esc_attr($month) . '"';
+		$html .= 'data-day="' . esc_attr($day) . '"';
+		$html .= 'data-hour="' . esc_attr($hour) . '"';
+		$html .= 'data-minute="' . esc_attr($minute) . '"';
+		$html .= 'data-timezone="' . get_option('gmt_offset') . '"';
+		$html .= 'data-month-label="' . esc_attr($month_label) . '"';
+		$html .= 'data-day-label="' . esc_attr($day_label) . '"';
+		$html .= 'data-hour-label="' . esc_attr($hour_label) . '"';
+		$html .= 'data-minute-label="' . esc_attr($minute_label) . '"';
+		$html .= 'data-second-label="' . esc_attr($second_label) . '"';
+		$html .= 'data-digit-size="' . esc_attr($digit_font_size) . '"';
+		$html .= 'data-digit-color="' . esc_attr($digit_color) . '"';
+		$html .= 'data-label-size="' . esc_attr($label_font_size) . '"';
+		$html .= '></div>';
+
+		return $html;
+	}
+}
+add_shortcode('countdown', 'countdown');
 
 /* Custom font shortcode */
 
@@ -831,28 +907,33 @@ add_shortcode('highlight', 'highlight');
 if(!function_exists('icons')) {
 	function icons($atts, $content = null) {
 		$default_atts = array(
-			"icon_pack"            => "",
-			"fa_size"              => "",
-			"custom_size"          => "",
-			"fa_icon"              => "",
-			"fe_icon"              => "",
-			"type"                 => "",
-			"position"             => "",
-			"border_color"         => "",
-			"border_width"         => "",
-			"icon_color"           => "",
-			"background_color"     => "",
-			"margin"               => "",
-			"icon_animation"       => "",
-			"icon_animation_delay" => "",
-			"link"                 => "",
-			"target"               => ""
+			"icon_pack"            		=> "",
+			"fa_size"              		=> "",
+			"custom_size"          		=> "",
+			"fa_icon"              		=> "",
+			"fe_icon"              		=> "",
+			"linear_icon"          		=> "",
+			"type"                 		=> "",
+			"position"             		=> "",
+			"border_color"         		=> "",
+			"border_hover_color"   		=> "",
+			"border_width"         		=> "",
+			"border_radius"				=> "",
+			"icon_color"           		=> "",
+			"icon_hover_color"     		=> "",
+			"background_color"     		=> "",
+			"background_hover_color"    => "",
+			"margin"               		=> "",
+			"icon_animation"       		=> "",
+			"icon_animation_delay" 		=> "",
+			"link"                 		=> "",
+			"target"               		=> ""
 		);
 
 		extract(shortcode_atts($default_atts, $atts));
 
 		$html = "";
-		if($fa_icon != "" || $fe_icon != "") {
+		if($fa_icon != "" || $fe_icon != "" || $linear_icon != "") {
 
 			if ($icon_pack == 'font_awesome' && $fa_icon != '')
 				$size = $fa_size;
@@ -868,23 +949,32 @@ if(!function_exists('icons')) {
 			$icon_stack_square_styles = '';
 			$icon_stack_normal_style  = '';
 			$icon_stack_font_size     = '';
+			$data_attr              = "";
+
+			if($background_hover_color != "") {
+				$data_attr .= "data-hover-background-color=".$background_hover_color." ";
+			}
+
+			if($border_hover_color != "") {
+				$data_attr .= "data-hover-border-color=".$border_hover_color." ";
+			}
+
+			if($icon_hover_color != "") {
+				$data_attr .= "data-hover-color=".$icon_hover_color." ";
+			}
 
 			if($custom_size != "") {
 				$icon_stack_normal_style .= 'font-size: '.$custom_size;
 
-				if($fe_icon != "" && $icon_pack == 'font_elegant'){
+				if(($fe_icon != "" && $icon_pack == 'font_elegant') || ($linear_icon != "" && $icon_pack == 'linear_icons')){
 					$icon_stack_circle_styles .= 'padding: 1.5em;';
-				} else {
-					$icon_stack_circle_styles .= 'font-size: '.$custom_size;
-				}
-				
-				if($fe_icon != "" && $icon_pack == 'font_elegant'){
 					$icon_stack_square_styles .= 'padding: 1.5em;';
 				} else {
-					$icon_stack_square_styles .= 'font-size: '.$custom_size;	
+					$icon_stack_circle_styles .= 'font-size: '.$custom_size;
+					$icon_stack_square_styles .= 'font-size: '.$custom_size;
 				}
 
-				if(!strstr($custom_size, 'px') && $icon_pack != 'font_elegant') {
+				if(!strstr($custom_size, 'px') && $icon_pack != 'font_elegant' && $icon_pack != 'linear_icons') {
 					$icon_stack_normal_style .= 'px;';
 					$icon_stack_circle_styles .= 'px;';
 					$icon_stack_square_styles .= 'px;';
@@ -895,15 +985,13 @@ if(!function_exists('icons')) {
 				}
 
 				//generate inline icon styles
-				if($fe_icon != "" && $icon_pack == 'font_elegant') {
+				if(($fe_icon != "" && $icon_pack == 'font_elegant') || ($linear_icon != "" && $icon_pack == 'linear_icons')) {
 					$icon_stack_font_size	.= 'font-size: '.$custom_size.'px;';
 				}
 			}
-
 			if($icon_color != "") {
 				$icon_stack_normal_style .= 'color: '.$icon_color.';';
 				$icon_stack_style .= 'color: '.$icon_color.';';
-				$icon_link_style .= 'color: '.$icon_color.';';
 			}
 
 			if($position != "") {
@@ -922,6 +1010,10 @@ if(!function_exists('icons')) {
 				$icon_stack_style .= 'border-width: '.$border_width.'px;';
 			}
 
+			if($border_radius != "") {
+				$icon_stack_square_styles .= 'border-radius: '.$border_radius.'px;';
+			}
+
 			if($icon_animation_delay != ""){
 				$animation_delay_style .= 'transition-delay: '.$icon_animation_delay.'ms; -webkit-transition-delay: '.$icon_animation_delay.'ms; -moz-transition-delay: '.$icon_animation_delay.'ms; -o-transition-delay: '.$icon_animation_delay.'ms;';
 			}
@@ -935,57 +1027,81 @@ if(!function_exists('icons')) {
 				case 'circle':
 					if($icon_pack == 'font_awesome' && $fa_icon != ''){
 
-						$html = '<span class="fa-stack q_icon_shortcode q_font_awsome_icon_holder q_font_awsome_icon_circle '.$size.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_circle_styles.' '.$animation_delay_style.'">';
+						$html = '<span class="fa-stack q_icon_shortcode circle q_font_awsome_icon_holder q_font_awsome_icon_circle '.$size.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_circle_styles.' '.$animation_delay_style.'"'. $data_attr . '>';
 						if($link != ""){
-							$html .= '<a href="'.$link.'" target="'.$target.'" style="'.$icon_link_style.'">';
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
 						}
 						$html .= '<i class="fa '.$fa_icon.'"></i>';
 
 					} elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
 
-						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_circle_styles.' '.$animation_delay_style.'">';
+						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_circle_styles.' '.$animation_delay_style.'"'. $data_attr . '>';
 						if($link != ""){
-							$html .= '<a href="'.$link.'" target="'.$target.'" style="'.$icon_link_style.'">';
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
 						}
 						$html .= '<span class="q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'"></span>';
+
+					} elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+
+						$html = '<span class="q_icon_shortcode q_linear_icons_holder '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_circle_styles.' '.$animation_delay_style.'"'. $data_attr . '>';
+						if($link != ""){
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
+						}
+						$html .= '<i class="lnr q_linear_icons_icon '.$linear_icon.'" style="'.$icon_stack_font_size.'"></i>';
 
 					}
 					break;
 				case 'square':
 					if($icon_pack == 'font_awesome' && $fa_icon != ''){
 
-						$html = '<span class="fa-stack q_font_awsome_icon_holder q_icon_shortcode q_font_awsome_icon_square '.$size.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_square_styles.' '.$animation_delay_style.'">';
+						$html = '<span class="fa-stack q_font_awsome_icon_holder q_icon_shortcode square q_font_awsome_icon_square '.$size.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_square_styles.' '.$animation_delay_style.'"'. $data_attr . '>';
 						if($link != ""){
-							$html .= '<a href="'.$link.'" target="'.$target.'" style="'.$icon_link_style.'">';
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
 						}
 						$html .= '<i class="fa '.$fa_icon.'"></i>';
 
 					} elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
 
-						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_square_styles.' '.$animation_delay_style.'">';
+						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_square_styles.' '.$animation_delay_style.'"'. $data_attr . '>';
 						if($link != ""){
-							$html .= '<a href="'.$link.'" target="'.$target.'" style="'.$icon_link_style.'">';
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
 						}
 						$html .= '<span class="q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'"></span>';
+
+					} elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+
+						$html = '<span class="q_linear_icons_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_style.$icon_stack_square_styles.' '.$animation_delay_style.'"'. $data_attr . '>';
+						if($link != ""){
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
+						}
+						$html .= '<i class="lnr q_linear_icons_icon '.$linear_icon.'"  style="'.$icon_stack_font_size.'"></i>';
 
 					}
 					break;
 				default:
 					if($icon_pack == 'font_awesome' && $fa_icon != ''){
 
-						$html = '<span class="q_font_awsome_icon q_icon_shortcode q_font_awsome_icon_holder '.$size.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_normal_style.' '.$animation_delay_style.'">';
+						$html = '<span class="q_font_awsome_icon q_icon_shortcode normal q_font_awsome_icon_holder '.$size.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_normal_style.' '.$animation_delay_style.'"'. $data_attr . '>';
 						if($link != ""){
-							$html .= '<a href="'.$link.'" target="'.$target.'" style="'.$icon_link_style.'">';
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
 						}
 						$html .= '<i class="fa '.$fa_icon.'"></i>';
 
 					} elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
 
-						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_normal_style.' '.$animation_delay_style.'">';
+						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_normal_style.' '.$animation_delay_style.'"'. $data_attr . '>';
 						if($link != ""){
-							$html .= '<a href="'.$link.'" target="'.$target.'" style="'.$icon_link_style.'">';
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
 						}
 						$html .= '<span class="q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'"></span>';
+
+					} elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+
+						$html = '<span class="q_font_elegant_holder q_icon_shortcode '.$type.' '.$icon_stack_classes.' '.$icon_animation.'" style="'.$icon_stack_normal_style.' '.$animation_delay_style.'"'. $data_attr . '>';
+						if($link != ""){
+							$html .= '<a href="'.$link.'" target="'.$target.'">';
+						}
+						$html .= '<i class="lnr q_linear_icons_icon '.$linear_icon.'"  style="'.$icon_stack_font_size.'"></i>';
 
 					}
 					break;
@@ -1013,6 +1129,8 @@ if(!function_exists('icon_text')) {
 			"icon_pack"             		=> "",
 			"fa_icon"               		=> "",
 			"fe_icon"               		=> "",
+			"linear_icon"              		=> "",
+			"custom_icon_image"             => "",
 			"icon_animation"        		=> "",
 			"icon_animation_delay"  	 	=> "",
 			"icon_type"             	 	=> "",
@@ -1060,7 +1178,7 @@ if(!function_exists('icon_text')) {
 		$animation_delay_style   	= '';
 
 		//generate inline icon styles
-		if($custom_icon_size != "" && $fe_icon != "" && $icon_pack == 'font_elegant') {
+		if($custom_icon_size != "" && (($fe_icon != "" && $icon_pack == 'font_elegant') || ($linear_icon != "" && $icon_pack == 'linear_icons'))) {
 			$icon_stack_style		.= 'font-size: '.$custom_icon_size.'px;';
 			$icon_stack_font_size	.= 'font-size: '.$custom_icon_size.'px;';
 		}
@@ -1138,6 +1256,7 @@ if(!function_exists('icon_text')) {
 
 		$html = "";
 		$html_icon = "";
+		$html_custom_icon = "";
 
 		//genererate icon html
 		switch ($icon_type) {
@@ -1156,6 +1275,10 @@ if(!function_exists('icon_text')) {
 					$html_icon .= '<span class="q_font_elegant_holder '.$icon_type.' '.$icon_stack_classes.'" style="'.$icon_stack_style.$icon_stack_base_style.'">';
 					$html_icon .= '<span class="icon_text_icon q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'"></span>';
 					$html_icon .= '</span>';
+				}elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+					$html_icon .= '<span class="q_linear_icons_holder '.$icon_type.' '.$icon_stack_classes.'" style="'.$icon_stack_style.$icon_stack_base_style.'">';
+					$html_icon .= '<i class="icon_text_icon q_linear_icons_icon lnr '.$linear_icon.'" style="'.$icon_stack_font_size.'"></i>';
+					$html_icon .= '</span>';
 				}
 
 				break;
@@ -1170,9 +1293,13 @@ if(!function_exists('icon_text')) {
 					$html_icon .= '<span class="fa-stack '.$icon_size.' '.$icon_stack_classes.'" style="'.$icon_stack_style.$icon_stack_square_style.'">';
 					$html_icon .= '<i class="icon_text_icon fa '.$fa_icon.' fa-stack-1x"></i>';
 					$html_icon .= '</span>';
-				} elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
+				}elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
 					$html_icon .= '<span class="q_font_elegant_holder '.$icon_type.' '.$icon_stack_classes.'" style="'.$icon_stack_style.$icon_stack_square_style.'">';
 					$html_icon .= '<span class="icon_text_icon q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'" ></span>';
+					$html_icon .= '</span>';
+				}elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+					$html_icon .= '<span class="q_linear_icons_holder '.$icon_type.' '.$icon_stack_classes.'" style="'.$icon_stack_style.$icon_stack_square_style.'">';
+					$html_icon .= '<span class="icon_text_icon lnr q_linear_icons_icon '.$linear_icon.'" style="'.$icon_stack_font_size.'" ></span>';
 					$html_icon .= '</span>';
 				}
 
@@ -1183,10 +1310,16 @@ if(!function_exists('icon_text')) {
 					$html_icon .= '<span style="'.$icon_stack_style.'" class="q_font_awsome_icon '.$icon_size.' '.$icon_stack_classes.'">';
 					$html_icon .= '<i class="icon_text_icon fa '.$fa_icon.'"></i>';
 					$html_icon .= '</span>';
-				} elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
+				}elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
 					$html_icon .= '<span class="q_font_elegant_holder '.$icon_type.' '.$icon_stack_classes.'" style="'.$icon_stack_style.'">';
 					$html_icon .= '<span class="icon_text_icon q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'"></span>';
 					$html_icon .= '</span>';
+				}elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+					$html_icon .= '<span class="q_linear_icons_holder '.$icon_type.' '.$icon_stack_classes.'" style="'.$icon_stack_style.'">';
+					$html_icon .= '<i class="icon_text_icon lnr q_linear_icons_icon '.$linear_icon.'" aria-hidden="true" style="'.$icon_stack_font_size.'"></i>';
+					$html_icon .= '</span>';
+				}elseif($icon_pack == 'custom_icon' && $custom_icon_image != '') {
+					$html_icon .= wp_get_attachment_image($custom_icon_image, 'full');
 				}
 
 				break;
@@ -1228,7 +1361,7 @@ if(!function_exists('icon_text')) {
 				$icon_with_text_clasess .= ' without_double_border';
 			}
 
-			if($text_left_padding != "" && $icon_pack == 'font_elegant' && $icon_position == "left"){
+			if($text_left_padding != "" && ($icon_pack == 'font_elegant' || $icon_pack == 'linear_icons') && $icon_position == "left"){
 				$icon_text_holder_style .= 'padding-left: '.$text_left_padding.'px';
 			}
 
@@ -1241,6 +1374,9 @@ if(!function_exists('icon_text')) {
 			}
 			if($icon_position == "left_from_title"){
 				$icon_with_text_clasess .= " left_from_title";
+			}
+			if($icon_pack == 'custom_icon') {
+				$icon_with_text_clasess .= " with_custom_icon";
 			}
 
 			$html .= "<div class='q_icon_with_title ".$icon_with_text_clasess."'>";
@@ -1308,6 +1444,10 @@ if(!function_exists('icon_text')) {
 
 			if($without_double_border_icon == 'yes') {
 				$icon_with_text_clasess .= ' without_double_border';
+			}
+
+			if($icon_pack == 'custom_icon') {
+				$icon_with_text_clasess .= " with_custom_icon";
 			}
 
 			$html .= '<div class="q_box_holder with_icon" style="'.$box_holder_styles.'">';
@@ -1416,6 +1556,7 @@ if (!function_exists('icon_list_item')) {
 			"icon_pack"                => "",
 			"fa_icon"                  => "",
 			"fe_icon"                  => "",
+			"linear_icon"              => "",
 			"icon_type"                => "",
 			"icon_color"               => "",
 			"border_type"              => "",
@@ -1458,6 +1599,10 @@ if (!function_exists('icon_list_item')) {
 		} elseif($icon_pack == 'font_elegant' && $fe_icon != ''){
 
 			$html .= '<span class="q_font_elegant_icon '.$fe_icon.' '.$icon_classes.' '.$border_type.'" aria-hidden="true" style="'.$icon_style.'"></span>';
+
+		} elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+
+			$html .= '<i class="lnr q_linear_icons_icon '.$linear_icon.' '.$icon_classes.' '.$border_type.'" aria-hidden="true" style="'.$icon_style.'"></i>';
 		}
 
 		$html .= '<p class="'.$icon_classes.'" style="'.$title_style.'">'.$title.'</p>';
@@ -1522,6 +1667,7 @@ if (!function_exists('interactive_banners')) {
 			"icon_pack"              => "",
 			"fa_icon"                => "",
 			"fe_icon"                => "",
+			"linear_icon"            => "",
 			"icon_custom_size"       => "45",
 			"icon_color"             => "",
 			"title"                  => "",
@@ -1624,6 +1770,8 @@ if (!function_exists('interactive_banners')) {
 						$html .= '<i class="icon_holder fa '.$fa_icon.'" '.$icon_styles .'></i>';
 					}elseif($icon_pack == 'font_elegant' && $fe_icon != ""){
 						$html .= '<span class="icon_holder q_font_elegant_icon '.$fe_icon.'" aria-hidden="true" '.$icon_styles .'></span>';
+					}elseif($icon_pack == 'linear_icons' && $linear_icon != ""){
+						$html .= '<i class="icon_holder lnr q_linear_icons_icon '.$linear_icon.'" '.$icon_styles .'></i>';
 					}
 					$html .= '<'.$subtitle_tag.' class="front_subtitle" style="'.$subtitle_styles.'">'.$subtitle.'</'.$subtitle_tag.'>';
 					$html .= '<'.$title_tag.' class="front_title" style="'.$title_styles.'">'.$title.'</'.$title_tag.'>';
@@ -1958,6 +2106,7 @@ if (!function_exists('message')) {
 			"icon_pack"             => "",
 			"fa_icon"               => "",
 			"fe_icon"               => "",
+			"linear_icon"           => "",
 			"icon_size"            	=> "fa-2x",
 			"icon_custom_size"      => "",
 			"icon_color"            => "",
@@ -1992,23 +2141,24 @@ if (!function_exists('message')) {
 		}
 
 		if($icon_color != "") {
-			$icon_styles .= "color: ".$icon_color;
+			$icon_styles .= "color: ".$icon_color . ";";
 		}
 
 		if($icon_background_color != "") {
-			$icon_styles .= " background-color: ".$icon_background_color;
+			$icon_styles .= " background-color: ".$icon_background_color . ";";
 		}
 
 		if($icon_custom_size != "") {
 			$icon_font_style = ' font-size: '.$icon_custom_size;
 			if(!strstr($icon_custom_size, 'px')) {
-				$icon_font_style .= 'px;';
+				$icon_font_style .= 'px';
 			}
+			$icon_font_style .= ';';
 			$icon_styles .= $icon_font_style;
 		}
 
 		if($close_button_color != "") {
-			$close_button_style .= "color: ".$close_button_color;
+			$close_button_style .= "color: ".$close_button_color . ";";
 		}
 
 		$html .= "<div class='q_message ".$message_classes."' style='".$message_styles."'>";
@@ -2027,6 +2177,8 @@ if (!function_exists('message')) {
 				$icon_html .= "<i class='fa ".$fa_icon." ". $icon_size . "' style='".$icon_styles."'></i>";
 			} elseif($icon_pack == 'font_elegant' && $fe_icon != ""){
 				$icon_html .= "<span class='q_font_elegant_icon ".$fe_icon."' aria-hidden='true' style='".$icon_styles ."'></span>";
+			} elseif($icon_pack == 'linear_icons' && $linear_icon != ""){
+				$icon_html .= "<i class='lnr q_linear_icons_icon ".$linear_icon."' style='".$icon_styles ."'></i>";
 			}
 			$icon_html .= '</div></div></div>';
 		}
@@ -2071,6 +2223,7 @@ if (!function_exists('pie_chart')) {
 			"percent_font_weight"   => "",
 			"active_color"          => "",
 			"noactive_color"        => "",
+			"chart_width"	        => "",
 			"line_width"            => "",
 			"text"                  => "",
 			"text_color"            => ""
@@ -2082,24 +2235,24 @@ if (!function_exists('pie_chart')) {
 
 		//get correct heading value. If provided heading isn't valid get the default one
 		$title_tag = (in_array($title_tag, $headings_array)) ? $title_tag : $args['title_tag'];
-
+		$percent_style = '';
 		$html = '';
-		$html .= '<div class="q_pie_chart_holder"><div class="q_percentage" data-percent="' . $percent . '" data-linewidth="' . $line_width . '" data-active="' . $active_color . '" data-noactive="' . $noactive_color . '"';
+		$html .= '<div class="q_pie_chart_holder"><div class="q_percentage" data-percent="' . $percent . '" data-linewidth="' . $line_width . '" data-chartwidth="' . $chart_width . '" data-active="' . $active_color . '" data-noactive="' . $noactive_color . '"';
 		if ($percentage_color != "" || $percent_font_size != "" || $percent_font_weight != "") {
-			$html .= ' style="';
+			$percent_style .= ' style="';
 
 			if($percentage_color != ""){
-				$html .= 'color:'.$percentage_color.';';
+				$percent_style .= 'color:'.$percentage_color.';';
 			}
 			if($percent_font_size != ""){
-				$html .= 'font-size:'.$percent_font_size.'px;';
+				$percent_style .= 'font-size:'.$percent_font_size.'px;';
 			}
 			if($percent_font_weight != ""){
-				$html .= 'font-weight:'.$percent_font_weight.';';
+				$percent_style .= 'font-weight:'.$percent_font_weight.';';
 			}
-			$html .= '"';
+			$percent_style .= '"';
 		}
-		$html .= '><span class="tocounter '.$show_percent_mark.'">' . $percent . '</span>';
+		$html .= '><span class="tocounter '.$show_percent_mark.'" ' .$percent_style . '>' . $percent . '</span>';
 		$html .= '</div><div class="pie_chart_text">';
 		if ($title != "") {
 			$html .= '<'.$title_tag.' class="pie_title"';
@@ -2135,10 +2288,12 @@ if (!function_exists('pie_chart_with_icon')) {
 			"percent"         => "",
 			"active_color"    => "",
 			"noactive_color"  => "",
+			"chart_width"	  => "",
 			"line_width"      => "",
 			"icon_pack"       => "",
 			"fa_icon"         => "",
 			"fe_icon"         => "",
+			"linear_icon"     => "",
 			"icon_color"      => "",
 			"title"           => "",
 			"title_color"     => "",
@@ -2156,7 +2311,7 @@ if (!function_exists('pie_chart_with_icon')) {
 
 		$html = '';
 
-		$html .= '<div class="q_pie_chart_with_icon_holder"><div class="q_percentage_with_icon" data-percent="'.$percent.'" data-linewidth="'.$line_width.'" data-active="'.$active_color.'" data-noactive="'.$noactive_color.'">';
+		$html .= '<div class="q_pie_chart_with_icon_holder"><div class="q_percentage_with_icon" data-percent="'.$percent.'" data-linewidth="'.$line_width.'" data-chartwidth="'.$chart_width.'" data-active="'.$active_color.'" data-noactive="'.$noactive_color.'">';
 
 		if($icon_pack == 'font_awesome' && $fa_icon != ""){
 			$html .= '<i class="fa '.$fa_icon.'"';
@@ -2176,6 +2331,16 @@ if (!function_exists('pie_chart_with_icon')) {
 				$html .= ' style="color: ' . $icon_color . ';"';
 			}
 			$html .= '></span>';
+		}
+
+		elseif($icon_pack == 'linear_icons' && $linear_icon != ""){
+			$html .= '<i class="lnr q_linear_icons_icon '.$linear_icon.'"';
+
+
+			if ($icon_color != "") {
+				$html .= ' style="color: ' . $icon_color . ';"';
+			}
+			$html .= '></i>';
 		}
 
 		$html .= '</div><div class="pie_chart_text">';
@@ -2302,7 +2467,13 @@ if (!function_exists('portfolio_list')) {
 
 		$args = array(
 			"type"                  	=> "standard",
+			"masonry_space"             => "no",
+			"pinterest_space"             => "no",
 			"hover_type"            	=> "default_hover",
+			"pinterest_hover_type"		=> "",
+			"portfolio_loading_type"	=> "",
+			"parallax_item_speed" 		=> "0.3",
+			"parallax_item_offset" 		=> "0",
 			"box_border"            	=> "",
 			"box_background_color" 		=> "",		
 			"box_border_color"      	=> "",
@@ -2324,7 +2495,10 @@ if (!function_exists('portfolio_list')) {
 			"show_load_more"        	=> "yes",
 			"title_tag"             	=> "h4",
 			"title_font_size"       	=> "",
-			"text_align"            	=> ""
+			"text_align"            	=> "",
+			"row_height"                        => "",
+			"justify_last_row"                  => "nojustify",
+			"justify_threshold"                 => 0.75
 		);
 
 		extract(shortcode_atts($args, $atts));
@@ -2334,11 +2508,15 @@ if (!function_exists('portfolio_list')) {
 		//get correct heading value. If provided heading isn't valid get the default one
 		$title_tag = (in_array($title_tag, $headings_array)) ? $title_tag : $args['title_tag'];
 
+
 		$html = "";
 
 		$_type_class = '';
 		$_portfolio_space_class = '';
 		$_portfolio_masonry_with_space_class = '';
+		$_portfolio_masonry_class = '';
+		$_loading_class = '';
+
 		if ($type == "hover_text") {
 			$_type_class = " hover_text";
 			$_portfolio_space_class = "portfolio_with_space portfolio_with_hover_text";
@@ -2348,12 +2526,34 @@ if (!function_exists('portfolio_list')) {
 			if($type == "masonry_with_space"){
 				$_portfolio_masonry_with_space_class = ' masonry_with_space';
 			}
+			if($pinterest_space == "yes" && $type == "masonry_with_space"){
+				$_portfolio_masonry_with_space_class = 'masonry_with_space pinterest_space';
+			}
 		} elseif ($type == "standard_no_space"){
 			$_type_class = " standard_no_space";
 			$_portfolio_space_class = "portfolio_no_space portfolio_standard";
 		} elseif ($type == "hover_text_no_space"){
 			$_type_class = " hover_text no_space";
 			$_portfolio_space_class = "portfolio_no_space portfolio_with_hover_text";
+		} elseif ($type == "justified_gallery"){
+			$_type_class = " justified_gallery";
+			$_portfolio_space_class = "portfolio_no_space";
+		}
+
+		if ($type == 'justified_gallery') {
+			$hover_type = " justified_gallery_hover ";
+		}
+
+		if ($portfolio_loading_type != ""){
+			$_loading_class =  $portfolio_loading_type;
+		}
+
+		if ($type == 'masonry_with_space' && $pinterest_hover_type=="info_on_hover") {
+			$hover_type = " pinterest_info_on_hover ";
+		}
+
+		if($masonry_space == 'yes') {
+			$_portfolio_masonry_class .= 'masonry_extended';
 		}
 
 		$portfolio_box_style = "";
@@ -2388,49 +2588,435 @@ if (!function_exists('portfolio_list')) {
 			$portfolio_description_class .= ' text_align_'.$text_align;
 		}
 
-		if($type != 'masonry') {
+
+
+
+		if($type == 'masonry') {
+			if ($filter == "yes") {
+				$html .= "<div class='filter_outer ".$filter_align."'>";
+				$html .= "<div class='filter_holder ".$portfolio_filter_class."'><ul>";
+				if($disable_filter_title != "yes"){
+					$html .= "<li class='filter_title'><span>".__('Sort Portfolio:', 'qode')."</span></li>";
+				}
+				$html .= "<li class='filter' data-filter='*'><span>" . __('All', 'qode') . "</span></li>";
+				if ($category == "") {
+					$args = array(
+						'parent' => 0,
+						'orderby' => $filter_order_by
+					);
+					$portfolio_categories = get_terms('portfolio_category', $args);
+				} else {
+					$top_category = get_term_by('slug', $category, 'portfolio_category');
+					$term_id = '';
+					if (isset($top_category->term_id))
+						$term_id = $top_category->term_id;
+					$args = array(
+						'parent' => $term_id,
+						'orderby' => $filter_order_by
+					);
+					$portfolio_categories = get_terms('portfolio_category', $args);
+				}
+				foreach ($portfolio_categories as $portfolio_category) {
+					$html .= "<li class='filter' data-filter='.portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
+					$args = array(
+						'child_of' => $portfolio_category->term_id
+					);
+					$html .= '</li>';
+				}
+				$html .= "</ul></div>";
+				$html .= "</div>";
+
+
+			}
+			$html .= "<div class='projects_masonry_holder $_loading_class $_portfolio_masonry_class' data-parallax_item_speed='".$parallax_item_speed."' data-parallax_item_offset='".$parallax_item_offset."'>";
+			if (get_query_var('paged')) {
+				$paged = get_query_var('paged');
+			} elseif (get_query_var('page')) {
+				$paged = get_query_var('page');
+			} else {
+				$paged = 1;
+			}
+			if ($category == "") {
+				$args = array(
+					'post_type' => 'portfolio_page',
+					'orderby' => $order_by,
+					'order' => $order,
+					'posts_per_page' => $number,
+					'paged' => $paged
+				);
+			} else {
+				$args = array(
+					'post_type' => 'portfolio_page',
+					'portfolio_category' => $category,
+					'orderby' => $order_by,
+					'order' => $order,
+					'posts_per_page' => $number,
+					'paged' => $paged
+				);
+			}
+			$project_ids = null;
+			if ($selected_projects != "") {
+				$project_ids = explode(",", $selected_projects);
+				$args['post__in'] = $project_ids;
+			}
+			query_posts($args);
+			if (have_posts()) : while (have_posts()) : the_post();
+				$terms = wp_get_post_terms(get_the_ID(), 'portfolio_category');
+				$featured_image_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full'); //original size
+				$portfolio_subtitle='';
+				if(get_post_meta(get_the_ID(), 'qode_portfolio_subtitle', true) != ""){
+					$portfolio_subtitle = get_post_meta(get_the_ID(), 'qode_portfolio_subtitle', true);
+				}
+
+				if(get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true) != ""){
+					$large_image = get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true);
+				} else {
+					$large_image = $featured_image_array[0];
+				}
+
+				$masonry_parallax_class = "";
+				$masonry_parallax = get_post_meta(get_the_ID(), "qode_portfolio_masonry_parallax", true);
+				if($masonry_parallax == "yes"){
+					$masonry_parallax_class = " parallax_item";
+				}
+
+				$custom_portfolio_link = get_post_meta(get_the_ID(), 'qode_portfolio-external-link', true);
+				$portfolio_link = $custom_portfolio_link != "" ? $custom_portfolio_link : get_permalink();
+				if(get_post_meta(get_the_ID(), 'qode_portfolio-external-link-target', true) != ""){
+					$custom_portfolio_link_target = get_post_meta(get_the_ID(), 'qode_portfolio-external-link-target', true);
+				} else {
+					$custom_portfolio_link_target = '_blank';
+				}
+
+				$target = $custom_portfolio_link != "" ? $custom_portfolio_link_target : '_self';
+
+
+				$masonry_size = "default";
+				$masonry_size =  get_post_meta(get_the_ID(), "qode_portfolio_type_masonry_style", true);
+
+				$image_size = "";
+				if($masonry_size == "large_width"){
+					$image_size = "portfolio_masonry_wide";
+				}elseif($masonry_size == "large_height"){
+					$image_size = "portfolio_masonry_tall";
+				}elseif($masonry_size == "large_width_height"){
+					$image_size = "portfolio_masonry_large";
+				} else{
+					$image_size = "portfolio_masonry_regular";
+				}
+
+				if($type == "masonry_with_space"){
+					$image_size = "portfolio_masonry_with_space";
+				}
+
+				$slug_list_ = "pretty_photo_gallery";
+				$title = get_the_title();
+				$html .= "<article class='portfolio_masonry_item ";
+
+				foreach ($terms as $term) {
+					$html .= "portfolio_category_$term->term_id ";
+				}
+
+				$html .= " " . $masonry_size;
+				$html .= " " . $masonry_parallax_class;
+				$html .= "'>";
+
+				$html .= "<div class='image_holder ".$hover_type."'>";
+				$html .= "<span class='image'>";
+				$html .= get_the_post_thumbnail(get_the_ID(), $image_size);
+				$html .= "</span>"; //close span.image
+
+				if($disable_link != "yes"){
+					$html .= "<a class='portfolio_link_class' href='" . $portfolio_link . "' target='".$target."'></a>";
+				}
+
+				if($hover_type == 'move_from_left'){
+					$html .= '<div class="holder-move">';
+				}
+
+				$html .= '<div class="portfolio_shader"></div>';
+
+				$html .= '<div class="text_holder">';
+				if($hover_type == "elegant_hover"){
+					$html .= '<div class="text_holder_inner"><div class="text_holder_inner2">';
+				}
+
+				if($hover_type == "default_hover" && !$portfolio_list_hide_category){
+					$html .= '<span class="project_category">';
+					$html .= '<span>'. __('In ', 'qode') .'</span>';
+					$k = 1;
+					foreach ($terms as $term) {
+						$html .= "$term->name";
+						if (count($terms) != $k) {
+							$html .= ' / ';
+						}
+						$k++;
+					}
+					$html .= '</span>';
+				}
+
+				$title_style = '';
+				if($title_font_size != ""){
+					$title_style = 'style="font-size: '.$title_font_size.'px;"';
+				}
+
+				$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'>' . get_the_title() . '</'.$title_tag.'>';
+
+				$html .= '<h6 class="portfolio_subtitle">' . $portfolio_subtitle . '</h6>';
+
+
+				if($hover_type != "default_hover" && !$portfolio_list_hide_category){
+					$html .= '<span class="project_category">';
+					$html .= '<span>'. __('In ', 'qode') .'</span>';
+					$k = 1;
+					foreach ($terms as $term) {
+						$html .= "$term->name";
+						if (count($terms) != $k) {
+							$html .= ' / ';
+						}
+						$k++;
+					}
+					$html .= '</span>';
+				}
+
+				if($hover_type == "elegant_hover"){
+					$html .= '</div></div>';
+				}
+				$html .= "</div>";
+
+				if($hover_type != "elegant_hover"){
+					$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
+					if ($lightbox == "yes") {
+						$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
+					}
+
+					if ($portfolio_qode_like == "on" && $show_like == "yes") {
+						if (function_exists('qode_like_portfolio_list')) {
+							$html .= qode_like_portfolio_list(get_the_ID());
+						}
+					}
+					$html .= "</div></div>";
+				}
+
+				if($hover_type == 'move_from_left'){
+					$html .= '</div>';
+				}
+				$html .= "</div>"; //close div.image_holder
+				$html .= "</article>";
+
+			endwhile;
+			else:
+				?>
+				<p><?php _e('Sorry, no posts matched your criteria.', 'qode'); ?></p>
+				<?php
+			endif;
+			wp_reset_query();
+			$html .= "</div>";
+		}
+
+		else if($type == 'justified_gallery') {
+			$html .= "<div class='projects_holder_outer portfolio_justified_gallery'>";
+
+			if ($filter == "yes") {
+				$html .= "<div class='filter_outer ".$filter_align."'>";
+				$html .= "<div class='filter_holder ".$portfolio_filter_class."'><ul>";
+				if($disable_filter_title != "yes"){
+					$html .= "<li class='filter_title'><span>".__('Sort Portfolio:', 'qode')."</span></li>";
+				}
+
+				$html .= "<li class='filter' data-filter='*'><span>" . __('All', 'qode') . "</span></li>";
+
+				if ($category == "") {
+					$args = array(
+						'parent' => 0,
+						'orderby' => $filter_order_by
+					);
+					$portfolio_categories = get_terms('portfolio_category', $args);
+				} else {
+					$top_category = get_term_by('slug', $category, 'portfolio_category');
+					$term_id = '';
+					if (isset($top_category->term_id))
+						$term_id = $top_category->term_id;
+					$args = array(
+						'parent' => $term_id,
+						'orderby' => $filter_order_by
+					);
+					$portfolio_categories = get_terms('portfolio_category', $args);
+				}
+				foreach ($portfolio_categories as $portfolio_category) {
+					$html .= "<li class='filter' data-filter='.portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
+					$args = array(
+						'child_of' => $portfolio_category->term_id
+					);
+					$html .= '</li>';
+				}
+				$html .= "</ul></div>";
+				$html .= "</div>";
+			}
+
+			$html .= "<div class='projects_holder clearfix' data-spacing='10'  ".($row_height != '' ? "data-row-height='$row_height'" : "")." ".($justify_last_row != "" ? "data-last-row='$justify_last_row'" : "")." ".($justify_threshold != '' ? "data-justify-threshold='$justify_threshold'" : "").">\n";
+
+			if (get_query_var('paged')) {
+				$paged = get_query_var('paged');
+			} elseif (get_query_var('page')) {
+				$paged = get_query_var('page');
+			} else {
+				$paged = 1;
+			}
+
+			if ($category == "") {
+				$args = array(
+					'post_type' => 'portfolio_page',
+					'orderby' => $order_by,
+					'order' => $order,
+					'posts_per_page' => $number,
+					'paged' => $paged
+				);
+			} else {
+				$args = array(
+					'post_type' => 'portfolio_page',
+					'portfolio_category' => $category,
+					'orderby' => $order_by,
+					'order' => $order,
+					'posts_per_page' => $number,
+					'paged' => $paged
+				);
+			}
+
+			$project_ids = null;
+			if ($selected_projects != "") {
+				$project_ids = explode(",", $selected_projects);
+				$args['post__in'] = $project_ids;
+			}
+
+			query_posts($args);
+
+			if (have_posts()) : while (have_posts()) : the_post();
+				$terms = wp_get_post_terms(get_the_ID(), 'portfolio_category');
+				$html .= "<article class='";
+				foreach ($terms as $term) {
+					$html .= "portfolio_category_$term->term_id ";
+				}
+
+				$title = get_the_title();
+				$featured_image_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full'); //original size
+
+
+				if(get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true) != ""){
+					$large_image = get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true);
+				} else {
+					$large_image = $featured_image_array[0];
+				}
+
+				$slug_list_ = "pretty_photo_gallery";
+
+				$custom_portfolio_link = get_post_meta(get_the_ID(), 'qode_portfolio-external-link', true);
+				$portfolio_link = $custom_portfolio_link != "" ? $custom_portfolio_link : get_permalink();
+
+				if(get_post_meta(get_the_ID(), 'qode_portfolio-external-link-target', true) != ""){
+					$custom_portfolio_link_target = get_post_meta(get_the_ID(), 'qode_portfolio-external-link-target', true);
+				} else {
+					$custom_portfolio_link_target = '_blank';
+				}
+
+				$target = $custom_portfolio_link != "" ? $custom_portfolio_link_target : '_self';
+
+				$html .="'>";
+
+				if($disable_link != "yes"){
+					$html .= "<a class='portfolio_jg_image_link image_holder' href='" . $portfolio_link . "' target='".$target."'>";
+				}
+				else {
+					$html .= "<span class='portfolio_jg_image_link image_holder'>";
+				}
+
+				$html .= get_the_post_thumbnail(get_the_ID(), 'full');
+				if($disable_link != "yes"){
+					$html .= "</a>";
+				}
+				else {
+					$html .= "</span>";
+				}
+				if($disable_link != "yes"){
+					$html .= "<a class='portfolio_shader' href='" . $portfolio_link . "' target='".$target."'></a>";
+				}
+				else {
+					$html .= '<div class="portfolio_shader"></div>';
+				}
+
+				$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
+				if ($lightbox == "yes") {
+					$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
+				}
+
+				if ($portfolio_qode_like == "on" && $show_like == "yes") {
+					if (function_exists('qode_like_portfolio_list')) {
+						$html .= qode_like_portfolio_list(get_the_ID());
+					}
+				}
+				$html .= "</div></div>";
+				$html .= "</article>\n";
+			endwhile;
+			else:
+				?>
+				<p><?php _e('Sorry, no posts matched your criteria.', 'qode'); ?></p>
+				<?php
+			endif;
+
+			$html .= "</div>";
+			if (get_next_posts_link()) {
+				if ($show_load_more == "yes" || $show_load_more == "") {
+					$html .= '<div class="portfolio_paging"><span rel="' . $wp_query->max_num_pages . '" class="load_more">' . get_next_posts_link(__('Show more', 'qode')) . '</span></div>';
+					$html .= '<div class="portfolio_paging_loading"><a href="javascript: void(0)" class="qbutton">'.__('Loading...', 'qode').'</a></div>';
+				}
+			}
+			$html .= "</div>";
+			wp_reset_query();
+		}
+
+		else {
 			$html .= "<div class='projects_holder_outer v$columns $_portfolio_space_class $_portfolio_masonry_with_space_class'>";
 			if ($filter == "yes") {
 				$html .= "<div class='filter_outer ".$filter_align."'>";
-					$html .= "<div class='filter_holder ".$portfolio_filter_class."'><ul>";
-						if($disable_filter_title != "yes"){
-							$html .= "<li class='filter_title'><span>".__('Sort Portfolio:', 'qode')."</span></li>";
-						}
-						if($type == 'masonry_with_space'){
-							$html .= "<li class='filter' data-filter='*'><span>" . __('All', 'qode') . "</span></li>";
-						} else {
-							$html .= "<li class='filter' data-filter='all'><span>" . __('All', 'qode') . "</span></li>";
-						}
-						
-					if ($category == "") {
-						$args = array(
-							'parent' => 0,
-							'orderby' => $filter_order_by
-						);
-						$portfolio_categories = get_terms('portfolio_category', $args);
+				$html .= "<div class='filter_holder ".$portfolio_filter_class."'><ul>";
+				if($disable_filter_title != "yes"){
+					$html .= "<li class='filter_title'><span>".__('Sort Portfolio:', 'qode')."</span></li>";
+				}
+				if($type == 'masonry_with_space'){
+					$html .= "<li class='filter' data-filter='*'><span>" . __('All', 'qode') . "</span></li>";
+				} else {
+					$html .= "<li class='filter' data-filter='all'><span>" . __('All', 'qode') . "</span></li>";
+				}
+
+				if ($category == "") {
+					$args = array(
+						'parent' => 0,
+						'orderby' => $filter_order_by
+					);
+					$portfolio_categories = get_terms('portfolio_category', $args);
+				} else {
+					$top_category = get_term_by('slug', $category, 'portfolio_category');
+					$term_id = '';
+					if (isset($top_category->term_id))
+						$term_id = $top_category->term_id;
+					$args = array(
+						'parent' => $term_id,
+						'orderby' => $filter_order_by
+					);
+					$portfolio_categories = get_terms('portfolio_category', $args);
+				}
+				foreach ($portfolio_categories as $portfolio_category) {
+					if($type == 'masonry_with_space'){
+						$html .= "<li class='filter' data-filter='.portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
 					} else {
-						$top_category = get_term_by('slug', $category, 'portfolio_category');
-						$term_id = '';
-						if (isset($top_category->term_id))
-							$term_id = $top_category->term_id;
-						$args = array(
-							'parent' => $term_id,
-							'orderby' => $filter_order_by
-						);
-						$portfolio_categories = get_terms('portfolio_category', $args);
+						$html .= "<li class='filter' data-filter='portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
 					}
-					foreach ($portfolio_categories as $portfolio_category) {
-						if($type == 'masonry_with_space'){
-							$html .= "<li class='filter' data-filter='.portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
-						} else {
-							$html .= "<li class='filter' data-filter='portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
-						}
-						$args = array(
-							'child_of' => $portfolio_category->term_id
-						);
-						$html .= '</li>';
-					}
-					$html .= "</ul></div>";
+					$args = array(
+						'child_of' => $portfolio_category->term_id
+					);
+					$html .= '</li>';
+				}
+				$html .= "</ul></div>";
 				$html .= "</div>";
 			}
 
@@ -2454,7 +3040,7 @@ if (!function_exists('portfolio_list')) {
 					break;
 			}
 
-			$html .= "<div class='projects_holder clearfix v$columns$_type_class $thumb_size_class'>\n";
+			$html .= "<div class='projects_holder clearfix v$columns$_type_class $thumb_size_class $_loading_class'>\n";
 			if (get_query_var('paged')) {
 				$paged = get_query_var('paged');
 			} elseif (get_query_var('page')) {
@@ -2495,6 +3081,10 @@ if (!function_exists('portfolio_list')) {
 
 				$title = get_the_title();
 				$featured_image_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full'); //original size
+				$portfolio_subtitle='';
+				if(get_post_meta(get_the_ID(), 'qode_portfolio_subtitle', true) != ""){
+					$portfolio_subtitle = get_post_meta(get_the_ID(), 'qode_portfolio_subtitle', true);
+				}
 
 				if(get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true) != ""){
 					$large_image = get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true);
@@ -2541,103 +3131,43 @@ if (!function_exists('portfolio_list')) {
 				$html .="'>";
 
 				$html .= "<div class='image_holder ".$hover_type."'>";
-					$html .= "<span class='image'>";
-						$html .= get_the_post_thumbnail(get_the_ID(), $thumb_size);
-					$html .= "</span>";
+				$html .= "<span class='image'>";
+				$html .= get_the_post_thumbnail(get_the_ID(), $thumb_size);
+				$html .= "</span>";
 
-					if ($type == "standard" || $type == "standard_no_space" || $type == "masonry_with_space") {
+				if ($type == "standard" || $type == "standard_no_space" || $type == "masonry_with_space") {
 
-						if($disable_link != "yes"){
-							$html .= "<a class='portfolio_link_class' href='" . $portfolio_link . "' target='".$target."'></a>";
-						}
+					if($type=="masonry_with_space" && $pinterest_hover_type == "info_on_hover"){
+						$html .= "<div class='pinterest_info_hover_holder'>";
+						$html .= "<div class='pinterest_info_hover_inner'>";
+						$html .= "<div class='pinterest_info_hover_cell'>";
+					}
 
-						$html .= '<div class="portfolio_shader"></div>';
+					if($disable_link != "yes"){
+						$html .= "<a class='portfolio_link_class' href='" . $portfolio_link . "' target='".$target."'></a>";
+					}
 
-						$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
-							if ($lightbox == "yes") {
-								$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
-							}
+					$html .= '<div class="portfolio_shader"></div>';
 
-							if ($portfolio_qode_like == "on" && $show_like == "yes") {
-								if (function_exists('qode_like_portfolio_list')) {
-									$html .= qode_like_portfolio_list(get_the_ID());
-								}
-							}
-						$html .= "</div></div>";
 
-					} else if ($type == "hover_text" || $type == "hover_text_no_space") {
 
-						if($disable_link != "yes"){
-							$html .= "<a class='portfolio_link_class' href='" . $portfolio_link . "' target='".$target."'></a>";
-						}
-						
-						$html .= '<div class="portfolio_shader"></div>';
+					$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
+					if ($lightbox == "yes") {
+						$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
+					}
 
-						$html .= '<div class="text_holder">';
-							if($hover_type == "elegant_hover"){
-								$html .= '<div class="text_holder_inner"><div class="text_holder_inner2">';
-							}
-
-							if($hover_type == "default_hover" && !$portfolio_list_hide_category){
-								$html .= '<span class="project_category">';
-									$html .= '<span>'. __('In ', 'qode') .'</span>';
-									$k = 1;
-									foreach ($terms as $term) {
-										$html .= "$term->name";
-										if (count($terms) != $k) {
-											$html .= ' / ';
-										}
-										$k++;
-									}
-								$html .= '</span>';
-							}	
-
-							$title_style = '';
-							if($title_font_size != ""){
-								$title_style = 'style="font-size: '.$title_font_size.'px;"';
-							}
-							
-							$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'>' . get_the_title() . '</'.$title_tag.'>';
-
-							if($hover_type != "default_hover" && !$portfolio_list_hide_category){
-								$html .= '<span class="project_category">';
-									$html .= '<span>'. __('In ', 'qode') .'</span>';
-									$k = 1;
-									foreach ($terms as $term) {
-										$html .= "$term->name";
-										if (count($terms) != $k) {
-											$html .= ' / ';
-										}
-										$k++;
-									}
-								$html .= '</span>';
-							}
-
-							if($hover_type == "elegant_hover"){
-								$html .= '</div></div>';
-							}
-						$html .= "</div>";
-
-						if($hover_type != "elegant_hover"){
-							$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
-								if ($lightbox == "yes") {
-									$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
-								}
-
-								if ($portfolio_qode_like == "on" && $show_like == "yes") {
-									if (function_exists('qode_like_portfolio_list')) {
-										$html .= qode_like_portfolio_list(get_the_ID());
-									}
-								}
-							$html .= "</div></div>";
+					if ($portfolio_qode_like == "on" && $show_like == "yes") {
+						if (function_exists('qode_like_portfolio_list')) {
+							$html .= qode_like_portfolio_list(get_the_ID());
 						}
 					}
 
-				$html .= "</div>";
+					$html .= "</div></div>";
 
-				if ($type == "standard" || $type == "standard_no_space" || $type == "masonry_with_space") {
-					$html .= "<div class='portfolio_description ".$portfolio_description_class."'". $portfolio_box_style .">";
-						
+
+					//pinterest info on hover
+					if($type=="masonry_with_space" && $pinterest_hover_type == "info_on_hover"){
+
 						$title_style = '';
 						if($title_font_size != ""){
 							$title_style = 'style="font-size: '.$title_font_size.'px;"';
@@ -2648,20 +3178,138 @@ if (!function_exists('portfolio_list')) {
 						} else {
 							$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'>' . get_the_title() . '</'.$title_tag.'>';
 						}
-					
+
+						$html .= '<h6 class="portfolio_subtitle">' . $portfolio_subtitle . '</h6>';
+
 						if(!$portfolio_list_hide_category){
 							$html .= '<span class="project_category">';
-								$html .= '<span>'. __('In ', 'qode') .'</span>';
-								$k = 1;
-								foreach ($terms as $term) {
-									$html .= "$term->name";
-									if (count($terms) != $k) {
-										$html .= ', ';
-									}
-									$k++;
+							$k = 1;
+							foreach ($terms as $term) {
+								$html .= "$term->name";
+								if (count($terms) != $k) {
+									$html .= ', ';
 								}
+								$k++;
+							}
 							$html .= '</span>';
 						}
+					}
+
+					if($type=="masonry_with_space" && $pinterest_hover_type == "info_on_hover"){
+						$html .= "</div></div></div>";
+					}
+
+				} else if ($type == "hover_text" || $type == "hover_text_no_space") {
+
+					if($disable_link != "yes"){
+						$html .= "<a class='portfolio_link_class' href='" . $portfolio_link . "' target='".$target."'></a>";
+					}
+
+
+					if($hover_type == 'move_from_left'){
+						$html .= '<div class="holder-move">';
+					}
+
+
+					$html .= '<div class="portfolio_shader"></div>';
+
+					$html .= '<div class="text_holder">';
+
+					if($hover_type == "elegant_hover"){
+						$html .= '<div class="text_holder_inner"><div class="text_holder_inner2">';
+					}
+
+					if($hover_type == "default_hover" && !$portfolio_list_hide_category){
+						$html .= '<span class="project_category">';
+						$html .= '<span>'. __('In ', 'qode') .'</span>';
+						$k = 1;
+						foreach ($terms as $term) {
+							$html .= "$term->name";
+							if (count($terms) != $k) {
+								$html .= ' / ';
+							}
+							$k++;
+						}
+						$html .= '</span>';
+					}
+
+					$title_style = '';
+					if($title_font_size != ""){
+						$title_style = 'style="font-size: '.$title_font_size.'px;"';
+					}
+
+					$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'>' . get_the_title() . '</'.$title_tag.'>';
+					$html .= '<h6 class="portfolio_subtitle">' . $portfolio_subtitle . '</h6>';
+
+					if($hover_type != "default_hover" && !$portfolio_list_hide_category){
+						$html .= '<span class="project_category">';
+						$html .= '<span>'. __('In ', 'qode') .'</span>';
+						$k = 1;
+						foreach ($terms as $term) {
+							$html .= "$term->name";
+							if (count($terms) != $k) {
+								$html .= ' / ';
+							}
+							$k++;
+						}
+						$html .= '</span>';
+					}
+
+					if($hover_type == "elegant_hover"){
+						$html .= '</div></div>';
+					}
+					$html .= "</div>";
+
+					if($hover_type != "elegant_hover"){
+						$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
+						if ($lightbox == "yes") {
+							$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
+						}
+
+						if ($portfolio_qode_like == "on" && $show_like == "yes") {
+							if (function_exists('qode_like_portfolio_list')) {
+								$html .= qode_like_portfolio_list(get_the_ID());
+							}
+						}
+						$html .= "</div></div>";
+					}
+
+					if($hover_type == 'move_from_left'){
+						$html .= '</div>'; //close holder-move
+					}
+				}
+
+				$html .= "</div>";
+
+				if (($type == "standard" || $type == "standard_no_space" || $type == "masonry_with_space") && ($pinterest_hover_type != "info_on_hover")) {
+					$html .= "<div class='portfolio_description ".$portfolio_description_class."'". $portfolio_box_style .">";
+
+					$title_style = '';
+					if($title_font_size != ""){
+						$title_style = 'style="font-size: '.$title_font_size.'px;"';
+					}
+
+					if($disable_link != "yes"){
+						$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'><a href="' . $portfolio_link . '" target="'.$target.'">' . get_the_title() . '</a></'.$title_tag.'>';
+					} else {
+						$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'>' . get_the_title() . '</'.$title_tag.'>';
+					}
+
+					$html .= '<h6 class="portfolio_subtitle">' . $portfolio_subtitle . '</h6>';
+
+					if(!$portfolio_list_hide_category){
+						$html .= '<span class="project_category">';
+						$html .= '<span>'. __('In ', 'qode') .'</span>';
+						$k = 1;
+						foreach ($terms as $term) {
+							$html .= "$term->name";
+							if (count($terms) != $k) {
+								$html .= ', ';
+							}
+							$k++;
+						}
+						$html .= '</span>';
+					}
 					$html .= '</div>';
 				}
 
@@ -2680,7 +3328,7 @@ if (!function_exists('portfolio_list')) {
 			else:
 				?>
 				<p><?php _e('Sorry, no posts matched your criteria.', 'qode'); ?></p>
-			<?php
+				<?php
 			endif;
 
 
@@ -2693,206 +3341,8 @@ if (!function_exists('portfolio_list')) {
 			}
 			$html .= "</div>";
 			wp_reset_query();
-		} else {
-			if ($filter == "yes") {
-
-				$html .= "<div class='filter_outer ".$filter_align."'>";
-				$html .= "<div class='filter_holder ".$portfolio_filter_class."'><ul>";
-				if($disable_filter_title != "yes"){		
-					$html .= "<li class='filter_title'><span>".__('Sort Portfolio:', 'qode')."</span></li>";
-				}	
-				$html .= "<li class='filter' data-filter='*'><span>" . __('All', 'qode') . "</span></li>";
-				if ($category == "") {
-					$args = array(
-						'parent' => 0,
-						'orderby' => $filter_order_by
-					);
-					$portfolio_categories = get_terms('portfolio_category', $args);
-				} else {
-					$top_category = get_term_by('slug', $category, 'portfolio_category');
-					$term_id = '';
-					if (isset($top_category->term_id))
-						$term_id = $top_category->term_id;
-					$args = array(
-						'parent' => $term_id,
-						'orderby' => $filter_order_by
-					);
-					$portfolio_categories = get_terms('portfolio_category', $args);
-				}
-				foreach ($portfolio_categories as $portfolio_category) {
-					$html .= "<li class='filter' data-filter='.portfolio_category_$portfolio_category->term_id'><span>$portfolio_category->name</span>";
-					$args = array(
-						'child_of' => $portfolio_category->term_id
-					);
-					$html .= '</li>';
-				}
-				$html .= "</ul></div>";
-				$html .= "</div>";
-
-
-			}
-			$html .= "<div class='projects_masonry_holder'>";
-			if (get_query_var('paged')) {
-				$paged = get_query_var('paged');
-			} elseif (get_query_var('page')) {
-				$paged = get_query_var('page');
-			} else {
-				$paged = 1;
-			}
-			if ($category == "") {
-				$args = array(
-					'post_type' => 'portfolio_page',
-					'orderby' => $order_by,
-					'order' => $order,
-					'posts_per_page' => $number,
-					'paged' => $paged
-				);
-			} else {
-				$args = array(
-					'post_type' => 'portfolio_page',
-					'portfolio_category' => $category,
-					'orderby' => $order_by,
-					'order' => $order,
-					'posts_per_page' => $number,
-					'paged' => $paged
-				);
-			}
-			$project_ids = null;
-			if ($selected_projects != "") {
-				$project_ids = explode(",", $selected_projects);
-				$args['post__in'] = $project_ids;
-			}
-			query_posts($args);
-			if (have_posts()) : while (have_posts()) : the_post();
-				$terms = wp_get_post_terms(get_the_ID(), 'portfolio_category');
-				$featured_image_array = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full'); //original size
-
-				if(get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true) != ""){
-					$large_image = get_post_meta(get_the_ID(), 'qode_portfolio-lightbox-link', true);
-				} else {
-					$large_image = $featured_image_array[0];
-				}
-
-				$custom_portfolio_link = get_post_meta(get_the_ID(), 'qode_portfolio-external-link', true);
-				$portfolio_link = $custom_portfolio_link != "" ? $custom_portfolio_link : get_permalink();
-				if(get_post_meta(get_the_ID(), 'qode_portfolio-external-link-target', true) != ""){
-					$custom_portfolio_link_target = get_post_meta(get_the_ID(), 'qode_portfolio-external-link-target', true);
-				} else {
-					$custom_portfolio_link_target = '_blank';
-				}
-
-				$target = $custom_portfolio_link != "" ? $custom_portfolio_link_target : '_self';
-
-				$masonry_size = "default";
-				$masonry_size =  get_post_meta(get_the_ID(), "qode_portfolio_type_masonry_style", true);
-
-				$image_size = "";
-				if($masonry_size == "large_width"){
-					$image_size = "portfolio_masonry_wide";
-				}elseif($masonry_size == "large_height"){
-					$image_size = "portfolio_masonry_tall";
-				}elseif($masonry_size == "large_width_height"){
-					$image_size = "portfolio_masonry_large";
-				} else{
-					$image_size = "portfolio_masonry_regular";
-				}
-
-				if($type == "masonry_with_space"){
-					$image_size = "portfolio_masonry_with_space";
-				}
-
-				$slug_list_ = "pretty_photo_gallery";
-				$title = get_the_title();
-				$html .= "<article class='portfolio_masonry_item ";
-
-				foreach ($terms as $term) {
-					$html .= "portfolio_category_$term->term_id ";
-				}
-
-				$html .= " " . $masonry_size;
-				$html .= "'>";
-
-					$html .= "<div class='image_holder ".$hover_type."'>";
-						$html .= "<span class='image'>";
-							$html .= get_the_post_thumbnail(get_the_ID(), $image_size);
-						$html .= "</span>"; //close span.image
-
-						if($disable_link != "yes"){
-							$html .= "<a class='portfolio_link_class' href='" . $portfolio_link . "' target='".$target."'></a>";
-						}
-						
-						$html .= '<div class="portfolio_shader"></div>';
-
-						$html .= '<div class="text_holder">';
-							if($hover_type == "elegant_hover"){
-								$html .= '<div class="text_holder_inner"><div class="text_holder_inner2">';
-							}
-
-							if($hover_type == "default_hover" && !$portfolio_list_hide_category){
-								$html .= '<span class="project_category">';
-									$html .= '<span>'. __('In ', 'qode') .'</span>';
-									$k = 1;
-									foreach ($terms as $term) {
-										$html .= "$term->name";
-										if (count($terms) != $k) {
-											$html .= ' / ';
-										}
-										$k++;
-									}
-								$html .= '</span>';
-							}
-
-							$title_style = '';
-							if($title_font_size != ""){
-								$title_style = 'style="font-size: '.$title_font_size.'px;"';
-							}
-							
-							$html .= '<'.$title_tag.' class="portfolio_title" '.$title_style.'>' . get_the_title() . '</'.$title_tag.'>';
-
-							if($hover_type != "default_hover" && !$portfolio_list_hide_category){
-								$html .= '<span class="project_category">';
-									$html .= '<span>'. __('In ', 'qode') .'</span>';
-									$k = 1;
-									foreach ($terms as $term) {
-										$html .= "$term->name";
-										if (count($terms) != $k) {
-											$html .= ' / ';
-										}
-										$k++;
-									}
-								$html .= '</span>';
-							}
-
-							if($hover_type == "elegant_hover"){
-								$html .= '</div></div>';
-							}
-						$html .= "</div>";
-
-						if($hover_type != "elegant_hover"){
-							$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
-								if ($lightbox == "yes") {
-									$html .= "<a class='portfolio_lightbox' title='" . $title . "' href='" . $large_image . "' data-rel='prettyPhoto[" . $slug_list_ . "]'></a>";
-								}
-
-								if ($portfolio_qode_like == "on" && $show_like == "yes") {
-									if (function_exists('qode_like_portfolio_list')) {
-										$html .= qode_like_portfolio_list(get_the_ID());
-									}
-								}
-							$html .= "</div></div>";
-						}
-					$html .= "</div>"; //close div.image_holder
-				$html .= "</article>";
-
-			endwhile;
-			else:
-				?>
-				<p><?php _e('Sorry, no posts matched your criteria.', 'qode'); ?></p>
-			<?php
-			endif;
-			wp_reset_query();
-			$html .= "</div>";
 		}
+
 		return $html;
 	}
 
@@ -2935,8 +3385,11 @@ if (!function_exists('portfolio_slider')) {
 			$portfolio_list_hide_category = true;
 		}
 
+
+
 		$html = "";
 		$lightbox_slug = 'portfolio_slider_'.rand();
+
 
 		$html .= "<div class='portfolio_slider_holder clearfix'><div class='portfolio_slider'><ul class='portfolio_slides'>";
 
@@ -3035,6 +3488,7 @@ if (!function_exists('portfolio_slider')) {
 						}
 						
 						$html .= '<'.$title_tag.' class="portfolio_title">' . get_the_title() . '</'.$title_tag.'>';
+
 					$html .= "</div>";
 
 					$html .= '<div class="icons_holder"><div class="icons_holder_inner">';
@@ -3268,6 +3722,7 @@ if (!function_exists('progress_bar_icon')) {
 			"icon_pack"                 => "",
 			"fa_icon"                   => "",
 			"fe_icon"                   => "",
+			"linear_icon"               => "",
 			"size"                      => "",
 			"icon_color"                => "",
 			"icon_active_color"         => "",
@@ -3329,6 +3784,14 @@ if (!function_exists('progress_bar_icon')) {
 				}
 
 				$html .= "></span>";
+			} elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+				$html .= "<i class='lnr q_linear_icons_icon ".$linear_icon."'";
+
+				if($icon_active_color != ""){
+					$html .= " style='color: ".$icon_active_color.";'";
+				}
+
+				$html .= "></i>";
 			}
 
 			$html .= "</span><span class='bar_active fa-stack ";
@@ -3376,6 +3839,14 @@ if (!function_exists('progress_bar_icon')) {
 				}
 
 				$html .= "></span>";
+			} elseif($icon_pack == 'linear_icons' && $linear_icon != ''){
+				$html .= "<i class='lnr q_linear_icons_icon ".$linear_icon."'";
+
+				if($icon_active_color != ""){
+					$html .= " style='color: ".$icon_active_color.";'";
+				}
+
+				$html .= "></i>";
 			}
 
 			$html .= "</span></div>";
@@ -3629,6 +4100,10 @@ add_shortcode('social_share', 'social_share');
 
 if (!function_exists('social_share_list')) {
 	function social_share_list($atts, $content = null) {
+		$args = array(
+			"list_type"    => "circle"
+		);
+		extract(shortcode_atts($args, $atts));
 		global $qode_options;
 		if(isset($qode_options['twitter_via']) && !empty($qode_options['twitter_via'])) {
 			$twitter_via = " via " . $qode_options['twitter_via'] . " ";
@@ -3642,7 +4117,7 @@ if (!function_exists('social_share_list')) {
 
 			if(isset($qode_options["post_types_names_$post_type"])) {
 				if($qode_options["post_types_names_$post_type"] == $post_type) {
-					$html .= '<div class="social_share_list_holder">';
+					$html .= '<div class="social_share_list_holder ' . $list_type . '">';
 					$html .= '<ul>';
 
 					if(isset($qode_options['enable_facebook_share']) &&  $qode_options['enable_facebook_share'] == "yes") {
@@ -3655,7 +4130,12 @@ if (!function_exists('social_share_list')) {
 						if(!empty($qode_options['facebook_icon'])) {
 							$html .= '<img src="' . $qode_options["facebook_icon"] . '" alt="" />';
 						} else {
-							$html .= '<i class="social_facebook_circle"></i>';
+							if($list_type == 'circle') {
+								$html .= '<i class="social_facebook_circle"></i>';
+							}
+							else {
+								$html .= '<i class="social_facebook"></i>';
+							}
 						}
 						$html .= "</a>";
 						$html .= "</li>";
@@ -3667,7 +4147,12 @@ if (!function_exists('social_share_list')) {
 						if(!empty($qode_options['twitter_icon'])) {
 							$html .= '<img src="' . $qode_options["twitter_icon"] . '" alt="" />';
 						} else {
-							$html .= '<i class="social_twitter_circle"></i>';
+							if($list_type == 'circle') {
+								$html .= '<i class="social_twitter_circle"></i>';
+							}
+							else {
+								$html .= '<i class="social_twitter"></i>';
+							}
 						}
 
 						$html .= "</a>";
@@ -3679,7 +4164,12 @@ if (!function_exists('social_share_list')) {
 						if(!empty($qode_options['google_plus_icon'])) {
 							$html .= '<img src="' . $qode_options['google_plus_icon'] . '" alt="" />';
 						} else {
-							$html .= '<i class="social_googleplus_circle"></i>';
+							if($list_type == 'circle') {
+								$html .= '<i class="social_googleplus_circle"></i>';
+							}
+							else {
+								$html .= '<i class="social_googleplus"></i>';
+							}
 						}
 
 						$html .= "</a>";
@@ -3691,7 +4181,12 @@ if (!function_exists('social_share_list')) {
 						if(!empty($qode_options['linkedin_icon'])) {
 							$html .= '<img src="' . $qode_options['linkedin_icon'] . '" alt="" />';
 						} else {
-							$html .= '<i class="social_linkedin_circle"></i>';
+							if($list_type == 'circle') {
+								$html .= '<i class="social_linkedin_circle"></i>';
+							}
+							else {
+								$html .= '<i class="social_linkedin"></i>';
+							}
 						}
 
 						$html .= "</a>";
@@ -3703,7 +4198,12 @@ if (!function_exists('social_share_list')) {
 						if(!empty($qode_options['tumblr_icon'])) {
 							$html .= '<img src="' . $qode_options['tumblr_icon'] . '" alt="" />';
 						} else {
-							$html .= '<i class="social_tumblr_circle"></i>';
+							if($list_type == 'circle') {
+								$html .= '<i class="social_tumblr_circle"></i>';
+							}
+							else {
+								$html .= '<i class="social_tumblr"></i>';
+							}
 						}
 
 						$html .= "</a>";
@@ -3716,7 +4216,12 @@ if (!function_exists('social_share_list')) {
 						if(!empty($qode_options['pinterest_icon'])) {
 							$html .= '<img src="' . $qode_options['pinterest_icon'] . '" alt="" />';
 						} else {
-							$html .= '<i class="social_pinterest_circle"></i>';
+							if($list_type == 'circle') {
+								$html .= '<i class="social_pinterest_circle"></i>';
+							}
+							else {
+								$html .= '<i class="social_pinterest"></i>';
+							}
 						}
 
 						$html .= "</a>";
@@ -3752,6 +4257,7 @@ if (!function_exists('social_share_list')) {
 if (!function_exists('q_team')) {
 	function q_team($atts, $content = null) {
 		$args = array(
+			"team_type"									=> "",
 			"team_image"								=> "",
 			"team_image_hover_color"					=> "",
 			"team_name"									=> "",
@@ -3834,6 +4340,10 @@ if (!function_exists('q_team')) {
 
 		if($background_color != "" || ($box_border != "")) {
 			$q_team_holder_classes[] = "with_padding";
+		}
+
+		if($team_type == "info_hover") {
+			$q_team_holder_classes[] = "info_hover";
 		}
 
 		$q_team_style = "";
@@ -3924,14 +4434,28 @@ if (!function_exists('q_team')) {
 			$q_team_description_style = 'style ="'.implode(';', $q_team_description_style_array).'"';
 		}
 
-		$html =  "<div class='q_team ".implode(' ', $q_team_holder_classes)."'". $q_team_style .">";
-		$html .=  "<div class='q_team_inner'>";
-		if($team_image != "") {
-			$html .=  "<div class='q_team_image'>";
-			$html .= "<img src='$team_image_src' alt='team_image' />";
-			$html .=  "<div class='q_team_social_holder' ".$q_team_image_hover_style.">";
-			$html .=  "<div class='q_team_social'>";
-			$html .=  "<div class='q_team_social_inner'>";
+			$html =  "<div class='q_team ".implode(' ', $q_team_holder_classes)."'". $q_team_style .">";
+			$html .=  "<div class='q_team_inner'>";
+			if($team_image != "") {
+				$html .=  "<div class='q_team_image'>";
+				$html .= "<img src='$team_image_src' alt='team_image' />";
+				$html .=  "<div class='q_team_social_holder' ".$q_team_image_hover_style.">";
+				$html .=  "<div class='q_team_social'>";
+				$html .=  "<div class='q_team_social_inner'>";
+
+
+				if($team_type == 'info_hover'){
+					// html for info hover type
+					$html .=  "<div class='q_team_title_holder'>";
+					$html .=  "<$team_name_tag class='q_team_name' ".$q_team_name_style.">";
+					$html .= $team_name;
+					$html .=  "</$team_name_tag>";
+					if($team_position != "") {
+						$html .= "<h6 class='q_team_position' ".$q_team_position_style.">" . $team_position . "</h6>";
+					}
+					$html .=  "</div>"; //close div.q_team_title_holder
+				}
+
 				//generate social icons html
 				$team_social_icon_type_label = ''; //used in generating shortcode parameters based on icon pack
 				$team_social_icon_param_label = ''; //used in generating shortcode parameters based on icon pack
@@ -3945,6 +4469,8 @@ if (!function_exists('q_team')) {
 					$team_social_icon_param_label = 'fe_icon';
 				}
 
+				if($team_type == 'info_hover'){ $html .=  "<div class='q_team_social_on_hover'>"; }
+
 				//for each of available icons
 				for($i = 1; $i <= 5; $i++) {
 					$team_social_icon 		= ${$team_social_icon_type_label.'_'.$i};
@@ -3955,7 +4481,7 @@ if (!function_exists('q_team')) {
 						$social_icons_param_array = array();
 
 						$social_icons_param_array[] = $team_social_icon_param_label."='".$team_social_icon."'";
-						
+
 						if($team_social_link !== '') {
 							$social_icons_param_array[] = "link='".$team_social_link."'";
 						}
@@ -3994,61 +4520,73 @@ if (!function_exists('q_team')) {
 							$social_icons_param_array[] = "border_hover_color='".$team_social_border_hover_color."'";
 						}
 
-						$html .=  do_shortcode('[social_icons icon_pack="'.$team_social_icon_pack.'" '.implode(' ', $social_icons_param_array).']');
+
+							$html .=  do_shortcode('[social_icons icon_pack="'.$team_social_icon_pack.'" '.implode(' ', $social_icons_param_array).']');
+
 					}
 
 				}
+
+				if($team_type == 'info_hover'){ $html .=  "</div>"; }
 
 				$html .=  "</div></div></div>"; //close div.q_team_social_holder
 				$html .=  "</div>"; //close div.q_team_image
-		}
-		$html .=  "<div class='q_team_text ".$text_align."' ". $qteam_box_style .">";
-		$html .=  "<div class='q_team_text_inner'>";
-		$html .=  "<div class='q_team_title_holder'>";
-		if($team_position != "") {
-			$html .= "<h6 class='q_team_position' ".$q_team_position_style.">" . $team_position . "</h6>";
-		}		
-		$html .=  "<$team_name_tag class='q_team_name' ".$q_team_name_style.">";
-		$html .= $team_name;
-		$html .=  "</$team_name_tag>"; 
-		$html .=  "</div>"; //close div.q_team_title_holder
+			}
+			if(($team_type == 'info_hover' && ($team_description != '' || $show_skills == 'yes')) || $team_type == '') {
+				$html .=  "<div class='q_team_text ".$text_align."' ". $qteam_box_style .">";
+				$html .=  "<div class='q_team_text_inner'>";
 
-		if($team_description != "") {
 
-			$html .= "<div class='q_team_description'>";
-			$html .= "<p ".$q_team_description_style.">".$team_description."</p>";
-			$html .= "</div>"; // close div.q_team_description
-		}
+				if($team_type != 'info_hover') {
+					$html .= "<div class='q_team_title_holder'>";
+					if ($team_position != "") {
+						$html .= "<h6 class='q_team_position' " . $q_team_position_style . ">" . $team_position . "</h6>";
+					}
+					$html .= "<$team_name_tag class='q_team_name' " . $q_team_name_style . ">";
+					$html .= $team_name;
+					$html .= "</$team_name_tag>";
+					$html .= "</div>"; //close div.q_team_title_holder
+				}
 
-		if($show_skills == 'yes') {
-			$html .= '<div class="q_team_skills_holder">';
+				if($team_description != "") {
 
-			for($i = 1; $i <=3; $i++) {
-				$skill_title = ${"skill_title_".$i};
-				$skill_percentage = ${"skill_percentage_".$i};
+					$html .= "<div class='q_team_description'>";
+					$html .= "<p ".$q_team_description_style.">".$team_description."</p>";
+					$html .= "</div>"; // close div.q_team_description
+				}
 
-				if($skill_title != '' && $skill_percentage != '') {
+				if($show_skills == 'yes') {
+					$html .= '<div class="q_team_skills_holder">';
 
-					$skills_param_array = array(
-						'title ="'.$skill_title.'"',
-						'percent = '.$skill_percentage
-					);
+					for($i = 1; $i <=3; $i++) {
+						$skill_title = ${"skill_title_".$i};
+						$skill_percentage = ${"skill_percentage_".$i};
 
-					if($skills_title_size != '') {
-						$skills_param_array[] = 'title_custom_size = '.$skills_title_size;
+						if($skill_title != '' && $skill_percentage != '') {
+
+							$skills_param_array = array(
+								'title ="'.$skill_title.'"',
+								'percent = '.$skill_percentage
+							);
+
+							if($skills_title_size != '') {
+								$skills_param_array[] = 'title_custom_size = '.$skills_title_size;
+							}
+
+							$html .= do_shortcode('[progress_bar '.implode(' ', $skills_param_array).']');
+						}
 					}
 
-					$html .= do_shortcode('[progress_bar '.implode(' ', $skills_param_array).']');
+					$html .= '</div>';
 				}
+
+				$html .=  "</div>"; //close div.q_team_text_inners
+				$html .=  "</div>"; //close div.q_team_text
 			}
 
-			$html .= '</div>';
-		}
+			$html .=  "</div>"; //close div.q_team_inner
+			$html .=  "</div>"; //close div.q_team
 
-		$html .=  "</div>"; //close div.q_team_text_inners
-		$html .=  "</div>"; //close div.q_team_text
-		$html .=  "</div>"; //close div.q_team_inner
-		$html .=  "</div>"; //close div.q_team
 		return $html;
 	}
 }
@@ -4061,11 +4599,15 @@ if (!function_exists('testimonials')) {
 
 	function testimonials($atts, $content = null) {
 		$deafult_args = array(
+			"type"						=> "",
 			"number"					=> "-1",
 			"category"					=> "",
+			"show_author_image"			=> "",
+			"show_title"				=> "",
 			"text_color"				=> "",
 			"text_font_size"			=> "",
 			"author_text_color"			=> "",
+			"show_author_job_position"	=> "",
 			"text_align"                => "left_align",
 			"show_navigation"			=> "",
 			"navigation_style"			=> "",
@@ -4107,38 +4649,87 @@ if (!function_exists('testimonials')) {
 			$args['testimonials_category'] = $category;
 		}
 
-		$html .= "<div class='testimonials_holder clearfix ".$navigation_style."'>";
+		$html .= "<div class='testimonials_holder clearfix " . $navigation_style . " " . $type . "'>";
 		$html .= '<div class="testimonials testimonials_carousel" data-show-navigation="'.$show_navigation.'" data-animation-type="'.$animation_type.'" data-animation-speed="'.$animation_speed.'" data-auto-rotate-slides="'.$auto_rotate_slides.'">';
 		$html .= '<ul class="slides">';
-
+		$i = 0;
+		$opened = false;
 		query_posts($args);
 		if (have_posts()) :
 			while (have_posts()) : the_post();
 				$author = get_post_meta(get_the_ID(), "qode_testimonial-author", true);
 				$text = get_post_meta(get_the_ID(), "qode_testimonial-text", true);
+				$job = get_post_meta(get_the_ID(), "qode_testimonial-job", true);
+				if($type == 'grouped') {
+					$i++;
+					if($i%3 == 1){
+						$html .= '<li id="testimonials' . get_the_ID() . '" class="testimonial_content">';
+						$opened = true;
+					}
+					$html .= '<div class="testimonial_content_grouped_item">';
+					$html .= '<div class="testimonial_content_inner">';
+					$html .= '<div class="testimonial_text_holder '.$text_align.'">';
+					$html .= '<div class="testimonial_text_inner">';
+					if($show_author_image == 'yes') {
+						$html .= '<div class="testimonial_image_holder">';
+						$html .= get_the_post_thumbnail(get_the_ID());
+						$html .= '</div>';
+					}
+					$html .= '<p'. $testimonial_p_style .'>' . trim($text) . '</p>';
 
-				$html .= '<li id="testimonials' . get_the_ID() . '" class="testimonial_content">';
-				$html .= '<div class="testimonial_content_inner"';
+					$html .= '<p class="testimonial_author" style="'.$testimonial_name_styles.'">- ' . $author;
+					if($show_author_job_position == 'yes') {
+						$html .= '<span class="testimonial_author_job">' . $job . '</span>';
+					}
+					$html .= '</p>';
+					$html .= '</div>'; //close testimonial_text_inner
+					$html .= '</div>'; //close testimonial_text_holder
 
-				$html .= '>';
-				$html .= '<div class="testimonial_text_holder '.$text_align.'">';
-				$html .= '<div class="testimonial_text_inner">';
-				$html .= '<p'. $testimonial_p_style .'>' . trim($text) . '</p>';
+					$html .= '</div>'; //close testimonial_content_inner
+					$html .= '</div>'; //close testimonial_content_grouped_item
 
-				$html .= '<p class="testimonial_author" style="'.$testimonial_name_styles.'">- ' . $author;
+					if($i%3 == 0) {
+						$html .= '</li>';
+						$opened = false;
+					}
 
-				$html .= '</p>';
-				$html .= '</div>'; //close testimonial_text_inner
-				$html .= '</div>'; //close testimonial_text_holder
+				}
+				else {
+					$html .= '<li id="testimonials' . get_the_ID() . '" class="testimonial_content">';
+					$html .= '<div class="testimonial_content_inner">';
+					$html .= '<div class="testimonial_text_holder '.$text_align.'">';
+					$html .= '<div class="testimonial_text_inner">';
+					if($show_author_image == 'yes') {
+						$html .= '<div class="testimonial_image_holder">';
+						$html .= get_the_post_thumbnail(get_the_ID());
+						$html .= '</div>';
+					}
+					if($show_title == 'yes') {
+						$html .= '<p class="testimonial_title">' . get_the_title(get_the_ID()) . '</p>';
+					}
+					$html .= '<p'. $testimonial_p_style .'>' . trim($text) . '</p>';
 
-				$html .= '</div>'; //close testimonial_content_inner
-				$html .= '</li>'; //close testimonials
+					$html .= '<p class="testimonial_author" style="'.$testimonial_name_styles.'">- ' . $author;
+					if($show_author_job_position == 'yes') {
+						$html .= '<span class="testimonial_author_job">' . $job . '</span>';
+					}
+					$html .= '</p>';
+					$html .= '</div>'; //close testimonial_text_inner
+					$html .= '</div>'; //close testimonial_text_holder
+
+					$html .= '</div>'; //close testimonial_content_inner
+					$html .= '</li>'; //close testimonials
+				}
+
 			endwhile;
 		else:
 			$html .= __('Sorry, no posts matched your criteria.', 'qode');
 		endif;
 
 		wp_reset_query();
+		if($type == 'grouped' && $opened) {
+			$html .= '</li>';
+		}
 		$html .= '</ul>';//close slides
 		$html .= '</div>';
 		$html .= '</div>';
@@ -4202,6 +4793,7 @@ if (!function_exists('service_table')) {
 			"icon_pack"              	=> "",
 			"fa_icon"                	=> "",
 			"fe_icon"                	=> "",
+			"linear_icon"              	=> "",
 			"custom_size"              	=> "",
 			"border"					=> "",
 			"border_width"              => "",
@@ -4303,6 +4895,10 @@ if (!function_exists('service_table')) {
 			if($fe_icon != ""){
 				$html .= "<span class='service_table_icon ".$fe_icon."' style='".$icon_style."'></span>";
 			}
+		} elseif ($icon_pack == 'linear_icons' && $linear_icon != ''){
+			if($linear_icon != ""){
+				$html .= "<i class='service_table_icon lnr ".$linear_icon."' style='".$icon_style."'></i>";
+			}
 		}
 
 		$html .= "</li>";
@@ -4351,7 +4947,7 @@ if (!function_exists('qode_slider')) {
 			if(isset($slider_meta['slider_parallax_effect'])){
 				$slider_parallax = $slider_meta['slider_parallax_effect'];
 			}
-			if($slider_parallax == 'no'){
+			if($slider_parallax == 'no' || (isset($qode_options['paspartu']) && $qode_options['paspartu'] == 'yes')){
 				$data_parallax_effect = 'data-parallax="no"';
 				$slider_css_position_class = 'relative_position';
 			}else{
@@ -4424,7 +5020,7 @@ if (!function_exists('qode_slider')) {
 
 			$page_id = $wp_query->get_queried_object_id();
 			$header_height_padding = 0;
-			if((get_post_meta($page_id, "qode_header_color_transparency_per_page", true) == "" || get_post_meta($page_id, "qode_header_color_transparency_per_page", true) == "1") && ($qode_options['header_background_transparency_initial'] == "" || $qode_options['header_background_transparency_initial'] == "1") && $qode_options['header_bottom_appearance'] != "regular"){
+			if((get_post_meta($page_id, "qode_header_color_transparency_per_page", true) == "" || get_post_meta($page_id, "qode_header_color_transparency_per_page", true) == "1") && ($qode_options['header_background_transparency_initial'] == "" || $qode_options['header_background_transparency_initial'] == "1") && $qode_options['header_bottom_appearance'] != "regular" && ($qode_options['enable_content_top_margin'] != "yes" && get_post_meta($page_id, "qode_enable_content_top_margin", true) != "yes")){
 
                 $header_bottom_appearance = "";
                 if (isset($qode_options['header_bottom_appearance'])) {
@@ -4564,6 +5160,22 @@ if (!function_exists('qode_slider')) {
                     $slide_title_style .= 'text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);';
                 }
 
+				if(get_post_meta(get_the_ID(), 'qode_slide-title-bottom-margin', true) !== '') {
+					$slide_title_style .= 'margin-bottom: '.get_post_meta(get_the_ID(), 'qode_slide-title-bottom-margin', true).'px;';
+				}
+
+				if(get_post_meta(get_the_ID(), 'qode_slide-title-background-color', true) !== '') {
+					$original_color = get_post_meta(get_the_ID(), 'qode_slide-title-background-color', true);
+					$color = qode_hex2rgb($original_color);
+					if(get_post_meta(get_the_ID(), 'qode_slide-title-background-opacity', true) !== '') {
+						$opacity = get_post_meta(get_the_ID(), 'qode_slide-title-background-opacity', true);
+						$slide_title_style .= 'background-color: rgba('. $color[0] . ',' . $color[1] . ',' . $color[2] . ',' . $opacity . ')';
+					}
+					else {
+						$slide_title_style .= 'background-color: rgba('. $color[0] . ',' . $color[1] . ',' . $color[2] . ')';
+					}
+				}
+
 				$slide_subtitle_style = "";
 				if(get_post_meta(get_the_ID(), "qode_slide-subtitle-color", true) != ""){
 					$slide_subtitle_style .= "color: ". get_post_meta(get_the_ID(), "qode_slide-subtitle-color", true) . ";";
@@ -4593,6 +5205,10 @@ if (!function_exists('qode_slider')) {
 				if(get_post_meta(get_the_ID(), 'qode_slide-hide-shadow', true) == 'yes'){
                     $slide_subtitle_style .= 'text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);';
                 }
+
+				if(get_post_meta(get_the_ID(), 'qode_slide-subtile-bottom-margin', true) !== '') {
+					$slide_subtitle_style .= 'margin-bottom: '.get_post_meta(get_the_ID(), 'qode_slide-subtile-bottom-margin', true).'px;';
+				}
 
 				$slide_text_style = "";
 				$button_style = "";
@@ -4625,6 +5241,10 @@ if (!function_exists('qode_slider')) {
 				if(get_post_meta(get_the_ID(), 'qode_slide-hide-shadow', true) == 'yes'){
                     $slide_text_style .= 'text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);';
                 }
+
+				if(get_post_meta(get_the_ID(), 'qode_slide-text-bottom-margin', true) !== '') {
+					$slide_text_style .= 'margin-bottom: '.get_post_meta(get_the_ID(), 'qode_slide-text-bottom-margin', true).'px;';
+				}
 
 				$graphic_alignment = get_post_meta(get_the_ID(), "qode_slide-graphic-alignment", true);
 				$content_alignment = get_post_meta(get_the_ID(), "qode_slide-content-alignment", true);
@@ -4765,6 +5385,10 @@ if (!function_exists('qode_slider')) {
                     $html_thumb .= '</div>';
                 }
 				$html_text = "";
+				$title_class = "";
+				if(get_post_meta(get_the_ID(), "qode_slide-title-background-color", true) != '') {
+					$title_class .= ' with_bg_color';
+				}
 				$html_text .= '<div class="text '.$content_animation.'" style="'.$slide_content_style.'">';
 
 					if(get_post_meta(get_the_ID(), "qode_slide-subtitle", true) != ""){
@@ -4772,7 +5396,7 @@ if (!function_exists('qode_slider')) {
 					}
 
 					if(get_post_meta(get_the_ID(), "qode_slide-hide-title", true) != true){
-						$html_text .= '<h2 class="q_slide_title" style="'.$slide_title_style.'"><span>'.get_the_title().'</span></h2>';
+						$html_text .= '<h2 class="q_slide_title' . $title_class . '" style="'.$slide_title_style.'"><span>'.get_the_title().'</span></h2>';
 					}
 
 					if(get_post_meta(get_the_ID(), "qode_slide-text", true) != ""){
@@ -4815,7 +5439,7 @@ if (!function_exists('qode_slider')) {
 					if(get_post_meta(get_the_ID(), "qode_slide-anchor-button", true) !== '') {
 	                    $slide_anchor_style = array();
 	                    if(get_post_meta(get_the_ID(), "qode_slide-text-color", true) !== '') {
-	                        $slide_anchor_style[] = get_post_meta(get_the_ID(), "qode_slide-text-color", true);
+	                        $slide_anchor_style[] = "color: " . get_post_meta(get_the_ID(), "qode_slide-text-color", true);
 	                    }
 
 	                    if($slide_anchor_style !== '') {
@@ -4916,134 +5540,268 @@ if (!function_exists('qode_carousel')) {
 	function qode_carousel( $atts, $content = null ) {
 		$args = array(
 			"carousel" 			=> "",
+			"items_visible" 	=> "5",
 			"orderby"  			=> "date",
 			"order"    			=> "ASC",
 			"show_navigation"	=> "",
-			"show_in_two_rows" 	=> ""
+			"show_in_two_rows" 	=> "",
+			"space_between" 	=> "no",
+			"hover_effect" 		=> "second_image",
+			"on_click" 			=> "open_link",
+			"carousel_type"		=> ""
 		);
 
 		extract(shortcode_atts($args, $atts));
 
 		$html = "";
+		$data = "";
 
 
 		if ($carousel != "") {
 			$carousel_holder_classes = array();
+			$carousel_type_classes = "";
 
-			if($show_in_two_rows == 'yes') {
+			if ($carousel_type == "carousel_owl") {
+				$carousel_type_classes = 'carousel_owl';
+			}
+
+			if ($show_in_two_rows == 'yes') {
 				$carousel_holder_classes[] = 'two_rows';
 			}
 
-			$html .= "<div class='qode_carousels_holder clearfix ".implode(' ', $carousel_holder_classes)."'><div class='qode_carousels'><ul class='slides'>";
-
-			$q = array('post_type'=> 'carousels', 'carousels_category' => $carousel, 'orderby' => $orderby, 'order' => $order, 'posts_per_page' => '-1');
-
-			query_posts($q);
-			$have_posts = false;
-
-			if ( have_posts() ) : $post_count = 1; $have_posts = true; while ( have_posts() ) : the_post();
-
-				if(get_post_meta(get_the_ID(), "qode_carousel-image", true) != "") {
-					$image = get_post_meta(get_the_ID(), "qode_carousel-image", true);
-				} else {
-					$image = "";
-				}
-
-				if(get_post_meta(get_the_ID(), "qode_carousel-hover-image", true) != ""){
-					$hover_image = get_post_meta(get_the_ID(), "qode_carousel-hover-image", true);
-					$has_hover_image = "has_hover_image";
-				} else {
-					$hover_image = "";
-					$has_hover_image = "";
-				}
-
-				if(get_post_meta(get_the_ID(), "qode_carousel-item-link", true) != ""){
-					$link = get_post_meta(get_the_ID(), "qode_carousel-item-link", true);
-				} else {
-					$link = "";
-				}
-
-				if(get_post_meta(get_the_ID(), "qode_carousel-item-target", true) != ""){
-					$target = get_post_meta(get_the_ID(), "qode_carousel-item-target", true);
-				} else {
-					$target = "_self";
-				}
-
-				$title = get_the_title();
-
-				//is current item not on even position in array and two rows option is chosen?
-				if($post_count % 2 !== 0 && $show_in_two_rows == 'yes') {
-					$html .= "<li class='item'>";
-				} elseif($show_in_two_rows == '') {
-					$html .= "<li class='item'>";
-				}
-
-				$html .= '<div class="carousel_item_holder">';
-
-				if($link != ""){
-					$html .= "<a href='".$link."' target='".$target."'>";
-				}
-
-				if($image != ""){
-					$html .= "<span class='first_image_holder ".$has_hover_image."'><img src='".$image."' alt='".$title."'></span>";
-				}
-
-				if($hover_image != ""){
-					$html .= "<span class='second_image_holder ".$has_hover_image."'><img src='".$hover_image."' alt='".$title."'></span>";
-				}
-
-				if($link != ""){
-					$html .= "</a>";
-				}
-
-				$html .= '</div>';
-
-				//is current item on even position in array and two rows option is chosen?
-				if($post_count % 2 == 0 && $show_in_two_rows == 'yes') {
-					$html .= "</li>";
-				} elseif($show_in_two_rows == '') {
-					$html .= "</li>";
-				}
-
-				$post_count++;
-
-			endwhile;
-
-			else:
-				$html .= __('Sorry, no posts matched your criteria.','qode');
-			endif;
-
-			wp_reset_query();
-
-			$html .= "</ul>";
-
-			if($show_navigation != 'no' && $have_posts) {
-				//generate navigation html
-				$html .= '<ul class="caroufredsel-direction-nav">';
-
-				$html .= '<li class="caroufredsel-prev-holder">';
-
-				$html .= '<a id="caroufredsel-prev" class="qode_carousel_prev caroufredsel-navigation-item caroufredsel-prev" href="javascript: void(0)">';
-
-				$html .= '<span class="arrow_carrot-left"></span>';
-
-				$html .= '</a>';
-
-				$html .= '</li>'; //close li.caroufredsel-prev-holder
-
-				$html .= '<li class="caroufredsel-next-holder">';
-				$html .= '<a class="qode_carousel_next caroufredsel-next caroufredsel-navigation-item" id="caroufredsel-next" href="javascript: void(0)">';
-
-				$html .= '<span class="arrow_carrot-right"></span>';
-
-				$html .= '</a>';
-
-				$html .= '</li>'; //close li.caroufredsel-next-holder
-
-				$html .= '</ul>'; //close ul.caroufredsel-direction-nav
+			if ($items_visible != "") {
+				$data .= 'data-number_of_items = ' . $items_visible;
 			}
-			$html .= "</div></div>";
 
+			if ($space_between == 'yes') {
+				$carousel_holder_classes[] = 'with_space';
+			}
+
+			if ($hover_effect == 'second_image') {
+				$carousel_holder_classes[] = 'hover_second_image';
+			} else if ($hover_effect == 'overlay') {
+				$carousel_holder_classes[] = 'hover_overlay';
+			}
+
+
+
+			if ($carousel_type == "carousel_owl") {
+
+				$html .= "<div class='qode_carousels_holder clearfix ".implode(' ', $carousel_holder_classes)."'><div class='qode_carousels " .$carousel_type_classes. "'><div class='slides'>";
+
+				$q = array('post_type'=> 'carousels', 'carousels_category' => $carousel, 'orderby' => $orderby, 'order' => $order, 'posts_per_page' => '-1');
+
+				$pretty_rel_random = ' data-rel="prettyPhoto[rel-' . get_the_ID() . '-' . rand() . ']"';
+
+				query_posts($q);
+				$have_posts = false;
+
+				if ( have_posts() ) : $post_count = 1; $have_posts = true; while ( have_posts() ) : the_post();
+
+					if(get_post_meta(get_the_ID(), "qode_carousel-image", true) != "") {
+						$image = get_post_meta(get_the_ID(), "qode_carousel-image", true);
+					} else {
+						$image = "";
+					}
+
+					if(get_post_meta(get_the_ID(), "qode_carousel-hover-image", true) != ""){
+						$hover_image = get_post_meta(get_the_ID(), "qode_carousel-hover-image", true);
+						$has_hover_image = "has_hover_image";
+					} else {
+						$hover_image = "";
+						$has_hover_image = "";
+					}
+
+					if(get_post_meta(get_the_ID(), "qode_carousel-item-link", true) != ""){
+						$link = get_post_meta(get_the_ID(), "qode_carousel-item-link", true);
+					} else {
+						$link = "";
+					}
+
+					if(get_post_meta(get_the_ID(), "qode_carousel-item-target", true) != ""){
+						$target = get_post_meta(get_the_ID(), "qode_carousel-item-target", true);
+					} else {
+						$target = "_self";
+					}
+
+					$title = get_the_title();
+
+					//is current item not on even position in array and two rows option is chosen?
+					if($post_count % 2 !== 0 && $show_in_two_rows == 'yes') {
+						$html .= "<div class='item'>";
+					} elseif($show_in_two_rows == '') {
+						$html .= "<div class='item'>";
+					}
+
+					$html .= '<div class="carousel_item_holder">';
+
+					if($link != "" && $on_click == 'open_link'){
+						$html .= "<a href='".$link."' target='".$target."'>";
+					}
+					else if ($on_click == 'prettyphoto') {
+						$html .= "<a class='prettyphoto' href='" . $image . "'" . $pretty_rel_random . ">";
+					}
+
+					if($image != ""){
+						$html .= "<span class='first_image_holder ".$has_hover_image."'><img src='".$image."' alt='".$title."'></span>";
+					}
+
+					if($hover_image != "" && $hover_effect == 'second_image'){
+						$html .= "<span class='second_image_holder ".$has_hover_image."'><img src='".$hover_image."' alt='".$title."'></span>";
+					}
+
+					else if($hover_effect == 'overlay') {
+						$html .= "<span class='carousel_image_overlay'></span>";
+					}
+
+					if($link != "" || $on_click == 'prettyphoto'){
+						$html .= "</a>";
+					}
+
+					$html .= '</div>';
+
+					//is current item on even position in array and two rows option is chosen?
+					if($post_count % 2 == 0 && $show_in_two_rows == 'yes') {
+						$html .= "</div>";
+					} elseif($show_in_two_rows == '') {
+						$html .= "</div>";
+					}
+
+					$post_count++;
+
+				endwhile;
+
+				else:
+					$html .= __('Sorry, no posts matched your criteria.','qode');
+				endif;
+
+				wp_reset_query();
+
+				$html .= "</div>";
+
+				$html .= "</div></div>";
+
+			} else {
+
+				$html .= "<div class='qode_carousels_holder clearfix " . implode(' ', $carousel_holder_classes) . "'><div class='qode_carousels " . $carousel_type_classes . "' " . $data . "><ul class='slides'>";
+
+				$q = array('post_type' => 'carousels', 'carousels_category' => $carousel, 'orderby' => $orderby, 'order' => $order, 'posts_per_page' => '-1');
+
+				$pretty_rel_random = ' data-rel="prettyPhoto[rel-' . get_the_ID() . '-' . rand() . ']"';
+
+				query_posts($q);
+				$have_posts = false;
+
+				if (have_posts()) : $post_count = 1;
+					$have_posts = true;
+					while (have_posts()) : the_post();
+
+						if (get_post_meta(get_the_ID(), "qode_carousel-image", true) != "") {
+							$image = get_post_meta(get_the_ID(), "qode_carousel-image", true);
+						} else {
+							$image = "";
+						}
+
+						if (get_post_meta(get_the_ID(), "qode_carousel-hover-image", true) != "") {
+							$hover_image = get_post_meta(get_the_ID(), "qode_carousel-hover-image", true);
+							$has_hover_image = "has_hover_image";
+						} else {
+							$hover_image = "";
+							$has_hover_image = "";
+						}
+
+						if (get_post_meta(get_the_ID(), "qode_carousel-item-link", true) != "") {
+							$link = get_post_meta(get_the_ID(), "qode_carousel-item-link", true);
+						} else {
+							$link = "";
+						}
+
+						if (get_post_meta(get_the_ID(), "qode_carousel-item-target", true) != "") {
+							$target = get_post_meta(get_the_ID(), "qode_carousel-item-target", true);
+						} else {
+							$target = "_self";
+						}
+
+						$title = get_the_title();
+
+						//is current item not on even position in array and two rows option is chosen?
+						if ($post_count % 2 !== 0 && $show_in_two_rows == 'yes') {
+							$html .= "<li class='item'>";
+						} elseif ($show_in_two_rows == '') {
+							$html .= "<li class='item'>";
+						}
+
+						$html .= '<div class="carousel_item_holder">';
+
+						if ($link != "" && $on_click == 'open_link') {
+							$html .= "<a href='" . $link . "' target='" . $target . "'>";
+						} else if ($on_click == 'prettyphoto') {
+							$html .= "<a class='prettyphoto' href='" . $image . "'" . $pretty_rel_random . ">";
+						}
+
+						if ($image != "") {
+							$html .= "<span class='first_image_holder " . $has_hover_image . "'><img src='" . $image . "' alt='" . $title . "'></span>";
+						}
+
+						if ($hover_image != "" && $hover_effect == 'second_image') {
+							$html .= "<span class='second_image_holder " . $has_hover_image . "'><img src='" . $hover_image . "' alt='" . $title . "'></span>";
+						} else if ($hover_effect == 'overlay') {
+							$html .= "<span class='carousel_image_overlay'></span>";
+						}
+
+						if ($link != "" || $on_click == 'prettyphoto') {
+							$html .= "</a>";
+						}
+
+						$html .= '</div>';
+
+						//is current item on even position in array and two rows option is chosen?
+						if ($post_count % 2 == 0 && $show_in_two_rows == 'yes') {
+							$html .= "</li>";
+						} elseif ($show_in_two_rows == '') {
+							$html .= "</li>";
+						}
+
+						$post_count++;
+
+					endwhile;
+
+				else:
+					$html .= __('Sorry, no posts matched your criteria.', 'qode');
+				endif;
+
+				wp_reset_query();
+
+				$html .= "</ul>";
+
+				if ($show_navigation != 'no' && $have_posts) {
+					//generate navigation html
+					$html .= '<ul class="caroufredsel-direction-nav">';
+
+					$html .= '<li class="caroufredsel-prev-holder">';
+
+					$html .= '<a id="caroufredsel-prev" class="qode_carousel_prev caroufredsel-navigation-item caroufredsel-prev" href="javascript: void(0)">';
+
+					$html .= '<span class="arrow_carrot-left"></span>';
+
+					$html .= '</a>';
+
+					$html .= '</li>'; //close li.caroufredsel-prev-holder
+
+					$html .= '<li class="caroufredsel-next-holder">';
+					$html .= '<a class="qode_carousel_next caroufredsel-next caroufredsel-navigation-item" id="caroufredsel-next" href="javascript: void(0)">';
+
+					$html .= '<span class="arrow_carrot-right"></span>';
+
+					$html .= '</a>';
+
+					$html .= '</li>'; //close li.caroufredsel-next-holder
+
+					$html .= '</ul>'; //close ul.caroufredsel-direction-nav
+				}
+				$html .= "</div></div>";
+
+			}
 		}
 
 		return $html;
@@ -5063,7 +5821,8 @@ if (!function_exists('image_slider_no_space')) {
 			"custom_links" 				=> "",
 			"custom_links_target" 		=> "",
 			"navigation_style"			=> "",
-			"highlight_active_image" 	=> ""
+			"highlight_active_image" 	=> "",
+			"link_all_items"			=> ""
         );
 
         extract(shortcode_atts($args, $atts));
@@ -5094,6 +5853,10 @@ if (!function_exists('image_slider_no_space')) {
 
 		if($highlight_active_image == 'yes') {
 			$image_gallery_holder_classes .= ' highlight_active';
+		}
+
+		if($link_all_items == 'yes') {
+			$image_gallery_holder_classes .= ' link_all';
 		}
 
         $html .= "<div class='qode_image_gallery_no_space ".$image_gallery_holder_classes."'><div class='qode_image_gallery_holder' style='".$image_gallery_holder_styles."'><ul>";
@@ -5190,4 +5953,220 @@ if (!function_exists('image_slider_no_space')) {
     }
 
 	add_shortcode('image_slider_no_space', 'image_slider_no_space');
+}
+
+/* Product list shortcode */
+if (!function_exists('qode_product_list')) {
+	function qode_product_list($atts, $content = null)
+	{
+		global $qode_options;
+		$args = array(
+			'type' => 'standard',
+			'columns' => '4',
+			'items_number' => '-1',
+			'order_by' => 'date',
+			'sort_order' => 'desc',
+			'taxonomy_to_display' => 'category',
+			'taxonomy_values' => '',
+			'display_categories' => 'yes'
+		);
+
+		extract(shortcode_atts($args, $atts));
+		$params = array();
+		$params['display_categories'] = $display_categories;
+		if($type == 'standard') {
+			do_action('qode_pl_standard_initial_setup', $params);
+		}
+		else if($type == 'simple') {
+			do_action('qode_pl_simple_initial_setup');
+		}
+
+		$html = '';
+
+		/* Get query args */
+		$args = array(
+			'post_type' => 'product',
+			'post_status' => 'publish',
+			'ignore_sticky_posts' => 1,
+			'orderby' => $order_by,
+			'order' => $sort_order,
+			'posts_per_page' => $items_number,
+			'meta_query' => WC()->query->get_meta_query()
+		);
+
+		if ($taxonomy_to_display != '' && $taxonomy_to_display == 'category') {
+			$args['product_cat'] = $taxonomy_values;
+		}
+
+		if ($taxonomy_values != '' && $taxonomy_values == 'tag') {
+			$args['product_tag'] = $taxonomy_values;
+		}
+
+		if ($taxonomy_to_display != '' && $taxonomy_to_display == 'id') {
+			$idArray = $taxonomy_values;
+			$ids = explode(',', $idArray);
+			$args['post__in'] = $ids;
+		}
+
+		$products = new \WP_Query($args);
+		$html .= '<div class="qodef-product-list-holder">';
+		$html .= '<div class="woocommerce columns-' . $columns . '">';
+		$html .= '<ul class="products ' . $type . '">';
+		ob_start();
+		if ($products->have_posts()) :
+			while ($products->have_posts()) : $products->the_post();
+				$html .= get_template_part('templates/product-list/'.$type.'-loop');
+			endwhile;
+		endif;
+		$output = ob_get_contents();
+		ob_end_clean();
+		$html .= $output;
+
+		woocommerce_reset_loop();
+		wp_reset_postdata();
+
+		$html .= '</ul>';
+		$html .= '</div>';
+		$html .= '</div>';
+
+		return $html;
+
+	}
+	add_shortcode('qode_product_list', 'qode_product_list');
+}
+
+/* Product list shortcode */
+if (!function_exists('qode_shop_category_showcase')) {
+	function qode_shop_category_showcase($atts, $content = null) {
+
+		$args = array(
+			'cat_slug' => '',
+			'product_id' => '',
+			'product_id_2' => '',
+			'products_position' => ''
+		);
+
+		extract(shortcode_atts($args, $atts));
+
+		$html = '';
+		$cat1_html = $cat1_img = $cat1_href = '';
+		$products_html = '';
+		$classes = '';
+		$cat1 = false;
+
+		if($products_position != ''  && $products_position == 'left') {
+			$classes .= 'cat_and_products_33_66';
+		}
+		else if($products_position != ''  && $products_position == 'right') {
+			$classes .= 'cat_and_products_66_33';
+		}
+
+		if($cat_slug != '') {
+			$cat1 = get_term_by('slug',$cat_slug,'product_cat');
+		}
+
+		if($cat1) {
+			$category_thumbnail = get_woocommerce_term_meta($cat1->term_id, 'thumbnail_id', true);
+			$cat1_img =  wp_get_attachment_image_src($category_thumbnail, 'full');
+			$cat1_href = get_term_link( $cat1->term_id, 'product_cat' );
+
+			$cat1_html .= '<div class="qode_category_showcase_category_holder">';
+			$cat1_html .= '<div class="qode_category_showcase_category_image">';
+			$cat1_html .= '</div>';
+			$cat1_html .= '<a class="qode_category_showcase_category_info" target="_self" href="' . $cat1_href . '" style="background-image: url(' . $cat1_img[0] . ')">';
+			$cat1_html .= '<div class="qode_category_showcase_category_name">';
+			$cat1_html .= '<span>' . $cat1->name . '</span>';
+			$cat1_html .= '</div>';
+			$cat1_html .= '</a>';
+			$cat1_html .= '</div>';
+		}
+
+		if($product_id != '') {
+			$product = wc_get_product($product_id);
+			if($product) {
+				$image_id = $product->get_image_id();
+				$products_html .= '<div class="qode_category_showcase_product_holder">'; 			// open product holder
+				$products_html .= '<div class="qode_category_showcase_product_holder_inner">'; 		// open product holder inner
+				$products_html .= '<div class="qode_category_showcase_product_image_holder">'; 		// open image holder
+				$products_html .= '<div class="qode_category_showcase_product_shader"></div>'; 		// image shader
+				$products_html .=  wp_get_attachment_image($image_id, 'full');
+				$products_html .= '</div>';															// close image holder
+				$products_html .= '<a class="qode_category_showcase_product_info_holder" ';			// open info holder
+				$products_html .= 'target="_self" href="' . $product->get_permalink() . '">';
+				$products_html .= '<div class="qode_category_showcase_product_info_holder_inner">';	// open info holder inner
+				$products_html .= '<div class="qode_category_showcase_product_info_wrapper">';		// open info wrapper
+				$products_html .= '<div class="qode_category_showcase_product_title">';				// open product title
+				$products_html .= '<span>' . $product->get_title() . '</span>';
+				$products_html .= '</div>';															// close product title
+				$products_html .= '<div class="qode_category_showcase_product_price">';				// open product price
+				$products_html .=  $product->get_price_html();
+				$products_html .= '</div>';															// close product price
+				$products_html .= '</div>';															// close info holder inner
+				$products_html .= '</div>';															// close info wrapper
+				$products_html .= '</a>'; 															// close info holder
+				$products_html .= '</div>'; 														// close product holder inner
+				$products_html .= '</div>';
+			}
+			if($product_id_2 == '') {
+				$classes .= ' showcase_single_product';
+			}
+		}
+
+		if($product_id_2 != '') {
+			$product = wc_get_product($product_id_2);
+			if($product) {
+				$image_id = $product->get_image_id();
+				$products_html .= '<div class="qode_category_showcase_product_holder">'; 			// open product holder
+				$products_html .= '<div class="qode_category_showcase_product_holder_inner">'; 		// open product holder inner
+				$products_html .= '<div class="qode_category_showcase_product_image_holder">'; 		// open image holder
+				$products_html .= '<div class="qode_category_showcase_product_shader"></div>'; 		// image shader
+				$products_html .=  wp_get_attachment_image($image_id, 'full');
+				$products_html .= '</div>';															// close image holder
+				$products_html .= '<a class="qode_category_showcase_product_info_holder" ';			// open info holder
+				$products_html .= 'target="_self" href="' . $product->get_permalink() . '">';
+				$products_html .= '<div class="qode_category_showcase_product_info_holder_inner">';	// open info holder inner
+				$products_html .= '<div class="qode_category_showcase_product_info_wrapper">';		// open info wrapper
+				$products_html .= '<div class="qode_category_showcase_product_title">';				// open product title
+				$products_html .= '<span>' . $product->get_title() . '</span>';
+				$products_html .= '</div>';															// close product title
+				$products_html .= '<div class="qode_category_showcase_product_price">';				// open product price
+				$products_html .=  $product->get_price_html();
+				$products_html .= '</div>';															// close product price
+				$products_html .= '</div>';															// close info holder inner
+				$products_html .= '</div>';															// close info wrapper
+				$products_html .= '</a>'; 															// close info holder
+				$products_html .= '</div>'; 														// close product holder inner
+				$products_html .= '</div>'; 														// close product holder
+			}
+			if($product_id == '') {
+				$classes .= ' showcase_single_product';
+			}
+		}
+
+		$html .= '<div class="qode_shop_category_showcase ' .$classes . ' ">';
+
+		$html .= '<div class="qode_shop_category_showcase_element element_left">';
+
+		if($products_position == 'right') {
+			$html .= $cat1_html;
+		}
+		else {
+			$html .= $products_html;
+		}
+		$html .= '</div>';
+
+		$html .= '<div class="qode_shop_category_showcase_element element_right">';
+		if($products_position == 'left') {
+			$html .= $cat1_html;
+		}
+		else {
+			$html .= $products_html;
+		}
+		$html .= '</div>';
+
+		$html .=  '</div>'; /* close qode_shop_category_showcase */
+		return $html;
+	}
+
+	add_shortcode('qode_shop_category_showcase', 'qode_shop_category_showcase');
 }

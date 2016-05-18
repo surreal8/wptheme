@@ -220,6 +220,26 @@ class Qode_Import {
 												<option value="stockholm18">Stockholm 18 - Sigfrid</option>
 												<option value="stockholm19">Stockholm 19 - Tomas</option>
 												<option value="stockholm20">Stockholm 20 - Viggo</option>
+                                                <option value="stockholmnew1">New Demo 1 - Kelda</option>
+                                                <option value="stockholmnew2">New Demo 2 - Frida</option>
+                                                <option value="stockholmnew3">New Demo 3 - Jette</option>
+                                                <option value="stockholmnew4">New Demo 4 - Metta</option>
+                                                <option value="stockholmnew5">New Demo 5 - Göta</option>
+                                                <option value="stockholmnew6">New Demo 6 - Eva</option>
+                                                <option value="stockholmnew7">New Demo 7 - Tilde</option>
+                                                <option value="stockholmnew8">New Demo 8 - Ebba</option>
+                                                <option value="stockholmnew9">New Demo 9 - Rona</option>
+                                                <option value="stockholmnew10">New Demo 10 - Tove</option>
+                                                <option value="stockholmnew11">New Demo 11 - Solveig</option>
+                                                <option value="stockholmnew12">New Demo 12 - Hilde</option>
+                                                <option value="stockholmnew13">New Demo 13 - Kajsa</option>
+                                                <option value="stockholmnew14">New Demo 14 - Elke</option>
+                                                <option value="stockholmnew15">New Demo 15 - Anke</option>
+                                                <option value="stockholmnew16">New Demo 16 - Dagmar</option>
+                                                <option value="stockholmnew17">New Demo 17 - Tala</option>
+                                                <option value="stockholmnew18">New Demo 18 - Oda</option>
+                                                <option value="stockholmnew19">New Demo 19 - Ylva</option>
+                                                <option value="stockholmnew20">New Demo 20 - Gala</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-3">

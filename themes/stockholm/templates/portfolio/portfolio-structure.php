@@ -30,7 +30,7 @@ if(get_post_meta($id, "qode_content-top-padding", true) != ""){
 }
 
 $sidebar = "";
-if(get_post_meta(get_the_ID(), "qode_portfolio_show_sidebar", true) != ""){
+if(get_post_meta(get_the_ID(), "qode_portfolio_show_sidebar", true) != "" && get_post_meta(get_the_ID(), "qode_portfolio_show_sidebar", true) != "default"){
 	$sidebar = get_post_meta(get_the_ID(), "qode_portfolio_show_sidebar", true);
 }else{
 	if(isset($qode_options['portfolio_single_sidebar'])){

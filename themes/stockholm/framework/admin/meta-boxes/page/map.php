@@ -51,6 +51,12 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("page_general",$qodeGeneral);
 	$qode_revolution_slider = new QodeMetaField("text","qode_revolution-slider","","Layer Slider or Select Slider Shortcode","Copy and paste your shortcode located in Select Slider -> Slider");
 	$qodeGeneral->addChild("qode_revolution-slider",$qode_revolution_slider);
 
+	$qode_enable_content_top_margin = new QodeMetaField("selectblank","qode_enable_content_top_margin","","Put Content Below Header","Enabling this option will put all of the content below header", array(
+		"no" => "No",
+		"yes" => "Yes",
+	));
+	$qodeGeneral->addChild("qode_enable_content_top_margin",$qode_enable_content_top_margin);
+
 // Left Menu Area
 
 $qodeLeftMenuArea = new QodeMetaBox("page", "Select Left Menu Area","vertical_area",array("no"));
@@ -158,6 +164,15 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("page_title",$qodeTitle);
 		"yes" => "yes"
 	));
 	$row1->addChild("qode_title_text_shadow",$qode_title_text_shadow);
+
+	$row2 = new QodeRow();
+	$group1->addChild("row2",$row2);
+
+	$qode_page_title_text_background_color = new QodeMetaField("colorsimple","qode_page-title-text-background-color","","Text Background Color","ThisIsDescription");
+	$row2->addChild("qode_page-title-text-background-color",$qode_page_title_text_background_color);
+
+	$qode_page_title_text_background_opacity = new QodeMetaField("textsimple","qode_page-title-text-background-opacity","","Text Background Opacity (0-1)","ThisIsDescription", array(), array("col_width" => 3));
+	$row2->addChild("qode_page-title-text-background-opacity",$qode_page_title_text_background_opacity);
 
 	$qode_page_title_background_color = new QodeMetaField("color","qode_page-title-background-color","","Background Color","Choose background color for Title Area");
 	$qode_page_title_area_container->addChild("qode_page-title-background-color",$qode_page_title_background_color);

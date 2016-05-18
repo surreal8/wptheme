@@ -180,7 +180,7 @@ class KM_UpdatesV3 {
 			// Store version number of the latest release
 			// to notify unauthorized sites owners
 			if(!empty($this->data->_latest_version)) {
-				update_option('ls-latest-version', $data->_latest_version);
+				update_option('ls-latest-version', $this->data->_latest_version);
 			}
 		}
 

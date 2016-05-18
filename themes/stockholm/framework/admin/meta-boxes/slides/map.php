@@ -133,6 +133,16 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("slides_title",$qodeSlideTitle);
 		    $title_texttransform = new QodeMetaField("selectblanksimple","qode_slide-title-text-transform","","Text Transform","This is some description",$options_texttransform);
 		    $row2->addChild("qode_slide-title-text-transform",$title_texttransform);
 
+		$row3 = new QodeRow(true);
+		$title_group->addChild("row3",$row3);
+			$title_bottom_margin = new QodeMetaField("textsimple","qode_slide-title-bottom-margin","","Bottom Margin","This is some description");
+			$row3->addChild("qode_slide-title-bottom-margin",$title_bottom_margin);
+			$title_background_color = new QodeMetaField("colorsimple","qode_slide-title-background-color","","Background Color","This is some description");
+			$row3->addChild("qode_slide-title-background-color",$title_background_color);
+			$title_background_opacity = new QodeMetaField("textsimple","qode_slide-title-background-opacity","","Background Opacity (0-1)","This is some description");
+			$row3->addChild("qode_slide-title-background-opacity",$title_background_opacity);
+
+
 //Select Slide Subtitle
 
 $qodeSlideSubtitle = new QodeMetaBox("slides", "Select Slide Subtitle");
@@ -165,6 +175,11 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("slides_subtitle",$qodeSlideSubtitle);
 		    $subtitle_transform = new QodeMetaField("selectblanksimple","qode_slide-subtitle-text-transform","","Text Transform","This is some description",$options_texttransform);
 			$row2->addChild("qode_slide-subtitle-text-transform",$subtitle_transform);
 
+		$row3 = new QodeRow(true);
+		$subtitle_group->addChild("row3",$row3);
+			$subtitle_bottom_margin = new QodeMetaField("textsimple","qode_slide-subtitle-bottom-margin","","Bottom Margin","This is some description");
+			$row3->addChild("qode_slide-subtitle-bottom-margin",$subtitle_bottom_margin);
+
 //Select Slide Text
 
 $qodeSlideText = new QodeMetaBox("slides", "Select Slide Text");
@@ -196,6 +211,11 @@ $qodeFramework->qodeMetaBoxes->addMetaBox("slides_text",$qodeSlideText);
         $row2->addChild("qode_slide-text-font-weight",$text_fontweight);
         $text_transform = new QodeMetaField("selectblanksimple","qode_slide-text-text-transform","","Text Transform","This is some description",$options_texttransform);
 		$row2->addChild("qode_slide-text-text-transform",$text_transform);
+
+	$row3 = new QodeRow(true);
+	$text_group->addChild("row3",$row3);
+		$text_bottom_margin = new QodeMetaField("textsimple","qode_slide-text-bottom-margin","","Bottom Margin","This is some description");
+		$row3->addChild("qode_slide-text-bottom-margin",$text_bottom_margin);
 
 //Select Slide Graphic
 
