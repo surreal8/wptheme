@@ -256,8 +256,13 @@ p.spacer {
 }
 
 header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
-    border-bottom: 2px solid #bebdbd;
+    border-bottom: 2px solid #ffffff;
     height: 57px;
+	background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
 }
 
 .header_inner, header .container {
@@ -472,4 +477,39 @@ body div.pp_default a.pp_previous {
 
 .titleStieglitz {
 	padding-bottom: 50px;
+}
+
+.siteTitle, .siteInvite, .siteSubject {
+	text-align: center;
+	font-family: 'Poppins', sans-serif; 
+	font-size: 19px;
+	letter-spacing: 2px;
+	font-weight: initial;
+	line-height: 40px;
+}
+
+.siteInvite {
+	padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.siteSubject {
+	font-size: 13px;
+	font-weight: 600;
+	padding-bottom: 30px;
+	padding-top: 3px;
+}
+
+.siteTitle:after {
+    content: "";
+    position: absolute;
+    left: 35%;
+    height: 1px;
+    width: 30%;
+    border-bottom: 1px solid #000000;
+}
+
+.siteName {
+	font-family: 'Garibaldi-Medium', serif; 
+	font-size: 46px;
 }
