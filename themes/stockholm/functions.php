@@ -462,7 +462,7 @@ if (!function_exists('qode_scripts')) {
 			wp_enqueue_script("qode_default_dynamic", QODE_ROOT."/js/default_dynamic.php", array(), false, true);
 		}
 
-		wp_enqueue_script("qode_default", QODE_ROOT."/js/default.min.js", array(), false, true);
+		wp_enqueue_script("qode_default", QODE_ROOT."/js/default.js", array(), false, true);
 
 		if (file_exists(dirname(__FILE__) ."/js/custom_js.js") && qode_is_js_folder_writable() && !is_multisite()) {
 			wp_enqueue_script("qode_custom_js", QODE_ROOT."/js/custom_js.js",array(), filemtime(dirname(__FILE__) ."/js/custom_js.js"),true);
