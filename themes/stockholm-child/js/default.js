@@ -1853,9 +1853,17 @@ function initPortfolio(){
 ** Show/hide sub menu
 */
 function subMenu(){
-	$j('.parent_menu').on('click',function(){
+	$j('li.parent_menu span').on('click',function(){
+		$j('#filterSelect').css('display', 'none');
+		$j('#filterBy').remove();
 		$j('.filter_holder ul.child').css('display', 'none');
+		
 		$j('.filter_holder li:hover > ul.child').css('display', 'block');
+		if ($j(this).is('li.parent_menu span:not(:first)')) {
+		$j('#filterSelect').html('FILTERED BY').append('<div id="filterBy">' + $j(this).html() + '</div>') ;
+		$j('#filterSelect').fadeIn('slow').css('display', 'block');
+		}
+		
 		var subMenuHeight = $j('.filter_holder li:hover > ul.child').height();
 		var filterHolderHeight = $j('.filter_holder').height();
 		var menuAreaHeight = subMenuHeight + filterHolderHeight;

@@ -194,7 +194,7 @@ if (!function_exists('portfolio_list')) {
                     }
                     $html .= "</ul></li>";
                 }
-                $html .= "</ul></div></div>";
+                $html .= "</ul></div></div><div id='filterSelect'></div>";
             }
 
             $thumb_size_class = "";

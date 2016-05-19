@@ -513,3 +513,26 @@ body div.pp_default a.pp_previous {
 	font-family: 'Garibaldi-Medium', serif; 
 	font-size: 46px;
 }
+
+#filterSelect {
+	font-family: 'Poppins', sans-serif; 
+	display: none;
+	top: 70px;
+    position: relative;
+	text-transform:uppercase;
+	font-size: 13px;
+	text-align: center;
+	padding-bottom: 60px;
+}
+
+#filterBy {
+	font-family: 'Garibaldi-Medium', serif; 
+	font-size: 30px;	
+	color: #63122d;
+	text-transform: none;
+	padding-top: 10px;
+}
+
+.filter_outer {
+	margin: 0;
+}
