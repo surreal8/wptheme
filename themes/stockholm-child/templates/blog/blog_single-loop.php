@@ -311,6 +311,20 @@ $_post_format = get_post_format();
 ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<div class="post_content_holder">
+            <div id="returnGlossary">
+            <?php 
+			$categories = get_the_category();
+ 			if ( ! empty( $categories ) ) {
+				$glossary_cat = esc_html($categories[0]->name);
+				if ($glossary_cat == 'Stieglitz Series') {
+				echo '<a href="/glossary/#stieglitz-series">' . $glossary_cat . '</a> > ' ; 
+				} else {
+				echo '<a href="/glossary/#'. strtolower($glossary_cat) .'">' . $glossary_cat . '</a> > ';
+				}
+			}		  
+			echo the_title();	  
+			?>
+            </div>
 				<?php if(get_post_meta(get_the_ID(), "qode_hide-featured-image", true) != "yes") {
 					if ( has_post_thumbnail() ) { ?>
 						<div class="post_image">

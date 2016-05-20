@@ -366,7 +366,7 @@ h4 {
 	padding-bottom: 15px;
 }
 
-.return_home {
+.return_home, #returnGlossary {
 	font-family: Poppins;
     color: #63122d;
     font-size: 12px;
@@ -376,7 +376,14 @@ h4 {
     font-weight: 500;
     letter-spacing: .1em;
 	text-decoration: none;
-	left: 20px;
+	left: 0px;
+}
+
+#returnGlossary a {
+	font-family: Poppins;
+    color: #63122d;
+    font-size: 12px;
+	text-decoration: none;
 }
 
 #glossaryNav a {
