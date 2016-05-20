@@ -537,3 +537,8 @@ body div.pp_default a.pp_previous {
 .filter_outer {
 	margin: 0;
 }
+
+.footer_bottom {
+	font-size: 13px;
+	font-family: 'Poppins', sans-serif; 
+}
