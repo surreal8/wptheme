@@ -317,9 +317,9 @@ $_post_format = get_post_format();
  			if ( ! empty( $categories ) ) {
 				$glossary_cat = esc_html($categories[0]->name);
 				if ($glossary_cat == 'Stieglitz Series') {
-				echo '<a href="/glossary/#stieglitz-series">' . $glossary_cat . '</a> > ' ; 
+				echo '<a href="'.get_site_url().'/glossary/#stieglitz-series">' . $glossary_cat . '</a> > ' ; 
 				} else {
-				echo '<a href="/glossary/#'. strtolower($glossary_cat) .'">' . $glossary_cat . '</a> > ';
+				echo '<a href="'.get_site_url().'/glossary/#'. strtolower($glossary_cat) .'">' . $glossary_cat . '</a> > ';
 				}
 			}		  
 			echo the_title();	  
