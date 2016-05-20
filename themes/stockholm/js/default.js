@@ -2574,7 +2574,7 @@ function initFlexSlider(){
 
 		$j(this).flexslider({
 			animationLoop: true,
-			controlNav: false,
+			controlNav: true,
 			useCSS: false,
 			pauseOnAction: true,
 			pauseOnHover: true,
