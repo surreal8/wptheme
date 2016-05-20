@@ -343,16 +343,7 @@ if (!function_exists('portfolio_list')) {
 
                             if($hover_type == "default_hover" && !$portfolio_list_hide_category){
                                 $html .= '<span class="project_category">';
-                                    $html .= '<span>'. __('In ', 'qode') .'</span>';
-                                    $k = 1;
-                                    foreach ($terms as $term) {
-                                        $html .= "$term->name";
-                                        if (count($terms) != $k) {
-                                            $html .= ' / ';
-                                        }
-                                        $k++;
-                                    }
-                                $html .= '</span>';
+								$html .= '<span>'. get_field('artist_name') .'</span></span>';
                             }    
 
                             $title_style = '';

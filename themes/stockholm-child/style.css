@@ -542,3 +542,30 @@ body div.pp_default a.pp_previous {
 	font-size: 13px;
 	font-family: 'Poppins', sans-serif; 
 }
+
+.projects_holder article .portfolio_shader {
+	background-color: rgba(255, 255, 255, 0.85);
+}
+
+.projects_holder article .image_holder .text_holder {
+	padding: 115px 20px 0px;
+}
+
+.projects_holder.hover_text article .project_category, .projects_holder.hover_text article .portfolio_title {
+	color: #3a3a3a;
+	letter-spacing: 1px;
+}
+
+.projects_holder.hover_text article .project_category {
+	font-family: 'Poppins', sans-serif; 
+	font-weight: 600;
+	text-transform:uppercase;
+}
+
+.projects_holder.hover_text article .portfolio_title {
+	font-family: 'Garibaldi-Medium', serif; 
+	font-weight: 200;
+	font-size: 24px;
+	text-transform:none;
+	line-height: 20px;
+}
