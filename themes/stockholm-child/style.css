@@ -232,7 +232,7 @@ li.related p {
 	color: #3a3a3a;
 	font-family: 'Garibaldi-Medium', serif; 
 	font-size: 14px;
-	line-height: 1.5em;
+	line-height: 1.25em;
 }
 
 li.relatedside {
@@ -342,17 +342,18 @@ header {
 }
 
 h3.related {
-	font-family: 'Poppins', sans-serif; 
-	color: #63122d;
-	border-top: #63132d 5px solid;
-    padding: 15px 5px;
+	font-family: 'Poppins', sans-serif;
+    color: #63122d;
+    border-top: #63132d 7px solid;
+    padding: 12px 5px 22px 5px;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
+    letter-spacing: 1px;
 }
 
 .relatedside p, li.related {
-	padding: 0px 0px 10px 5px;
+	padding: 0px 20px 10px 5px;
 }
 
 #post_image {
@@ -360,10 +361,10 @@ h3.related {
 }
 
 h4 {
-	font-size: 24px;
-	color: #3a3a3a;
-	font-weight: normal;
-	padding-bottom: 15px;
+	font-size: 23px;
+    color: #3a3a3a;
+    font-weight: lighter;
+    padding-bottom: 7px;
 }
 
 .return_home, #returnGlossary {
@@ -432,6 +433,7 @@ li.related p.artist_cat {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
+	padding-bottom: 3px;
 }
 
 div.pp_pic_holder {
