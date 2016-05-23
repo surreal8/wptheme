@@ -49,10 +49,17 @@ body {
 	line-height: 1.5em;
 }
 
-h2 {
+h2, h3 {
 	font-weight: normal;
     text-transform: none;
 	font-size: 41px;
+	line-height: 45px;
+}
+
+h3 {
+	font-family: 'Garibaldi-Medium', serif;
+	font-size: 20px;
+	color: #393939;
 }
 
 .blog_holder article h2 {
@@ -611,4 +618,10 @@ body div.pp_default a.pp_previous {
 	font-size: 24px;
 	text-transform:none;
 	line-height: 20px;
+}
+
+.about_text {
+	padding: 0 25px;
+	font-family: 'Garibaldi-Medium', serif;
+    line-height: 1.5em;
 }
