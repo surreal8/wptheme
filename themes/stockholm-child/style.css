@@ -114,8 +114,9 @@ a, p a {
 }
 
 
-header:not(.with_hover_bg_color) nav.main_menu>ul>li:hover>a, nav.main_menu>ul>li.active>a {
+header:not(.with_hover_bg_color) nav.main_menu>ul>li:hover>a, nav.main_menu>ul>li.active>a, .q_tabs .tabs-nav li.active a, .q_tabs .tabs-nav li a:hover, #glossaryNav a:hover, #glossaryNav a:active {
 	color: #eb5f33;
+	background-color: transparent;
 }
 
 nav.main_menu > ul > li > a {
@@ -388,17 +389,44 @@ h4 {
 	text-decoration: none;
 }
 
-#glossaryNav a {
+#glossaryNav a, .q_tabs .tabs-nav li a {
 	font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #bebdbd;
     padding: 0 15px;
     text-decoration: none;
+	background-color: transparent;
+	letter-spacing: 0;
+}
+
+.q_tabs .tabs-nav li a {
+	padding: 0px;
+	font-weight: 500;
+}
+
+.q_tabs .tabs-nav {
+	width: 100%;
+	
+}
+
+.q_tabs .tabs-nav li {
+	float: none;
+	margin-right: 0;
+	height: inherit;
+}
+
+#glossaryNav, .q_tabs .tabs-nav {
+	border-bottom: 2px solid #ffffff;
+	background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
+	
 }
 
 #glossaryNav {
 	text-align: center;
-	border-bottom: 2px solid #bebdbd;
 	padding: 15px 0px;
 	color: #bebdbd;
 }
@@ -465,13 +493,18 @@ body div.pp_default a.pp_previous {
 	padding: 0 15px;
 }
 
-.filter_holder ul.child li:not(:last-child) span:after {
+.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after {
     content: '|';
-    position: absolute;
+    /*position: absolute;*/
     right: 0;
     display: inline-block;
     width: 1px;
     color: #706156;
+}
+
+.q_tabs .tabs-nav li:not(:last-child) a:after {
+	color: #bebdbd;
+	padding: 0 20px;	
 }
 
 .filter_holder ul li {
