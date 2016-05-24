@@ -41,18 +41,19 @@ Template: stockholm
 
 body {
 	color: #3a3a3a;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .portfolio_container, .blog_holder { 
 	font-family: 'Garibaldi-Medium', serif; 
 	line-height: 1.5em;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 h2, h3 {
 	font-weight: normal;
     text-transform: none;
-	font-size: 37px;
+	font-size: 36px;
 	line-height: 45px;
 }
 
@@ -225,7 +226,7 @@ ol.flex-control-nav {
     font-family: Poppins, sans-serif;
     font-size: 15px;
     color: #3a3a3a;
-	font-weight: normal;
+	font-weight: 300;
 	letter-spacing: 1px;
 }
 
@@ -255,8 +256,8 @@ li.relatedside {
 	width: 100%;
 	display: inline-table;
 	padding-right: 10px;
-	margin-top: 20px;
-	padding-bottom: 30px;
+	margin-top: 0px;
+	padding-bottom: 20px;
 }
 
 p.spacer {
@@ -288,6 +289,12 @@ header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
 
 header.sticky .header_bottom .container_inner {
 	background-color: #ffffff;
+	border-bottom: 2px solid #ffffff;
+	background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
 }
 
 /* no bg image for now - 4.20
@@ -325,16 +332,17 @@ header {
 }
 
 .filter_holder ul li.parent_menu span {
+	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
-	font-size: 14px;
-    font-weight: 600;
+	font-size: 13px;
+    font-weight: 400;
 	color: #a58771;
 	letter-spacing: 0.050em;
 }
 
 .filter_holder ul:not(.child) li.active span, .filter_holder ul:not(.child) li:hover span {
     color: #3a3a3a;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .filter_holder ul.child li.filter span {
@@ -361,11 +369,12 @@ h3.related {
 	font-family: 'Poppins', sans-serif;
     color: #63122d;
     border-top: #63132d 7px solid;
-    padding: 3px 5px 22px 5px;
+    padding: 12px 5px 22px 5px;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 1px;
+	line-height: 17px;
 }
 
 .relatedside p, li.related {
@@ -391,7 +400,7 @@ h4 {
     top: 25px;
     position: relative;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: .1em;
 	text-decoration: none;
 	left: 0px;
