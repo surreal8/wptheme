@@ -626,6 +626,10 @@ body div.pp_default a.pp_previous {
     line-height: 1.5em;
 }
 
+.slide_title {
+	letter-space: 2px;
+}
+
 .slide_text {
 	font-family: 'Garibaldi-Medium', serif;
 }
