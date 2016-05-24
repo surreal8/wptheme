@@ -829,9 +829,8 @@ if (!function_exists('latest_post')) {
 						}	
 
 						if($text_length != '0' & $type == "boxes") {
-							$excerpt = ($text_length > 0) ? substr(get_the_excerpt(), 0, intval($text_length)) : get_the_excerpt();
-
-							$html .= '<p class="excerpt">'.$excerpt.' <span class="readmore"><a href="' . get_the_permalink() . '">read more</a></span></p>';
+							//$excerpt = ($text_length > 0) ? substr(get_the_excerpt(), 0, intval($text_length)) : get_the_excerpt();
+							$html .= '<p class="excerpt">'.get_the_excerpt().' <span class="readmore"><a href="' . get_the_permalink() . '">read more</a></span></p>';
 						}
 
 						if($display_author == '1' && $type == "boxes"){
