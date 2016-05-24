@@ -558,8 +558,8 @@ body div.pp_default a.pp_previous {
 .siteTitle, .siteInvite, .siteSubject {
 	text-align: center;
 	font-family: 'Poppins', sans-serif; 
-	font-size: 19px;
-	letter-spacing: 2px;
+	font-size: 18px;
+	letter-spacing: 4px;
 	font-weight: initial;
 	line-height: 40px;
 }
@@ -587,7 +587,11 @@ body div.pp_default a.pp_previous {
 
 .siteName {
 	font-family: 'Garibaldi-Medium', serif; 
-	font-size: 46px;
+	font-size: 42px;
+}
+
+.siteInvite .siteName {
+	font-size: 45px;
 }
 
 #filterSelect {
