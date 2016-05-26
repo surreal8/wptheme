@@ -829,8 +829,12 @@ if (!function_exists('latest_post')) {
 						}	
 
 						if($text_length != '0' & $type == "boxes") {
-							//$excerpt = ($text_length > 0) ? substr(get_the_excerpt(), 0, intval($text_length)) : get_the_excerpt();
-							$html .= '<p class="excerpt">'.get_the_excerpt().' <span class="readmore"><a href="' . get_the_permalink() . '">read more</a></span></p>';
+							//getting content and removing vc shortcodes and trimming word count
+							$the_content = get_the_content();
+							$the_content = preg_replace("~(?:\[/?)[^/\]]+/?\]~s", '', $the_content); 
+							$the_content = wp_trim_words($the_content, 15, '');
+							
+							$html .= '<p class="excerpt">'.$the_content.' <span class="readmore"><a href="' . get_the_permalink() . '">read more</a></span></p>';
 						}
 
 						if($display_author == '1' && $type == "boxes"){
@@ -869,6 +873,9 @@ if(!function_exists('qode_excerpt')) {
 			$excerpt_word_array = explode (' ', $clean_excerpt);
 			$excerpt_word_array = array_slice ($excerpt_word_array, 0, $word_count);
 			$excerpt = implode (' ', $excerpt_word_array);
+			//removing vc shortcodes and trimming word count
+			$excerpt = preg_replace("~(?:\[/?)[^/\]]+/?\]~s", '', $excerpt); 
+			$excerpt = wp_trim_words($excerpt, 15, '');
 			$excerpt_readmore = '<span class="readmore"><a href="' . get_the_permalink() . '">read more</a></span>';
 
 			//is excerpt different than empty string?
