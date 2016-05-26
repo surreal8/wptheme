@@ -369,9 +369,6 @@ global $qode_toolbar;
                         <?php if($centered_logo && $header_bottom_appearance !== "stick menu_bottom") {
                             dynamic_sidebar( 'header_left_from_logo' );
                         } ?>
-						<?php if(qode_is_main_menu_set()) { ?>
-							<div class="mobile_menu_button"><span><i class="fa fa-bars"></i></span></div>
-						<?php } ?>
 						<div class="logo_wrapper">
 							<?php
 							if (isset($qode_options['logo_image']) && $qode_options['logo_image'] != ""){ $logo_image = $qode_options['logo_image'];}else{ $logo_image =  get_template_directory_uri().'/img/logo.png'; };
@@ -382,11 +379,7 @@ global $qode_toolbar;
                             if (isset($qode_options['logo_image_fixed_hidden']) && $qode_options['logo_image_fixed_hidden'] != ""){ $logo_image_fixed_hidden = $qode_options['logo_image_fixed_hidden'];}else{ $logo_image_fixed_hidden =  get_template_directory_uri().'/img/logo.png'; };
 							?>
 							<div class="q_logo"><a href="<?php echo home_url('/'); ?>"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>		
-                            <?php if ( is_page( 'Home Default' )  ) {?>
-								<div class="sitetitlehome"><a href="<?php echo home_url('/'); ?>"><?php echo get_bloginfo( 'name' ); ?></a></div>
-							<?php } else { ?>
 								<div class="sitetitle"><a href="<?php echo home_url('/'); ?>"><?php echo get_bloginfo( 'name' ); ?></a></div>
-							<?php } ?>
                             
                             <?php if($header_bottom_appearance == "fixed_hiding") { ?>
                                 <div class="q_logo_hidden"><a href="<?php echo home_url('/'); ?>"><img alt="Logo" src="<?php echo $logo_image_fixed_hidden; ?>" style="height: 100%;"></a></div>
@@ -544,47 +537,6 @@ global $qode_toolbar;
 							</div>
 						</div>
 						<?php } ?>
-						<nav class="mobile_menu">
-							<?php
-                            if($header_bottom_appearance == "stick_with_left_right_menu") {
-                                echo '<ul>';
-                                wp_nav_menu( array( 'theme_location' => 'left-top-navigation' ,
-                                    'container'  => '',
-                                    'container_class' => '',
-                                    'menu_class' => '',
-                                    'menu_id' => '',
-                                    'fallback_cb' => '',
-                                    'link_before' => '<span>',
-                                    'link_after' => '</span>',
-                                    'walker' => new qode_type4_walker_nav_menu(),
-                                    'items_wrap'      => '%3$s'
-                                ));
-                                wp_nav_menu( array( 'theme_location' => 'right-top-navigation' ,
-                                    'container'  => '',
-                                    'container_class' => '',
-                                    'menu_class' => '',
-                                    'menu_id' => '',
-                                    'fallback_cb' => '',
-                                    'link_before' => '<span>',
-                                    'link_after' => '</span>',
-                                    'walker' => new qode_type4_walker_nav_menu(),
-                                    'items_wrap'      => '%3$s'
-                                ));
-                                echo '</ul>';
-                            }else{
-                                wp_nav_menu( array( 'theme_location' => 'top-navigation' ,
-                                    'container'  => '',
-                                    'container_class' => '',
-                                    'menu_class' => '',
-                                    'menu_id' => '',
-                                    'fallback_cb' => 'top_navigation_fallback',
-                                    'link_before' => '<span>',
-                                    'link_after' => '</span>',
-                                    'walker' => new qode_type2_walker_nav_menu()
-                                ));
-                            }
-							?>
-						</nav>
 						<?php if($header_in_grid){ ?>
 					</div>
 				</div>
@@ -604,9 +556,6 @@ global $qode_toolbar;
 					<div class="container_inner clearfix" <?php echo $header_bottom_border_style; ?>>
 						<?php } ?>
 						<div class="header_inner_left">
-							<?php if(qode_is_main_menu_set()) { ?>
-								<div class="mobile_menu_button"><span><i class="fa fa-bars"></i></span></div>
-							<?php } ?>
 							<div class="logo_wrapper">
 								<?php
 								if (isset($qode_options['logo_image']) && $qode_options['logo_image'] != ""){ $logo_image = $qode_options['logo_image'];}else{ $logo_image =  get_template_directory_uri().'/img/logo.png'; };
@@ -626,20 +575,6 @@ global $qode_toolbar;
 					</div>
 				</div>
 			<?php } ?>
-				<nav class="mobile_menu">
-					<?php
-					wp_nav_menu( array( 'theme_location' => 'top-navigation' ,
-						'container'  => '',
-						'container_class' => '',
-						'menu_class' => '',
-						'menu_id' => '',
-						'fallback_cb' => 'top_navigation_fallback',
-						'link_before' => '<span>',
-						'link_after' => '</span>',
-						'walker' => new qode_type2_walker_nav_menu()
-					));
-					?>
-				</nav>
 			</div>
 		</div>
 	</header>
