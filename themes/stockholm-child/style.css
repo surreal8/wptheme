@@ -45,6 +45,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.wrapper, .container {
+    background-color: #ffffff;
+}
+
 .portfolio_container, .blog_holder { 
 	font-family: 'Garibaldi-Medium', serif; 
 	line-height: 1.5em;
@@ -81,7 +85,7 @@ h3 {
 }
 .related_caption {
 	text-align: center;
-	font-weight: 400;
+	font-weight: 200;
 }
 
 .artistname {

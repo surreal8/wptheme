@@ -171,7 +171,7 @@ if (is_array($portfolio_images)){
 				    }
 				    if (get_field('primary_sources')) {
 					  echo '<li class="relatedside">';
-					  echo '<h3 class="related">Primary Sources</h3>';
+					  echo '<h3 class="related">Key Sources</h3>';
 					  echo '<p>' . get_field('primary_sources') . '</p>'; 
 				      echo '</li>';
 				    }
