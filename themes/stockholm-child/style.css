@@ -42,6 +42,7 @@ Template: stockholm
 body {
 	color: #3a3a3a;
 	font-size: 16px;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .portfolio_container, .blog_holder { 
@@ -321,6 +322,7 @@ ol.flex-control-nav {
     color: #3a3a3a;
 	font-weight: 300;
 	letter-spacing: 1px;
+	font-style: normal;
 }
 
 .portfolio_image_title {
@@ -428,7 +430,7 @@ header {
 	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
 	font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
 	color: #a58771;
 	letter-spacing: 0.050em;
 }
@@ -722,6 +724,8 @@ body div.pp_default a.pp_previous {
 .footer_bottom {
 	font-size: 13px;
 	font-family: 'Poppins', sans-serif; 
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 200;
 }
 
 .projects_holder article .portfolio_shader {
