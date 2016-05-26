@@ -179,24 +179,63 @@ nav.main_menu>ul>li:not(:first-child):before {
     max-width: 850px;
 }
 
-/* For height 400px and larger: 
-@media only screen and (min-width: 768px) {
-    .portfolio_single .flexslider {
-    	height: 425px;
-	}
+.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after {
+    content: '|';
+    /*position: absolute;*/
+    right: 0;
+    display: inline-block;
+    width: 1px;
+    color: #706156;
+}
+
+#glossaryNav a, .q_tabs .tabs-nav li a {
+	font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #bebdbd;
+    padding: 0 15px;
+    text-decoration: none;
+	background-color: transparent;
+	letter-spacing: 0;
+}
+
+#glossaryNav, .q_tabs .tabs-nav {
+	border-bottom: 2px solid #ffffff;
+	background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
 	
-	.flex-viewport, .portfolio_slider .flex-viewport {
-    	max-height: 425px;
+}
+
+.filter_holder ul.child {
+    display: none;
+    position: absolute;
+    top: 55px;
+	padding: 25px 0;
+	background-color: #3b3b3b;
+	color: #f0bd97;
+	left: 0;
+	width: 100%;
+}
+
+/*theme overrides*/
+@media only screen and (max-width: 1000px) {
+	.main_menu {
+		display: block!important;
 	}
-	
-	.flexslider .slides img {
-		width: auto;
-		display: block;
-		margin: 0 auto;
-		max-height: 275px;
-		max-width: 450px;
+	.logo_wrapper {
+		left: 0;
 	}
-}*/
+	nav.main_menu.right {
+		float: none;
+		top: 57px;
+	}
+	nav.main_menu>ul>li:first-child>a {
+	padding-left: 0px;
+    padding-right: 10px;
+	}
+}
 
 /* For phones */
 @media only screen 
@@ -224,7 +263,38 @@ nav.main_menu>ul>li:not(:first-child):before {
 	}
 	
 	.logo_wrapper {
-    left: 10%;
+    	left: 0%;
+	}
+	
+	.main_menu {
+		display: block;
+	}
+	
+	nav.main_menu > ul > li > a {
+		font-size: 12px;
+	}
+	
+	.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after {
+    	content: normal;
+	}
+	
+	.q_tabs .tabs-nav li a {
+		height: 15px;
+    	line-height: 15px;
+		text-align: left;
+    	margin-left: 5px;
+    	font-size: 13px;
+	}
+	
+	#glossaryNav, .q_tabs .tabs-nav {
+		top: 20px;
+		background: none;
+		border-bottom: 1px solid #dedede;
+		margin-bottom: 20px;
+	}
+	
+	.filter_holder ul.child {
+		top: 100px;
 	}
 }
 
@@ -248,7 +318,46 @@ nav.main_menu>ul>li:not(:first-child):before {
 		max-height: 415px;
 		max-width: 650px;
 	}
+	
+	.main_menu {
+		display: block;
+	}
+	
+	.q_tabs .tabs-nav li a {
+    	font-size: 12px;
+		height: 15px;
+    	line-height: 15px;
+	}
+	
+	#glossaryNav, .q_tabs .tabs-nav {
+		top: 20px;
+		background: none;
+		border-bottom: 1px solid #dedede;
+		margin-bottom: 20px;
+		left: 0px;
+		text-align: left;
+	}
+	
+	.filter_holder ul.child {
+		top: 50px;
+	}
 }
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+	.filter_holder ul.child {
+		top: 75px;
+	}
+	
+	#glossaryNav, .q_tabs .tabs-nav {
+		top: 25px;
+	}
+  }
+
 
 /*For laptops*/
 @media screen 
@@ -269,6 +378,10 @@ nav.main_menu>ul>li:not(:first-child):before {
 		margin: 0 auto;
 		max-height: 345px;
 		max-width: 800px;
+	}
+	
+	.main_menu {
+		display: block;
 	}
 }
 
@@ -449,17 +562,6 @@ header {
 	color: #f0bd97;
 }
 
-.filter_holder ul.child {
-    display: none;
-    position: absolute;
-    top: 55px;
-	padding: 25px 0;
-	background-color: #3b3b3b;
-	color: #f0bd97;
-	left: 0;
-	width: 100%;
-}
-
 h3.related {
 	font-family: 'Poppins', sans-serif;
     color: #63122d;
@@ -508,16 +610,6 @@ h4 {
 	text-decoration: none;
 }
 
-#glossaryNav a, .q_tabs .tabs-nav li a {
-	font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #bebdbd;
-    padding: 0 15px;
-    text-decoration: none;
-	background-color: transparent;
-	letter-spacing: 0;
-}
-
 .q_tabs .tabs-nav li a {
 	padding: 0px;
 	font-weight: 500;
@@ -532,16 +624,6 @@ h4 {
 	float: none;
 	margin-right: 0;
 	height: inherit;
-}
-
-#glossaryNav, .q_tabs .tabs-nav {
-	border-bottom: 2px solid #ffffff;
-	background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
-	
 }
 
 #glossaryNav {
@@ -627,15 +709,6 @@ body div.pp_default a.pp_previous {
 
 .filter_holder ul li span {
 	padding: 0 15px;
-}
-
-.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after {
-    content: '|';
-    /*position: absolute;*/
-    right: 0;
-    display: inline-block;
-    width: 1px;
-    color: #706156;
 }
 
 .q_tabs .tabs-nav li:not(:last-child) a:after {
