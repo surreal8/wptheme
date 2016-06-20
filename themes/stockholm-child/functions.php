@@ -1,5 +1,27 @@
 <?php
 
+function qode_styles_child() {
+ wp_deregister_style('style_dynamic');
+ wp_register_style('style_dynamic', get_stylesheet_directory_uri() . '/style_dynamic.css');
+ wp_enqueue_style('style_dynamic');
+ wp_deregister_style('style_dynamic_responsive');
+ wp_register_style('style_dynamic_responsive', get_stylesheet_directory_uri() . '/style_dynamic_responsive.css');
+ wp_enqueue_style('style_dynamic_responsive');
+ wp_deregister_style('custom_css');
+ wp_register_style('custom_css', get_stylesheet_directory_uri() . '/custom_css.css');
+ wp_enqueue_style('custom_css');
+}
+function qode_scripts_child() {
+ wp_deregister_script('default_dynamic');
+ wp_register_script('default_dynamic', get_stylesheet_directory_uri() . '/default_dynamic.js');
+ wp_enqueue_style('default_dynamic', array(),false,true);
+ wp_deregister_script('custom_js');
+ wp_register_script('custom_js', get_stylesheet_directory_uri() . '/custom_js.js');
+ wp_enqueue_style('custom_js', array(),false,true);
+}
+add_action( 'wp_enqueue_scripts', 'qode_styles_child', 11);
+add_action( 'wp_enqueue_scripts', 'qode_scripts_child', 11);  
+
 // enqueue the child theme stylesheet
 Function wp_schools_enqueue_scripts() {
 wp_register_style( 'childstyle', get_stylesheet_directory_uri() . '/style.css'  );
