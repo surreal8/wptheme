@@ -183,23 +183,24 @@ nav.main_menu>ul>li:not(:first-child):before {
     max-width: 850px;
 }
 
-.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after {
+.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after, #glossaryNav li:not(:last-child) a:after {
     content: '|';
-    /*position: absolute;*/
     right: 0;
     display: inline-block;
     width: 1px;
-    color: #706156;
+    color: #bebdbd;
 }
 
-#glossaryNav a, .q_tabs .tabs-nav li a {
+.q_tabs .tabs-nav li a, #glossaryNav li a {
 	font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #bebdbd;
-    padding: 0 15px;
     text-decoration: none;
 	background-color: transparent;
 	letter-spacing: 0;
+	float: left;
+	height: inherit;
+	line-height: 20px;
 }
 
 #glossaryNav, .q_tabs .tabs-nav {
@@ -209,7 +210,6 @@ nav.main_menu>ul>li:not(:first-child):before {
     background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
-	
 }
 
 .filter_holder ul.child {
@@ -221,6 +221,20 @@ nav.main_menu>ul>li:not(:first-child):before {
 	color: #f0bd97;
 	left: 0;
 	width: 100%;
+}
+
+#glossaryNav li {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.q_tabs .tabs-nav li a {
+	padding: 0px;
+	font-weight: 500;
+	float: left;
 }
 
 /*theme overrides*/
@@ -238,6 +252,12 @@ nav.main_menu>ul>li:not(:first-child):before {
 	nav.main_menu>ul>li:first-child>a {
 	padding-left: 0px;
     padding-right: 10px;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.q_tabs .tabs-nav li, #glossaryNav li {
+		display: block;
 	}
 }
 
@@ -278,28 +298,37 @@ nav.main_menu>ul>li:not(:first-child):before {
 		font-size: 12px;
 	}
 	
-	.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after {
+	.filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after, #glossaryNav li:not(:last-child) a:after {
     	content: normal;
 	}
 	
-	.q_tabs .tabs-nav li a {
+	.q_tabs .tabs-nav li a, #glossaryNav li a{
 		height: 15px;
     	line-height: 15px;
 		text-align: left;
     	margin-left: 5px;
     	font-size: 13px;
+		padding: 3px 0;
 	}
 	
 	#glossaryNav, .q_tabs .tabs-nav {
-		top: 20px;
 		background: none;
 		border-bottom: 1px solid #dedede;
 		margin-bottom: 20px;
 	}
 	
+	#glossaryNav li {
+    	display: block;
+	}
+	
 	.filter_holder ul.child {
 		top: 100px;
 	}
+	
+	.q_tabs.horizontal.center {
+		text-align: left;
+	}
+
 }
 
 /* For tablets */
@@ -327,14 +356,14 @@ nav.main_menu>ul>li:not(:first-child):before {
 		display: block;
 	}
 	
-	.q_tabs .tabs-nav li a {
+	.q_tabs .tabs-nav li a, #glossaryNav li a {
     	font-size: 12px;
 		height: 15px;
     	line-height: 15px;
+		padding: 3px 0;
 	}
 	
 	#glossaryNav, .q_tabs .tabs-nav {
-		top: 20px;
 		background: none;
 		border-bottom: 1px solid #dedede;
 		margin-bottom: 20px;
@@ -345,6 +374,11 @@ nav.main_menu>ul>li:not(:first-child):before {
 	.filter_holder ul.child {
 		top: 50px;
 	}
+	
+	.q_tabs.horizontal.center {
+		text-align: left;
+	}
+
 }
 
 /* Portrait */
@@ -357,8 +391,8 @@ nav.main_menu>ul>li:not(:first-child):before {
 		top: 75px;
 	}
 	
-	#glossaryNav, .q_tabs .tabs-nav {
-		top: 25px;
+	.q_tabs.horizontal.center {
+		text-align: left;
 	}
   }
 
@@ -614,26 +648,20 @@ h4 {
 	text-decoration: none;
 }
 
-.q_tabs .tabs-nav li a {
-	padding: 0px;
-	font-weight: 500;
-}
-
-.q_tabs .tabs-nav {
-	width: 100%;
-	
-}
-
-.q_tabs .tabs-nav li {
+#glossaryNav li, .q_tabs .tabs-nav li {
 	float: none;
 	margin-right: 0;
 	height: inherit;
+	margin-bottom: -3px;
 }
 
-#glossaryNav {
-	text-align: center;
+#glossaryNav, .q_tabs .tabs-nav {
 	padding: 15px 0px;
 	color: #bebdbd;
+	width: 100%;
+	display: block;
+	overflow: visible;
+	margin: 0 5px;
 }
 
 #artists, #processes, #galleries, #journals, #stieglitz-series, #themes {
@@ -715,7 +743,7 @@ body div.pp_default a.pp_previous {
 	padding: 0 15px;
 }
 
-.q_tabs .tabs-nav li:not(:last-child) a:after {
+.q_tabs .tabs-nav li:not(:last-child) a:after, #glossaryNav li:not(:last-child) a:after {
 	color: #bebdbd;
 	padding: 0 20px;	
 }
