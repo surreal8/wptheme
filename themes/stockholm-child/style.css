@@ -98,6 +98,10 @@ h3 {
     left: 0;
 }
 
+.q_logo a {
+	height: 51px !important;
+}
+
 .sitetitle a:link, .sitetitle a:visited, .sitetitlehome a:link, .sitetitlehome a:visited {
 	font-family: 'Poppins', sans-serif; 
 	position: absolute;
