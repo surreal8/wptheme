@@ -92,16 +92,17 @@ h3 {
 	font-size: 14px;
 	font-weight: 500;
 }
-.q_logo a{
-    height: 50px !important;
-	/*temporary display none for logo*/
-	display: none;
+.q_logo {
+	position: absolute;
+    top: 18px;
+    left: 0;
 }
 
 .sitetitle a:link, .sitetitle a:visited, .sitetitlehome a:link, .sitetitlehome a:visited {
 	font-family: 'Poppins', sans-serif; 
 	position: absolute;
     top: 18px;
+	left: 75px;
     width: 500px;
 	color: #bebdbd;
     font-size: 13px;
@@ -250,8 +251,13 @@ nav.main_menu>ul>li:not(:first-child):before {
 		top: 57px;
 	}
 	nav.main_menu>ul>li:first-child>a {
-	padding-left: 0px;
-    padding-right: 10px;
+		padding-left: 0px;
+		padding-right: 10px;
+	}
+	.q_logo a {
+		left: 0;
+		top: -24px;
+		position: absolute;
 	}
 }
 
@@ -527,6 +533,7 @@ header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
     background: -o-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
+	margin-top: 15px;
 }
 
 .header_inner, header .container {
@@ -542,13 +549,6 @@ header.sticky .header_bottom .container_inner {
     background: -moz-linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#ffffff 95%, #dedede 3%, #f2f2f2); /* Standard syntax */
 }
-
-/* no bg image for now - 4.20
-.container_inner {
-	background-image: url("img/headerbg.jpg");
-	background-repeat: no-repeat;	
-}
-*/
 
 .header_bottom {
 	height: 0px
