@@ -666,6 +666,7 @@ h4 {
 	display: block;
 	overflow: visible;
 	margin: 19px 0 5px;
+	text-align: center;
 }
 
 #artists, #processes, #galleries, #journals, #stieglitz-series, #themes {
