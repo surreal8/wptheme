@@ -771,15 +771,15 @@ body div.pp_default a.pp_previous {
 .siteTitle, .siteInvite, .siteSubject {
 	text-align: center;
 	font-family: 'Poppins', sans-serif; 
-	font-size: 18px;
-	letter-spacing: 4px;
+	font-size: 15px;
+	letter-spacing: 2px;
 	font-weight: initial;
-	line-height: 40px;
+	line-height: 30px;
 }
 
 .siteInvite {
-	padding-top: 50px;
-    padding-bottom: 40px;
+	padding-top: 25px;
+    padding-bottom: 15px;
 }
 
 .siteSubject {
@@ -795,16 +795,15 @@ body div.pp_default a.pp_previous {
     left: 35%;
     height: 1px;
     width: 30%;
-    border-bottom: 1px solid #000000;
 }
 
 .siteName {
 	font-family: 'Garibaldi-Medium', serif; 
-	font-size: 42px;
+	font-size: 32px;
 }
 
 .siteInvite .siteName {
-	font-size: 45px;
+	font-size: 32px;
 }
 
 #filterSelect {
