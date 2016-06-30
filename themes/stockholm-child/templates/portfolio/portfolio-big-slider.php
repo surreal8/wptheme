@@ -34,7 +34,7 @@ if (is_array($portfolio_images)){
                 ?>
                 <?php if($lightbox_single_project == "yes"){ ?>
                     <li class="slide">
-                        <a class="lightbox_single_portfolio" title="<?php echo $title; ?>" href="<?php echo $image_src; ?>" data-rel="prettyPhoto[single_pretty_photo]">
+                        <a class="lightbox_single_portfolio" title="<?php echo $title; ?>" href="<?php echo $image_src; ?>" data-rel="lightbox">
                             <img src="<?php echo $image_src; ?>" alt="<?php echo $alt; ?>" />
                         </a>
                         <div class="portfolio_image_title"><?php echo $title; ?></div>
@@ -60,7 +60,7 @@ if (is_array($portfolio_images)){
 					?>
                     <?php if($lightbox_single_project == "yes"){ ?>
                         <li class="slide">
-                            <a class="lightbox_single_portfolio" title="<?php echo $title; ?>" href="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" data-rel="prettyPhoto[single_pretty_photo]">
+                            <a class="lightbox_single_portfolio" title="<?php echo $title; ?>" href="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" data-rel="lightbox">
                                 <img src="<?php echo stripslashes($portfolio_image['portfolioimg']); ?>" alt="<?php echo $alt; ?>" />
                             </a>
                             <div class="portfolio_image_title"><?php echo $title; ?></div>

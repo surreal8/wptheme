@@ -2598,8 +2598,8 @@ function initFlexSlider(){
 		}
 
 		$j(this).flexslider({
-			animationLoop: true,
-			controlNav: false,
+			animationLoop: false,
+			controlNav: true,
 			useCSS: false,
 			pauseOnAction: true,
 			pauseOnHover: true,
@@ -2991,7 +2991,7 @@ function initTestimonials(){
 			}
 
 			$j(this).flexslider({
-				animationLoop: true,
+				animationLoop: false,
 				controlNav: directionNav,
 				directionNav: false,
 				useCSS: false,
@@ -5056,7 +5056,7 @@ function initTwitterShortcode(){
 			}
 
 			$j(this).flexslider({
-				animationLoop: true,
+				animationLoop: false,
 				controlNav: controlNav,
 				directionNav: directionNav,
 				prevText: "<span class='arrow_carrot-left'></span>",

@@ -176,7 +176,7 @@ nav.main_menu>ul>li:not(:first-child):before {
 
 .portfolio_single .flexslider {
 	margin-top: 50px;
-    height: 825px;
+    height: 625px;
     background-color: #f6f6f6;
 }
 
@@ -184,16 +184,16 @@ nav.main_menu>ul>li:not(:first-child):before {
     width: auto;
     display: block;
     margin: 0 auto;
-    max-height: 700px;
-    max-width: 850px;
+    max-height: 515px;
+    max-width: 700px;
 }
 
 .filter_holder ul.child li:not(:last-child) span:after, .q_tabs .tabs-nav li:not(:last-child) a:after, #glossaryNav li:not(:last-child) a:after {
     content: '|';
+	color: #706156; 
     right: 0;
     display: inline-block;
     width: 1px;
-    color: #bebdbd;
 }
 
 .q_tabs .tabs-nav li a, #glossaryNav li a {
@@ -880,4 +880,38 @@ body div.pp_default a.pp_previous {
 
 .single-post .projects_holder_outer {
 	padding-top: 30px;
+}
+
+.tos-desktop .tos-wrapper.tos-fixed {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.tos-wrapper.tos-has-bullets .tos-pagination a {
+    width: 15px;
+    height: 15px;
+}
+
+.tos-prev, .tos-next {
+    height: 60px;
+}
+
+.tos-prev, .tos-next, .tos-close {
+    background: #a6a6a6;
+    border-radius: 0px;
+    width: 60px;
+}
+
+.tos-caption {
+       font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.tos-wrapper.tos-has-bullets .tos-caption {
+    bottom: 15px;
+}
+
+.tos-desktop .tos-wrapper.tos-fixed.tos-fit.tos-has-bullets.tos-has-caption .tos-slide {
+    padding-bottom: 60px;
 }
