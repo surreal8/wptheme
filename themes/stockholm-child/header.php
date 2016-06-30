@@ -378,7 +378,7 @@ global $qode_toolbar;
 							if (isset($qode_options['logo_image_popup']) && $qode_options['logo_image_popup'] != ""){ $logo_image_popup = $qode_options['logo_image_popup'];}else{ $logo_image_popup =  get_template_directory_uri().'/img/logo_white.png'; };
                             if (isset($qode_options['logo_image_fixed_hidden']) && $qode_options['logo_image_fixed_hidden'] != ""){ $logo_image_fixed_hidden = $qode_options['logo_image_fixed_hidden'];}else{ $logo_image_fixed_hidden =  get_template_directory_uri().'/img/logo.png'; };
 							?>
-							<div class="q_logo"><a href="<?php echo home_url('/'); ?>"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>		
+							<div class="q_logo"><a href="http://www.artic.edu/" target="_blank"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>		
 								<div class="sitetitle"><a href="<?php echo home_url('/'); ?>"><?php echo get_bloginfo( 'name' ); ?></a></div>
                             
                             <?php if($header_bottom_appearance == "fixed_hiding") { ?>
@@ -564,7 +564,7 @@ global $qode_toolbar;
 								if (isset($qode_options['logo_image_sticky']) && $qode_options['logo_image_sticky'] != ""){ $logo_image_sticky = $qode_options['logo_image_sticky'];}else{ $logo_image_sticky =  get_template_directory_uri().'/img/logo_black.png'; };
 								if (isset($qode_options['logo_image_popup']) && $qode_options['logo_image_popup'] != ""){ $logo_image_popup = $qode_options['logo_image_popup'];}else{ $logo_image_popup =  get_template_directory_uri().'/img/logo_white.png'; };
 								?>
-								<div class="q_logo"><a href="<?php echo home_url('/'); ?>"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>
+								<div class="q_logo"><a href="http://www.artic.edu/" target="_blank"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>
                                 <div class="sitetitle"><?php echo get_bloginfo( 'name' ); ?></div>
 
 							</div>
