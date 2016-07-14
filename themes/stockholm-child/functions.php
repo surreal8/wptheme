@@ -32,8 +32,8 @@ add_action( 'wp_enqueue_scripts', 'wp_schools_enqueue_scripts', 11);
 //Replace default.js file
 add_action('wp_enqueue_scripts', 'load_javascript_files');
 function load_javascript_files() {
-	wp_register_script('defaultjs', get_stylesheet_directory_uri() . '/js/default.js', array('jquery'), true );
-	wp_enqueue_script('defaultjs');
+	wp_register_script('qode_default', get_stylesheet_directory_uri() . '/js/default.js', array('jquery'), true );
+	wp_enqueue_script('qode_default');
 }
 
 // Remove Query String
