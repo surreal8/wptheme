@@ -915,3 +915,7 @@ body div.pp_default a.pp_previous {
 .tos-desktop .tos-wrapper.tos-fixed.tos-fit.tos-has-bullets.tos-has-caption .tos-slide {
     padding-bottom: 60px;
 }
+
+.error404 .content {
+    margin-top: 0px;
+}
