@@ -143,7 +143,7 @@ header:not(.with_hover_bg_color) nav.main_menu>ul>li:hover>a, nav.main_menu>ul>l
 nav.main_menu > ul > li > a {
 	font-family: 'Poppins', sans-serif; 
 	color: #bebdbd;
-	line-height: 60px;
+	line-height: 60px !important;
 	letter-spacing: 1px;
 }
 
@@ -529,7 +529,7 @@ p.spacer {
     display: none;
 }
 
-header:not(.sticky):not(.scrolled) .header_bottom .container_inner {
+header:not(.sticky):not(.scrolled) .header_bottom .container_inner, header.fixed.scrolled .header_bottom .container_inner {
     border-bottom: 2px solid #ffffff;
     height: 57px;
 	background: red; /* For browsers that do not support gradients */
@@ -578,7 +578,7 @@ header {
 }
 
 .content .content_inner > .container > .container_inner, .content .content_inner > .full_width > .full_width_inner {
-    padding-top: 159px;
+    padding-top: 198px;
 }
 
 .filter_holder ul li.parent_menu span {
