@@ -919,3 +919,7 @@ body div.pp_default a.pp_previous {
 .error404 .content {
     margin-top: 0px;
 }
+
+.tos-uibg {
+	display: none;
+}
