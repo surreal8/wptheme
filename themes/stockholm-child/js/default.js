@@ -1847,6 +1847,7 @@ function initPortfolio(){
 			});
 		});
 	}
+	$j('.homeloading').css('display', 'none');
 }
 
 /*

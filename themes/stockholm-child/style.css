@@ -923,3 +923,8 @@ body div.pp_default a.pp_previous {
 .tos-uibg {
 	display: none;
 }
+
+.homeloading {
+	text-align: center;
+	margin-top: -40px;
+}
