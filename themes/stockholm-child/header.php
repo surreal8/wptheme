@@ -83,23 +83,15 @@ if(isset($qode_options['header_buttons_size'])){
 <div class="wrapper">
 <div class="wrapper_inner">
 <!-- Google Analytics start -->
-<?php if (isset($qode_options['google_analytics_code'])){
-	if($qode_options['google_analytics_code'] != "") {
-		?>
-		<script>
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', '<?php echo $qode_options['google_analytics_code']; ?>']);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
-	<?php }
-}
-?>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MQBCFS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MQBCFS');</script>
+<!-- End Google Tag Manager -->
 <!-- Google Analytics end -->
 
 <?php
