@@ -1855,6 +1855,7 @@ function initPortfolio(){
 */
 function subMenu(){
 	$j('li.parent_menu span').on('click',function(){
+		$j('.projects_holder>.mix').css('display', 'none');
 		$j('#filterSelect').css('display', 'none');
 		$j('#filterBy').remove();
 		$j('.filter_holder ul.child').css('display', 'none');
