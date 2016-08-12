@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <?php
+
+if( wp_is_mobile() && is_front_page() ){
+        $redirect_url = home_url('/') . 'home-mobile/';
+		header('Location: ' . $redirect_url);
+    }
+
 global $qode_options;
 global $wp_query;
 ?>
@@ -249,9 +255,9 @@ if(get_post_meta($id, "qode_page_vertical_area_background_image", true) != ""){
 			?>
 			<div class="q_logo_vertical">
 				<a href="<?php echo home_url('/'); ?>">
-					<img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/>
-					<img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/>
-					<img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/>
+					<img class="normal" src="<?php echo $logo_image; ?>" alt="Art Institute of Chicago"/>
+					<img class="light" src="<?php echo $logo_image_light; ?>" alt="Art Institute of Chicago"/>
+					<img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Art Institute of Chicago"/>
 				</a>
 			</div>
 
@@ -370,11 +376,11 @@ global $qode_toolbar;
 							if (isset($qode_options['logo_image_popup']) && $qode_options['logo_image_popup'] != ""){ $logo_image_popup = $qode_options['logo_image_popup'];}else{ $logo_image_popup =  get_template_directory_uri().'/img/logo_white.png'; };
                             if (isset($qode_options['logo_image_fixed_hidden']) && $qode_options['logo_image_fixed_hidden'] != ""){ $logo_image_fixed_hidden = $qode_options['logo_image_fixed_hidden'];}else{ $logo_image_fixed_hidden =  get_template_directory_uri().'/img/logo.png'; };
 							?>
-							<div class="q_logo"><a href="http://www.artic.edu/" target="_blank"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>		
+							<div class="q_logo"><a href="http://www.artic.edu/" target="_blank"><img class="normal" src="<?php echo $logo_image; ?>" alt="Art Institute of Chicago"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Art Institute of Chicago"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Art Institute of Chicago"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Art Institute of Chicago"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Art Institute of Chicago"/><?php } ?></a></div>		
 								<div class="sitetitle"><a href="<?php echo home_url('/'); ?>"><?php echo get_bloginfo( 'name' ); ?></a></div>
                             
                             <?php if($header_bottom_appearance == "fixed_hiding") { ?>
-                                <div class="q_logo_hidden"><a href="<?php echo home_url('/'); ?>"><img alt="Logo" src="<?php echo $logo_image_fixed_hidden; ?>" style="height: 100%;"></a></div>
+                                <div class="q_logo_hidden"><a href="<?php echo home_url('/'); ?>"><img alt="Art Institute of Chicago" src="<?php echo $logo_image_fixed_hidden; ?>" style="height: 100%;"></a></div>
                             <?php } ?>
 						</div>
 						<?php if($header_bottom_appearance == "stick menu_bottom" && is_active_sidebar('header_fixed_right')){ ?>
@@ -556,7 +562,7 @@ global $qode_toolbar;
 								if (isset($qode_options['logo_image_sticky']) && $qode_options['logo_image_sticky'] != ""){ $logo_image_sticky = $qode_options['logo_image_sticky'];}else{ $logo_image_sticky =  get_template_directory_uri().'/img/logo_black.png'; };
 								if (isset($qode_options['logo_image_popup']) && $qode_options['logo_image_popup'] != ""){ $logo_image_popup = $qode_options['logo_image_popup'];}else{ $logo_image_popup =  get_template_directory_uri().'/img/logo_white.png'; };
 								?>
-								<div class="q_logo"><a href="http://www.artic.edu/" target="_blank"><img class="normal" src="<?php echo $logo_image; ?>" alt="Logo"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Logo"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Logo"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Logo"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Logo"/><?php } ?></a></div>
+								<div class="q_logo"><a href="http://www.artic.edu/" target="_blank"><img class="normal" src="<?php echo $logo_image; ?>" alt="Art Institute of Chicago"/><img class="light" src="<?php echo $logo_image_light; ?>" alt="Art Institute of Chicago"/><img class="dark" src="<?php echo $logo_image_dark; ?>" alt="Art Institute of Chicago"/><img class="sticky" src="<?php echo $logo_image_sticky; ?>" alt="Art Institute of Chicago"/><?php if($enable_popup_menu == 'yes'){ ?><img class="popup" src="<?php echo $logo_image_popup; ?>" alt="Art Institute of Chicago"/><?php } ?></a></div>
                                 <div class="sitetitle"><?php echo get_bloginfo( 'name' ); ?></div>
 
 							</div>
